@@ -1,4 +1,5 @@
 import TeamHero from "@/components/TeamPages/TeamHero";
+import TeamImages from "@/components/TeamPages/TeamImages";
 import TeamResult from "@/components/TeamPages/TeamResult";
 import React from "react";
 
@@ -7,6 +8,7 @@ function page() {
     <>
       <TeamHero />
       <TeamResult />
+      <TeamImages />
     </>
   );
 }
