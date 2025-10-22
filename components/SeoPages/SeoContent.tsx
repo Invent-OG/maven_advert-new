@@ -9,7 +9,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 
-export default function AppContent() {
+export default function SupportContent() {
   return (
     <section className="w-full bg-white py-12 px-6 md:px-20">
       <div className="flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">

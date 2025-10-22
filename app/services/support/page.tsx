@@ -1,9 +1,14 @@
-import React from 'react'
+import SupportContent from "@/components/SeoPages/SeoContent";
+import SupportHero from "@/components/SupportPages/SupportHero";
+import React from "react";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <>
+      <SupportHero />
+      <SupportContent />
+    </>
+  );
 }
 
-export default page
+export default page;

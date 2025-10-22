@@ -1,9 +1,14 @@
-import React from 'react'
+import AppHero from "@/components/AppDevelopmentPages/AppHero";
+import AppContent from "@/components/WebDevelopmentPages/WebContent";
+import React from "react";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <>
+      <AppHero />
+      <AppContent />
+    </>
+  );
 }
 
-export default page
+export default page;
