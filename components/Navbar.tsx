@@ -88,12 +88,12 @@ function Navbar() {
 
   return (
     <nav
-      className={`w-full bg-white shadow-md fixed top-0 left-0 z-50 transition-transform duration-300 ${
+      className={`w-full bg-white fixed top-0 left-0 z-50 transition-transform duration-300 ${
         showNavbar ? "translate-y-0" : "-translate-y-24"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between mt-4 items-center ">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/">

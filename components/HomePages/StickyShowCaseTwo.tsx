@@ -66,17 +66,15 @@ export default function StickyShowCaseTwo() {
 
   return (
     <>
-      <div>
-        <h1 className=" text-4xl md:text-7xl font-bold text-center">
+      <section className="showcase-section relative w-full min-h-screen p-10  overflow-hidden">
+        <h1 className=" text-4xl  md:text-7xl font-bold text-center">
           Use Pre-Built <br /> Sections
         </h1>
-        <p className="text-center ">
+        <p className="text-center text-gray-600 mt-4 mb-8 max-w-2xl mx-auto px-4 sm:px-0 leading-relaxed">
           Pop Site gives you stunning prebuilt sections to build your site
-          effortlessly. <br /> Just pick, customize, and publish—no design
-          skills needed.
+          effortlessly. Just pick, customize, and publish—no design skills
+          needed.
         </p>
-      </div>
-      <section className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-white to-gray-50 overflow-hidden">
         <div className="relative py-16 flex justify-center items-center gap-4 sm:gap-6">
           {/* Left images */}
           <div className="flex flex-col gap-6 sm:gap-8">
@@ -133,9 +131,9 @@ function PhoneMockup({ screen, className }: PhoneMockupProps) {
   return (
     <div
       className={`relative 
-        w-[200px] h-[400px] 
+        w-[200px] h-[200px] 
         sm:w-[220px] sm:h-[440px] 
-        md:w-[240px] md:h-[480px] 
+        md:w-[240px] md:h-[460px] 
         lg:w-[260px] lg:h-[520px] 
         xl:w-[280px] xl:h-[560px] 
         min-w-[180px] min-h-[360px] 

@@ -34,7 +34,7 @@ export default function FeatureOn() {
   }, []);
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-white py-10 overflow-hidden">
+    <section className=" flex flex-col justify-center items-center mt-10 py-10 overflow-hidden">
       <h2 className="text-7xl font-bold text-center mb-8">Featured On</h2>
 
       <div className="overflow-hidden max-w-4xl w-full">

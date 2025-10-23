@@ -30,16 +30,16 @@ export default function StickyShowcase() {
   }, []);
 
   return (
-    <section className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="showcase-section  relative w-full min-h-screen bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       {/* Top content */}
       <div className="sticky top-0 z-10 flex flex-col items-center text-center px-4">
         {/* Icon on top */}
-        <div className=" mt-6 ">
-          <ShieldCheck className="w-12 h-12  text-blue-600 " />
+        <div className="mt-6">
+          <ShieldCheck className="w-12 h-12 text-blue-600" />
         </div>
 
-        <h1 className="text-4xl py-4 text-black md:text-7xl font-bold leading-tight">
-          Make a stunning <br /> personal site
+        <h1 className="text-4xl md:py-4 md:mt-0 mt-20 text-black max-w-2xl md:text-7xl font-bold">
+          Make a stunning personal site
         </h1>
         <p className="text-gray-600 mt-2">
           Claim, customize, and publish—for free.
@@ -52,32 +52,32 @@ export default function StickyShowcase() {
       </div>
 
       {/* Phones Showcase */}
-      <div className="relative py-20">
-        <div className="flex justify-center items-end gap-6 flex-nowrap -mx-[100px]">
+      <div className="relative py-20 ">
+        <div className="flex justify-center  items-end gap-6 flex-nowrap -mx-[40px] sm:-mx-[60px] md:-mx-[80px] lg:-mx-[100px]">
           {/* Phone 1 - lower */}
           <PhoneMockup
             screen="https://picsum.photos/400/800?random=1"
-            className="phone-anim translate-y-56 hidden md:block"
+            className="phone-anim translate-y-36  hidden sm:block"
           />
           {/* Phone 2 - slightly higher */}
           <PhoneMockup
             screen="https://picsum.photos/400/800?random=2"
-            className="phone-anim translate-y-36"
+            className="phone-anim translate-y-24"
           />
           {/* Phone 3 - center big */}
           <PhoneMockup
             screen="https://picsum.photos/400/800?random=3"
-            className="phone-anim scale-115 z-10"
+            className="phone-anim scale-110 z-10"
           />
           {/* Phone 4 - slightly higher */}
           <PhoneMockup
             screen="https://picsum.photos/400/800?random=4"
-            className="phone-anim translate-y-36"
+            className="phone-anim translate-y-24"
           />
           {/* Phone 5 - lower */}
           <PhoneMockup
             screen="https://picsum.photos/400/800?random=5"
-            className="phone-anim translate-y-56 hidden md:block"
+            className="phone-anim translate-y-36 hidden sm:block"
           />
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function StickyShowcase() {
 }
 
 /* -----------------
-   Phone Mockup Component
+   Phone Mockup Component (responsive)
 ------------------- */
 type PhoneMockupProps = {
   screen: string;
@@ -96,9 +96,13 @@ type PhoneMockupProps = {
 function PhoneMockup({ screen, className }: PhoneMockupProps) {
   return (
     <div
-      className={`relative  w-[200px] h-[400px] md:w-[240px] md:h-[480px] lg:w-[260px] lg:h-[520px] xl:w-[280px] xl:h-[560px] ${
-        className || ""
-      }`}
+      className={`relative 
+        w-[160px] h-[320px]      // mobile
+        sm:w-[200px] sm:h-[400px]
+        md:w-[240px] md:h-[480px]
+        lg:w-[260px] lg:h-[520px]
+        xl:w-[280px] xl:h-[560px]
+        ${className || ""}`}
     >
       {/* Screen image */}
       <Image
