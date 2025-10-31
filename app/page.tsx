@@ -1,3 +1,4 @@
+import Hero3D from "@/components/3dPages/Hero3D";
 import EverythingYouNeed from "@/components/HomePages/Card";
 import FeatureOn from "@/components/HomePages/FeatureOn";
 import MemberShip from "@/components/HomePages/MemberShip";
@@ -16,6 +17,7 @@ import React from "react";
 function page() {
   return (
     <>
+      {/* <Hero3D /> */}
       <StickyShowcase />
       <StickyShowCaseTwo />
       <EverythingYouNeed />

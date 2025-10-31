@@ -66,8 +66,7 @@ function Navbar() {
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/casestudies" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Team", href: "/team" },
+    { name: "3D", href: "/threed" },
     { name: "Contact", href: "/contact" },
   ];
 
