@@ -1,0 +1,177 @@
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Building2, Ruler, FileSpreadsheet } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function Offering() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const cards = section.querySelectorAll(".offer-card");
+
+    gsap.from(cards, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+      },
+    });
+  }, []);
+
+  const offerings = [
+    {
+      title: "Construction Service",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      icon: <Building2 className="w-10 h-10" />,
+      img: "https://picsum.photos/id/1005/600/400",
+      type: "image", // 1
+    },
+    {
+      title: "Architecture Service",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      icon: <FileSpreadsheet className="w-10 h-10" />,
+      img: "https://picsum.photos/id/1016/600/400",
+      type: "content", // 2
+    },
+    {
+      title: "Budget Planning",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      icon: <Ruler className="w-10 h-10" />,
+      img: "https://picsum.photos/id/1025/600/400",
+      type: "image", // 3
+    },
+    {
+      title: "Engineering Design",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      icon: <Building2 className="w-10 h-10" />,
+      img: "https://picsum.photos/id/1036/600/400",
+      type: "content", // 4
+    },
+    {
+      title: "Interior Finishing",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      icon: <FileSpreadsheet className="w-10 h-10" />,
+      img: "https://picsum.photos/id/1041/600/400",
+      type: "image", // 5
+    },
+    {
+      title: "Project Planning",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      icon: <Ruler className="w-10 h-10" />,
+      img: "https://picsum.photos/id/1056/600/400",
+      type: "content", // 6
+    },
+  ];
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative w-full py-24 bg-[#f5f9fd] text-center overflow-hidden"
+    >
+      {/* Section Header */}
+      <div className="mb-16 px-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-4">
+          Service We’re Offering
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua saidul
+        </p>
+      </div>
+
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6 md:px-10">
+        {offerings.map((offer, i) => (
+          <div
+            key={i}
+            className="offer-card relative group overflow-hidden rounded-md shadow-lg cursor-pointer"
+          >
+            {/* For IMAGE-first cards */}
+            {offer.type === "image" && (
+              <>
+                {/* Background Image */}
+                <Image
+                  src={offer.img}
+                  alt={offer.title}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-orange-500/90 transition-all duration-500"></div>
+                {/* Hover Content */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out px-8">
+                  <div className="text-white mb-4">{offer.icon}</div>
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    {offer.title}
+                  </h3>
+                  <p className="text-white/90 text-sm mb-5">
+                    {offer.description}
+                  </p>
+                  <button className="text-white font-medium underline underline-offset-4 hover:text-gray-200 transition-all">
+                    Read More
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* For CONTENT-first cards */}
+            {offer.type === "content" && (
+              <>
+                {/* Default White Content */}
+                <div className="bg-white h-full flex flex-col items-center justify-center p-10 transition-all duration-700 ease-in-out group-hover:opacity-0 group-hover:scale-95 text-center">
+                  <div className="text-orange-500 mb-4">{offer.icon}</div>
+                  <h3 className="text-lg font-semibold text-[#0a1b3d] mb-3">
+                    {offer.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-5">
+                    {offer.description}
+                  </p>
+                  <button className="text-orange-500 font-medium underline underline-offset-4 hover:text-orange-600 transition-all">
+                    Read More
+                  </button>
+                </div>
+
+                {/* Hover State with Image */}
+                <Image
+                  src={offer.img}
+                  alt={offer.title}
+                  fill
+                  className="object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-orange-500/90 opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white opacity-0 group-hover:opacity-100 transition-all duration-700 px-8">
+                  <div className="mb-4">{offer.icon}</div>
+                  <h3 className="text-2xl font-semibold mb-3">{offer.title}</h3>
+                  <p className="text-white/90 text-sm mb-5">
+                    {offer.description}
+                  </p>
+                  <button className="text-white font-medium underline underline-offset-4 hover:text-gray-200 transition-all">
+                    Read More
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

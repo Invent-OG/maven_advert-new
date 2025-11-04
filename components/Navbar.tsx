@@ -66,6 +66,7 @@ function Navbar() {
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/casestudies" },
+    { name: "Stall Fabrication", href: "/stallfabrication" },
     { name: "3D", href: "/threed" },
     { name: "Contact", href: "/contact" },
   ];
