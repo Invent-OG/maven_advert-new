@@ -1,3 +1,5 @@
+import Blogs from "@/components/Blogs";
+import BlogsCard from "@/components/BlogsPages/BlogsCard";
 import Architectura from "@/components/stallfabrication/Architectura";
 import Offering from "@/components/stallfabrication/Offering";
 import StallGallery from "@/components/stallfabrication/StallGallery";
@@ -15,6 +17,8 @@ function page() {
       <Offering />
       <StallGallery />
       <Testimonial />
+      {/* <Blogs /> */}
+      <BlogsCard />
     </>
   );
 }
