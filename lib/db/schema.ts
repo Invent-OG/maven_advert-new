@@ -39,12 +39,12 @@ export const testimonials = pgTable("testimonials", {
   imageUrl: text("image_url").notNull(), // 👈 this is imageUrl in Drizzle, even though it's snake_case in DB
   youtubeUrl: text("youtube_url"), // 👈 this is youtubeUrl in Drizzle
 });
+
 export const leads = pgTable("leads", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: text("name").notNull(),
-  email: text("email").notNull().unique(),
+  email: text("email").notNull(),
   whatsappNumber: varchar("whatsapp_number", { length: 15 }).notNull(),
   message: text("message").notNull(),
-  city: text("city").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
