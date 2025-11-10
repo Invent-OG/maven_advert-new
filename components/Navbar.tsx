@@ -92,7 +92,7 @@ function Navbar() {
         showNavbar ? "translate-y-0" : "-translate-y-24"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto pb-4 px-4  sm:px-6 lg:px-8">
         <div className="flex justify-between mt-4 items-center ">
           {/* Logo */}
           <div className="flex-shrink-0">

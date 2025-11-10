@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.prod.website-files.com",
       },
+      {
+        protocol: "https",
+        hostname: "hxtgxpzuhnhsesburmfl.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
   },
 };
