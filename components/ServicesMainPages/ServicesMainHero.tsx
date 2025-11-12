@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-export default function WebHero() {
+export default function ServicesMainHero() {
   return (
     <section className="relative w-full min-h-[40vh] md:min-h-[70vh] bg-white flex flex-col md:flex-row md:items-center items-start px-4 sm:px-6 md:px-20 py-12 md:py-16 overflow-hidden">
       {/* Background Image */}
@@ -17,11 +17,11 @@ export default function WebHero() {
 
       {/* Left side - text content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end items-start text-left space-y-2 sm:space-y-4 md:space-y-4">
-        <p className="text-xs font-medium sm:text-sm md:text-base text-orange-500 md:text-orange-500">
-          We build & grow{" "}
+        <p className="text-xs sm:text-sm md:text-base text-gray-200 md:text-gray-600">
+          Feel free to get in touch
         </p>
-        <h1 className="text-2xl sm:text-3xl md:text-6xl font-bold text-neutral-800 leading-none">
-          Creative <br /> Solutions
+        <h1 className="text-2xl sm:text-3xl md:text-6xl font-bold text-neutral-800 leading-snug">
+          Marketing <br /> Contact
         </h1>
       </div>
     </section>

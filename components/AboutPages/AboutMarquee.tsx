@@ -24,27 +24,27 @@ export default function AboutMarquee() {
         ref={marqueeRef}
         className="flex whitespace-nowrap text-[8vw] font-extrabold"
       >
-        <span className="text-neutral-800 bg-white px-6">thinking</span>
+        <span className="text-neutral-800 bg-white px-6">Innovation</span>
         <span
           className="text-white px-6"
           style={{ WebkitTextStroke: "1px #666", color: "transparent" }}
         >
-          amazing
+          Excellence
         </span>
         <span className="text-neutral-800 bg-white px-6">thinking</span>
         <span
           className="text-white px-6"
           style={{ WebkitTextStroke: "1px #666", color: "transparent" }}
         >
-          amazing
+          Resonance
         </span>
         <span className="text-neutral-800 bg-white px-6">thinking</span>
-        <span
+        {/* <span
           className="text-white px-6"
           style={{ WebkitTextStroke: "1px black", color: "transparent" }}
         >
           amazing
-        </span>
+        </span> */}
       </div>
     </section>
   );

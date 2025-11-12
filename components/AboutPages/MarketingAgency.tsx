@@ -12,19 +12,21 @@ function MarketingAgency() {
       {/* Top Badge */}
       <div className="mb-4">
         <span className="inline-block bg-orange-500 text-white text-xs font-semibold px-4 py-1 rounded-full">
-          WELCOME TO MARKETING AGENCY
+          Welcome to Maven Advert{" "}
         </span>
       </div>
 
       {/* Header and Description */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-12 gap-6">
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 md:w-1/2">
-          Guiding your business to achieve success.
+          Guiding brands to grow, engage, and succeed{" "}
         </h2>
-        <p className="text-gray-500 text-lg md:w-1/2">
-          We curate an excellent quality hand-crafted email template designs
-          that enhance readability of users with possibility. We believe in
-          maintaining long-term relationship.
+        <p className="text-gray-500 text-md md:w-1/2">
+          We craft tailored strategies across digital marketing, web
+          development, branding, SEO, and automation, ensuring measurable
+          results and long-term partnerships. Our focus is on creating impactful
+          campaigns, seamless digital experiences, and growth-driven solutions
+          that elevate businesses and drive engagement.
         </p>
       </div>
 
@@ -35,11 +37,9 @@ function MarketingAgency() {
           <div className="bg-orange-50 p-4 rounded-full mb-4">
             <FaThumbsUp className="text-6xl text-gray-900" />
           </div>
-          <h4 className="font-bold text-gray-900 text-lg mb-2">
-            Trusted company
-          </h4>
+          <h4 className="font-bold text-gray-900 text-lg mb-2">Brand Trust </h4>
           <p className="text-gray-500 text-base">
-            Digital marketing that helps you to promote the world.
+            Building brands that people remember, respect, and return to.{" "}
           </p>
         </div>
 
@@ -49,10 +49,10 @@ function MarketingAgency() {
             <FaMousePointer className="text-6xl text-gray-900" />
           </div>
           <h4 className="font-bold text-gray-900 text-lg mb-2">
-            Professional work
+            Expert Execution{" "}
           </h4>
           <p className="text-gray-500 text-base">
-            We never fail for support for your business anywhere.
+            Delivering ideas that move fast, scale smart, and perform better.{" "}
           </p>
         </div>
 
@@ -62,10 +62,10 @@ function MarketingAgency() {
             <FaBullhorn className="text-6xl text-gray-900" />
           </div>
           <h4 className="font-bold text-gray-900 text-lg  mb-2">
-            Award winning
+            Creative Intelligence{" "}
           </h4>
           <p className="text-gray-500 text-base">
-            Digital marketing that helps you to promote the world.
+            Where insight meets imagination to create meaningful impact.{" "}
           </p>
         </div>
 
@@ -75,10 +75,10 @@ function MarketingAgency() {
             <FaQuestion className="text-6xl text-gray-900" />
           </div>
           <h4 className="font-bold text-gray-900 text-lg  mb-2">
-            Help any time
+            Enduring Partnership{" "}
           </h4>
           <p className="text-gray-500 text-base">
-            We never fail for support for your business anywhere.
+            Working side by side to keep your brand always ahead.{" "}
           </p>
         </div>
       </div>

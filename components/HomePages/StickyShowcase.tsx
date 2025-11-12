@@ -34,15 +34,15 @@ export default function StickyShowcase() {
       {/* Top content */}
       <div className="sticky top-0 z-10 flex flex-col items-center text-center px-4">
         {/* Icon on top */}
-        <div className="mt-6">
-          <ShieldCheck className="w-12 h-12 text-blue-600" />
+        <div className="md:mt-24 mt-24">
+          {/* <ShieldCheck className="w-12 h-12 text-blue-600" /> */}
         </div>
 
         <h1 className="text-4xl md:py-4 md:mt-0 mt-20 text-black max-w-2xl md:text-7xl font-bold">
-          Make a stunning personal site
+          Build a remarkable brand experience
         </h1>
         <p className="text-gray-600 mt-2">
-          Claim, customize, and publish—for free.
+          Design, launch, and grow with Maven.{" "}
         </p>
 
         {/* Main Button */}

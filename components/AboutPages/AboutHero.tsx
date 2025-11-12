@@ -18,10 +18,10 @@ export default function AboutHero() {
       {/* Left side - text content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end items-start text-left space-y-2 sm:space-y-4 md:space-y-4">
         <p className="text-xs sm:text-sm md:text-base text-gray-200 md:text-gray-600">
-          Digital marketing agency
+          Full-Service Marketing,{" "}
         </p>
-        <h1 className="text-2xl max-w-0.5 sm:text-3xl md:text-6xl font-bold text-neutral-800 leading-snug">
-          Happening agency
+        <h1 className="text-2xl max-w-0.5 sm:text-3xl md:text-6xl font-bold text-neutral-800 leading-none">
+          Growth Engineers{" "}
         </h1>
       </div>
     </section>

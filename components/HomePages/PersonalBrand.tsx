@@ -5,23 +5,27 @@ function PersonalBrand() {
   const features = [
     {
       icon: <CheckCircle size={24} className="text-black" />,
-      title: "Easy Setup",
-      description: "Get started quickly with pre-made templates.",
+      title: "Accelerate Your Brand Growth",
+      description:
+        "Choose your pathway, shape your strategy, and expand your brand presence.",
     },
     {
       icon: <Zap size={24} className="text-black" />,
-      title: "Fast Performance",
-      description: "Your site loads lightning fast for all visitors.",
+      title: "Integrated Solutions",
+      description:
+        "Access a suite of services — from web development and automation to marketing and branding — crafted to amplify your digital impact.",
     },
     {
       icon: <User size={24} className="text-black" />,
-      title: "Custom Branding",
-      description: "Add your logo, colors, and style effortlessly.",
+      title: "Deploy Instantly",
+      description:
+        "Launch campaigns, websites, or digital systems with expertise where everything from code to content, executed seamlessly.",
     },
     {
       icon: <Globe size={24} className="text-black" />,
-      title: "Global Reach",
-      description: "Share your personal brand with the world.",
+      title: "Seamless Digital Management",
+      description:
+        "Monitor, adjust, and optimize every element with intuitive tools designed for smooth operations.",
     },
   ];
 
@@ -47,13 +51,13 @@ function PersonalBrand() {
             className="flex flex-col items-center text-center p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
           >
             {/* Icon with gray border */}
-            <div className="w-16 h-16 flex justify-center items-center mb-4 rounded-full border-2 border-gray-300">
+            <div className="w-16 h-16 flex justify-center items-center mb-4 rounded-full border-1 border-gray-300">
               {feature.icon}
             </div>
             <h3 className="text-lg sm:text-xl font-semibold mb-2">
               {feature.title}
             </h3>
-            <p className="text-gray-600 text-sm sm:text-base">
+            <p className="text-gray-600 text-sm sm:text-sm">
               {feature.description}
             </p>
           </div>

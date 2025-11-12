@@ -102,14 +102,14 @@ const Video = () => {
       </p>
 
       {/* Heading */}
-      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold max-w-full sm:max-w-2xl md:max-w-3xl ">
-        The easiest way to build a stunning personal site.
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none xl:text-7xl font-bold max-w-full sm:max-w-2xl md:max-w-3xl ">
+        The easiest way to elevate your brand{" "}
       </h1>
 
       {/* Subtext */}
       <p className="text-xs sm:text-sm md:text-xl lg:text-base text-gray-300 mt-2 py-8 sm:mt-3 max-w-full sm:max-w-lg px-2 sm:px-0 leading-relaxed">
-        No complicated tools or hidden fees—just a fast, free way to create a
-        stunning site in minutes. Professional results in just 60 seconds.
+        No complicated tools. Just a fast, seamless way to explore creative
+        solutions that engage, Inspire, and deliver results.
       </p>
 
       {/* Video Section */}

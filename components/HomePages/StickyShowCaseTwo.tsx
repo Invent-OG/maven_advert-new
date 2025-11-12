@@ -68,12 +68,12 @@ export default function StickyShowCaseTwo() {
     <>
       <section className="showcase-section relative w-full min-h-screen p-10  overflow-hidden">
         <h1 className=" text-4xl  md:text-7xl font-bold text-center">
-          Use Pre-Built <br /> Sections
+          Elevate Every <br /> Digital Move
         </h1>
-        <p className="text-center text-gray-600 mt-4 mb-8 max-w-2xl mx-auto px-4 sm:px-0 leading-relaxed">
-          Pop Site gives you stunning prebuilt sections to build your site
-          effortlessly. Just pick, customize, and publish—no design skills
-          needed.
+        <p className="text-center text-gray-600 mt-4 mb-8 max-w-sm mx-auto px-4 sm:px-0 leading-relaxed">
+          Maven Advert gives you powerful solutions to build, market, and scale
+          effortlessly. Unlock your potential, execute your vision, and grow
+          with impact.
         </p>
         <div className="relative py-16 flex justify-center items-center gap-4 sm:gap-6">
           {/* Left images */}

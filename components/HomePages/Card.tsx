@@ -37,79 +37,79 @@ export default function EverythingYouNeed() {
     {
       image:
         "https://framerusercontent.com/images/7dO8cZCgml9VNEVN3iHoGpId9Dw.jpg?scale-down-to=512",
-      title: "Forms",
+      title: "Strategic Digital Architecture",
       description:
-        "Capture inquiries with customizable forms to grow your business.",
+        "Build your brand’s online journey with data-driven insights and cohesive digital strategies.",
     },
     {
       image:
         "https://framerusercontent.com/images/7dO8cZCgml9VNEVN3iHoGpId9Dw.jpg?scale-down-to=512",
-      title: "Showcase",
+      title: "Interactive Web Experiences",
       description:
-        "Show the world your visual work and earn add-ons to boost engagement.",
+        "Develop websites that engage, convert, and reflect your brand’s identity seamlessly.",
     },
     {
       image:
         "https://framerusercontent.com/images/00EUntV8RMJM5PyskAclGChN9s8.jpg?scale-down-to=512",
-      title: "Services",
+      title: "Brand Identity Crafting",
       description:
-        "Clearly display your services, pricing, and descriptions to attract more clients.",
+        "Transform any digital visual into a cohesive brand language that resonates",
     },
     {
       image:
         "https://framerusercontent.com/images/oMdcviojJa9zK00dtdpSR7ffq6E.jpg?scale-down-to=512",
-      title: "Testimonials",
+      title: "Targeted Growth Campaigns",
       description:
-        "Build trust by showcasing real customer feedback and success stories.",
+        "ROI-focused advertising across Google, social, and display networks to maximize impact.",
     },
     {
       image:
         "https://framerusercontent.com/images/FslHXXxXCDOMyOJzYO89SJJlvXA.jpg?scale-down-to=512",
-      title: "Videos",
+      title: "Content Marketing for Authority",
       description:
-        "Feature one or more videos to engage visitors and increase conversions.",
+        "SEO, blogs, and multimedia content designed to build credibility and organic reach.",
     },
     {
       image:
         "https://framerusercontent.com/images/Qr7KMQJHcfeNk4LSsnK1id52E7g.jpg?scale-down-to=512",
-      title: "Socials",
+      title: "eCommerce Growth Engine",
       description:
-        "Link everything in one place so visitors easily connect with your platforms.",
+        "Optimize marketplaces and product listings to drive traffic, conversions, and repeat sales.",
     },
     {
       image:
         "https://framerusercontent.com/images/U7ONvjSO4tFRexJCBv69x0O7I.jpg?scale-down-to=512",
-      title: "Resume",
+      title: "Automated Sales Systems",
       description:
-        "Highlight your experience and expertise to win clients and job opportunities.",
+        "CRM, Chatbots, Landing pages, and analytics engineered to streamline and boost sales.",
     },
     {
       image:
         "https://framerusercontent.com/images/XkBqyfrXhJSH88VAqh1qdsHGJ44.jpg?scale-down-to=512",
-      title: "Stats",
+      title: "Social Amplification & Engagement",
       description:
-        "Display key business metrics to establish credibility and showcase success.",
+        "Grow audience, Enhance Brand Visibility, and foster meaningful social connections.",
     },
     {
       image:
         "https://framerusercontent.com/images/AG4NbEc1vlVyLZtonCBmltk2jM.jpg?scale-down-to=512",
-      title: "Tech Stack",
+      title: "Visual Storytelling & Production",
       description:
-        "Showcase the tools and tech you’ve mastered and attract opportunities.",
+        "Corporate films, Brand shoots, and Photography that capture your brand essence.",
     },
     {
       image:
         "https://framerusercontent.com/images/87bY5xcFN4asDCaH1lXq6XTdjCo.jpg?scale-down-to=512",
-      title: "Tech Stack",
+      title: "Experiential Spaces & Installations",
       description:
-        "Showcase the tools and tech you’ve mastered and attract opportunities.",
+        "Trade show stalls, Exhibitions, and brand environments designed to leave lasting impressions.",
     },
     {
       image:
         "https://framerusercontent.com/images/h4NtlJI69nsUCTgJMqCfcddzC0.jpg?scale-down-to=512",
-      title: "Tech Stack",
+      title: "Performance Intelligence & Insights",
       description:
-        "Showcase the tools and tech you’ve mastered and attract opportunities.",
+        "Advanced analytics and optimization to continuously refine campaigns and strategy outcomes.",
     },
   ];
 
@@ -118,11 +118,11 @@ export default function EverythingYouNeed() {
       {/* Section Heading */}
       <div className="max-w-6xl mx-auto mb-16 text-center">
         <h2 className="text-7xl font-bold text-black mb-3">
-          Everything you need
+          Everything Your <br /> Brand Needs
         </h2>
-        <p className="text-gray-500 text-base ">
-          Prebuilt, powerful sections designed to showcase your <br /> personal
-          brand and drive growth.
+        <p className="text-gray-500 max-w-sm mx-auto text-base ">
+          A blend of creativity, technology and strategy designed to build
+          brands and drive growth.
         </p>
       </div>
 

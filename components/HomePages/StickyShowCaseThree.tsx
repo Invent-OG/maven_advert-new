@@ -222,11 +222,11 @@ export default function StickyShowCaseThree() {
           "radial-gradient(circle at top, #402B7D 0%, #402B7D 0%, #000000 100%)",
       }}
     >
-      <h4 className="text-center text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl p-6 sm:p-10 font-bold">
-        You look better on <br /> MavenAdvert
+      <h4 className="text-center text-white text-3xl max-w-2xl mx-auto sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl p-6 sm:p-10 font-bold">
+        Redefining Your Visual Presence{" "}
       </h4>
       <p className="text-white text-center text-sm sm:text-base md:text-lg mb-6">
-        See Oliver&apos;s new MavenAdvert (left) v.s. his old website (right)
+        See the updated design (left) against the old version (right)
       </p>
 
       <section className="w-full flex justify-center items-center p-6 sm:p-10 md:p-12 lg:p-16 min-h-[520px] md:min-h-[600px] lg:min-h-[680px]">

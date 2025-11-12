@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         hostname: "hxtgxpzuhnhsesburmfl.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
+      {
+        protocol: "https",
+        hostname: "crafto.themezaa.com",
+        pathname: "/marketing/wp-content/uploads/**",
+      },
     ],
   },
 };

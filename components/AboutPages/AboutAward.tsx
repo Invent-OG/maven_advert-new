@@ -9,14 +9,14 @@ function AboutAward() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-20">
           <div className="md:w-1/2 text-left">
             <h2 className="text-4xl md:text-5xl font-bold text-[#0c1523] leading-tight">
-              We are the marketing <br /> agency for business.
+              We elevate brands through creativity and innovation.
             </h2>
           </div>
           <div className="md:w-1/2 mt-6 md:mt-0 text-left md:pl-16">
             <p className="text-gray-500 leading-relaxed text-[18px]">
-              We curate an excellent quality hand-crafted email template designs
-              that enhance readability of users with possibility. We believe in
-              maintaining long-term relationship.
+              By combining branding expertise, design excellence, and
+              data-driven strategies, we deliver impactful campaigns that drive
+              business growth and meaningful audience engagement.
             </p>
           </div>
         </div>

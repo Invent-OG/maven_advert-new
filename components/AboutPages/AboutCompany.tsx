@@ -6,35 +6,36 @@ import gsap from "gsap";
 const tabs = [
   {
     id: 1,
-    title: "Company benefits",
-    heading: "Build better results with company insights.",
+    title: "Strategic Insight",
+    heading:
+      "Empowering brands with data-driven strategies and creative foresight.",
     description:
-      "Leverage years of experience and expert data insights to boost your company's performance and long-term growth. Our analytics help streamline decision-making and enhance ROI.",
-    feature: "Real-time performance tracking.",
+      "We go beyond trends — analysing audience behavior, market potential, and brand positioning to build purposeful campaigns that drive measurable growth.",
+    feature: "Strategy shapes success.",
   },
   {
     id: 2,
-    title: "Competitive analysis",
-    heading: "Understand your competition like never before.",
+    title: "Creative Precision",
+    heading: "Creativity refined through insight, vision, and purpose.",
     description:
-      "Analyze your competitors’ strategies, market trends, and performance metrics to help you stay one step ahead in your industry.",
-    feature: "Comprehensive market analytics.",
+      "We design brands, campaigns, and experiences that resonate deeply and drive real growth.",
+    feature: "Details define excellence.",
   },
   {
     id: 3,
-    title: "Trusted experience",
-    heading: "Effective solutions for all business.",
+    title: "Proven Expertise",
+    heading: "Driven by insight, strengthened by experience.",
     description:
-      "Lorem ipsum is simply printing typesetting industry industry's standard dummy text printer scrambled ipsum is simply dummy text of the printing.",
-    feature: "Competitors research intelligence.",
+      "Our team brings years of strategic knowledge, creative depth, and proven results — helping brands evolve with purpose and precision.",
+    feature: "Experience builds trust.",
   },
   {
     id: 4,
-    title: "Global partners",
-    heading: "Partnering globally for your success.",
+    title: "Innovative Partnerships",
+    heading: "Collaborating beyond boundaries to create impact.",
     description:
-      "Collaborate with trusted global brands and agencies to expand your business network and unlock new opportunities worldwide.",
-    feature: "International collaboration insights.",
+      "We believe in partnerships that inspire progress — combining ideas, strategy, and creativity to shape lasting success.",
+    feature: "Together, we grow.",
   },
 ];
 
@@ -53,7 +54,7 @@ function AboutCompany() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-16">
+    <section className="w-full bg-gray-100 py-16">
       {/* Tabs Navigation */}
       <div className="flex justify-center border-b border-gray-200">
         {tabs.map((tab) => (
@@ -106,7 +107,7 @@ function AboutCompany() {
           </p>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="px-4 py-3 bg-gray-50 border rounded-lg flex items-center gap-2 shadow-sm">
+            <div className="px-4 py-3 bg-gray-50 border border-gray-50 rounded-lg flex items-center gap-2 shadow-sm">
               <span className="text-red-500 text-xl">🌐</span>
               <span className="font-medium text-gray-800">
                 {tabs[activeTab - 1].feature}
@@ -121,10 +122,10 @@ function AboutCompany() {
 
           <div className="flex items-center gap-5 mt-8">
             <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
-              Explore services →
+              Discover More →
             </button>
             <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
-              ✉️ Quick contact
+              ✉️ Connect & Grow
             </button>
           </div>
         </div>
