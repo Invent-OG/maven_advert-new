@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Card Component
 type CardProps = {
@@ -9,10 +11,19 @@ type CardProps = {
 };
 
 function Card({ image, title, description }: CardProps) {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 flex flex-col items-center h-[360px] w-[340px] hover:-translate-y-1">
       {/* Image Section */}
-      <div className="w-[300px] h-[220px] rounded-2xl overflow-hidden border-2 border-gray-200 shadow-inner relative transition-transform duration-300 hover:scale-105">
+      <div
+        data-aos="fade-down"
+        className="w-[300px] h-[220px] rounded-2xl overflow-hidden border-2 border-gray-200 shadow-inner relative transition-transform duration-300 hover:scale-105"
+      >
         <img
           src={image}
           alt={title}
@@ -117,10 +128,10 @@ export default function EverythingYouNeed() {
     <section className="bg-white py-20 px-4">
       {/* Section Heading */}
       <div className="max-w-6xl mx-auto mb-16 text-center">
-        <h2 className="text-7xl font-bold text-black mb-3">
+        <h2 className="md:text-7xl text-4xl font-bold text-neutral-900 mb-3">
           Everything Your <br /> Brand Needs
         </h2>
-        <p className="text-gray-500 max-w-sm mx-auto text-base ">
+        <p className="text-gray-500 max-w-sm mx-auto text-sm md:text-sm leading-relaxed">
           A blend of creativity, technology and strategy designed to build
           brands and drive growth.
         </p>

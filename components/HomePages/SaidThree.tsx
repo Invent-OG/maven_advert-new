@@ -1,16 +1,27 @@
-
 "use client";
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function SaidThree() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   const phoneRefs = useRef<HTMLDivElement[]>([]);
 
   return (
     <section className="relative w-full min-h-screen  flex flex-col md:flex-row items-center justify-center px-6 sm:px-10 md:px-16 lg:px-20 py-16 md:py-24 overflow-hidden">
       {/* Left Side - Membership content */}
-      <div className="flex-1 flex flex-col justify-center items-start text-center md:text-left p-4 sm:p-8 md:p-12 lg:p-16 order-2 md:order-1">
+      <div
+        data-aos="fade-right"
+        className="flex-1 flex flex-col justify-center items-start text-center md:text-left p-4 sm:p-8 md:p-12 lg:p-16 order-2 md:order-1"
+      >
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight max-w-2xl mx-auto md:mx-0">
           Make your personal site now.
         </h2>
@@ -23,7 +34,10 @@ export default function SaidThree() {
       </div>
 
       {/* Right Side - Centered stacked images */}
-      <div className="flex-1 flex right-10 -top-15 md:top-0 justify-center items-end relative order-1 pb-10 md:order-2 pt-12 md:pt-0">
+      <div
+        data-aos="fade-left"
+        className="flex-1 flex right-10 -top-15 md:top-0 justify-center items-end relative order-1 pb-10 md:order-2 pt-12 md:pt-0"
+      >
         <div className="flex justify-center items-end gap-[-80px] md:gap-[-80px] relative">
           <PhoneMockup
             ref={(el) => {

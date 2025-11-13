@@ -1,56 +1,111 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+"use client";
 
-import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
+type AnimatedButtonProps = {
+  children: ReactNode;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  className?: string;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+export default function Button({
+  children,
+  onClick,
+  type = "button",
+  className = "",
+  ...rest
+}: AnimatedButtonProps) {
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const glow1Ref = useRef<HTMLSpanElement | null>(null);
+  const glow2Ref = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    const btn = btnRef.current;
+    const glow1 = glow1Ref.current;
+    const glow2 = glow2Ref.current;
+
+    if (!btn || !glow1 || !glow2) return;
+
+    // Initially hide glows off-screen
+    gsap.set(glow1, { x: "-150%", opacity: 0 });
+    gsap.set(glow2, { x: "150%", opacity: 0 });
+
+    const handleEnter = () => {
+      gsap.to(btn, {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      gsap.fromTo(
+        glow1,
+        { x: "-150%", opacity: 0 },
+        { x: "150%", opacity: 0.9, duration: 1.2, ease: "power2.out" }
+      );
+      gsap.fromTo(
+        glow2,
+        { x: "150%", opacity: 0 },
+        { x: "-150%", opacity: 0.9, duration: 1.2, ease: "power2.out" }
+      );
+    };
+
+    const handleLeave = () => {
+      gsap.to(btn, {
+        scale: 1,
+        duration: 0.3,
+        ease: "power2.inOut",
+      });
+
+      gsap.to(glow1, {
+        x: "-150%",
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut",
+      });
+      gsap.to(glow2, {
+        x: "150%",
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut",
+      });
+    };
+
+    btn.addEventListener("mouseenter", handleEnter);
+    btn.addEventListener("mouseleave", handleLeave);
+
+    return () => {
+      btn.removeEventListener("mouseenter", handleEnter);
+      btn.removeEventListener("mouseleave", handleLeave);
+    };
+  }, []);
+
+  return (
+    <button
+      ref={btnRef}
+      type={type}
+      onClick={onClick}
+      className={`relative overflow-hidden z-10 px-6 py-2 rounded-full font-medium text-white bg-[#171817] border border-[#DDF694] shadow-[0px_0px_25px_6px_#6F7C4E] transition-transform duration-300 ease-in-out ${className}`}
+      {...rest}
+    >
+      {/* Glowing overlays */}
+      <span
+        ref={glow1Ref}
+        className="absolute top-0 left-0 w-2/3 h-full pointer-events-none"
+      >
+        <span className="absolute w-full h-full bg-white blur-sm rounded-full" />
+      </span>
+      <span
+        ref={glow2Ref}
+        className="absolute top-0 left-0 w-2/3 h-full pointer-events-none"
+      >
+        <span className="absolute w-full h-full bg-white blur-sm rounded-full" />
+      </span>
+
+      {/* Button text */}
+      <span className="relative z-10">{children}</span>
+    </button>
+  );
 }
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Button.displayName = "Button";
-
-export { Button, buttonVariants };

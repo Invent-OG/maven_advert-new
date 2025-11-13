@@ -1,12 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Said() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <section className="w-full flex flex-col md:flex-row items-stretch bg-black text-white overflow-hidden min-h-[600px] md:min-h-[500px]">
       {/* Left Side - Image */}
-      <div className="relative w-full md:w-1/2 h-[600px] md:h-auto">
+      <div
+        data-aos="fade-right"
+        className="relative w-full md:w-1/2 h-[600px] md:h-auto"
+      >
         <Image
           src="https://framerusercontent.com/images/TpMLCULNEpBMGtsbiAjXEdQLEc.webp?scale-down-to=1024"
           alt="Oliur"
@@ -17,7 +28,10 @@ export default function Said() {
       </div>
 
       {/* Right Side - Testimonial */}
-      <div className="w-full md:w-1/2 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a] flex flex-col justify-center p-10 md:p-16">
+      <div
+        data-aos="fade-left"
+        className="w-full md:w-1/2 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a] flex flex-col justify-center p-10 md:p-16"
+      >
         {/* Quotation Header */}
         <div className="flex items-center gap-2 mb-4">
           <div className="bg-gray-800 p-2 rounded-md">

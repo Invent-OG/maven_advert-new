@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +15,7 @@ export default function SaidTwo() {
   useEffect(() => {
     phoneRefs.current.forEach((phone, i) => {
       gsap.to(phone, {
-        y: -250 - i * 50, // move up on scroll with stacking effect
+        y: -150 - i * 50, // move up on scroll with stacking effect
         ease: "power1.out",
         scrollTrigger: {
           trigger: phone,
@@ -22,6 +24,12 @@ export default function SaidTwo() {
           scrub: true,
         },
       });
+    });
+  }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
     });
   }, []);
 
@@ -54,7 +62,10 @@ export default function SaidTwo() {
       </div>
 
       {/* Right Side - Testimonial */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left p-6 sm:p-10 md:p-16">
+      <div
+        data-aos="fade-left"
+        className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left p-6 sm:p-10 md:p-16"
+      >
         {/* Quotation Header */}
         <div className="flex items-center gap-2 mb-4">
           <div className="bg-gray-800 p-2 rounded-md">

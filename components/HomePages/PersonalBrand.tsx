@@ -1,7 +1,17 @@
+"use client";
 import React from "react";
 import { CheckCircle, Zap, User, Globe } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 function PersonalBrand() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   const features = [
     {
       icon: <CheckCircle size={24} className="text-black" />,
@@ -32,11 +42,11 @@ function PersonalBrand() {
   return (
     <section className="w-full min-h-screen flex flex-col justify-center items-center bg-white px-4 sm:px-6 md:px-12 lg:px-20 py-16">
       {/* Heading */}
-      <div className="text-center max-w-3xl mb-12">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-black mb-6 leading-tight">
+      <div data-aos="fade-up" className="text-center max-w-3xl mb-12">
+        <h1 className="md:text-6xl text-3xl font-bold text-neutral-900 mb-6 leading-tight">
           Launch your personal brand today
         </h1>
-        <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+        <p className="text-sm sm:text-sm md:text-sm text-gray-700 leading-relaxed">
           Pick a template, edit a few sections, and share. No design skills
           needed— <br className="hidden md:block" />
           just a fast, effortless way to build your brand.
@@ -44,7 +54,10 @@ function PersonalBrand() {
       </div>
 
       {/* Cards Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 w-full max-w-6xl">
+      <div
+        data-aos="fade-down"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 w-full max-w-6xl"
+      >
         {features.map((feature, index) => (
           <div
             key={index}

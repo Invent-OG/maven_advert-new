@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
+import AnimatedButton from "../ui/AnimatedButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,7 +39,7 @@ export default function StickyShowcase() {
           {/* <ShieldCheck className="w-12 h-12 text-blue-600" /> */}
         </div>
 
-        <h1 className="text-4xl md:py-4 md:mt-0 mt-20 text-black max-w-2xl md:text-7xl font-bold">
+        <h1 className="md:text-8xl text-4xl font-bold text-neutral-900 md:py-4 md:mt-0 mt-20 md:max-w-4xl ">
           Build a remarkable brand experience
         </h1>
         <p className="text-gray-600 mt-2">
@@ -46,9 +47,10 @@ export default function StickyShowcase() {
         </p>
 
         {/* Main Button */}
-        <button className="mt-6 px-6 py-4 bg-blue-600 text-white rounded-md font-medium text-lg">
+        {/* <button className="mt-6 px-6 py-4 bg-blue-600 text-white rounded-md font-medium text-lg">
           Get Started
-        </button>
+        </button> */}
+        <AnimatedButton className="mt-6  ">Get Started</AnimatedButton>
       </div>
 
       {/* Phones Showcase */}

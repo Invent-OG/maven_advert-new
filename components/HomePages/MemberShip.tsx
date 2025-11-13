@@ -2,14 +2,26 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function MemberShip() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   const phoneRefs = useRef<HTMLDivElement[]>([]);
 
   return (
     <section className="relative w-full min-h-screen bg-white flex flex-col md:flex-row items-center justify-evenly px-6 sm:px-10 md:px-16 lg:px-20 py-2 md:py-24 overflow-hidden">
       {/* Left Side - Centered stacked images */}
-      <div className="flex-1 flex justify-center left-10 items-center relative  md:mb-0">
+      <div
+        data-aos="fade-down"
+        className="flex-1 flex justify-center left-10 items-center relative  md:mb-0"
+      >
         <div className="relative flex justify-center items-center">
           <PhoneMockup
             ref={(el) => {
@@ -29,8 +41,11 @@ export default function MemberShip() {
       </div>
 
       {/* Right Side - Membership content */}
-      <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left p-4 sm:p-8 md:p-12 lg:p-16">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight max-w-2xl">
+      <div
+        data-aos="fade-left"
+        className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left p-4 sm:p-8 md:p-12 lg:p-16"
+      >
+        <h2 className="md:text-7xl text-3xl font-bold text-neutral-900 mb-6 leading-normal max-w-xl">
           Automate Your Digital Workflow.{" "}
         </h2>
         <p className="text-gray-700 text-sm sm:text-base md:text-sm font-semibold mb-8 max-w-xl leading-relaxed">

@@ -2,6 +2,8 @@
 
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Sample testimonial data
 const sampleTestimonials = [
@@ -64,7 +66,7 @@ function MovingCard({
   return (
     <div className="bg-[#131414] p-4 rounded-xl shadow-lg mb-6 flex items-center w-80 h-32">
       {/* Avatar */}
-      <div className="flex-shrink-0">
+      <div data-aos="fade-down" className="flex-shrink-0">
         <img
           src={testimonial.image}
           alt={testimonial.name}
@@ -136,6 +138,12 @@ function MovingColumn({
 
 // Main Testimonials Component
 export default function Testimonials() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   // Split testimonials into three columns
   const firstColumn = sampleTestimonials.filter((_, i) => i % 3 === 0);
   const secondColumn = sampleTestimonials.filter((_, i) => i % 3 === 1);

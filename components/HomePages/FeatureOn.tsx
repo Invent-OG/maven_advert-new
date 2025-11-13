@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function FeatureOn() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -32,14 +34,20 @@ export default function FeatureOn() {
       );
     }
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
     <section className=" flex flex-col justify-center items-center mt-10 py-10 overflow-hidden">
-      <h2 className="text-7xl font-bold text-center mb-8">
+      <h2 data-aos="fade-down" className="text-7xl font-bold text-center mb-8">
         Brands We Work With
       </h2>
 
-      <div className="overflow-hidden max-w-4xl w-full">
+      <div data-aos="fade-down" className="overflow-hidden max-w-4xl w-full">
         <div
           ref={marqueeRef}
           className="flex space-x-10 whitespace-nowrap w-max"

@@ -67,10 +67,10 @@ export default function StickyShowCaseTwo() {
   return (
     <>
       <section className="showcase-section relative w-full min-h-screen p-10  overflow-hidden">
-        <h1 className=" text-4xl  md:text-7xl font-bold text-center">
+        <h1 className=" text-4xl text-neutral-900 md:text-7xl font-bold text-center">
           Elevate Every <br /> Digital Move
         </h1>
-        <p className="text-center text-gray-600 mt-4 mb-8 max-w-sm mx-auto px-4 sm:px-0 leading-relaxed">
+        <p className="text-center md:text-sm text-gray-600 mt-4 mb-8 max-w-sm mx-auto px-4 sm:px-0 leading-relaxed">
           Maven Advert gives you powerful solutions to build, market, and scale
           effortlessly. Unlock your potential, execute your vision, and grow
           with impact.
