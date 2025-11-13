@@ -155,7 +155,6 @@ export default function Sidebar() {
               return (
                 <Button
                   key={item.href}
-                  asChild
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
                     "w-full justify-start transition-colors duration-200",
@@ -164,7 +163,7 @@ export default function Sidebar() {
                       : "bg-transparent hover:bg-orange-500"
                   )}
                 >
-                  <Link href={item.href}>
+                  <Link className="inline-flex" href={item.href}>
                     {item.icon && <item.icon className="h-5 w-5 mr-2" />}
                     <span>{item.label}</span>
                   </Link>
