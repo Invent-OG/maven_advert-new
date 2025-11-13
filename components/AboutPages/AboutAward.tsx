@@ -1,12 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function AboutAward() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <section className="w-full bg-white py-8 mb-12">
       <div className="max-w-6xl mx-auto px-6">
         {/* Heading Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-20">
+        <div
+          data-aos="fade-up"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center mb-20"
+        >
           <div className="md:w-1/2 text-left">
             <h2 className="text-4xl md:text-5xl font-bold text-[#0c1523] leading-tight">
               We elevate brands through creativity and innovation.
@@ -22,7 +33,7 @@ function AboutAward() {
         </div>
 
         {/* Timeline Section */}
-        <div className="relative">
+        <div data-aos="fade-down" className="relative">
           {/* Dotted line */}
           <div className="absolute top-[68px] left-0 w-full border-t border-dotted border-gray-300"></div>
 

@@ -1,12 +1,21 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import {
   FaThumbsUp,
   FaMousePointer,
   FaBullhorn,
   FaQuestion,
 } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function MarketingAgency() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <section className="w-full bg-white py-16 px-6 md:px-20 min-h-screen">
       {/* Top Badge */}
@@ -31,7 +40,10 @@ function MarketingAgency() {
       </div>
 
       {/* Features */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:mt-24 text-center">
+      <div
+        data-aos="fade-down"
+        className="grid grid-cols-1 md:grid-cols-4 gap-8 md:mt-24 text-center"
+      >
         {/* Feature 1 */}
         <div className="flex flex-col items-center">
           <div className="bg-orange-50 p-4 rounded-full mb-4">

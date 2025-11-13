@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const tabs = [
   {
@@ -52,11 +54,20 @@ function AboutCompany() {
       yoyo: true,
     });
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
-    <section className="w-full bg-gray-100 py-16">
+    <section className="w-full bg-gray-100 py-16 overflow-x-hidden">
       {/* Tabs Navigation */}
-      <div className="flex justify-center border-b border-gray-200">
+      <div
+        data-aos="fade-down"
+        className="flex justify-center border-b border-gray-200"
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -75,7 +86,10 @@ function AboutCompany() {
       {/* Content Section */}
       <div className="flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 py-14 gap-10">
         {/* Left Image */}
-        <div className="relative w-full lg:w-1/2 flex justify-center">
+        <div
+          data-aos="fade-right"
+          className="relative w-full lg:w-1/2 flex justify-center"
+        >
           <div className="relative">
             <Image
               src="https://images.pexels.com/photos/15443240/pexels-photo-15443240.jpeg"
@@ -95,7 +109,10 @@ function AboutCompany() {
         </div>
 
         {/* Right Content */}
-        <div className="w-full flex flex-col gap-8 lg:w-1/2 ">
+        <div
+          data-aos="fade-left"
+          className="w-full flex flex-col gap-8 lg:w-1/2 "
+        >
           <h6 className="text-sm text-orange-500 font-bold  tracking-wide uppercase mb-3">
             {tabs[activeTab - 1].title}
           </h6>

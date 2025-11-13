@@ -1,19 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function AboutMarketing() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <section className="w-full bg-[#f8fafc] py-20">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16">
+        <div
+          data-aos="fade-right"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16"
+        >
           <div className="md:w-1/2 text-left">
             <h2 className="text-4xl md:text-5xl font-bold text-[#0c1523] leading-tight">
               Committed staff are <br /> ready to help you.
             </h2>
           </div>
-          <div className="md:w-1/2 mt-6 md:mt-0 text-left md:pl-16">
+          <div
+            data-aos="fade-left"
+            className="md:w-1/2 mt-6 md:mt-0 text-left md:pl-16"
+          >
             <p className="text-gray-500 leading-relaxed text-[17px]">
               We curate an excellent quality hand-crafted email template designs
               that enhance readability of users with possibility. We believe in
@@ -25,7 +39,10 @@ function AboutMarketing() {
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="relative bg-white p-12 rounded-md shadow-sm transition-all duration-300 hover:shadow-md">
+          <div
+            data-aos="fade-up"
+            className="relative bg-white p-12 rounded-md shadow-sm transition-all duration-300 hover:shadow-md"
+          >
             {/* Background shape */}
             <div
               className="absolute bottom-0 right-0 w-32 h-32 opacity-30"
@@ -45,7 +62,10 @@ function AboutMarketing() {
           </div>
 
           {/* Card 2 (Highlighted) */}
-          <div className="relative bg-[#fff176] rounded-lg p-12 shadow-sm transition-all duration-300 hover:shadow-md">
+          <div
+            data-aos="fade-left"
+            className="relative bg-[#fff176] rounded-lg p-12 shadow-sm transition-all duration-300 hover:shadow-md"
+          >
             {/* Background shape */}
             <div
               className="absolute bottom-0 right-0 w-32 h-32 opacity-15"
@@ -68,7 +88,10 @@ function AboutMarketing() {
           </div>
 
           {/* Card 3 */}
-          <div className="relative bg-white rounded-lg p-12 shadow-sm transition-all duration-300 hover:shadow-md">
+          <div
+            data-aos="fade-down"
+            className="relative bg-white rounded-lg p-12 shadow-sm transition-all duration-300 hover:shadow-md"
+          >
             {/* Background shape */}
             <div
               className="absolute bottom-0 right-0 w-32 h-32 opacity-10"

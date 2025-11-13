@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function AboutMarquee() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -17,9 +19,18 @@ export default function AboutMarquee() {
       repeat: -1,
     });
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
-    <section className="w-full overflow-hidden bg-white py-10">
+    <section
+      data-aos="fade-up"
+      className="w-full overflow-hidden bg-white py-10"
+    >
       <div
         ref={marqueeRef}
         className="flex whitespace-nowrap text-[8vw] font-extrabold"

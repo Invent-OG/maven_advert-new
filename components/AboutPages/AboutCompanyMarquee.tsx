@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function AboutCompanyMarquee() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -25,6 +27,12 @@ export default function AboutCompanyMarquee() {
 
     return () => ctx.revert();
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const logos = [
     "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-netflix-dark-gray.svg",
@@ -37,7 +45,7 @@ export default function AboutCompanyMarquee() {
   ];
 
   return (
-    <section className="w-full mb-10 bg-white py-12">
+    <section data-aos="fade-up" className="w-full mb-10 bg-white py-12">
       {/* The container that restricts width */}
       <div className="relative mx-auto max-w-6xl overflow-hidden flex items-center justify-center">
         {/* The animated marquee */}
