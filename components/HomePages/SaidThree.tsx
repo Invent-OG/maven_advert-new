@@ -26,7 +26,7 @@ export default function SaidThree() {
           Make your personal site now.
         </h2>
         <p className="text-gray-700 text-sm sm:text-base md:text-lg font-semibold mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
-          Pop Site has partnered with{" "}
+          MavenAdvert has partnered with{" "}
           <span className="font-semibold">MemberSpace</span> to help you sell
           members-only content on your site. Build a thriving community and
           unlock exclusive access for your members.

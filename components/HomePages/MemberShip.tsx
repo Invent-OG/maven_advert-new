@@ -5,8 +5,11 @@ import Image from "next/image";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import AnimatedButton from "../ui/AnimatedButton";
+import { useRouter } from "next/navigation";
 
 export default function MemberShip() {
+  const router = useRouter();
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -52,12 +55,15 @@ export default function MemberShip() {
           Seamlessly connect WhatsApp, CRM, and analytics tools to manage leads,
           nurture customers, and scale smarter.
         </p>
-        <a
+        {/* <a
           href="#"
           className="inline-block bg-blue-400 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-md"
         >
           Get Started
-        </a>
+        </a> */}
+        <AnimatedButton onClick={() => router.push("/contact")}>
+          Get Started
+        </AnimatedButton>
       </div>
     </section>
   );

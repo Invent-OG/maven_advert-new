@@ -6,10 +6,12 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 import AnimatedButton from "../ui/AnimatedButton";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function StickyShowcase() {
+  const router = useRouter();
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Floating animation for side phones
@@ -50,7 +52,12 @@ export default function StickyShowcase() {
         {/* <button className="mt-6 px-6 py-4 bg-blue-600 text-white rounded-md font-medium text-lg">
           Get Started
         </button> */}
-        <AnimatedButton className="mt-6  ">Get Started</AnimatedButton>
+        <AnimatedButton
+          onClick={() => router.push("/contact")}
+          className="mt-6  "
+        >
+          Get Started
+        </AnimatedButton>
       </div>
 
       {/* Phones Showcase */}

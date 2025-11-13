@@ -23,14 +23,16 @@ export default function LenisProvider({
 
   useEffect(() => {
     // Create properly typed options for Lenis and extend to allow smoothTouch if missing
-    const lenisOptions: ConstructorParameters<typeof Lenis>[0] & { smoothTouch?: boolean } = {
-      duration: 1.2,
+    const lenisOptions: ConstructorParameters<typeof Lenis>[0] & {
+      smoothTouch?: boolean;
+    } = {
+      duration: 3,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      smoothTouch: false, // disable touch smoothing for better mobile UX
+      smoothTouch: true, // disable touch smoothing for better mobile UX
       infinite: false,
     };
-    
+
     const lenis = new Lenis(lenisOptions);
 
     lenisRef.current = lenis;

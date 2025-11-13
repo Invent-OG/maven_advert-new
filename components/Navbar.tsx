@@ -66,13 +66,13 @@ function Navbar() {
   ];
 
   const menuLinks = [
-    { name: "HOME", href: "/" },
-    { name: "ABOUT", href: "/about" },
-    { name: "SERVICES", href: "/services" },
-    { name: "CASESTUDY", href: "/casestudies" },
-    { name: "CONTACT", href: "/contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Case Studies", href: "/casestudies" },
+    { name: "Contact", href: "/contact" },
     { name: "Stall Fabrication", href: "/stallfabrication" },
-    { name: "3D modelling", href: "/threed" },
+    { name: "3D Modelling", href: "/threed" },
   ];
 
   useEffect(() => {
