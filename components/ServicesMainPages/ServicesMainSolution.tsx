@@ -57,49 +57,50 @@ function ServicesMainSolution() {
         {/* ---------- RIGHT CONTENT SECTION ---------- */}
         <div className="flex-1">
           <p className="text-orange-500 uppercase font-semibold text-sm tracking-wide mb-3">
-            Our highly expertise
+            Our Highly Expertise{" "}
           </p>
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-            Marketing solutions <br className="hidden md:block" /> for all
-            business.
+            Innovative & <br /> elevate your brand
           </h2>
 
-          <div className="space-y-6 mb-10">
+          <div className="space-y-6 mb-10 ">
             {/* Feature 1 */}
-            <div className="flex items-start gap-3">
-              <div className="bg-orange-100 p-2 rounded-full flex-shrink-0">
-                <FaCheck className="text-orange-500 text-sm" />
+            <div className="flex items-start  gap-3">
+              <div className="bg-orange-100 p-5 rounded-full flex-shrink-0">
+                <FaCheck className="text-orange-500 text-xl" />
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800 text-lg">
-                  Search engine marketing
+                <h4 className="font-semibold text-gray-800 text-xl">
+                  Brand Identity Crafting{" "}
                 </h4>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Lorem ipsum is simply dummy text printing typesetting industry
-                  industry&apos;s standard.
+                <p className="text-gray-500 text-lg leading-relaxed">
+                  Transforming logos, visuals, and messaging into a cohesive
+                  brand language that drives recognition and audience
+                  engagement.
                 </p>
               </div>
             </div>
 
             {/* Feature 2 */}
             <div className="flex items-start gap-3">
-              <div className="bg-orange-100 p-2 rounded-full flex-shrink-0">
-                <FaCheck className="text-orange-500 text-sm" />
+              <div className="bg-orange-100 p-5 rounded-full flex-shrink-0">
+                <FaCheck className="text-orange-500 text-xl" />
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800 text-lg">
-                  Social media marketing
+                <h4 className="font-semibold text-gray-800 text-xl">
+                  Visual Storytelling & Production{" "}
                 </h4>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Lorem ipsum is simply dummy text printing typesetting industry
-                  industry&apos;s standard.
+                <p className="text-gray-500 text-lg leading-relaxed">
+                  Creating corporate films, brand shoots, and multimedia content
+                  that amplifies your brand’s impact and connects with your
+                  audience.
                 </p>
               </div>
             </div>
           </div>
 
           {/* ---------- BUTTONS ---------- */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap px-4 gap-4">
             <button className="bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition flex items-center gap-2">
               Case studies →
             </button>

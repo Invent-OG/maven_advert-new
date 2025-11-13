@@ -50,14 +50,14 @@ export default function Architectura() {
       {/* Left Content */}
       <div className="fade-left max-w-xl text-left">
         <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-6 leading-snug">
-          We Are The Leader In <br />
-          <span className="text-[#0a1b3d]">The Architectura!</span>
+          Redefining Stall Experiences <br /> with Maven Advert​
         </h2>
 
         <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-10">
-          We work with the public sector to build thriving communities. And we
-          work with regulators and financial institutions to build trust and
-          integrity in ets uis aliqua sunt nisi consectetur anim.
+          Maven Advert, a trusted name in exhibition stall fabrication across
+          Tamil Nadu and South India, creates dynamic setups for corporate
+          events and trade shows. We specialize in custom and Octanorm stall
+          designs that blend innovation, functionality, and flawless execution.
         </p>
 
         {/* Feature Items */}
@@ -68,11 +68,11 @@ export default function Architectura() {
             </div>
             <div>
               <h3 className="font-semibold text-lg text-[#0a1b3d] mb-1">
-                Exterior Design
+                Concept & Design Innovation​{" "}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Medixer Care will be administered through plan-based omizable
-                incorporate partnership between family.
+                We merge creativity with strategy to design custom exhibition
+                stalls that tell your brand story with purpose and impact.
               </p>
             </div>
           </div>
@@ -83,11 +83,12 @@ export default function Architectura() {
             </div>
             <div>
               <h3 className="font-semibold text-lg text-[#0a1b3d] mb-1">
-                Plan Estimator
+                Build & Beyond​{" "}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Medixer Care will be administered through plan-based omizable
-                incorporate partnership between family.
+                From stall fabrication to installation, every detail is executed
+                with precision — ensuring a seamless and memorable brand
+                presence.
               </p>
             </div>
           </div>

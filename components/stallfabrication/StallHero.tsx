@@ -18,17 +18,19 @@ export default function StallHero() {
         {/* Left Content */}
         <div className="max-w-xl text-[#0a1b3d]">
           <p className="text-orange-500 font-semibold text-sm md:text-base mb-3">
-            Simple & Secure Payment Process
+            Innovative Stall Fabricators in South India{" "}
           </p>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Giving Awesome Building <br />
-            <span className="text-[#0a1b3d]">Ideas Fresh Start</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-none">
+            Bringing brands alive with innovative stalls.
           </h1>
 
           <p className="text-gray-600 text-base md:text-lg mt-6 mb-10">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            At Maven Advert, we specialize in custom stall fabrication across
+            Tamil Nadu and South India — delivering creative, durable, and
+            brand-focused setups. Whether it’s a trade show, product launch, or
+            corporate event, our expert team transforms your vision into a
+            standout experience.
           </p>
 
           <div className="flex items-center justify-center lg:justify-start gap-6">

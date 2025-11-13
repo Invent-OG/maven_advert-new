@@ -62,8 +62,8 @@ export default function Blogs() {
           Our Latest News
         </h2>
         <p className="text-gray-500 mt-2 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Stay updated with insights, trends, and stories that shape brands,
+          experiences, and creative innovation at Maven Advert.
         </p>
       </div>
 

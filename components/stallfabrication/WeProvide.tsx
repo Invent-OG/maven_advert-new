@@ -31,27 +31,27 @@ export default function WeProvide() {
 
   const services = [
     {
-      title: "Interior Design",
+      title: "Pre-Promotional Activities",
       description:
-        "Bring creature let Fish t grass under the given a void fromt deep form greater and days give upon day light",
+        "Strategic digital promotions, teasers, and engagement campaigns that create buzz before the event.​",
       icon: <Brush className="w-10 h-10" />,
     },
     {
-      title: "Budget Planning",
+      title: "On-Site Fabrication Excellence",
       description:
-        "Bring creature let Fish t grass under the given a void fromt deep form greater and days give upon day light",
+        "Premium design, detailing, and on-ground execution built to captivate and endure.​",
       icon: <FileSpreadsheet className="w-10 h-10" />,
     },
     {
-      title: "Project Planning",
+      title: "Post-Promotional Activities",
       description:
-        "Bring creature let Fish t grass under the given a void fromt deep form greater and days give upon day light",
+        "Beyond the event, we help extend your brand’s visibility through engaging post-stall promotions and digital highlights.",
       icon: <Building2 className="w-10 h-10" />,
     },
     {
-      title: "Architecture Service",
+      title: "Experiential Design Focus",
       description:
-        "Bring creature let Fish t grass under the given a void fromt deep form greater and days give upon day light",
+        "Each stall is crafted not just to display, but to connect — transforming spaces into immersive brand experiences.",
       icon: <Ruler className="w-10 h-10" />,
     },
   ];
@@ -61,28 +61,38 @@ export default function WeProvide() {
       ref={sectionRef}
       className="relative w-full py-24 bg-white text-center overflow-hidden"
     >
-      {/* Section Heading */}
+      {/* Heading */}
       <div className="mb-16 px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-4">
-          What We Provide Special
+          What Makes Us Stand Apart{" "}
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua saidul
+        <p className="text-gray-500 text-sm max-w-xl mx-auto">
+          At Maven Advert, we go beyond building stalls — we build experiences
+          that live before, during, and after the event. Every step is crafted
+          to amplify your brand’s impact and audience connection.
         </p>
       </div>
 
-      {/* Cards Grid */}
+      {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-6 ">
         {services.map((service, i) => (
           <div
             key={i}
-            className="service-card group relative w-full h-[320px] [perspective:1000px]"
+            className="service-card group relative w-full h-[320px] [perspective:1100px] 
+            transition-all duration-500 
+            hover:scale-[1.05] hover:-translate-y-2 
+            hover:shadow-2xl"
           >
-            {/* Inner container */}
-            <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-              {/* Front Side */}
-              <div className="absolute inset-0 bg-white shadow-lg rounded-xl flex flex-col items-center justify-center px-6 text-center [backface-visibility:hidden]">
+            {/* Flip container with balloon easing */}
+            <div
+              className="relative w-full h-full transition-transform duration-[900ms] 
+              [transform-style:preserve-3d] 
+              group-hover:[transform:rotateY(180deg)] 
+              group-hover:duration-[1200ms] 
+              group-hover:ease-[cubic-bezier(.34,1.56,.64,1)]"
+            >
+              {/* FRONT */}
+              <div className="absolute inset-0 bg-white shadow-lg rounded-xl flex flex-col items-start justify-center px-6 text-start [backface-visibility:hidden]">
                 <div className="bg-orange-500 text-white w-16 h-16 rounded-full flex items-center justify-center mb-6">
                   {service.icon}
                 </div>
@@ -94,8 +104,8 @@ export default function WeProvide() {
                 </p>
               </div>
 
-              {/* Back Side */}
-              <div className="absolute inset-0 bg-orange-500 text-white rounded-xl flex flex-col items-center justify-center px-6 text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
+              {/* BACK */}
+              <div className="absolute inset-0 bg-orange-500 text-white rounded-xl flex flex-col items-start justify-start px-6 pt-10 text-start [backface-visibility:hidden] [transform:rotateY(180deg)]">
                 <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                   {service.icon}
                 </div>

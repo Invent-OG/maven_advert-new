@@ -32,25 +32,25 @@ export default function Offering() {
 
   const offerings = [
     {
-      title: "Construction Service",
+      title: "Stall Fabrication​",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "We offer custom exhibition stall fabrication in Tamil Nadu and South India, blending creativity, functionality, and precision to deliver stalls that enhance your brand presence at trade shows and expos.",
       icon: <Building2 className="w-10 h-10" />,
       img: "https://picsum.photos/id/1005/600/400",
       type: "image", // 1
     },
     {
-      title: "Architecture Service",
+      title: "Corporate Event Setups​",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Our corporate event fabrication services create stunning, brand-focused spaces for product launches, exhibitions, and business events, ensuring a seamless experience from concept to execution.",
       icon: <FileSpreadsheet className="w-10 h-10" />,
       img: "https://picsum.photos/id/1016/600/400",
       type: "content", // 2
     },
     {
-      title: "Budget Planning",
+      title: "Octanorm Stall​",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Maven Advert provides Octanorm stall fabrication and design services that are flexible, durable, and professional — ideal for exhibitions, trade fairs, and corporate displays across Tamil Nadu and South India.",
       icon: <Ruler className="w-10 h-10" />,
       img: "https://picsum.photos/id/1025/600/400",
       type: "image", // 3
@@ -89,11 +89,13 @@ export default function Offering() {
       {/* Section Header */}
       <div className="mb-16 px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-4">
-          Service We’re Offering
+          Services We’re Offering{" "}
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua saidul
+          At Maven Advert, we specialize in exhibition stall fabrication,
+          corporate event setups, and Octanorm stall design — delivering
+          creative, durable, and brand-focused solutions that make every space
+          stand out.
         </p>
       </div>
 

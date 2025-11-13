@@ -17,11 +17,11 @@ export default function ServicesMainHero() {
 
       {/* Left side - text content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end items-start text-left space-y-2 sm:space-y-4 md:space-y-4">
-        <p className="text-xs sm:text-sm md:text-base text-gray-200 md:text-gray-600">
-          Feel free to get in touch
+        <p className="text-xs sm:text-sm md:text-xl font-medium text-orange-500 md:text-orange-500">
+          We build & grow{" "}
         </p>
         <h1 className="text-2xl sm:text-3xl md:text-6xl font-bold text-neutral-800 leading-snug">
-          Marketing <br /> Contact
+          Creative <br /> Solutions
         </h1>
       </div>
     </section>

@@ -18,7 +18,7 @@ export default function WebHero() {
       {/* Left side - text content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end items-start text-left space-y-2 sm:space-y-4 md:space-y-4">
         <p className="text-xs font-medium sm:text-sm md:text-base text-orange-500 md:text-orange-500">
-          We build & grow{" "}
+          We Elevate Businesses{" "}
         </p>
         <h1 className="text-2xl sm:text-3xl md:text-6xl font-bold text-neutral-800 leading-none">
           Creative <br /> Solutions

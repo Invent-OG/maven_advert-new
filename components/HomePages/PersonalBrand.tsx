@@ -48,7 +48,7 @@ function PersonalBrand() {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-center p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
+            className="flex flex-col items-center text-start p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
           >
             {/* Icon with gray border */}
             <div className="w-16 h-16 flex justify-center items-center mb-4 rounded-full border-1 border-gray-300">
@@ -57,7 +57,7 @@ function PersonalBrand() {
             <h3 className="text-lg sm:text-xl font-semibold mb-2">
               {feature.title}
             </h3>
-            <p className="text-gray-600 text-sm sm:text-sm">
+            <p className="text-gray-600 text-sm leading-relaxed sm:text-sm">
               {feature.description}
             </p>
           </div>

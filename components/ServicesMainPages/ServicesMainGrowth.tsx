@@ -34,9 +34,14 @@ function ServicesMainGrowth() {
                 toggleActions: "play none none reverse",
               },
               onUpdate: function () {
+                // Format number with commas while counting
                 num.innerText = Math.floor(
                   Number(num.innerText)
                 ).toLocaleString();
+              },
+              onComplete: function () {
+                // Add "+" at the end once animation completes
+                num.innerText = `${targetValue.toLocaleString()}+`;
               },
             }
           );
@@ -61,10 +66,10 @@ function ServicesMainGrowth() {
   }, []);
 
   const stats = [
-    { value: 353, label: "Revenue increasing" },
-    { value: 642, label: "Company growth" },
-    { value: 376, label: "Clients enhanced" },
-    { value: 285, label: "Convert traffic" },
+    { value: 1200, label: "Content Assets" },
+    { value: 5000, label: "Leads Generated" },
+    { value: 600, label: "Social Engagements" },
+    { value: 1000, label: "Digital Assets" },
   ];
 
   return (
@@ -79,7 +84,7 @@ function ServicesMainGrowth() {
             className="stat-item flex flex-col items-center justify-center"
           >
             {/* Number + Arrow container */}
-            <div className="relative inline-flex items-start  justify-center mb-1">
+            <div className="relative inline-flex items-start justify-center mb-1">
               <FaArrowUp className="growth-arrow text-green-500 text-2xl absolute -top-3 -left-6 md:-left-7" />
               <h3
                 ref={(el) => {
@@ -88,7 +93,7 @@ function ServicesMainGrowth() {
                 data-value={item.value}
                 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-none"
               >
-                0%
+                0+
               </h3>
             </div>
 

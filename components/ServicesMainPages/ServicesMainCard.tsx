@@ -5,74 +5,52 @@ import Link from "next/link";
 
 const services = [
   {
-    title: "Sales development",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
+    title: "Digital Sales Infrastructure & Automation",
+    description:
+      "We build landing pages, integrate CRM, implement chatbots, and set up analytics to streamline your sales process",
     image:
       "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600",
     link: "/services/sales-development",
   },
   {
-    title: "Social media analysis",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
+    title: "ECommerce Marketing & Product Promotion",
+    description:
+      "We optimize your presence on Amazon and Flipkart, run targeted product ads, and boost cross-sales to increase revenue",
     image:
       "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600",
     link: "/services/social-media-analysis",
   },
   {
-    title: "Marketing campaigns",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
+    title: "Social Media Growth & Brand Engagement:",
+    description:
+      "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
     image:
       "https://images.pexels.com/photos/3182770/pexels-photo-3182770.jpeg?auto=compress&cs=tinysrgb&w=600",
     link: "/services/marketing-campaigns",
   },
   {
-    title: "Marketing research",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
+    title: "Digital Advertising & ROI Campaigns",
+    description:
+      "We design Google Ads, retargeting campaigns, and lead funnels to maximize ROI and drive measurable results",
     image:
       "https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg?auto=compress&cs=tinysrgb&w=600",
     link: "/services/marketing-research",
   },
   {
-    title: "Engaging audiences",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
+    title: "Search & Content Marketing",
+    description:
+      "We leverage SEO, blogs, YouTube, and email/WhatsApp campaigns to enhance visibility and attract your target audience",
     image:
       "https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=600",
     link: "/services/engaging-audiences",
   },
   {
-    title: "Business growth",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
+    title: "Social Media Growth & Brand Engagement:",
+    description:
+      "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
     image:
-      "https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/business-growth",
-  },
-  {
-    title: "Customer insights",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
-    image:
-      "https://images.pexels.com/photos/3184637/pexels-photo-3184637.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/customer-insights",
-  },
-  {
-    title: "Brand strategy",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
-    image:
-      "https://images.pexels.com/photos/3184290/pexels-photo-3184290.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/brand-strategy",
-  },
-  {
-    title: "Digital advertising",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
-    image:
-      "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/digital-advertising",
-  },
-  {
-    title: "Data-driven marketing",
-    description: "Lorem ipsum simply dummy text printing the and typesetting.",
-    image:
-      "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/data-driven-marketing",
+      "https://images.pexels.com/photos/3182770/pexels-photo-3182770.jpeg?auto=compress&cs=tinysrgb&w=600",
+    link: "/services/marketing-campaigns",
   },
 ];
 
@@ -110,8 +88,11 @@ function ServicesMainCard() {
   return (
     <div className="bg-white py-16 px-6 md:px-12 lg:px-20">
       {/* Heading */}
+      <p className="text-xs text-center mb-6 sm:text-sm md:text-xl font-medium text-orange-500 md:text-orange-500">
+        Driving Brand Growth{" "}
+      </p>
       <h2 className="text-3xl md:text-6xl font-extrabold text-center text-gray-900 mb-12 leading-none">
-        Guiding your business to <br /> achieve online success
+        Empowering your business with <br /> impactful digital solutions
       </h2>
 
       {/* Horizontal Scroll Container */}
@@ -144,8 +125,8 @@ function ServicesMainCard() {
                 </Link>
               </div>
             </div>
-            <div className="p-6 text-center">
-              <h3 className="font-semibold text-lg text-gray-900 mb-2">
+            <div className="p-4 text-start">
+              <h3 className="font-semibold text-lg text-gray-900 ">
                 {service.title}
               </h3>
               <p className="text-gray-500 p-2 text-sm leading-relaxed">
