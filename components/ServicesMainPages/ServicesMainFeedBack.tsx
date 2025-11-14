@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const feedbacks = [
   {
@@ -58,6 +60,12 @@ function ServicesMainFeedBack() {
       );
     }
   }, [activeIndex]);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const nextFeedback = () => {
     setActiveIndex((prev) => (prev + 1) % feedbacks.length);
@@ -72,7 +80,10 @@ function ServicesMainFeedBack() {
   return (
     <section className="bg-white py-24 px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-16">
       {/* LEFT STATIC IMAGE SECTION */}
-      <div className="relative w-full md:w-1/2 flex justify-center items-center">
+      <div
+        data-aos="fade-up"
+        className="relative w-full md:w-1/2 flex justify-center items-center"
+      >
         {/* Static Short Image */}
         <div className="rounded-2xl overflow-hidden shadow-lg">
           <Image

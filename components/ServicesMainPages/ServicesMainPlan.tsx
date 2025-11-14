@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { FaBullhorn } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function ServicesMainPlan() {
   const floatingRef = useRef<HTMLDivElement | null>(null);
@@ -19,12 +21,18 @@ function ServicesMainPlan() {
       });
     }
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
     <>
       <section className="bg-white py-24 px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-20">
         {/* LEFT SIDE */}
-        <div className="w-full md:w-1/2">
+        <div data-aos="fade-down" className="w-full md:w-1/2">
           {/* Subtitle */}
           <p className="text-orange-500 uppercase font-semibold tracking-widest mb-3">
             Strategic Growth Roadmap{" "}
@@ -88,7 +96,10 @@ function ServicesMainPlan() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="w-full md:w-1/2 relative flex justify-center items-center">
+        <div
+          data-aos="fade-up"
+          className="w-full md:w-1/2 relative flex justify-center items-center"
+        >
           {/* Large Image */}
           <div className="relative w-[360px] md:w-[420px] lg:w-[460px]">
             <Image

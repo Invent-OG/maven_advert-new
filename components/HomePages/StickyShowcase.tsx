@@ -33,7 +33,7 @@ export default function StickyShowcase() {
   }, []);
 
   return (
-    <section className="showcase-section  relative w-full min-h-screen bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="showcase-section  relative w-full min-h-screen bg-gradient-to-b from-white to-orange-50 overflow-hidden">
       {/* Top content */}
       <div className="sticky top-0 z-10 flex flex-col items-center text-center px-4">
         {/* Icon on top */}
@@ -41,7 +41,7 @@ export default function StickyShowcase() {
           {/* <ShieldCheck className="w-12 h-12 text-blue-600" /> */}
         </div>
 
-        <h1 className="md:text-8xl text-4xl font-bold text-neutral-900 md:py-4 md:mt-0 mt-20 md:max-w-4xl ">
+        <h1 className="md:text-8xl text-4xl font-extrabold text-neutral-900 md:py-4 md:mt-0 mt-20 md:max-w-4xl ">
           Build a remarkable brand experience
         </h1>
         <p className="text-gray-600 mt-2">

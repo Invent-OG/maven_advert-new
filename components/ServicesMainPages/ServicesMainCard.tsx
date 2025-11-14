@@ -2,6 +2,8 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const services = [
   {
@@ -84,9 +86,15 @@ function ServicesMainCard() {
 
     return () => clearInterval(interval);
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
-    <div className="bg-white py-16 px-6 md:px-12 lg:px-20">
+    <div data-aos="fade-down" className="bg-white py-16 px-6 md:px-12 lg:px-20">
       {/* Heading */}
       <p className="text-xs text-center mb-6 sm:text-sm md:text-xl font-medium text-orange-500 md:text-orange-500">
         Driving Brand Growth{" "}

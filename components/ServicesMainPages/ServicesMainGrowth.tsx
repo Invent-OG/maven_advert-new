@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaArrowUp } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,6 +66,12 @@ function ServicesMainGrowth() {
       return () => ctx.revert();
     }
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const stats = [
     { value: 1200, label: "Content Assets" },
@@ -77,7 +85,10 @@ function ServicesMainGrowth() {
       ref={sectionRef}
       className="w-full bg-white py-20 md:py-28 flex justify-center"
     >
-      <div className="max-w-6xl w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center px-6 md:px-12">
+      <div
+        data-aos="fade-up"
+        className="max-w-6xl w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center px-6 md:px-12"
+      >
         {stats.map((item, idx) => (
           <div
             key={idx}

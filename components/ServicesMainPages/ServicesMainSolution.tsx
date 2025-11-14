@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
 import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function ServicesMainSolution() {
   const floatingRef = useRef<HTMLDivElement>(null);
@@ -20,12 +22,21 @@ function ServicesMainSolution() {
       });
     }
   }, []);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
     <section className="relative w-full bg-white py-20 md:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 px-6 md:px-12">
         {/* ---------- LEFT IMAGE SECTION ---------- */}
-        <div className="relative flex-1 flex justify-center">
+        <div
+          data-aos="fade-right"
+          className="relative flex-1 flex justify-center"
+        >
           {/* Main image */}
           <Image
             src="https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/demo-marketing-services-02.jpg.webp"
@@ -55,7 +66,7 @@ function ServicesMainSolution() {
         </div>
 
         {/* ---------- RIGHT CONTENT SECTION ---------- */}
-        <div className="flex-1">
+        <div data-aos="fade-left" className="flex-1">
           <p className="text-orange-500 uppercase font-semibold text-sm tracking-wide mb-3">
             Our Highly Expertise{" "}
           </p>

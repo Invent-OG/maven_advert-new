@@ -2,6 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const categories = ["All", "Selected", "Digital", "Branding", "Web"];
 
@@ -83,12 +85,21 @@ export default function CaseCards() {
       );
     }
   }, [activeCategory]);
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
     <section className="w-full py-16 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Filter Bar */}
-        <div className="flex flex-wrap justify-center gap-6 mb-10 pb-4">
+        <div
+          data-aos="fade-up"
+          className="flex flex-wrap justify-center gap-6 mb-10 pb-4"
+        >
           {categories.map((cat) => (
             <button
               key={cat}
