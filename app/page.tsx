@@ -1,4 +1,5 @@
 import Hero3D from "@/components/3dPages/Hero3D";
+import DynamicTestimonials from "@/components/DynamicTestimonial/DynamicTestimonials";
 import EverythingYouNeed from "@/components/HomePages/Card";
 import FeatureOn from "@/components/HomePages/FeatureOn";
 import MemberShip from "@/components/HomePages/MemberShip";
@@ -31,6 +32,7 @@ function page() {
       <MemberShip />
       <FeatureOn />
       <SaidThree />
+      <DynamicTestimonials />
     </>
   );
 }

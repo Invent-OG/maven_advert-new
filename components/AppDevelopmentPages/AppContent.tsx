@@ -10,6 +10,9 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function AppContent() {
   const pathname = usePathname();
@@ -42,6 +45,12 @@ export default function AppContent() {
       href: "/search-content",
     },
   ];
+  useEffect(() => {
+      AOS.init({
+        duration: 800,
+        once: false,
+      });
+    }, []);
 
   return (
     <section className="w-full bg-white py-12 px-6 md:px-20">

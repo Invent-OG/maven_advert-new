@@ -10,10 +10,19 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function SeoContent() {
   const pathname = usePathname();
   const router = useRouter();
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   const navLinks = [
     {
@@ -102,7 +111,7 @@ export default function SeoContent() {
         {/* RIGHT MAIN CONTENT */}
         <div className="md:w-2/3 lg:w-3/4 space-y-12">
           {/* TOP SECTION */}
-          <div>
+          <div data-aos="fade-up">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Maximized Digital Impact​​​{" "}
             </h2>

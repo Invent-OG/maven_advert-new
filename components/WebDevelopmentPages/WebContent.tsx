@@ -10,6 +10,9 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function WebContent() {
   const pathname = usePathname();
@@ -42,6 +45,12 @@ export default function WebContent() {
       href: "/search-content",
     },
   ];
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+    });
+  }, []);
 
   return (
     <section className="w-full bg-white py-12 px-6 md:px-20">
@@ -134,7 +143,7 @@ export default function WebContent() {
           </div>
 
           {/* STRATEGIES SECTION */}
-          <div>
+          <div data-aos="fade-up">
             <h3 className="text-3xl  font-bold text-gray-900 mb-6">
               Automation Strategies
             </h3>
@@ -177,7 +186,10 @@ export default function WebContent() {
           </div>
 
           {/* QUOTE SECTION */}
-          <div className="bg-yellow-100 border-l-4 border-yellow-400 p-8 rounded-xl">
+          <div
+            data-aos="fade-right"
+            className="bg-yellow-100 border-l-4 border-yellow-400 p-8 rounded-xl"
+          >
             <p className="text-lg text-gray-800 italic mb-4">
               “Even when you are marketing to your entire audience or customer
               base, you are still simply speaking to a single human at a time.”
@@ -188,7 +200,7 @@ export default function WebContent() {
           </div>
 
           {/* CONTACT FORM */}
-          <div>
+          <div data-aos="fade-up">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               Get in touch with us
             </h3>
