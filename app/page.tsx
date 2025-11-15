@@ -1,5 +1,5 @@
 import Hero3D from "@/components/3dPages/Hero3D";
-import DynamicBlog from "@/components/DynamicBlogs/DynamicBlog";
+// import DynamicBlog from "@/components/DynamicBlogs/DynamicBlog";
 import DynamicTestimonials from "@/components/DynamicTestimonial/DynamicTestimonials";
 import EverythingYouNeed from "@/components/HomePages/Card";
 import FeatureOn from "@/components/HomePages/FeatureOn";
@@ -34,7 +34,7 @@ function page() {
       <FeatureOn />
       <SaidThree />
       <DynamicTestimonials />
-      <DynamicBlog />
+      {/* <DynamicBlog /> */}
     </>
   );
 }
