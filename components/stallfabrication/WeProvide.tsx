@@ -13,20 +13,6 @@ export default function WeProvide() {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-
-    const cards = section.querySelectorAll(".service-card");
-
-    gsap.from(cards, {
-      opacity: 0,
-      y: 60,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-      },
-    });
   }, []);
 
   const services = [

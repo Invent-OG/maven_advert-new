@@ -137,10 +137,12 @@ export default function DynamicTestimonials() {
         const json = await res.json();
         if (json.success) {
           // ensure ids are strings (match Testimonial type)
-          const normalized = json.testimonials.map((t: Omit<Testimonial, 'id'> & { id: string | number }) => ({
-            ...t,
-            id: String(t.id),
-          }));
+          const normalized = json.testimonials.map(
+            (t: Omit<Testimonial, "id"> & { id: string | number }) => ({
+              ...t,
+              id: String(t.id),
+            })
+          );
           setTestimonials(normalized);
         } else {
           console.error("Failed to load testimonials:", json);
