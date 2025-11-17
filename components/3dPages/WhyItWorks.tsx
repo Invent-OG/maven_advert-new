@@ -32,7 +32,7 @@ const tipsData = [
     label: "LEONARDO",
   },
   {
-    id: "03",
+    id: "04", // ⭐ FIXED — previously duplicated "03"
     title: "Digital",
     description:
       "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",

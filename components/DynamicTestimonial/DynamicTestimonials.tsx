@@ -168,7 +168,7 @@ export default function DynamicTestimonials() {
 
   return (
     <section className="bg-black py-16">
-      <h2 className="text-4xl font-bold text-center text-white mb-14">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mx-auto text-center text-white mb-14">
         Testimonials
       </h2>
 
