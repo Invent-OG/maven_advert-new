@@ -16,6 +16,7 @@ import { gsap } from "gsap";
 import toast from "react-hot-toast"; // ✅ import toast
 import AOS from "aos";
 import "aos/dist/aos.css";
+import AnimatedButton from "../ui/AnimatedButton";
 
 const languages = ["Hello", "Hola", "Bonjour", "Ciao"];
 
@@ -224,13 +225,16 @@ export default function GetInTouch() {
               <FaComment className="absolute right-2 top-9.5 text-gray-400" />
             </div>
 
-            <button
+            {/* <button
               type="submit"
               disabled={loading}
               className="mt-4 bg-gray-900 text-white py-3 rounded-md hover:bg-gray-800 transition disabled:opacity-50"
             >
               {loading ? "Sending..." : "Send message"}
-            </button>
+            </button> */}
+            <AnimatedButton type="submit" disabled={loading}>
+              {loading ? "Sending..." : "Send message"}
+            </AnimatedButton>
           </form>
 
           <p className="text-xs text-gray-400 mt-2">

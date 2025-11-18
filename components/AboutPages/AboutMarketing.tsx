@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import AnimatedButton from "../ui/AnimatedButton";
 
 function AboutMarketing() {
   useEffect(() => {
@@ -59,6 +60,9 @@ function AboutMarketing() {
             <button className="flex items-center gap-2 bg-[#0c1523] text-white px-6 py-3 rounded-md text-sm font-medium">
               Join with us <ArrowRight size={16} />
             </button>
+            {/* <AnimatedButton className="flex items-center gap-2 whitespace-nowrap ">
+              Join with us <ArrowRight size={16} />
+            </AnimatedButton> */}
           </div>
 
           {/* Card 2 (Highlighted) */}

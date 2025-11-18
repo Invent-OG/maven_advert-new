@@ -4,6 +4,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import AnimatedButton from "../ui/AnimatedButton";
 
 const tabs = [
   {
@@ -138,9 +139,10 @@ function AboutCompany() {
           </p>
 
           <div className="flex items-center gap-5 mt-8">
-            <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
+            {/* <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
               Discover More →
-            </button>
+            </button> */}
+            <AnimatedButton> Discover More →</AnimatedButton>
             <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
               ✉️ Connect & Grow
             </button>

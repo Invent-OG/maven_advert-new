@@ -4,70 +4,74 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SaidTwo() {
   const phoneRefs = useRef<HTMLDivElement[]>([]);
 
+  // SCROLL ANIMATION (same as your MemberShip component)
   useEffect(() => {
-    phoneRefs.current.forEach((phone, i) => {
+    const phones = phoneRefs.current.filter(Boolean);
+
+    phones.forEach((phone, i) => {
       gsap.to(phone, {
-        y: -150 - i * 50, // move up on scroll with stacking effect
+        y: -150 - i * 50,
         ease: "power1.out",
         scrollTrigger: {
           trigger: phone,
-          start: "top center",
-          end: "bottom 20%",
+          start: "top bottom",
+          end: "bottom top",
           scrub: true,
         },
       });
     });
   }, []);
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
 
   return (
     <section
-      className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-white to-gray-50 overflow-hidden flex flex-col md:flex-row items-center px-6 sm:px-10 md:px-20 py-16 md:py-24"
+      className="showcase-section relative w-full min-h-screen flex flex-col md:flex-row 
+      items-center justify-between px-6 sm:px-10 md:px-20 py-16 overflow-hidden"
       style={{
         background: "radial-gradient(ellipse at top, #C02900 0%, #000000 70%)",
       }}
     >
-      {/* Left Side - Centered stacked images */}
-      <div className="flex-1 flex justify-center items-center relative mb-12 md:mb-0 overflow-visible">
+      {/* LEFT SIDE */}
+      <div className="flex-1 flex justify-center items-center relative  md:mb-0 overflow-visible">
         <div className="relative flex justify-center items-center">
-          {/* First Image - z-0 */}
+          {/* Phone 1 */}
           <PhoneMockup
             ref={(el) => {
               if (el) phoneRefs.current[0] = el;
             }}
-            screen="https://picsum.photos/400/800?random=1"
-            className="phone-anim relative z-0 top-[90px] sm:top-[110px]"
+            screen="https://res.cloudinary.com/dr9gcshs6/image/upload/phone1_ujwx3x"
+            className="phone-anim relative z-0 top-[90px] left-[80px] md:left-[10px] sm:top-[110px]"
           />
+
+          {/* Phone 2 */}
           <PhoneMockup
             ref={(el) => {
               if (el) phoneRefs.current[1] = el;
             }}
-            screen="https://picsum.photos/400/800?random=2"
-            className="phone-anim absolute top-[140px] sm:top-[170px] -left-[60px] md:-left-[100px] z-10"
+            screen="https://res.cloudinary.com/dr9gcshs6/image/upload/phone2_wqfevl"
+            className="phone-anim absolute top-[140px] sm:top-[170px] -left-[60px] md:-left-[200px] z-10"
           />
         </div>
       </div>
 
-      {/* Right Side - Testimonial */}
+      {/* RIGHT SIDE (FIXED ALIGNMENT) */}
       <div
-        data-aos="fade-left"
-        className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left p-6 sm:p-10 md:p-16"
+        className="w-full md:w-1/2 flex flex-col 
+  justify-center md:justify-center 
+  items-start                 /* mobile text start */
+  md:items-start              /* desktop stays same */
+  text-left                   /* mobile text left */
+  md:text-left 
+  p-2 sm:p-10 md:p-10 lg:p-10 
+  space-y-4"
       >
-        {/* Quotation Header */}
-        <div className="flex items-center gap-2 mb-4">
+        {/* Oliur Said Header */}
+        <div className="flex items-center gap-2">
           <div className="bg-gray-800 p-2 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,13 +91,13 @@ export default function SaidTwo() {
           <p className="text-gray-300 text-sm">Oliur said</p>
         </div>
 
-        {/* Quote Text */}
-        <blockquote className="text-2xl sm:text-3xl md:text-4xl text-white font-medium italic leading-snug mb-8 max-w-lg sm:max-w-xl md:max-w-lg">
+        {/* QUOTE */}
+        <blockquote className="text-2xl sm:text-3xl md:text-4xl text-white font-medium italic leading-snug max-w-md">
           Growth Metrics, Performance Tracking, Lasting Impact
         </blockquote>
 
-        {/* Author Info */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+        {/* PROFILE */}
+        <div className="flex flex-row items-center gap-4 pt-2">
           <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
             <Image
               src="https://framerusercontent.com/images/TpMLCULNEpBMGtsbiAjXEdQLEc.webp?scale-down-to=512"
@@ -103,9 +107,11 @@ export default function SaidTwo() {
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+
+          <div className="flex flex-col text-left">
             <h4 className="font-semibold text-white text-base">Oliur</h4>
             <p className="text-gray-400 text-sm">Designer & Creator</p>
+
             <a
               href="#"
               className="text-blue-400 hover:underline text-sm inline-flex items-center gap-1 mt-1"
@@ -129,7 +135,7 @@ export default function SaidTwo() {
 }
 
 /* -----------------
-   Phone Mockup Component
+   Phone Mockup Component (your exact sizes)
 ------------------- */
 type PhoneMockupProps = {
   screen: string;
@@ -141,23 +147,19 @@ const PhoneMockup = React.forwardRef<HTMLDivElement, PhoneMockupProps>(
     return (
       <div
         ref={ref}
-        className={`relative w-[180px] h-[360px] sm:w-[200px] sm:h-[400px] md:w-[240px] md:h-[480px] lg:w-[260px] lg:h-[520px] xl:w-[280px] xl:h-[560px] ${
-          className || ""
-        }`}
+        className={`relative 
+          w-[220px] h-[440px] 
+          sm:w-[240px] sm:h-[480px]
+          md:w-[300px] md:h-[600px]
+          lg:w-[330px] lg:h-[660px]
+          xl:w-[360px] xl:h-[720px]
+          ${className || ""}`}
       >
-        {/* Screen image */}
         <Image
           src={screen}
           alt="screen"
           fill
           className="object-cover rounded-[2rem] px-[12px] pt-[10px] pb-[12px]"
-        />
-        {/* iPhone frame */}
-        <Image
-          src="/assets/mobileimages/H2xOBKfRU2M06U4j9LF5WN8z6pA.avif"
-          alt="frame"
-          fill
-          className="pointer-events-none select-none"
         />
       </div>
     );

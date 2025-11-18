@@ -9,6 +9,7 @@ import PersonalBrand from "@/components/HomePages/PersonalBrand";
 import Said from "@/components/HomePages/Said";
 import SaidThree from "@/components/HomePages/SaidThree";
 import SaidTwo from "@/components/HomePages/SaidTwo";
+import Sample from "@/components/HomePages/Sample";
 import ServiceVideo from "@/components/HomePages/ServiceVideo";
 import StickyShowcase from "@/components/HomePages/StickyShowcase";
 import StickyShowCaseThree from "@/components/HomePages/StickyShowCaseThree";
@@ -19,6 +20,7 @@ import React from "react";
 function page() {
   return (
     <>
+      {/* <Sample /> */}
       {/* <Hero3D /> */}
       <StickyShowcase />
       <StickyShowCaseTwo />

@@ -42,7 +42,10 @@ function PersonalBrand() {
   return (
     <section className="w-full min-h-screen flex flex-col justify-center items-center bg-white px-4 sm:px-6 md:px-12 lg:px-20 py-16">
       {/* Heading */}
-      <div data-aos="fade-up" className="text-center max-w-3xl mb-12">
+      <div
+        data-aos="fade-up"
+        className="md:text-center text-start md:p-0 p-4 max-w-3xl mb-12"
+      >
         <h1 className="md:text-6xl text-3xl font-bold text-neutral-900 mb-6 leading-tight">
           Launch your personal brand today
         </h1>
@@ -61,7 +64,7 @@ function PersonalBrand() {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-start p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
+            className="flex flex-col items-start text-start p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
           >
             {/* Icon with gray border */}
             <div className="w-16 h-16 flex justify-center items-center mb-4 rounded-full border-1 border-gray-300">
