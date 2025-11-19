@@ -1,21 +1,73 @@
-// import PortfolioOne from "@/components/CaseStudiesPages/PortfolioOne";
+"use client";
 
-// export default function CaseStudyDetailPage({
-//   params,
-// }: {
-//   params: { id: string };
-// }) {
-//   return <PortfolioOne params={params} />;
-// }
-import PortfolioOne from "@/components/CaseStudiesPages/PortfolioOne";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { PortfolioLayouts } from "@/components/Portfolio";
 
-function page() {
+export default function CaseStudyDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const [portfolio, setPortfolio] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const res = await fetch("/api/portfolio");
+        const data = await res.json();
+
+        const found = data.find((p: any) => p.id === params.id);
+        if (!found) {
+          console.error("Portfolio not found");
+          setLoading(false);
+          return;
+        }
+
+        let images = [];
+        try {
+          images =
+            typeof found.images === "string"
+              ? JSON.parse(found.images)
+              : found.images;
+        } catch {
+          images = [];
+        }
+
+        setPortfolio({
+          ...found,
+          images,
+          layoutId: Number(found.layoutId),
+        });
+      } catch (err) {
+        console.error("Failed to load portfolio:", err);
+      }
+
+      setLoading(false);
+    }
+
+    loadData();
+  }, [params.id]);
+
+  if (loading) return <div className="p-10">Loading...</div>;
+  if (!portfolio) return <div className="p-10">Portfolio Not Found</div>;
+
+  const Layout = PortfolioLayouts[portfolio.layoutId];
+
+  if (!Layout) {
+    return (
+      <div className="p-10 text-red-600">
+        Invalid layout selected for this portfolio.
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <PortfolioOne />
-    </div>
+    <Layout
+      title={portfolio.title}
+      description={portfolio.description}
+      content={portfolio.content}
+      images={portfolio.images}
+    />
   );
 }
-
-export default page;

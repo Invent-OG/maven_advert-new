@@ -3,13 +3,23 @@
 import React from "react";
 import { CldImage } from "next-cloudinary";
 
-export default function LayerOne() {
+export default function LayerOne({
+  title,
+  description,
+  content,
+  images,
+}: {
+  title: string;
+  description: string;
+  content: string;
+  images: string[];
+}) {
   return (
     <div className="w-full flex flex-col">
       {/* ====================== 1. TOP FULL IMAGE ====================== */}
       <section className=" w-full">
         <CldImage
-          src="page-01_r5ihgs"
+          src={images?.[0] || "page-01_r5ihgs"}
           alt="Top Banner"
           width={2000}
           height={1500}
@@ -50,7 +60,7 @@ export default function LayerOne() {
         {/* Left Image */}
         <div className="w-full md:w-1/2">
           <CldImage
-            src="page-03_xzfhej"
+            src={images?.[1] || "page-03_xzfhej"}
             alt="Right Content Image"
             width={1200}
             height={1200}
@@ -60,37 +70,20 @@ export default function LayerOne() {
 
         {/* Right Content */}
         <div className="max-w-2xl md:w-1/2 space-y-8">
-          <h2 className="text-3xl font-bold">Lorem Ipsum</h2>
-          <p className="text-black">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni
-            earum sint molestias mollitia eius nostrum eum, adipisci repellat
-            totam deserunt, atque odio ab ducimus dignissimos ex maiores, quod
-            possimus veritatis non optio cupiditate! Doloremque deserunt unde
-            veritatis quisquam dicta, aliquam consectetur quibusdam rerum
-            recusandae impedit error corrupti vero voluptatem aliquid.
-          </p>
+          <h2 className="text-3xl font-bold">{title}</h2>
+          <p className="text-black">{description}</p>
 
-          <ul className="space-y-2">
-            <li className="font-medium">
-              1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni
-              earum sint molestias mollitia eius nostrum eum,
-            </li>
-            <li className="font-medium">
-              2. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni
-              earum sint molestias mollitia eius nostrum eum,
-            </li>
-            <li className="font-medium">
-              3. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni
-              earum sint molestias mollitia eius nostrum eum,
-            </li>
-          </ul>
+          <div
+            className="prose text-black"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
       </section>
 
       {/* ====================== 3. FULL SIZE IMAGE ====================== */}
       <section className="w-full p-10 py-10">
         <CldImage
-          src="page-06_t3dw8b"
+          src={images?.[2] || "page-06_t3dw8b"}
           alt="Full Size Section"
           width={2000}
           height={1500}
@@ -102,7 +95,7 @@ export default function LayerOne() {
       <section className="max-w-6xl mx-auto py-10 px-6">
         <div className="w-full  flex flex-col md:flex-row gap-6">
           <CldImage
-            src="page-04_xb9k4y"
+            src={images?.[3] || "page-04_xb9k4y"}
             alt="Left Image"
             width={1000}
             height={1000}
@@ -110,7 +103,7 @@ export default function LayerOne() {
           />
 
           <CldImage
-            src="page-05_z83aui"
+            src={images?.[4] || "page-05_z83aui"}
             alt="Right Image"
             width={1000}
             height={1000}
@@ -123,7 +116,7 @@ export default function LayerOne() {
       <section className="w-full relative">
         {/* Full Width Image */}
         <CldImage
-          src="page-02_syokgp"
+          src={images?.[5] || "page-02_syokgp"}
           alt="Background Image"
           width={2000}
           height={1200}

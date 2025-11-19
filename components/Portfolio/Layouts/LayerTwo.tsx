@@ -4,13 +4,23 @@ import React from "react";
 import { CldImage } from "next-cloudinary";
 import { Section } from "lucide-react";
 
-export default function LayerTwo() {
+export default function LayerTwo({
+  title,
+  description,
+  content,
+  images,
+}: {
+  title: string;
+  description: string;
+  content: string;
+  images: string[];
+}) {
   return (
     <div className="w-full flex flex-col">
       {/* ====================== 1. TOP FULL IMAGE ====================== */}
       <section className=" w-full">
         <CldImage
-          src="page-01_nmz0il"
+          src={images?.[0] || "page-01_nmz0il"}
           alt="Top Banner"
           width={2000}
           height={1500}
@@ -51,7 +61,7 @@ export default function LayerTwo() {
         {/* Left Image */}
         <div className="w-full">
           <CldImage
-            src="page-06_kwpxuh"
+            src={images?.[1] || "page-06_kwpxuh"}
             alt="Right Content Image"
             width={1600}
             height={1200}
@@ -75,7 +85,7 @@ export default function LayerTwo() {
       <section className="max-w-6xl mx-auto py-10 ">
         <div className="w-full  flex flex-col md:flex-row gap-6">
           <CldImage
-            src="page-03_g1zdg3"
+            src={images?.[2] || "page-03_g1zdg3"}
             alt="Left Image"
             width={1000}
             height={1000}
@@ -83,7 +93,7 @@ export default function LayerTwo() {
           />
 
           <CldImage
-            src="page-04_zufchx"
+            src={images?.[3] || "page-04_zufchx"}
             alt="Right Image"
             width={1000}
             height={1000}
@@ -92,19 +102,17 @@ export default function LayerTwo() {
         </div>
       </section>
       <section className="text-black mb-6 text-center  max-w-4xl mx-auto flex items-center justify-center px-6">
-        <p className="text-xl leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-          numquam omnis dolores at in cumque laboriosam sapiente, rem fugiat,
-          minima accusamus pariatur quos voluptatibus aspernatur. Deleniti
-          cumque beatae corporis facere?
-        </p>
+        <div
+          className="text-xl leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: description || "" }}
+        />
       </section>
 
       {/* ====================== 5. LEFT IMAGE + RIGHT 3 BULLET POINTS ====================== */}
       <section className="w-full relative">
         {/* Full Width Image */}
         <CldImage
-          src="page-02_rz9zja"
+          src={images?.[4] || "page-02_rz9zja"}
           alt="Background Image"
           width={2000}
           height={1200}
@@ -113,29 +121,12 @@ export default function LayerTwo() {
 
         {/* Right Side Overlay Content */}
         <div className="absolute text-white top-1/2 right-10 -translate-y-1/2 text-left space-y-4 p-6 max-w-md">
-          <h2 className="text-4xl font-bold leading-tight">
-            Final Section Title
-          </h2>
+          <h2 className="text-4xl font-bold leading-tight">{title}</h2>
 
-          <ul className="space-y-2 text-lg">
-            <li className="font-medium flex items-start gap-2">
-              <span className="text-3xl leading-none">•</span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
-              cupiditate.
-            </li>
-
-            <li className="font-medium flex items-start gap-2">
-              <span className="text-3xl leading-none">•</span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
-              cupiditate.
-            </li>
-
-            <li className="font-medium flex items-start gap-2">
-              <span className="text-3xl leading-none">•</span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
-              cupiditate.
-            </li>
-          </ul>
+          <div
+            className="space-y-3 text-lg"
+            dangerouslySetInnerHTML={{ __html: content || "" }}
+          />
         </div>
       </section>
     </div>

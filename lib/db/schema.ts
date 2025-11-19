@@ -48,3 +48,22 @@ export const leads = pgTable("leads", {
   message: text("message").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const portfolioLayouts = pgTable("portfolio_layouts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: text("name").notNull(),
+  previewUrl: text("preview_url").notNull(),
+  componentKey: integer("component_key").notNull(), // <-- NEW
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const portfolios = pgTable("portfolios", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  content: text("content"), // extra content for layout
+  layoutId: integer("layout_id").notNull(),
+  images: text("images").notNull(), // store as JSON string array
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  createdBy: uuid("created_by").references(() => users.id),
+});

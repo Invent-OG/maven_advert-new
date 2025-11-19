@@ -7,67 +7,9 @@ import "aos/dist/aos.css";
 
 const categories = ["All", "Selected", "Digital", "Branding", "Web"];
 
-export const items = [
-  {
-    id: 1,
-    title: "Tailoring inteo",
-    category: "Branding",
-    subtitle: "Branding",
-    image:
-      "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/portfolio-207-600x430.jpg.webp",
-    description:
-      "A creative branding campaign focusing on tailor-made visual identity.",
-  },
-  {
-    id: 2,
-    title: "Design blast",
-    category: "Photography",
-    subtitle: "Photography",
-    image:
-      "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/portfolio-98-600x430.jpg.webp",
-    description: "A dynamic photo-driven marketing project for visual appeal.",
-  },
-  {
-    id: 3,
-    title: "Herbal beauty",
-    category: "Application",
-    subtitle: "Application",
-    image:
-      "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/portfolio-240-600x430.jpg.webp",
-    description: "A sleek app design promoting herbal skincare products.",
-  },
-  {
-    id: 4,
-    title: "Organic dropper",
-    category: "Selected",
-    subtitle: "Selected",
-    image:
-      "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/portfolio-33-600x430.jpg.webp",
-    description:
-      "Packaging and branding for an eco-friendly essential oils brand.",
-  },
-  {
-    id: 5,
-    title: "Cork product",
-    category: "Digital",
-    subtitle: "Digital",
-    image:
-      "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/portfolio-177-600x430.jpg.webp",
-    description: "Digital strategy for sustainable cork-based products.",
-  },
-  {
-    id: 6,
-    title: "Modern packaging",
-    category: "Web",
-    subtitle: "Web",
-    image:
-      "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/portfolio-178-600x430.jpg.webp",
-    description: "A modern website showcasing innovative packaging solutions.",
-  },
-];
-
 export default function CaseCards() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [items, setItems] = useState<any[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const filteredItems =
@@ -76,6 +18,35 @@ export default function CaseCards() {
       : items.filter((item) => item.category === activeCategory);
 
   useEffect(() => {
+    async function loadPortfolios() {
+      try {
+        const res = await fetch("/api/portfolio");
+        const data = await res.json();
+
+        const parsed = data.map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          category: p.description || "General",
+          subtitle: p.description || "General",
+          image: Array.isArray(p.images)
+            ? p.images[0]
+            : (() => {
+                try {
+                  const arr = JSON.parse(p.images);
+                  return arr[0];
+                } catch {
+                  return "";
+                }
+              })(),
+        }));
+
+        setItems(parsed);
+      } catch (e) {
+        console.error("Failed to load portfolios", e);
+      }
+    }
+    loadPortfolios();
+
     if (containerRef.current) {
       const tl = gsap.timeline();
       tl.fromTo(

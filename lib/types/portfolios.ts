@@ -1,42 +1,54 @@
-// import { z } from "zod";
+import { z } from "zod";
 
-// /* ---------------------------------
-//    SECTION SCHEMA
-// ---------------------------------- */
-// export const SectionSchema = z.object({
-//   heading: z.string().optional(),
-//   text: z.string().optional(),
-//   image: z.string().url("Invalid image URL").optional().or(z.literal("")), // ✅ allow empty string too
-// });
+// Schema for saved layout templates
+export const PortfolioLayoutSchema = z.object({
+  id: z.string().uuid().optional(),
+  name: z.string().min(1, "Layout name is required"),
+  previewUrl: z.string().url("previewUrl must be a valid URL"),
+  componentKey: z.number().min(1, "Component key is required"),
+  createdAt: z
+    .preprocess((arg) => (arg ? new Date(arg as string) : undefined), z.date())
+    .optional(),
+});
+export type PortfolioLayout = z.infer<typeof PortfolioLayoutSchema>;
 
-// /* ---------------------------------
-//    PROJECT SCHEMA
-// ---------------------------------- */
-// export const ProjectSchema = z.object({
-//   title: z.string().min(3, "Title required"),
-//   subtitle: z.string().optional(),
-//   logo: z.string().url("Logo must be a valid URL"),
-//   cover: z.string().url("Cover image must be a valid URL"),
-//   description: z.string().min(10, "Description required"),
-//   awards: z.string().optional(),
-//   industry: z.string().optional(),
-//   services: z.string().optional(),
-//   country: z.string().optional(),
-//   shareFacebook: z.string().optional(),
-//   shareLinkedin: z.string().optional(),
-//   sharePinterest: z.string().optional(),
-//   colors: z.array(z.string()).optional(),
-//   gallery: z.array(z.string().url("Invalid URL")).optional(),
-//   sections: z.array(SectionSchema).optional(),
-//   extraImageOne: z.string().url("Invalid image URL").optional(),
-//   extraImageTwo: z.string().url("Invalid image URL").optional(),
+// Main portfolio schema
+export const PortfolioSchema = z.object({
+  id: z.string().uuid().optional(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  content: z.string().optional(),
+  // layoutId references a PortfolioLayout id
+  layoutId: z.number().min(1, "layoutId must be a valid layout number"),
+  // images — array of URLs (you can change to accept file names if needed)
+  images: z.array(z.string().min(1)).optional().default([]),
+  createdAt: z
+    .preprocess((arg) => (arg ? new Date(arg as string) : undefined), z.date())
+    .optional(),
+  createdBy: z.string().uuid().optional().nullable(),
+});
 
-//   // ✅ using z.coerce.number makes RHF <select> values (strings) safe
-//   layer: z.coerce.number().int().min(1).max(6).default(1),
-// });
+export type Portfolio = z.infer<typeof PortfolioSchema>;
 
-// /* ---------------------------------
-//    TYPES
-// ---------------------------------- */
-// export type Section = z.infer<typeof SectionSchema>;
-// export type ProjectForm = z.infer<typeof ProjectSchema>;
+// Schema for create (client -> server) — id and createdAt will be set by the server
+export const CreatePortfolioSchema = PortfolioSchema.omit({
+  id: true,
+  createdAt: true,
+});
+export type CreatePortfolioInput = z.infer<typeof CreatePortfolioSchema>;
+
+// Schema for update — require id, make other fields partial
+export const UpdatePortfolioSchema = z
+  .object({
+    id: z.string().uuid(),
+  })
+  .merge(PortfolioSchema.partial().omit({ id: true }));
+export type UpdatePortfolioInput = z.infer<typeof UpdatePortfolioSchema>;
+
+// Helper validators
+export const ValidatePortfolio = (data: unknown) =>
+  PortfolioSchema.safeParse(data);
+export const ValidateCreatePortfolio = (data: unknown) =>
+  CreatePortfolioSchema.safeParse(data);
+export const ValidateUpdatePortfolio = (data: unknown) =>
+  UpdatePortfolioSchema.safeParse(data);
