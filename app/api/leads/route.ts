@@ -1,18 +1,12 @@
-import { supabase } from "@/lib/supabase/client";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { db, leads as leadsTable } from "@/lib/db";
+import { and, count, desc, eq, gte, ilike, lt, or } from "drizzle-orm";
 
 /* -----------------------------
    Type Definitions
 ----------------------------- */
-interface Lead {
-  id: string;
-  name: string;
-  email: string;
-  message: string;
-  whatsapp_number: string;
-  created_at?: string;
-}
+type Lead = typeof leadsTable.$inferSelect;
 
 interface TransformedLead {
   id: string;
@@ -50,18 +44,19 @@ export async function GET(req: Request) {
       );
     }
 
-    const from = (page - 1) * limit;
-    const to = from + limit - 1;
+    const offset = (page - 1) * limit;
 
-    let query = supabase
-      .from("leads")
-      .select("*", { count: "exact" })
-      .order("created_at", { ascending: false });
+    const filters = [];
 
     if (search) {
-      const searchPattern = `%${search}%`;
-      query = query.or(
-        `name.ilike.${searchPattern},whatsapp_number.ilike.${searchPattern},email.ilike.${searchPattern},message.ilike.${searchPattern}`
+      const pattern = `%${search}%`;
+      filters.push(
+        or(
+          ilike(leadsTable.name, pattern),
+          ilike(leadsTable.whatsappNumber, pattern),
+          ilike(leadsTable.email, pattern),
+          ilike(leadsTable.message, pattern)
+        )
       );
     }
 
@@ -69,38 +64,54 @@ export async function GET(req: Request) {
       const dateObj = new Date(date);
       const nextDay = new Date(dateObj);
       nextDay.setDate(nextDay.getDate() + 1);
-      query = query
-        .gte("created_at", dateObj.toISOString())
-        .lt("created_at", nextDay.toISOString());
-    }
-
-    query = query.range(from, to);
-
-    const { data, error, count } = await query;
-
-    if (error) {
-      console.error("Supabase error:", error);
-      return NextResponse.json<ErrorResponse>(
-        { error: error.message },
-        { status: 500 }
+      filters.push(
+        and(
+          gte(leadsTable.createdAt, dateObj),
+          lt(leadsTable.createdAt, nextDay)
+        )
       );
     }
 
-    const transformedLeads: TransformedLead[] = (data as Lead[]).map(
-      (lead) => ({
-        id: lead.id,
-        name: lead.name,
-        email: lead.email,
-        message: lead.message,
-        whatsappNumber: lead.whatsapp_number,
-        createdAt: lead.created_at ? new Date(lead.created_at) : undefined,
-      })
-    );
+    const whereClause =
+      filters.length === 0
+        ? undefined
+        : filters.length === 1
+        ? filters[0]
+        : and(...filters);
+
+    const [{ total }] = await (whereClause
+      ? db.select({ total: count() }).from(leadsTable).where(whereClause)
+      : db.select({ total: count() }).from(leadsTable));
+    const totalCount = Number(total ?? 0);
+
+    const data: Lead[] = await (whereClause
+      ? db
+          .select()
+          .from(leadsTable)
+          .where(whereClause)
+          .orderBy(desc(leadsTable.createdAt))
+          .limit(limit)
+          .offset(offset)
+      : db
+          .select()
+          .from(leadsTable)
+          .orderBy(desc(leadsTable.createdAt))
+          .limit(limit)
+          .offset(offset));
+
+    const transformedLeads: TransformedLead[] = data.map((lead) => ({
+      id: lead.id,
+      name: lead.name,
+      email: lead.email,
+      message: lead.message,
+      whatsappNumber: lead.whatsappNumber,
+      createdAt: lead.createdAt,
+    }));
 
     return NextResponse.json({
       leads: transformedLeads,
-      totalCount: count || 0,
-      totalPages: Math.ceil((count || 0) / limit),
+      totalCount,
+      totalPages: Math.ceil(totalCount / limit),
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown server error";
@@ -127,26 +138,18 @@ export async function POST(req: Request) {
       );
     }
 
-    // ✅ Save to Supabase
-    const { data, error } = await supabase
-      .from("leads")
-      .insert([
-        {
-          name,
-          email,
-          message,
-          whatsapp_number: whatsappNumber,
-        },
-      ])
-      .select()
-      .single();
+    const [insertedLead] = await db
+      .insert(leadsTable)
+      .values({
+        name,
+        email,
+        message,
+        whatsappNumber,
+      })
+      .returning();
 
-    if (error) {
-      console.error("Supabase insert error:", error);
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 }
-      );
+    if (!insertedLead) {
+      throw new Error("Failed to create lead");
     }
 
     /* ---------------------------------
@@ -198,7 +201,7 @@ export async function POST(req: Request) {
       console.error("❌ Failed to send admin email:", emailError);
     }
 
-    return NextResponse.json({ success: true, lead: data });
+    return NextResponse.json({ success: true, lead: insertedLead });
   } catch (err) {
     console.error("POST /api/leads error:", err);
     return NextResponse.json(
@@ -223,15 +226,7 @@ export async function DELETE(req: Request) {
       );
     }
 
-    const { error } = await supabase.from("leads").delete().eq("id", id);
-
-    if (error) {
-      console.error("Supabase error:", error);
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 }
-      );
-    }
+    await db.delete(leadsTable).where(eq(leadsTable.id, id));
 
     return NextResponse.json({ success: true });
   } catch (err) {
