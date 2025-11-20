@@ -2,29 +2,30 @@
 
 import React, { useEffect, useState } from "react";
 import { PortfolioLayouts } from "@/components/Portfolio";
+import { Portfolio } from "@/lib/types/portfolios";
 
 export default function CaseStudyDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const [portfolio, setPortfolio] = useState<any>(null);
+  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       try {
         const res = await fetch("/api/portfolio");
-        const data = await res.json();
+        const data: Portfolio[] = await res.json();
 
-        const found = data.find((p: any) => p.id === params.id);
+        const found = data.find((p) => p.id === params.id);
         if (!found) {
           console.error("Portfolio not found");
           setLoading(false);
           return;
         }
 
-        let images = [];
+        let images: string[] = [];
         try {
           images =
             typeof found.images === "string"
@@ -66,8 +67,8 @@ export default function CaseStudyDetailPage({
     <Layout
       title={portfolio.title}
       description={portfolio.description}
-      content={portfolio.content}
-      images={portfolio.images}
+      content={portfolio.content ?? ""}
+      images={portfolio.images ?? []}
     />
   );
 }

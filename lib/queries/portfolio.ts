@@ -43,7 +43,7 @@ export const useCreatePortfolio = () => {
       });
 
       if (!parsed.success) {
-        throw new Error(parsed.error.errors[0]?.message || "Invalid input");
+        throw new Error(parsed.error.issues[0]?.message || "Invalid input");
       }
 
       const res = await fetch("/api/portfolio", {
@@ -78,7 +78,7 @@ export const useUpdatePortfolio = () => {
 
       if (!parsed.success) {
         throw new Error(
-          parsed.error.errors[0]?.message || "Invalid update input"
+          parsed.error.issues[0]?.message || "Invalid update input"
         );
       }
 

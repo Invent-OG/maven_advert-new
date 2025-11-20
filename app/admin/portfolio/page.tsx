@@ -11,10 +11,10 @@ export default function PortfolioListPage() {
     async function load() {
       try {
         const res = await fetch("/api/portfolio");
-        const data = await res.json();
+        const data: Portfolio[] = await res.json();
 
         // parse images if stringified
-        const parsed = data.map((item: any) => ({
+        const parsed = data.map((item) => ({
           ...item,
           images:
             typeof item.images === "string"

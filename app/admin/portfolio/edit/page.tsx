@@ -5,6 +5,7 @@ import {
   useUpdatePortfolio,
   useDeletePortfolio,
 } from "@/lib/queries/portfolio";
+import { Portfolio } from "@/lib/types/portfolios";
 
 // Utility to convert File → dataURL
 function fileToDataUrl(file: File) {
@@ -16,14 +17,22 @@ function fileToDataUrl(file: File) {
   });
 }
 
-export default function EditPortfolioPage({ searchParams }: any) {
+type EditPortfolioPageProps = {
+  searchParams?: {
+    id?: string;
+  };
+};
+
+export default function EditPortfolioPage({
+  searchParams,
+}: EditPortfolioPageProps) {
   const id = searchParams?.id;
 
   const updateMutation = useUpdatePortfolio();
   const deleteMutation = useDeletePortfolio();
 
   const [loading, setLoading] = useState(true);
-  const [portfolio, setPortfolio] = useState<any>(null);
+  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -46,8 +55,8 @@ export default function EditPortfolioPage({ searchParams }: any) {
 
       try {
         const res = await fetch("/api/portfolio");
-        const all = await res.json();
-        const found = all.find((p: any) => p.id === id);
+        const all: Portfolio[] = await res.json();
+        const found = all.find((p) => p.id === id);
 
         if (!found) {
           console.error("Portfolio not found");
@@ -59,7 +68,7 @@ export default function EditPortfolioPage({ searchParams }: any) {
 
         setTitle(found.title);
         setDescription(found.description);
-        setContent(found.content);
+        setContent(found.content ?? "");
 
         try {
           setImagesPreview(
@@ -83,8 +92,8 @@ export default function EditPortfolioPage({ searchParams }: any) {
   }, [id]);
 
   // Handle new image uploads
-  const handleImageUpload = async (e: any) => {
-    const list = Array.from(e.target.files) as File[];
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const list = Array.from(e.target.files ?? []) as File[];
     setFiles(list);
     const urls = await Promise.all(list.map((f) => fileToDataUrl(f)));
     setImagesPreview(urls);
@@ -105,7 +114,7 @@ export default function EditPortfolioPage({ searchParams }: any) {
       });
 
       alert("Portfolio updated!");
-    } catch (e: any) {
+    } catch (e) {
       console.error(e);
       alert("Failed to update portfolio");
     }
@@ -113,6 +122,10 @@ export default function EditPortfolioPage({ searchParams }: any) {
 
   // Delete portfolio
   const handleDelete = async () => {
+    if (!id) {
+      alert("Invalid ID");
+      return;
+    }
     if (!confirm("Delete this portfolio?")) return;
 
     try {
@@ -194,6 +207,7 @@ export default function EditPortfolioPage({ searchParams }: any) {
               <img
                 src={layout.preview}
                 className="w-full h-40 object-cover rounded"
+                alt={layout.name}
               />
               <p className="text-center mt-2 font-medium">{layout.name}</p>
             </div>

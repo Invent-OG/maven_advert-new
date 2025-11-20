@@ -4,12 +4,23 @@ import gsap from "gsap";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Portfolio } from "@/lib/types/portfolios";
 
-const categories = ["All", "Selected", "Digital", "Branding", "Web"];
+const categories = ["All", "Selected", "Digital", "Branding", "Web"] as const;
+
+type Category = (typeof categories)[number];
+
+type CaseItem = {
+  id: string | undefined;
+  title: string;
+  category: string;
+  subtitle: string;
+  image: string;
+};
 
 export default function CaseCards() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [items, setItems] = useState<any[]>([]);
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [items, setItems] = useState<CaseItem[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const filteredItems =
@@ -21,23 +32,14 @@ export default function CaseCards() {
     async function loadPortfolios() {
       try {
         const res = await fetch("/api/portfolio");
-        const data = await res.json();
+        const data: Portfolio[] = await res.json();
 
-        const parsed = data.map((p: any) => ({
+        const parsed: CaseItem[] = data.map((p) => ({
           id: p.id,
           title: p.title,
           category: p.description || "General",
           subtitle: p.description || "General",
-          image: Array.isArray(p.images)
-            ? p.images[0]
-            : (() => {
-                try {
-                  const arr = JSON.parse(p.images);
-                  return arr[0];
-                } catch {
-                  return "";
-                }
-              })(),
+          image: Array.isArray(p.images) ? p.images[0] : "",
         }));
 
         setItems(parsed);
