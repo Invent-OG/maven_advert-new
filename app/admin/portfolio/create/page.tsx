@@ -30,25 +30,20 @@ function Page() {
 
   const createMutation = useCreatePortfolio();
 
-  const handleAddImageUrl = () => {
-    setImagesPreview([...imagesPreview, ""]);
-  };
-
-  const handleUpdateImageUrl = (index: number, url: string) => {
-    const updated = [...imagesPreview];
-    updated[index] = url;
-    setImagesPreview(updated);
-  };
-
-  const handleRemoveImageUrl = (index: number) => {
-    const updated = imagesPreview.filter((_, i) => i !== index);
-    setImagesPreview(updated);
-  };
-
   const handleSave = async () => {
     if (!selectedLayout) return alert("Select a layout first");
     if (!title || !description)
       return alert("Title and description are required");
+
+    const finalImages = Array.from({ length: requiredImages }).map((_, index) =>
+      (imagesPreview[index] || "").trim()
+    );
+
+    if (requiredImages > 0 && finalImages.some((img) => !img)) {
+      return alert(
+        `Please provide all ${requiredImages} image URLs required for this layout.`
+      );
+    }
 
     try {
       await createMutation.mutateAsync({
@@ -56,7 +51,7 @@ function Page() {
         description,
         content,
         layoutId: selectedLayout,
-        images: imagesPreview,
+        images: finalImages.filter((img) => img.length > 0),
       });
 
       alert("Portfolio saved to database!");

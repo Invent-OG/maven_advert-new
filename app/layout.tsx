@@ -52,28 +52,34 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning={true}>
         <QueryProvider>
-          <LenisProvider>
-            {!isAdminRoute && <Navbar />}
+          {isAdminRoute ? (
             <main>{children}</main>
-            {!isAdminRoute && <Footer />}
-            {/* ✅ Toast Provider */}
-            <Toaster
-              position="top-center"
-              containerStyle={{ zIndex: 9999 }}
-              toastOptions={{
-                duration: 4000,
-                style: {
-                  borderRadius: "10px",
-                  background: "#333",
-                  color: "#fff",
-                },
-                success: {
-                  iconTheme: { primary: "#22c55e", secondary: "#fff" },
-                },
-                error: { iconTheme: { primary: "#ef4444", secondary: "#fff" } },
-              }}
-            />
-          </LenisProvider>
+          ) : (
+            <LenisProvider>
+              {!isAdminRoute && <Navbar />}
+              <main>{children}</main>
+              {!isAdminRoute && <Footer />}
+              {/* ✅ Toast Provider */}
+              <Toaster
+                position="top-center"
+                containerStyle={{ zIndex: 9999 }}
+                toastOptions={{
+                  duration: 4000,
+                  style: {
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
+                  },
+                  success: {
+                    iconTheme: { primary: "#22c55e", secondary: "#fff" },
+                  },
+                  error: {
+                    iconTheme: { primary: "#ef4444", secondary: "#fff" },
+                  },
+                }}
+              />
+            </LenisProvider>
+          )}
         </QueryProvider>
       </body>
     </html>

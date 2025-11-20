@@ -11,20 +11,50 @@ import {
 // ---------------------
 // Fetch All Portfolios
 // ---------------------
+const normalizeImages = (images: Portfolio["images"]): string[] => {
+  if (Array.isArray(images)) return images;
+  if (typeof images === "string") {
+    try {
+      return JSON.parse(images);
+    } catch {
+      return [];
+    }
+  }
+  return [];
+};
+
+export type ClientPortfolio = Portfolio & { images: string[] };
+
 export const useGetPortfolios = () => {
   return useQuery({
     queryKey: ["portfolios"],
-    queryFn: async (): Promise<Portfolio[]> => {
-      const res = await fetch("/api/portfolio");
+    queryFn: async (): Promise<ClientPortfolio[]> => {
+      const res = await fetch("/api/portfolio", { cache: "no-store" });
       const data = await res.json();
 
-      const parsed = PortfolioSchema.array().safeParse(data);
+      const normalized = Array.isArray(data)
+        ? data.map((item) => ({
+            ...item,
+            images: normalizeImages(item.images),
+          }))
+        : [];
+
+      const parsed = PortfolioSchema.array().safeParse(
+        normalized.map(({ images, ...rest }) => ({
+          ...rest,
+          images,
+        }))
+      );
+
       if (!parsed.success) {
         console.error("Zod validation error:", parsed.error);
         throw new Error("Invalid portfolio data received from server");
       }
 
-      return parsed.data;
+      return parsed.data.map((item) => ({
+        ...item,
+        images: item.images ?? [],
+      })) as ClientPortfolio[];
     },
   });
 };

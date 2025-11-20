@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { blogs } from "@/data/blogs";
+import { useBlogs, Blog } from "@/lib/queries/blogs";
+import { blogs as fallbackBlogs } from "@/data/blogs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +27,42 @@ export default function BlogsCard() {
     return () => ctx.revert();
   }, []);
 
+  const { data, isLoading } = useBlogs(1, 3);
+
+  const visibleBlogs = useMemo(() => {
+    const source = data?.blogs?.length ? data.blogs : fallbackBlogs;
+    return source.slice(0, 3).map((post) => {
+      const apiPost = post as Partial<Blog>;
+      const image =
+        ("cover" in post && post.cover) ||
+        apiPost.imageUrl ||
+        "/placeholder.svg";
+      const description =
+        apiPost.description || ("excerpt" in post ? post.excerpt : "") || "";
+      const author =
+        apiPost.author ||
+        ("author" in post ? post.author : "Maven Advert Team");
+      const createdAt = apiPost.createdAt
+        ? new Date(apiPost.createdAt).toLocaleDateString()
+        : "date" in post
+        ? post.date
+        : "—";
+      const slug = apiPost.slug || post.id?.toString() || "";
+
+      return {
+        id:
+          apiPost.id || post.id?.toString() || slug || Math.random().toString(),
+        title: post.title,
+        author,
+        date: createdAt,
+        readTime: apiPost.readTime || ("readTime" in post ? post.readTime : ""),
+        excerpt: description,
+        image,
+        slug,
+      };
+    });
+  }, [data?.blogs]);
+
   return (
     <section ref={sectionRef} className="py-20 bg-white">
       {/* Header */}
@@ -37,18 +74,23 @@ export default function BlogsCard() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
+        {isLoading && (
+          <p className="text-sm text-orange-500 mt-3">
+            Fetching the newest stories...
+          </p>
+        )}
       </div>
 
       {/* Cards (3 only) */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-0">
-        {blogs.slice(0, 3).map((post) => (
+        {visibleBlogs.map((post) => (
           <article
             key={post.id}
             className="news-card bg-white shadow-md hover:shadow-lg transition-shadow duration-300 rounded-md overflow-hidden"
           >
             <div className="w-full h-64 relative">
               <Image
-                src={post.cover}
+                src={post.image}
                 alt={post.title}
                 fill
                 className="object-cover"
@@ -72,7 +114,7 @@ export default function BlogsCard() {
               <p className="text-gray-500 text-sm mb-4">{post.excerpt}</p>
 
               <Link
-                href={`/blogs/${post.id}`}
+                href={`/blogs/${post.slug || post.id}`}
                 className="text-orange-500 text-sm font-medium hover:underline"
               >
                 Read More

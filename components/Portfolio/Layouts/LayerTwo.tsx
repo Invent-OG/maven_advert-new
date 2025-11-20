@@ -1,8 +1,7 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import React from "react";
-import { CldImage } from "next-cloudinary";
-import { Section } from "lucide-react";
 
 export default function LayerTwo({
   title,
@@ -15,15 +14,25 @@ export default function LayerTwo({
   content: string;
   images: string[];
 }) {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const resolveImageSrc = (value?: string) => {
+    if (!value) return "/next.svg";
+    if (value.startsWith("http://") || value.startsWith("https://")) {
+      return value;
+    }
+    if (cloudName) {
+      return `https://res.cloudinary.com/${cloudName}/image/upload/${value}`;
+    }
+    return "/next.svg";
+  };
+
   return (
     <div className="w-full flex flex-col">
       {/* ====================== 1. TOP FULL IMAGE ====================== */}
       <section className=" w-full">
-        <CldImage
-          src={images?.[0] || "page-01_nmz0il"}
+        <img
+          src={resolveImageSrc(images?.[0])}
           alt="Top Banner"
-          width={2000}
-          height={1500}
           className="w-full py-16 h-auto object-cover"
         />
       </section>
@@ -60,11 +69,9 @@ export default function LayerTwo({
       <section className="max-w-6xl mx-auto ">
         {/* Left Image */}
         <div className="w-full">
-          <CldImage
-            src={images?.[1] || "page-06_kwpxuh"}
+          <img
+            src={resolveImageSrc(images?.[1])}
             alt="Right Content Image"
-            width={1600}
-            height={1200}
             className="w-full h-auto "
           />
         </div>
@@ -84,19 +91,15 @@ export default function LayerTwo({
       {/* ====================== 4. TWO IMAGES SIDE BY SIDE ====================== */}
       <section className="max-w-6xl mx-auto py-10 ">
         <div className="w-full  flex flex-col md:flex-row gap-6">
-          <CldImage
-            src={images?.[2] || "page-03_g1zdg3"}
+          <img
+            src={resolveImageSrc(images?.[2])}
             alt="Left Image"
-            width={1000}
-            height={1000}
             className="w-full md:w-1/2 h-auto "
           />
 
-          <CldImage
-            src={images?.[3] || "page-04_zufchx"}
+          <img
+            src={resolveImageSrc(images?.[3])}
             alt="Right Image"
-            width={1000}
-            height={1000}
             className="w-full md:w-1/2 h-auto "
           />
         </div>
@@ -111,11 +114,9 @@ export default function LayerTwo({
       {/* ====================== 5. LEFT IMAGE + RIGHT 3 BULLET POINTS ====================== */}
       <section className="w-full relative">
         {/* Full Width Image */}
-        <CldImage
-          src={images?.[4] || "page-02_rz9zja"}
+        <img
+          src={resolveImageSrc(images?.[4])}
           alt="Background Image"
-          width={2000}
-          height={1200}
           className="w-full h-auto object-cover"
         />
 

@@ -1,7 +1,7 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import React from "react";
-import { CldImage } from "next-cloudinary";
 
 export default function LayerOne({
   title,
@@ -14,15 +14,25 @@ export default function LayerOne({
   content: string;
   images: string[];
 }) {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const resolveImageSrc = (value?: string) => {
+    if (!value) return "/next.svg";
+    if (value.startsWith("http://") || value.startsWith("https://")) {
+      return value;
+    }
+    if (cloudName) {
+      return `https://res.cloudinary.com/${cloudName}/image/upload/${value}`;
+    }
+    return "/next.svg";
+  };
+
   return (
     <div className="w-full flex flex-col">
       {/* ====================== 1. TOP FULL IMAGE ====================== */}
       <section className=" w-full">
-        <CldImage
-          src={images?.[0] || "page-01_r5ihgs"}
+        <img
+          src={resolveImageSrc(images?.[0])}
           alt="Top Banner"
-          width={2000}
-          height={1500}
           className="w-full py-16 h-auto object-cover"
         />
       </section>
@@ -59,11 +69,9 @@ export default function LayerOne({
       <section className="max-w-7xl mx-auto flex flex-col md:flex-row items-center py-10 px-6 gap-6">
         {/* Left Image */}
         <div className="w-full md:w-1/2">
-          <CldImage
-            src={images?.[1] || "page-03_xzfhej"}
+          <img
+            src={resolveImageSrc(images?.[1])}
             alt="Right Content Image"
-            width={1200}
-            height={1200}
             className="w-full h-screen "
           />
         </div>
@@ -82,11 +90,9 @@ export default function LayerOne({
 
       {/* ====================== 3. FULL SIZE IMAGE ====================== */}
       <section className="w-full p-10 py-10">
-        <CldImage
-          src={images?.[2] || "page-06_t3dw8b"}
+        <img
+          src={resolveImageSrc(images?.[2])}
           alt="Full Size Section"
-          width={2000}
-          height={1500}
           className="w-full h-auto object-cover"
         />
       </section>
@@ -94,19 +100,15 @@ export default function LayerOne({
       {/* ====================== 4. TWO IMAGES SIDE BY SIDE ====================== */}
       <section className="max-w-6xl mx-auto py-10 px-6">
         <div className="w-full  flex flex-col md:flex-row gap-6">
-          <CldImage
-            src={images?.[3] || "page-04_xb9k4y"}
+          <img
+            src={resolveImageSrc(images?.[3])}
             alt="Left Image"
-            width={1000}
-            height={1000}
             className="w-full md:w-1/2 h-auto "
           />
 
-          <CldImage
-            src={images?.[4] || "page-05_z83aui"}
+          <img
+            src={resolveImageSrc(images?.[4])}
             alt="Right Image"
-            width={1000}
-            height={1000}
             className="w-full md:w-1/2 h-auto "
           />
         </div>
@@ -115,11 +117,9 @@ export default function LayerOne({
       {/* ====================== 5. LEFT IMAGE + RIGHT 3 BULLET POINTS ====================== */}
       <section className="w-full relative">
         {/* Full Width Image */}
-        <CldImage
-          src={images?.[5] || "page-02_syokgp"}
+        <img
+          src={resolveImageSrc(images?.[5])}
           alt="Background Image"
-          width={2000}
-          height={1200}
           className="w-full h-auto object-cover"
         />
 
