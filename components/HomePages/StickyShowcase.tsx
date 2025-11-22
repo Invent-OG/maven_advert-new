@@ -6,6 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import AnimatedButton from "../ui/AnimatedButton";
 import { useRouter } from "next/navigation";
+import { LiquidButton, MetalButton } from "../ui/liquid-glass-button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,16 +42,33 @@ export default function StickyShowcase() {
         <h1 className="md:text-8xl text-4xl font-extrabold text-neutral-900 md:py-4 md:mt-0 mt-20 md:max-w-4xl">
           Build a remarkable brand experience
         </h1>
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-600 mt-2 mb-6">
           Design, launch, and grow with Maven.
         </p>
 
-        <AnimatedButton
+        {/* <AnimatedButton
           onClick={() => router.push("/contact")}
           className="mt-6"
         >
           Get Started
-        </AnimatedButton>
+        </AnimatedButton> */}
+        <LiquidButton
+          onClick={() => router.push("/contact")}
+          className="mt-6"
+          size="xl"
+        >
+          Get Started
+        </LiquidButton>
+        {/* <MetalButton> Get Started</MetalButton>
+        <MetalButton onClick={() => router.push("/contact")} variant="bronze">
+          {" "}
+          Get Started
+        </MetalButton>
+        <MetalButton onClick={() => router.push("/contact")} variant="orange">
+          {" "}
+          Get Started
+        </MetalButton> */}
+        {/* <MetalButton variant="primary">Primary</MetalButton> */}
       </div>
 
       {/* Phones Showcase */}

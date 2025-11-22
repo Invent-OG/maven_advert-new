@@ -1,3 +1,4 @@
+import { CldImage } from "next-cloudinary";
 import React from "react";
 import { FaEnvelope } from "react-icons/fa";
 
@@ -26,10 +27,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Column 1: Logo */}
           <div className="flex flex-col items-start">
-            <img
-              src="https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2025/05/demo-marketing-logo-white.svg"
-              alt="Crafto Logo"
+            <CldImage
+              src="maven_white_logo-03_zhtjwf"
+              alt="Maven Logo"
+              width={144} // same as w-36 (36 * 4)
+              height={144} // adjust if needed (logo is square)
               className="w-36 mb-4"
+              quality="auto"
+              format="auto"
             />
           </div>
 

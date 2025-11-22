@@ -79,37 +79,37 @@ export default function StickyShowCaseTwo() {
           {/* Left images */}
           <div className="flex flex-col gap-6 sm:gap-8">
             <SideImage
-              src="https://framerusercontent.com/images/yXQTefuZSquJukQGCEdJtRYAGY.jpg?scale-down-to=1024"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646866/Assets-05_gjjsbh.jpg"
               className="left-img -rotate-12"
             />
             <SideImage
-              src="https://framerusercontent.com/images/PNnKht5fkykv5VpkXq45bRjfhGk.jpg?scale-down-to=1024"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646864/Assets-03_jli8b0.jpg"
               className="left-img rotate-12"
             />
             <SideImage
-              src="https://framerusercontent.com/images/q3i7KD0X92kfWz1q2P04yM3Xo.jpg?scale-down-to=512"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646862/Assets-04_dqhuiu.jpg"
               className="left-img -rotate-12"
             />
           </div>
 
           {/* Center phone mockup */}
           <PhoneMockup
-            screen="https://framerusercontent.com/images/3uePkZoyUfBUEH6sP13baAlRo0.jpg?scale-down-to=512"
-            className="phone-center scale-110 z-10 mx-4 sm:mx-6 md:mx-10"
+            screen="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646746/2_single_phone_p6vyuf.png"
+            className="phone-center scale-120 z-10 mx-4 sm:mx-6 md:mx-10"
           />
 
           {/* Right images */}
           <div className="flex flex-col gap-6 sm:gap-8">
             <SideImage
-              src="https://framerusercontent.com/images/g0DwN5mvHLQB8kirz2aWP8ex9PU.jpg?scale-down-to=512"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646860/Assets-02_vr96l1.jpg"
               className="right-img rotate-12"
             />
             <SideImage
-              src="https://framerusercontent.com/images/PNnKht5fkykv5VpkXq45bRjfhGk.jpg?scale-down-to=1024"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646858/Assets-06_noluho.jpg"
               className="right-img -rotate-12"
             />
             <SideImage
-              src="https://framerusercontent.com/images/yXQTefuZSquJukQGCEdJtRYAGY.jpg?scale-down-to=1024"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646856/Assets-01_nh1xi9.jpg"
               className="right-img rotate-12"
             />
           </div>
@@ -152,15 +152,6 @@ function PhoneMockup({ screen, className }: PhoneMockupProps) {
           right: "12px",
         }}
       />
-
-      {/* Frame always above */}
-      <Image
-        src="/assets/mobileimages/H2xOBKfRU2M06U4j9LF5WN8z6pA.avif"
-        alt="frame"
-        fill
-        className="pointer-events-none select-none z-10"
-        priority
-      />
     </div>
   );
 }
@@ -184,7 +175,7 @@ function SideImage({ src, className }: SideImageProps) {
         xl:w-[240px] xl:h-[200px] 
         rounded-2xl overflow-hidden shadow-lg ${className || ""}`}
     >
-      <Image src={src} alt="side" fill className="object-cover bg-white" />
+      <Image src={src} alt="side" fill className="object-contain bg-white" />
     </div>
   );
 }

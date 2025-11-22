@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { CldImage } from "next-cloudinary";
 
 export default function Said() {
   useEffect(() => {
@@ -18,11 +19,13 @@ export default function Said() {
         data-aos="fade-right"
         className="relative w-full md:w-1/2 h-[600px] md:h-auto"
       >
-        <Image
-          src="https://framerusercontent.com/images/TpMLCULNEpBMGtsbiAjXEdQLEc.webp?scale-down-to=1024"
+        <CldImage
+          src="Assets-16_fkg8zo"
           alt="Oliur"
           fill
-          className="object-cover"
+          className="object-fill"
+          quality="auto"
+          format="auto"
           priority
         />
       </div>
