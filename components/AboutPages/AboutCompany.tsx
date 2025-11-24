@@ -67,13 +67,13 @@ function AboutCompany() {
       {/* Tabs Navigation */}
       <div
         data-aos="fade-down"
-        className="flex justify-center border-b border-gray-200"
+        className="flex justify-start lg:justify-center noScrollbar border-b border-gray-200 overflow-x-auto whitespace-nowrap no-scrollbar px-2"
       >
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-4 text-sm font-medium transition-all duration-300 ${
+            className={`px-4 sm:px-6 py-3 text-sm font-medium flex-shrink-0 transition-all duration-300 ${
               activeTab === tab.id
                 ? "text-black border-b-2 border-black"
                 : "text-gray-500 hover:text-black"
@@ -104,7 +104,7 @@ function AboutCompany() {
               alt="Floating overlay"
               width={150} // smaller width
               height={100} // smaller height (keeps aspect ratio)
-              className="absolute -bottom-10 -left-10 float-img"
+              className="absolute -bottom-10 lg:-left-10 rounded-2xl -left-5 float-img"
             />
           </div>
         </div>

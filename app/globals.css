@@ -15,6 +15,14 @@
   }
 }
 
+
+.noScrollbar::-webkit-scrollbar {
+  display: none;
+}
+.noScrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 /* ---break---  */
 
 @theme inline {
