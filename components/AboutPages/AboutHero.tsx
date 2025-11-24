@@ -26,14 +26,27 @@ export default function AboutHero() {
       </div>
 
       {/* RIGHT IMAGE */}
-      <div className="relative z-20 flex justify-end items-end w-[90%] md:w-[60%] top-10 md:top-12 pr-2">
+      <div
+        className="
+          relative z-20 flex justify-end items-end 
+          w-full md:w-[40%]      /* FULL WIDTH ON MOBILE, SAME ON DESKTOP */
+          top-14 left-10 md:left-0 md:top-12 
+          pr-0 md:pr-2
+        "
+      >
         <Image
           src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722332/Banner_Kaniska_hs9ij7.png"
           alt="Marketing Contact"
           width={1600}
           height={1600}
           priority
-          className="w-full max-w-[1100px] md:max-w-[1500px] lg:max-w-[2000px] object-contain"
+          className="
+            w-[140%]       /* BIGGER IMAGE ON MOBILE */
+            max-w-none     /* REMOVE SIZE LIMIT ON MOBILE */
+            md:max-w-[1500px] 
+            lg:max-w-[2000px] 
+            object-contain
+          "
         />
       </div>
 

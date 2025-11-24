@@ -138,7 +138,7 @@ export default function StickyShowCaseThree() {
             ref={sliderRef}
             onMouseDown={startDrag}
             onTouchStart={startDrag}
-            className="absolute top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex justify-center items-center cursor-grab z-20"
+            className="absolute top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full shadow-lg flex justify-center items-center cursor-grab z-100"
           >
             <ChevronLeft size={18} className="text-gray-800" />
             <ChevronRight size={18} className="text-gray-800" />

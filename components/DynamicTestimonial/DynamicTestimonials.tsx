@@ -168,9 +168,9 @@ export default function DynamicTestimonials() {
 
   return (
     <section className="bg-black py-16">
-      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mx-auto text-center text-white mb-14">
+      {/* <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mx-auto text-center text-white mb-14">
         Testimonials
-      </h2>
+      </h2> */}
 
       <div className="relative overflow-hidden max-h-[700px] px-4 flex justify-center gap-6">
         {/* fade masks */}

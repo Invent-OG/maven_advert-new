@@ -147,3 +147,29 @@
   }
 }
 
+/* nav 3d icon float animation and hover effect */
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02) rotateY(8deg);
+  }
+}
+
+.premium-3d-icon {
+  animation: float3D 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+  filter: drop-shadow(0px 4px 8px rgba(255, 140, 0, 0.35));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+/* Desktop-hover parallax tilt effect */
+@media (min-width: 768px) {
+  .premium-3d-icon:hover {
+    transform: translateY(-6px) rotateY(18deg) rotateX(6deg) scale(1.07);
+    filter: drop-shadow(0px 6px 14px rgba(255, 120, 0, 0.55));
+  }
+}
+

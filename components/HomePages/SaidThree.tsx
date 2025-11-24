@@ -50,7 +50,7 @@ export default function SaidThree() {
       <div
         data-aos="fade-right"
         className="flex-1 flex flex-col justify-center items-start 
-        text-start md:text-left p-4 sm:p-8 md:p-12 
+        text-start md:text-left p-4 sm:p-8 md:p-2 
         order-2 md:order-1 space-y-6"
       >
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 leading-tight">
@@ -86,7 +86,7 @@ export default function SaidThree() {
               if (el) phoneRefs.current[1] = el;
             }}
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/phone2_wqfevl"
-            className="phone-anim relative z-10 top-[180px] right-[40px] translate-y-[60px]"
+            className="phone-anim relative z-10 top-[180px] right-[50px] md:right-[100px] translate-y-[60px]"
           />
         </div>
       </div>

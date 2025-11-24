@@ -20,7 +20,7 @@ function page() {
       <TeamImages /> */}
       <Hero3D />
       <Video />
-      <MeetGang />
+      {/* <MeetGang /> */}
       <TipsTrick />
       <ZoomImg />
       <WhyItWorks />

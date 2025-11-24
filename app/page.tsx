@@ -27,7 +27,8 @@ function page() {
       <EverythingYouNeed />
       <Said />
       <Video />
-      <MovingCard />
+      {/* <MovingCard /> */}
+      <DynamicTestimonials />
       <StickyShowCaseThree />
       <PersonalBrand />
       <ServiceVideo />
@@ -35,7 +36,7 @@ function page() {
       <MemberShip />
       <FeatureOn />
       <SaidThree />
-      <DynamicTestimonials />
+
       {/* <DynamicBlog /> */}
     </>
   );
