@@ -39,19 +39,29 @@ export default function StickyShowcase() {
       <div className="sticky top-0 z-10 flex flex-col items-center text-center px-4">
         <div className="md:mt-24 mt-24"></div>
 
-        <h1 className="md:text-8xl text-4xl font-extrabold text-neutral-900 md:py-4 md:mt-0 mt-20 md:max-w-4xl">
-          Build a remarkable brand experience
+        <h1
+          className="
+          
+    text-4xl 
+    md:text-7xl 
+    lg:text-8xl 
+    font-extrabold 
+    text-neutral-900 
+    leading-[1.05]
+    tracking-tight
+    md:py-4 
+    mt-20 md:mt-0 
+    md:max-w-4xl
+drop-shadow-[0_16px_5px_rgba(0,0,0,0.35)] shadow-black/10
+  "
+        >
+          Build a Remarkable Brand Experience
         </h1>
-        <p className="text-gray-600 mt-2 mb-6">
-          Design, launch, and grow with Maven.
+
+        <p className="text-neutral-900 font-medium mt-2 mb-6">
+          Design, Launch, and grow with Maven.
         </p>
 
-        {/* <AnimatedButton
-          onClick={() => router.push("/contact")}
-          className="mt-6"
-        >
-          Get Started
-        </AnimatedButton> */}
         <LiquidButton
           onClick={() => router.push("/contact")}
           className="mt-6"
@@ -59,16 +69,6 @@ export default function StickyShowcase() {
         >
           Get Started
         </LiquidButton>
-        {/* <MetalButton> Get Started</MetalButton>
-        <MetalButton onClick={() => router.push("/contact")} variant="bronze">
-          {" "}
-          Get Started
-        </MetalButton>
-        <MetalButton onClick={() => router.push("/contact")} variant="orange">
-          {" "}
-          Get Started
-        </MetalButton> */}
-        {/* <MetalButton variant="primary">Primary</MetalButton> */}
       </div>
 
       {/* Phones Showcase */}
@@ -126,14 +126,14 @@ function PhoneMockup({ screen, className }: PhoneMockupProps) {
     md:w-[260px] md:h-[500px]       // increased width
     lg:w-[300px] lg:h-[560px]       // increased width
     xl:w-[330px] xl:h-[620px]       // increased width
-    ${className || ""}`}
+    ${className || " "}`}
     >
       {/* ONLY SCREEN IMAGE */}
       <Image
         src={screen}
         alt="screen"
         fill
-        className="object-cover rounded-[2rem]"
+        className="object-cover  rounded-[2rem]"
       />
     </div>
   );

@@ -23,7 +23,7 @@ export default function Said() {
           src="Assets-16_fkg8zo"
           alt="Oliur"
           fill
-          className="object-fill"
+          className="object-cover"
           quality="auto"
           format="auto"
           priority

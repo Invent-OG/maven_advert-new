@@ -12,7 +12,7 @@ const services = [
       "We build landing pages, integrate CRM, implement chatbots, and set up analytics to streamline your sales process",
     image:
       "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/sales-development",
+    link: "/services/app-development",
   },
   {
     title: "ECommerce Marketing & Product Promotion",
@@ -20,7 +20,7 @@ const services = [
       "We optimize your presence on Amazon and Flipkart, run targeted product ads, and boost cross-sales to increase revenue",
     image:
       "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/social-media-analysis",
+    link: "/services/app-development",
   },
   {
     title: "Social Media Growth & Brand Engagement:",
@@ -28,7 +28,7 @@ const services = [
       "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
     image:
       "https://images.pexels.com/photos/3182770/pexels-photo-3182770.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/marketing-campaigns",
+    link: "/services/app-development",
   },
   {
     title: "Digital Advertising & ROI Campaigns",
@@ -36,7 +36,7 @@ const services = [
       "We design Google Ads, retargeting campaigns, and lead funnels to maximize ROI and drive measurable results",
     image:
       "https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/marketing-research",
+    link: "/services/app-development",
   },
   {
     title: "Search & Content Marketing",
@@ -44,7 +44,7 @@ const services = [
       "We leverage SEO, blogs, YouTube, and email/WhatsApp campaigns to enhance visibility and attract your target audience",
     image:
       "https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/engaging-audiences",
+    link: "/services/app-development",
   },
   {
     title: "Social Media Growth & Brand Engagement:",
@@ -52,7 +52,7 @@ const services = [
       "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
     image:
       "https://images.pexels.com/photos/3182770/pexels-photo-3182770.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/marketing-campaigns",
+    link: "/services/app-development",
   },
 ];
 

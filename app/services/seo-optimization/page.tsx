@@ -1,4 +1,4 @@
-import SeoContent from "@/components/CloudServicePages/CloudContent";
+import SeoContent from "@/components/SeoPages/SeoContent";
 import SeoHero from "@/components/SeoPages/SeoHero";
 import React from "react";
 

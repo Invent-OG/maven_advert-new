@@ -1,5 +1,5 @@
+import AppContent from "@/components/AppDevelopmentPages/AppContent";
 import AppHero from "@/components/AppDevelopmentPages/AppHero";
-import AppContent from "@/components/WebDevelopmentPages/WebContent";
 import React from "react";
 
 function page() {

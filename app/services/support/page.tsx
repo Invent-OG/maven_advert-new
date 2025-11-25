@@ -1,4 +1,4 @@
-import SupportContent from "@/components/SeoPages/SeoContent";
+import SupportContent from "@/components/SupportPages/SupportContent";
 import SupportHero from "@/components/SupportPages/SupportHero";
 import React from "react";
 
