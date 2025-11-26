@@ -7,7 +7,6 @@ import "aos/dist/aos.css";
 import { Portfolio } from "@/lib/types/portfolios";
 
 const categories = ["All", "Selected", "Digital", "Branding", "Web"] as const;
-
 type Category = (typeof categories)[number];
 
 type CaseItem = {
@@ -15,7 +14,7 @@ type CaseItem = {
   title: string;
   category: string;
   subtitle: string;
-  image: string;
+  image: string | null;
 };
 
 export default function CaseCards() {
@@ -39,7 +38,8 @@ export default function CaseCards() {
           title: p.title,
           category: p.description || "General",
           subtitle: p.description || "General",
-          image: Array.isArray(p.images) ? p.images[0] : "",
+          image:
+            Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : null,
         }));
 
         setItems(parsed);
@@ -50,19 +50,16 @@ export default function CaseCards() {
     loadPortfolios();
 
     if (containerRef.current) {
-      const tl = gsap.timeline();
-      tl.fromTo(
+      gsap.fromTo(
         containerRef.current.children,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, stagger: 0.15, duration: 0.6, ease: "power2.out" }
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, stagger: 0.18, duration: 0.6, ease: "power2.out" }
       );
     }
   }, [activeCategory]);
+
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
+    AOS.init({ duration: 800, once: false });
   }, []);
 
   return (
@@ -71,13 +68,13 @@ export default function CaseCards() {
         {/* Filter Bar */}
         <div
           data-aos="fade-up"
-          className="flex flex-wrap justify-center gap-6 mb-10 pb-4"
+          className="flex flex-wrap justify-center gap-8 mb-14 pb-2"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`text-gray-700 font-medium relative transition-all pb-1 ${
+              className={`text-gray-600 font-medium relative pb-1 transition-all ${
                 activeCategory === cat
                   ? "text-gray-900 after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-gray-900"
                   : "hover:text-gray-900"
@@ -88,29 +85,48 @@ export default function CaseCards() {
           ))}
         </div>
 
-        {/* Grid Gallery */}
+        {/* Cards Grid */}
         <div
           ref={containerRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14"
         >
           {filteredItems.map((item) => (
             <Link
               key={item.id}
               href={`/casestudies/${item.id}`}
-              className="group cursor-pointer overflow-hidden"
+              className="group cursor-pointer"
             >
-              <div className="relative overflow-hidden rounded-md">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-auto transform transition-transform duration-500 group-hover:scale-110"
-                />
+              <div className="relative overflow-hidden bg-white">
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="
+                      w-full h-[320px]
+                      object-cover
+                      transition-transform duration-700
+                      group-hover:scale-110
+                    "
+                  />
+                ) : (
+                  <div className="w-full h-[320px] bg-gray-200 flex items-center justify-center text-gray-400">
+                    No Image
+                  </div>
+                )}
               </div>
-              <div className="mt-8 flex justify-evenly items-center">
-                <h3 className="text-lg font-semibold text-gray-900">
+
+              {/* Title + Short subtitle */}
+              <div className="mt-6 flex items-center justify-center gap-10">
+                <h3 className="text-[18px] font-semibold text-gray-900">
                   {item.title}
                 </h3>
-                <p className="text-md text-gray-500">{item.subtitle}</p>
+
+                <p
+                  className="text-[14px] text-gray-500 max-w-[160px] overflow-hidden whitespace-nowrap text-ellipsis"
+                  title={item.subtitle}
+                >
+                  {item.subtitle}
+                </p>
               </div>
             </Link>
           ))}

@@ -1,3 +1,138 @@
+// "use client";
+// /* eslint-disable @next/next/no-img-element */
+
+// import React from "react";
+
+// export default function LayerTwo({
+//   title,
+//   description,
+//   content,
+//   images,
+// }: {
+//   title: string;
+//   description: string;
+//   content: string;
+//   images: string[];
+// }) {
+//   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+//   const resolveImageSrc = (value?: string) => {
+//     if (!value) return "/next.svg";
+//     if (value.startsWith("http://") || value.startsWith("https://")) {
+//       return value;
+//     }
+//     if (cloudName) {
+//       return `https://res.cloudinary.com/${cloudName}/image/upload/${value}`;
+//     }
+//     return "/next.svg";
+//   };
+
+//   return (
+//     <div className="w-full flex flex-col">
+//       {/* ====================== 1. TOP FULL IMAGE ====================== */}
+//       <section className=" w-full">
+//         <img
+//           src={resolveImageSrc(images?.[0])}
+//           alt="Top Banner"
+//           className="w-full py-16 h-auto object-cover"
+//         />
+//       </section>
+//       <section className="max-w-5xl mx-auto  px-6 bg-white">
+//         {/* 4 Column Grid */}
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+//           {/* Column 1 */}
+//           <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
+//             <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
+//             <p className="text-gray-600 text-sm">Quick turnaround</p>
+//           </div>
+
+//           {/* Column 2 */}
+//           <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
+//             <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
+//             <p className="text-gray-600 text-sm">Top-notch output</p>
+//           </div>
+
+//           {/* Column 3 */}
+//           <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
+//             <h3 className="text-xl font-semibold mb-2">Expert Team</h3>
+//             <p className="text-gray-600 text-sm">Skilled professionals</p>
+//           </div>
+
+//           {/* Column 4 */}
+//           <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
+//             <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
+//             <p className="text-gray-600 text-sm">Always available</p>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ====================== 2. RIGHT SIDE CONTENT LAYOUT ====================== */}
+//       <section className="max-w-6xl mx-auto ">
+//         {/* Left Image */}
+//         <div className="w-full">
+//           <img
+//             src={resolveImageSrc(images?.[1])}
+//             alt="Right Content Image"
+//             className="w-full h-auto "
+//           />
+//         </div>
+//       </section>
+
+//       {/* ====================== 3. FULL SIZE IMAGE ====================== */}
+//       {/* <section className="w-full p-10 py-10">
+//         <CldImage
+//           src="page-06_t3dw8b"
+//           alt="Full Size Section"
+//           width={2000}
+//           height={1500}
+//           className="w-full h-auto object-cover"
+//         />
+//       </section> */}
+
+//       {/* ====================== 4. TWO IMAGES SIDE BY SIDE ====================== */}
+//       <section className="max-w-6xl mx-auto py-10 ">
+//         <div className="w-full  flex flex-col md:flex-row gap-6">
+//           <img
+//             src={resolveImageSrc(images?.[2])}
+//             alt="Left Image"
+//             className="w-full md:w-1/2 h-auto "
+//           />
+
+//           <img
+//             src={resolveImageSrc(images?.[3])}
+//             alt="Right Image"
+//             className="w-full md:w-1/2 h-auto "
+//           />
+//         </div>
+//       </section>
+//       <section className="text-black mb-6 text-center  max-w-4xl mx-auto flex items-center justify-center px-6">
+//         <div
+//           className="text-xl leading-relaxed"
+//           dangerouslySetInnerHTML={{ __html: description || "" }}
+//         />
+//       </section>
+
+//       {/* ====================== 5. LEFT IMAGE + RIGHT 3 BULLET POINTS ====================== */}
+//       <section className="w-full relative">
+//         {/* Full Width Image */}
+//         <img
+//           src={resolveImageSrc(images?.[4])}
+//           alt="Background Image"
+//           className="w-full h-auto object-cover"
+//         />
+
+//         {/* Right Side Overlay Content */}
+//         <div className="absolute text-white top-1/2 right-10 -translate-y-1/2 text-left space-y-4 p-6 max-w-md">
+//           <h2 className="text-4xl font-bold leading-tight">{title}</h2>
+
+//           <div
+//             className="space-y-3 text-lg"
+//             dangerouslySetInnerHTML={{ __html: content || "" }}
+//           />
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
 "use client";
 /* eslint-disable @next/next/no-img-element */
 
@@ -17,115 +152,94 @@ export default function LayerTwo({
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const resolveImageSrc = (value?: string) => {
     if (!value) return "/next.svg";
-    if (value.startsWith("http://") || value.startsWith("https://")) {
+    if (value.startsWith("http://") || value.startsWith("https://"))
       return value;
-    }
-    if (cloudName) {
+    if (cloudName)
       return `https://res.cloudinary.com/${cloudName}/image/upload/${value}`;
-    }
     return "/next.svg";
   };
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col bg-white">
       {/* ====================== 1. TOP FULL IMAGE ====================== */}
-      <section className=" w-full">
+      <section className="w-full mt-10">
         <img
           src={resolveImageSrc(images?.[0])}
           alt="Top Banner"
-          className="w-full py-16 h-auto object-cover"
+          className="w-full h-[45vh] sm:h-[60vh] md:h-[85vh] md:object-contain object-contain"
         />
       </section>
-      <section className="max-w-5xl mx-auto  px-6 bg-white">
-        {/* 4 Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-          {/* Column 1 */}
-          <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
-            <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
-            <p className="text-gray-600 text-sm">Quick turnaround</p>
-          </div>
 
-          {/* Column 2 */}
-          <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
-            <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
-            <p className="text-gray-600 text-sm">Top-notch output</p>
-          </div>
-
-          {/* Column 3 */}
-          <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
-            <h3 className="text-xl font-semibold mb-2">Expert Team</h3>
-            <p className="text-gray-600 text-sm">Skilled professionals</p>
-          </div>
-
-          {/* Column 4 */}
-          <div className="p-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
-            <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-            <p className="text-gray-600 text-sm">Always available</p>
-          </div>
+      {/* ================= 2. 4 FEATURE BOXES ================= */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 md:py-14 ">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+          {[
+            { title: "Fast Delivery", sub: "Quick turnaround" },
+            { title: "Premium Quality", sub: "Top-notch output" },
+            { title: "Expert Team", sub: "Skilled professionals" },
+            { title: "24/7 Support", sub: "Always available" },
+          ].map((box, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-xl bg-gray-50 text-center border hover:shadow-md transition"
+            >
+              <h3 className="md:text-xl text-sm  font-semibold mb-1">{box.title}</h3>
+              <p className="text-gray-600 text-sm">{box.sub}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ====================== 2. RIGHT SIDE CONTENT LAYOUT ====================== */}
-      <section className="max-w-6xl mx-auto ">
-        {/* Left Image */}
-        <div className="w-full">
-          <img
-            src={resolveImageSrc(images?.[1])}
-            alt="Right Content Image"
-            className="w-full h-auto "
-          />
-        </div>
-      </section>
+      {/* ====================== 3. LARGE WIDE IMAGE ====================== */}
 
-      {/* ====================== 3. FULL SIZE IMAGE ====================== */}
-      {/* <section className="w-full p-10 py-10">
-        <CldImage
-          src="page-06_t3dw8b"
+      <section className="w-full mb-4">
+        <img
+          src={resolveImageSrc(images?.[1])}
           alt="Full Size Section"
-          width={2000}
-          height={1500}
-          className="w-full h-auto object-cover"
+          className="w-full h-[45vh] sm:h-[65vh] md:h-[100vh] object-contain"
         />
-      </section> */}
+      </section>
 
-      {/* ====================== 4. TWO IMAGES SIDE BY SIDE ====================== */}
-      <section className="max-w-6xl mx-auto py-10 ">
-        <div className="w-full  flex flex-col md:flex-row gap-6">
+      {/* ====================== 4. TWO SIDE BY SIDE IMAGES ====================== */}
+
+      <section className="w-full mb-10 px-4 sm:px-8 md:px-20 lg:px-[188px]">
+        <div className="w-full flex flex-col md:flex-row gap-4 sm:gap-2">
           <img
             src={resolveImageSrc(images?.[2])}
             alt="Left Image"
-            className="w-full md:w-1/2 h-auto "
+            className="w-full md:w-1/2 h-[280px] sm:h-[380px] md:h-[520px] object-cover"
           />
-
           <img
             src={resolveImageSrc(images?.[3])}
             alt="Right Image"
-            className="w-full md:w-1/2 h-auto "
+            className="w-full md:w-1/2 h-[280px] sm:h-[380px] md:h-[520px] object-cover"
           />
         </div>
       </section>
-      <section className="text-black mb-6 text-center  max-w-4xl mx-auto flex items-center justify-center px-6">
+
+      {/* ====================== DESCRIPTION BLOCK CENTER ====================== */}
+      <section className="text-black my-6 text-center max-w-4xl mx-auto px-6">
         <div
-          className="text-xl leading-relaxed"
+          className="text-lg sm:text-xl leading-relaxed"
           dangerouslySetInnerHTML={{ __html: description || "" }}
         />
       </section>
 
-      {/* ====================== 5. LEFT IMAGE + RIGHT 3 BULLET POINTS ====================== */}
-      <section className="w-full relative">
-        {/* Full Width Image */}
+      {/* ====================== 5. FINAL IMAGE + RIGHT SIDE TEXT ====================== */}
+      <section className="relative w-full mt-8 mb-14 min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh]">
         <img
           src={resolveImageSrc(images?.[4])}
           alt="Background Image"
-          className="w-full h-auto object-cover"
+          className="w-full h-[60vh] sm:h-[70vh] md:h-[85vh] object-cover"
         />
 
-        {/* Right Side Overlay Content */}
-        <div className="absolute text-white top-1/2 right-10 -translate-y-1/2 text-left space-y-4 p-6 max-w-md">
-          <h2 className="text-4xl font-bold leading-tight">{title}</h2>
+        <div className="absolute text-white top-1/2 right-5 sm:right-12 md:right-20 -translate-y-1/2 space-y-6 p-4 sm:p-6 max-w-lg text-right md:text-left drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+            {title}
+          </h2>
 
           <div
-            className="space-y-3 text-lg"
+            className="space-y-3 text-base sm:text-lg md:text-xl"
             dangerouslySetInnerHTML={{ __html: content || "" }}
           />
         </div>

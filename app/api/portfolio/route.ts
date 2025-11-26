@@ -39,10 +39,18 @@ export async function POST(req: Request) {
 }
 
 // GET ALL (GET)
+// GET ALL (GET)
 export async function GET() {
   try {
     const data = await db.select().from(portfolios);
-    return NextResponse.json(data, { status: 200 });
+
+    // FIX: Convert images string -> real array
+    const parsed = data.map((p) => ({
+      ...p,
+      images: p.images ? JSON.parse(p.images) : [],
+    }));
+
+    return NextResponse.json(parsed, { status: 200 });
   } catch (error) {
     console.error("GET ERROR:", error);
     return NextResponse.json(

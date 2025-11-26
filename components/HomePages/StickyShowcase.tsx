@@ -40,8 +40,7 @@ export default function StickyShowcase() {
         <div className="md:mt-24 mt-24"></div>
 
         <h1
-          className="
-          
+          className="        
     text-4xl 
     md:text-7xl 
     lg:text-8xl 
