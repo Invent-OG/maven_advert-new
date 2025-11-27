@@ -1,6 +1,7 @@
 import { CldImage } from "next-cloudinary";
 import React from "react";
 import { FaEnvelope } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -30,8 +31,8 @@ export default function Footer() {
             <CldImage
               src="maven_white_logo-03_zhtjwf"
               alt="Maven Logo"
-              width={144} // same as w-36 (36 * 4)
-              height={144} // adjust if needed (logo is square)
+              width={144}
+              height={144}
               className="w-36 mb-4"
               quality="auto"
               format="auto"
@@ -80,23 +81,55 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center border-t border-gray-700 pt-6">
           {/* Left side: Navbar tabs */}
           <div className="flex flex-wrap gap-6 mb-4 md:mb-0">
-            {[
-              "Home",
-              "About",
-              "Services",
-              "Case studies",
-              "Pricing",
-              "Team",
-              "Contact",
-            ].map((tab) => (
-              <a
-                key={tab}
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                {tab}
-              </a>
-            ))}
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/services"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Services
+            </Link>
+            <Link
+              href="/casestudies"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Case studies
+            </Link>
+            <Link
+              href="/threed"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              3D
+            </Link>
+            <Link
+              href="/stallfabrication"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Stall Fabrication
+            </Link>
+
+            <Link
+              href="/contact"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Contact
+            </Link>
+            <Link
+              href="/admin/login"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Admin
+            </Link>
           </div>
 
           {/* Right side: Copyright */}

@@ -6,7 +6,7 @@ import LeadTabs from "@/components/admin/LeadTabs";
 export default function LeadsPage() {
   return (
     <div>
-      <AdminHeader title="Leads Management" />
+      <AdminHeader title="" />
       <LeadTabs />
     </div>
   );
