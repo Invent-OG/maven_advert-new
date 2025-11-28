@@ -55,30 +55,6 @@ export default function Offering() {
       img: "https://picsum.photos/id/1025/600/400",
       type: "image", // 3
     },
-    {
-      title: "Engineering Design",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      icon: <Building2 className="w-10 h-10" />,
-      img: "https://picsum.photos/id/1036/600/400",
-      type: "content", // 4
-    },
-    {
-      title: "Interior Finishing",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      icon: <FileSpreadsheet className="w-10 h-10" />,
-      img: "https://picsum.photos/id/1041/600/400",
-      type: "image", // 5
-    },
-    {
-      title: "Project Planning",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      icon: <Ruler className="w-10 h-10" />,
-      img: "https://picsum.photos/id/1056/600/400",
-      type: "content", // 6
-    },
   ];
 
   return (

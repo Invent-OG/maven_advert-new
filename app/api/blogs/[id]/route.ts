@@ -24,7 +24,34 @@ export async function GET(
       );
     }
 
-    return NextResponse.json({ success: true, blog });
+   return NextResponse.json({
+     success: true,
+     blog: {
+       id: blog.id,
+       title: blog.title,
+       slug: blog.slug,
+       heading: blog.heading,
+       description: blog.description,
+       imageUrl: blog.imageUrl,
+       author: blog.author,
+       readTime: blog.readTime,
+       createdAt: blog.createdAt,
+
+       // 🔥 Convert string → array for UI
+       content: blog.content?.includes("\n")
+         ? blog.content.split("\n\n")
+         : [blog.content],
+
+       // 🔥 Convert CSV string → array of tags
+       tags: blog.category?.includes(",")
+         ? blog.category.split(",").map((t) => t.trim())
+         : [blog.category],
+
+       // 🔥 prevent crash when no comments implemented yet
+       comments: [],
+     },
+   });
+
   } catch (error) {
     console.error("GET /blogs/[id] error:", error);
     return NextResponse.json(

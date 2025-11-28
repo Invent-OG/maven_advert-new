@@ -21,9 +21,9 @@ function page() {
       <Architectura />
       <Offering />
       <StallGallery />
-      <Testimonial />
+      {/* <Testimonial /> */}
       {/* <Blogs /> */}
-      <BlogsCard />
+      {/* <BlogsCard /> */}
     </>
   );
 }

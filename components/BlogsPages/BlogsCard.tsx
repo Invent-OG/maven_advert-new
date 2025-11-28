@@ -114,7 +114,7 @@ export default function BlogsCard() {
               <p className="text-gray-500 text-sm mb-4">{post.excerpt}</p>
 
               <Link
-                href={`/blogs/${post.slug || post.id}`}
+                href={`/blogs/${post.id}`}
                 className="text-orange-500 text-sm font-medium hover:underline"
               >
                 Read More
