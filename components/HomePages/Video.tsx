@@ -33,12 +33,12 @@ const Video = () => {
       </p>
 
       {/* Heading */}
-      <h1
+      <h2
         data-aos="fade-down"
         className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-none xl:text-7xl font-bold max-w-full sm:max-w-2xl md:max-w-3xl"
       >
         The easiest way to elevate your brand{" "}
-      </h1>
+      </h2>
 
       {/* Subtext */}
       <p

@@ -6,6 +6,12 @@ import ServicesMainPlan from "@/components/ServicesMainPages/ServicesMainPlan";
 import ServicesMainSolution from "@/components/ServicesMainPages/ServicesMainSolution";
 import React from "react";
 
+export const metadata = {
+  title: "Integrated Brand Solutions | Automation, Strategy & Growth",
+  description:
+    "Drive measurable results with data-driven marketing, eCommerce ads, CRM automation, and brand engagement strategies that accelerate growth.",
+};
+
 function page() {
   return (
     <div>

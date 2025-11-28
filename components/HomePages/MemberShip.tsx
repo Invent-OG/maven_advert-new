@@ -32,9 +32,9 @@ export default function MemberShip() {
     <section className="w-full min-h-screen bg-white flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 py-0 gap-6">
       {/* LEFT SIDE CONTENT */}
       <div ref={textRef} className="w-full md:w-1/2">
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900">
+        <h2 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900">
           Automate <br /> Your Digital <br /> Workflow.
-        </h1>
+        </h2>
 
         <p className="mt-6 text-lg text-gray-600 max-w-md">
           Seamlessly connect WhatsApp, CRM, and analytics tools to manage leads,
