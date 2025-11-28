@@ -16,14 +16,18 @@ export default function BlogsCard() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".news-card", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        y: 60,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+        y: 50,
         opacity: 0,
         duration: 0.9,
         ease: "power3.out",
-        stagger: 0.25,
+        stagger: 0.2,
       });
     }, sectionRef);
+
     return () => ctx.revert();
   }, []);
 
@@ -50,8 +54,7 @@ export default function BlogsCard() {
       const slug = apiPost.slug || post.id?.toString() || "";
 
       return {
-        id:
-          apiPost.id || post.id?.toString() || slug || Math.random().toString(),
+        id: apiPost.id || post.id?.toString() || slug,
         title: post.title,
         author,
         date: createdAt,
@@ -64,16 +67,16 @@ export default function BlogsCard() {
   }, [data?.blogs]);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white">
+    <section ref={sectionRef} className="py-20 bg-white overflow-hidden">
       {/* Header */}
-      <div className="text-center mb-10 px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+      <div className="text-center mb-14 px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
           Our Latest News
         </h2>
-        <p className="text-gray-500 mt-2 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm md:text-base">
+          Stay updated with trends, products, and insights from our team.
         </p>
+
         {isLoading && (
           <p className="text-sm text-orange-500 mt-3">
             Fetching the newest stories...
@@ -81,43 +84,44 @@ export default function BlogsCard() {
         )}
       </div>
 
-      {/* Cards (3 only) */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-0">
+      {/* Cards */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4">
         {visibleBlogs.map((post) => (
           <article
             key={post.id}
-            className="news-card bg-white shadow-md hover:shadow-lg transition-shadow duration-300 rounded-md overflow-hidden"
+            className="news-card bg-white rounded-none shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col"
           >
-            <div className="w-full h-64 relative">
+            <div className="relative w-full h-64 overflow-hidden group">
               <Image
                 src={post.image}
                 alt={post.title}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
 
-            <div className="p-6">
-              <div className="flex items-center text-sm text-gray-500 mb-3">
-                <span className="flex items-center gap-2">
-                  <span className="text-orange-500">👤</span>
-                  {post.author}
+            <div className="p-6 flex flex-col flex-grow">
+              <div className="flex items-center text-sm text-gray-500 mb-3 gap-2 flex-wrap">
+                <span className="flex items-center gap-1">
+                  👤 {post.author}
                 </span>
-                <span className="mx-2">•</span>
+                <span>•</span>
                 <span>📅 {post.date}</span>
               </div>
 
-              <h3 className="font-semibold text-gray-900 text-lg mb-2 hover:text-orange-500 transition-colors cursor-pointer leading-snug">
+              <h3 className="font-semibold text-gray-900 text-lg mb-3 hover:text-orange-500 transition-colors leading-snug">
                 {post.title}
               </h3>
 
-              <p className="text-gray-500 text-sm mb-4">{post.excerpt}</p>
+              <p className="text-gray-500 text-sm mb-5 line-clamp-3 flex-grow">
+                {post.excerpt}
+              </p>
 
               <Link
                 href={`/blogs/${post.id}`}
-                className="text-orange-500 text-sm font-medium hover:underline"
+                className="text-orange-500 text-sm font-medium hover:underline mt-auto"
               >
-                Read More
+                Read More →
               </Link>
             </div>
           </article>

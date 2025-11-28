@@ -23,7 +23,7 @@ function page() {
       <StallGallery />
       {/* <Testimonial /> */}
       {/* <Blogs /> */}
-      {/* <BlogsCard /> */}
+      <BlogsCard />
     </>
   );
 }
