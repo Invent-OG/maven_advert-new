@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,12 +100,12 @@ export default function Blogs() {
 
               <p className="text-gray-500 text-sm mb-4">{news.desc}</p>
 
-              <a
+              <Link
                 href={news.link}
                 className="text-orange-500 text-sm font-medium hover:underline"
               >
                 Read More
-              </a>
+              </Link>
             </div>
           </div>
         ))}

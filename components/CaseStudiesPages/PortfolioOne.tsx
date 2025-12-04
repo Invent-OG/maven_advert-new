@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { items } from "@/public/data/item"; // assuming items.ts is in /data folder
+import Link from "next/link";
 
 function PortfolioOne() {
   // Separate items by section
@@ -39,18 +40,18 @@ function PortfolioOne() {
           <div className="flex gap-3 mt-2 text-sm text-gray-400">
             <span>SHARE NOW:</span>
             <div className="flex gap-2">
-              <a href="#" className="hover:text-gray-800">
+              <Link href="#" className="hover:text-gray-800">
                 Fb
-              </a>
-              <a href="#" className="hover:text-gray-800">
+              </Link>
+              <Link href="#" className="hover:text-gray-800">
                 Tw
-              </a>
-              <a href="#" className="hover:text-gray-800">
+              </Link>
+              <Link href="#" className="hover:text-gray-800">
                 Ln
-              </a>
-              <a href="#" className="hover:text-gray-800">
+              </Link>
+              <Link href="#" className="hover:text-gray-800">
                 Pt
-              </a>
+              </Link>
             </div>
           </div>
         </div>

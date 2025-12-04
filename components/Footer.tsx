@@ -14,12 +14,12 @@ export default function Footer() {
         </div>
 
         {/* Right Side */}
-        <a
+        <Link
           href="mailto:hello@domain.com"
           className="flex items-center bg-orange-500 text-white px-4 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
         >
           <FaEnvelope className="mr-2" /> hello@domain.com
-        </a>
+        </Link>
       </div>
 
       {/* Footer */}

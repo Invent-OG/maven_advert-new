@@ -185,6 +185,7 @@ import { DeleteConfirmation } from "./DeleteConfirmation";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase/client";
 import { getStoragePath } from "@/lib/utils";
+import Link from "next/link";
 
 interface TestimonialGridProps {
   searchTerm: string;
@@ -339,7 +340,7 @@ export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
                 {/* YouTube Link */}
                 <div>
                   {testimonial.youtubeUrl && (
-                    <a
+                    <Link
                       href={testimonial.youtubeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -347,7 +348,7 @@ export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
                     >
                       <Youtube className="h-4 w-4" />
                       Watch
-                    </a>
+                    </Link>
                   )}
                 </div>
 

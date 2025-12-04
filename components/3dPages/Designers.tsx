@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { Mail, Globe, Linkedin } from "lucide-react";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,18 +71,18 @@ export default function Designers() {
           </div>
 
           <div className="flex items-center gap-4 text-gray-600">
-            <a href="#" className="hover:text-black transition">
+            <Link href="#" className="hover:text-black transition">
               <Linkedin size={18} />
-            </a>
-            <a href="#" className="hover:text-black transition">
+            </Link>
+            <Link href="#" className="hover:text-black transition">
               <Globe size={18} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="mailto:will@design.com"
               className="hover:text-black transition"
             >
               <Mail size={18} />
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -105,18 +106,18 @@ export default function Designers() {
           </div>
 
           <div className="flex items-center gap-4 text-gray-600">
-            <a href="#" className="hover:text-black transition">
+            <Link href="#" className="hover:text-black transition">
               <Linkedin size={18} />
-            </a>
-            <a href="#" className="hover:text-black transition">
+            </Link>
+            <Link href="#" className="hover:text-black transition">
               <Globe size={18} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="mailto:eve@design.com"
               className="hover:text-black transition"
             >
               <Mail size={18} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

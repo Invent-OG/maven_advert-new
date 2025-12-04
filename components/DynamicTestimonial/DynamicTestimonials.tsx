@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Youtube } from "lucide-react";
 import { gsap } from "gsap";
+import Link from "next/link";
 
 interface Testimonial {
   id: string;
@@ -40,14 +41,14 @@ function MovingCard({ testimonial }: { testimonial: Testimonial }) {
         </div>
 
         {testimonial.youtubeUrl && (
-          <a
+          <Link
             href={testimonial.youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-red-500 hover:text-red-600"
           >
             <Youtube className="h-6 w-6" />
-          </a>
+          </Link>
         )}
       </div>
 

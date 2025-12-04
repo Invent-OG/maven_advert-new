@@ -17,6 +17,7 @@ import toast from "react-hot-toast"; // ✅ import toast
 import AOS from "aos";
 import "aos/dist/aos.css";
 import AnimatedButton from "../ui/AnimatedButton";
+import Link from "next/link";
 
 const languages = ["Hello", "Hola", "Bonjour", "Ciao"];
 
@@ -240,9 +241,9 @@ export default function GetInTouch() {
           <p className="text-xs text-gray-400 mt-2">
             I understand that my data will be held securely in accordance with
             the{" "}
-            <a href="#" className="underline">
+            <Link href="#" className="underline">
               privacy policy
-            </a>
+            </Link>
             .
           </p>
         </div>

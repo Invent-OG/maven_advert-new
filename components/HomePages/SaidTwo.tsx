@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,7 +113,7 @@ export default function SaidTwo() {
             <h4 className="font-semibold text-white text-base">Oliur</h4>
             <p className="text-gray-400 text-sm">Designer & Creator</p>
 
-            <a
+            <Link
               href="#"
               className="text-blue-400 hover:underline text-sm inline-flex items-center gap-1 mt-1"
             >
@@ -126,7 +127,7 @@ export default function SaidTwo() {
                 <path d="M10 15V9l5 3-5 3zm12-3c0-3.87-3.13-7-7-7H9C5.13 5 2 8.13 2 12s3.13 7 7 7h6c3.87 0 7-3.13 7-7z" />
               </svg>
               <span className="text-gray-400 ml-2">421K Subscribers</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1017,13 +1017,13 @@ export default function BlogsId() {
                   "Conclusion",
                   "Future Outlook",
                 ].map((item, index) => (
-                  <a
+                  <Link
                     key={index}
                     href={`#section-${index}`}
                     className="block text-sm text-gray-700 hover:text-blue-800 transition-colors py-1 border-b border-gray-100 last:border-b-0"
                   >
                     {item}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
