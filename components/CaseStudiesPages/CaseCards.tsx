@@ -5,6 +5,7 @@ import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Portfolio } from "@/lib/types/portfolios";
+import Image from "next/image";
 
 const categories = ["All", "Selected", "Digital", "Branding", "Web"] as const;
 type Category = (typeof categories)[number];
@@ -98,15 +99,27 @@ export default function CaseCards() {
             >
               <div className="relative overflow-hidden bg-white">
                 {item.image ? (
-                  <img
+                  // <img
+                  //   src={item.image}
+                  //   alt={item.title}
+                  //   className="
+                  //     w-full h-[320px]
+                  //     object-cover
+                  //     transition-transform duration-700
+                  //     group-hover:scale-110
+                  //   "
+                  // />
+                  <Image
                     src={item.image}
                     alt={item.title}
+                    width={800}
+                    height={320}
                     className="
-                      w-full h-[320px]
-                      object-cover
-                      transition-transform duration-700
-                      group-hover:scale-110
-                    "
+    w-full h-[320px]
+    object-cover
+    transition-transform duration-700
+    group-hover:scale-110
+  "
                   />
                 ) : (
                   <div className="w-full h-[320px] bg-gray-200 flex items-center justify-center text-gray-400">

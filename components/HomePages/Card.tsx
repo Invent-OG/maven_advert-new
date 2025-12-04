@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 // Card Component
 type CardProps = {
@@ -24,9 +25,16 @@ function Card({ image, title, description }: CardProps) {
         data-aos="fade-down"
         className="w-[300px] h-[220px] rounded-2xl overflow-hidden border-2 border-gray-200 shadow-inner relative transition-transform duration-300 hover:scale-105"
       >
-        <img
+        {/* <img
           src={image}
           alt={title}
+          className="w-full h-full object-cover rounded-xl"
+        /> */}
+        <Image
+          src={image}
+          alt={title}
+          width={800}
+          height={600}
           className="w-full h-full object-cover rounded-xl"
         />
       </div>

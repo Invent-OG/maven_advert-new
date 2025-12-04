@@ -10,6 +10,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function SupportContent() {
   const pathname = usePathname();
@@ -136,9 +137,11 @@ export default function SupportContent() {
               </div>
 
               <div className="flex-1 flex justify-center">
-                <img
+                <Image
                   src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763647207/vectors-03_h9m8n9.jpg"
                   alt="Marketing Illustration"
+                  width={500}
+                  height={500}
                   className="w-full max-w-xs md:max-w-sm h-auto object-contain"
                 />
               </div>

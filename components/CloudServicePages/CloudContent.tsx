@@ -12,6 +12,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 export default function CloudContent() {
   const pathname = usePathname();
@@ -139,9 +140,11 @@ export default function CloudContent() {
               </div>
 
               <div className="flex-1 flex justify-center">
-                <img
+                <Image
                   src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763647212/vectors-05_rbxjoz.jpg"
                   alt="Marketing Illustration"
+                  width={500}
+                  height={500}
                   className="w-full max-w-xs md:max-w-sm h-auto object-contain"
                 />
               </div>

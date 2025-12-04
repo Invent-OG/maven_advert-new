@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 export default function AboutCompanyMarquee() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -55,11 +56,19 @@ export default function AboutCompanyMarquee() {
           style={{ width: "max-content" }}
         >
           {[...logos, ...logos].map((logo, index) => (
-            <img
+            // <img
+            //   key={index}
+            //   src={logo}
+            //   alt={`Company logo ${index}`}
+            //   className="h-10 w-auto object-contain  transition-opacity duration-300"
+            // />
+            <Image
               key={index}
               src={logo}
               alt={`Company logo ${index}`}
-              className="h-10 w-auto object-contain  transition-opacity duration-300"
+              width={120}
+              height={40}
+              className="h-10 w-auto object-contain transition-opacity duration-300"
             />
           ))}
         </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 export default function FeatureOn() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -57,10 +58,20 @@ export default function FeatureOn() {
         >
           {/* Repeat images 3 times for smooth infinite scroll */}
           {[...images, ...images, ...images].map((src, index) => (
-            <img
+            // <img
+            //   key={index}
+            //   src={src}
+            //   alt={`Featured ${index + 1}`}
+            //   className="h-24 object-contain inline-block select-none"
+            //   draggable={false}
+            // />
+
+            <Image
               key={index}
               src={src}
               alt={`Featured ${index + 1}`}
+              width={96}
+              height={96}
               className="h-24 object-contain inline-block select-none"
               draggable={false}
             />

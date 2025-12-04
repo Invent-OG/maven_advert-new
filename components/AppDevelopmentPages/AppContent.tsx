@@ -12,6 +12,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 export default function AppContent() {
   const pathname = usePathname();
@@ -138,9 +139,16 @@ export default function AppContent() {
               </div>
 
               <div className="flex-1 flex justify-center">
-                <img
+                {/* <img
                   src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763647215/vectors-04_pdobwn.jpg"
                   alt="Marketing Illustration"
+                  className="w-full max-w-xs md:max-w-sm h-auto object-contain"
+                /> */}
+                <Image
+                  src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763647215/vectors-04_pdobwn.jpg"
+                  alt="Marketing Illustration"
+                  width={500}
+                  height={500}
                   className="w-full max-w-xs md:max-w-sm h-auto object-contain"
                 />
               </div>

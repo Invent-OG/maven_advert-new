@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 // Sample testimonial data
 const sampleTestimonials = [
@@ -67,9 +68,16 @@ function MovingCard({
     <div className="bg-[#131414] p-4 rounded-xl shadow-lg mb-6 flex items-center w-80 h-32">
       {/* Avatar */}
       <div data-aos="fade-down" className="flex-shrink-0">
-        <img
+        {/* <img
           src={testimonial.image}
           alt={testimonial.name}
+          className="w-16 h-16 rounded-full object-cover border-2 border-gray-700"
+        /> */}
+        <Image
+          src={testimonial.image}
+          alt={testimonial.name}
+          width={64}
+          height={64}
           className="w-16 h-16 rounded-full object-cover border-2 border-gray-700"
         />
       </div>
