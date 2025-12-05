@@ -77,30 +77,35 @@ drop-shadow-[0_16px_5px_rgba(0,0,0,0.35)] shadow-black/10
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/Social_media_nz1xs1"
             className="phone-anim translate-y-36 hidden sm:block"
+            priority
           />
 
           {/* Phone 2 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/website_pcfebi"
             className="phone-anim translate-y-24"
+            priority
           />
 
           {/* Phone 3 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/main_banner_iz3zq5"
             className="phone-anim scale-110 z-10"
+            priority
           />
 
           {/* Phone 4 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/whats_app_jwltrs"
             className="phone-anim translate-y-24"
+            priority
           />
 
           {/* Phone 5 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/E_commerce_bxapmz"
             className="phone-anim translate-y-36 hidden sm:block"
+            priority
           />
         </div>
       </div>
@@ -114,9 +119,14 @@ drop-shadow-[0_16px_5px_rgba(0,0,0,0.35)] shadow-black/10
 type PhoneMockupProps = {
   screen: string;
   className?: string;
+  priority?: boolean;
 };
 
-function PhoneMockup({ screen, className }: PhoneMockupProps) {
+function PhoneMockup({
+  screen,
+  className,
+  priority = false,
+}: PhoneMockupProps) {
   return (
     <div
       className={`relative 
@@ -132,6 +142,8 @@ function PhoneMockup({ screen, className }: PhoneMockupProps) {
         src={screen}
         alt="screen"
         fill
+        priority={priority}
+        sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, (max-width: 1024px) 260px, (max-width: 1280px) 300px, 330px"
         className="object-cover  rounded-[2rem]"
       />
     </div>
