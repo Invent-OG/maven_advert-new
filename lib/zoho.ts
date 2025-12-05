@@ -14,7 +14,9 @@ const ZOHO_BASE_URL = `https://www.zohoapis.${dc.toLowerCase()}/bigin/v2`;
 /**
  * 🔁 Redirect URI — must match the one in Zoho API Console
  */
-const REDIRECT_URI = "http://localhost:3000/api/zoho/oauth/callback";
+const REDIRECT_URI =
+  process.env.ZOHO_REDIRECT_URI ||
+  "http://localhost:3000/api/zoho/oauth/callback";
 
 /* -----------------------------------------------------------------
    🔐 Step 1: Get Access Token using the Refresh Token
@@ -32,6 +34,10 @@ async function getAccessToken(): Promise<string> {
         grant_type: "refresh_token",
       },
     });
+
+    if (data.error) {
+      throw new Error(`Zoho API Error: ${data.error}`);
+    }
 
     if (!data.access_token) {
       throw new Error("Access token missing in Zoho response");

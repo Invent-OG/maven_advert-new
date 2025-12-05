@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { db, leads as leadsTable } from "@/lib/db";
 import { and, count, desc, eq, gte, ilike, lt, or } from "drizzle-orm";
+import { addLeadToZohoBigin } from "@/lib/zoho";
 
 /* -----------------------------
    Type Definitions
@@ -199,6 +200,21 @@ export async function POST(req: Request) {
       console.log("✅ Admin notification sent:", adminEmail);
     } catch (emailError) {
       console.error("❌ Failed to send admin email:", emailError);
+    }
+
+    /* ---------------------------------
+       ✅ Sync to Zoho Bigin
+    ---------------------------------- */
+    try {
+      await addLeadToZohoBigin({
+        name,
+        email,
+        whatsappNumber,
+        message,
+      });
+    } catch (zohoError) {
+      console.error("❌ Failed to sync to Zoho Bigin:", zohoError);
+      // We don't throw here to ensure the user still gets a success response
     }
 
     return NextResponse.json({ success: true, lead: insertedLead });

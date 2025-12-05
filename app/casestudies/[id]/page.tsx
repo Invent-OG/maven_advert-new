@@ -7,8 +7,9 @@ import { Portfolio } from "@/lib/types/portfolios";
 export default function CaseStudyDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = React.use(params);
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +19,7 @@ export default function CaseStudyDetailPage({
         const res = await fetch("/api/portfolio");
         const data: Portfolio[] = await res.json();
 
-        const found = data.find((p) => p.id === params.id);
+        const found = data.find((p) => p.id === id);
         if (!found) {
           console.error("Portfolio not found");
           setLoading(false);
@@ -48,7 +49,7 @@ export default function CaseStudyDetailPage({
     }
 
     loadData();
-  }, [params.id]);
+  }, [id]);
 
   if (loading) return <div className="p-10">Loading...</div>;
   if (!portfolio) return <div className="p-10">Portfolio Not Found</div>;

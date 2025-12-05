@@ -86,7 +86,7 @@ export default function AdminLayout({
           {children}
         </main>
       </div>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
