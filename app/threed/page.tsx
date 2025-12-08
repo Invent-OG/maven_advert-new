@@ -1,5 +1,6 @@
 import Designers from "@/components/3dPages/Designers";
 import Gallery from "@/components/3dPages/Gallery";
+import GridVideos from "@/components/3dPages/GridVideos";
 import Hero3D from "@/components/3dPages/Hero3D";
 import HeroFourthVideo from "@/components/3dPages/HeroFourthVideo";
 import HeroSecondVideo from "@/components/3dPages/HeroSecondVideo";
@@ -33,7 +34,8 @@ function page() {
       <WhyItWorks />
       {/* <ZoomImgOne /> */}
       <HeroFourthVideo />
-      <Gallery />
+      {/* <Gallery /> */}
+      <GridVideos />
       <Designers />
     </>
   );
