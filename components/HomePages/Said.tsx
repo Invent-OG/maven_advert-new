@@ -20,13 +20,20 @@ export default function Said() {
         data-aos="fade-right"
         className="relative w-full md:w-1/2 h-[600px] md:h-auto"
       >
-        <CldImage
+        {/* <CldImage
           src="Assets-16_fkg8zo"
           alt="Oliur"
           fill
           className="object-cover"
           quality="auto"
           format="auto"
+          priority
+        /> */}
+        <Image
+          src="https://images.pexels.com/photos/3800848/pexels-photo-3800848.jpeg"
+          alt="Oliur"
+          fill
+          className="object-cover"
           priority
         />
       </div>

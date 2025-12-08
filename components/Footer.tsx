@@ -134,7 +134,7 @@ export default function Footer() {
 
           {/* Right side: Copyright */}
           <div className="text-gray-500 text-sm">
-            © 2025 Crafto is Powered by ThemeZaa
+            © 2025 Deiago is Powered by MavenAdvert
           </div>
         </div>
       </footer>
