@@ -142,8 +142,6 @@ function PhoneMockup({
         src={screen}
         alt="screen"
         fill
-        priority={priority}
-        sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, (max-width: 1024px) 260px, (max-width: 1280px) 300px, 330px"
         className="object-cover  rounded-[2rem]"
       />
     </div>

@@ -5,6 +5,8 @@ import gsap from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import AnimatedButton from "../ui/AnimatedButton";
+import { LiquidButton } from "../ui/liquid-glass-button";
+import { useRouter } from "next/navigation";
 
 const tabs = [
   {
@@ -44,6 +46,7 @@ const tabs = [
 
 function AboutCompany() {
   const [activeTab, setActiveTab] = useState(3); // Default: Trusted experience
+  const router = useRouter();
 
   // GSAP floating animation for overlay image
   useEffect(() => {
@@ -142,7 +145,15 @@ function AboutCompany() {
             {/* <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
               Discover More →
             </button> */}
-            <AnimatedButton> Discover More →</AnimatedButton>
+            {/* <AnimatedButton> Discover More →</AnimatedButton> */}
+            <LiquidButton
+              onClick={() => router.push("/contact")}
+              className=""
+              size="xl"
+              radius={"md"}
+            >
+              Get Started
+            </LiquidButton>
             <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
               ✉️ Connect & Grow
             </button>
