@@ -72,7 +72,7 @@ drop-shadow-[0_16px_5px_rgba(0,0,0,0.35)] shadow-black/10
 
       {/* Phones Showcase */}
       <div className="relative py-20">
-        <div className="flex justify-center items-end gap-6 flex-nowrap -mx-[40px] sm:-mx-[60px] md:-mx-[80px] lg:-mx-[100px]">
+        <div className="flex justify-center items-end  flex-nowrap -mx-[50px] sm:-mx-[60px] md:-mx-[80px] lg:-mx-[100px]">
           {/* Phone 1 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/Social_media_nz1xs1"
