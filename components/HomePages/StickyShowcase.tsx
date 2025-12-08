@@ -128,12 +128,7 @@ function PhoneMockup({ screen, className }: PhoneMockupProps) {
     ${className || " "}`}
     >
       {/* ONLY SCREEN IMAGE */}
-      <Image
-        src={screen}
-        alt="screen"
-        fill
-        className="object-cover  rounded-[2rem]"
-      />
+      <Image src={screen} alt="screen" fill className="object-cover " />
     </div>
   );
 }

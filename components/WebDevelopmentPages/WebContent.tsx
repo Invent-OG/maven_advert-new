@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
+import { LiquidButton } from "../ui/liquid-glass-button";
 
 export default function WebContent() {
   const pathname = usePathname();
@@ -243,13 +244,7 @@ export default function WebContent() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
                 />
               </div>
-              <div className="space-y-1">
-                <input
-                  type="text"
-                  placeholder="Subject"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                />
-              </div>
+
               <div className="space-y-1 md:col-span-2">
                 <textarea
                   placeholder="Your message"
@@ -258,12 +253,15 @@ export default function WebContent() {
                 ></textarea>
               </div>
               <div className="md:col-span-2">
-                <button
+                {/* <button
                   type="submit"
                   className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition duration-300 font-semibold text-base md:text-lg shadow-md hover:shadow-lg"
                 >
                   Send message
-                </button>
+                </button> */}
+                <LiquidButton type="submit" size="lg" radius="md">
+                  Contact now
+                </LiquidButton>
               </div>
             </form>
 

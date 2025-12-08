@@ -33,7 +33,7 @@ export default function FeatureOn() {
         { x: 0 },
         {
           x: -totalWidth,
-          duration: 40,
+          duration: 30,
           ease: "linear",
           repeat: -1,
         }
@@ -43,7 +43,7 @@ export default function FeatureOn() {
 
   return (
     <section className=" flex flex-col justify-center items-center mt-10 py-10 overflow-hidden">
-      <h2 className="md:text-7xl text-4xl font-bold text-center mb-8">
+      <h2 className="md:text-5xl text-4xl font-bold text-center mb-8">
         Brands We Work With
       </h2>
 
@@ -70,9 +70,9 @@ export default function FeatureOn() {
               key={index}
               src={src}
               alt={`Featured ${index + 1}`}
-              width={96}
-              height={96}
-              className="h-24 object-contain inline-block select-none"
+              className="h-32 object-contain inline-block select-none"
+              width={180}
+              height={180}
               draggable={false}
             />
           ))}
