@@ -5,6 +5,7 @@ import EverythingYouNeed from "@/components/HomePages/Card";
 import FeatureOn from "@/components/HomePages/FeatureOn";
 import MemberShip from "@/components/HomePages/MemberShip";
 import MovingCard from "@/components/HomePages/MovingCard";
+import Partner from "@/components/HomePages/Partner";
 import PersonalBrand from "@/components/HomePages/PersonalBrand";
 import Said from "@/components/HomePages/Said";
 import SaidThree from "@/components/HomePages/SaidThree";
@@ -28,6 +29,7 @@ function page() {
       {/* <Sample /> */}
       {/* <Hero3D /> */}
       <StickyShowcase />
+      <Partner />
       <StickyShowCaseTwo />
       <EverythingYouNeed />
       <Said />

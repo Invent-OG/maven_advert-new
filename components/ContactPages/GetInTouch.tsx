@@ -18,6 +18,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import AnimatedButton from "../ui/AnimatedButton";
 import Link from "next/link";
+import { LiquidButton } from "../ui/liquid-glass-button";
 
 const languages = ["Hello", "Hola", "Bonjour", "Ciao"];
 
@@ -233,9 +234,18 @@ export default function GetInTouch() {
             >
               {loading ? "Sending..." : "Send message"}
             </button> */}
-            <AnimatedButton type="submit" disabled={loading}>
+            {/* <AnimatedButton type="submit" disabled={loading}>
               {loading ? "Sending..." : "Send message"}
-            </AnimatedButton>
+            </AnimatedButton> */}
+            <LiquidButton
+              type="submit"
+              disabled={loading}
+              className="mt-6"
+              size="xl"
+              radius={"md"}
+            >
+              {loading ? "Sending..." : "Send message"}
+            </LiquidButton>
           </form>
 
           <p className="text-xs text-gray-400 mt-2">
