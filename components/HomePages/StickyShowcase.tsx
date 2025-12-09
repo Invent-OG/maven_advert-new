@@ -4,9 +4,8 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
-import AnimatedButton from "../ui/AnimatedButton";
 import { useRouter } from "next/navigation";
-import { LiquidButton, MetalButton } from "../ui/liquid-glass-button";
+import { LiquidButton } from "../ui/liquid-glass-button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,12 +18,12 @@ export default function StickyShowcase() {
       gsap.utils.toArray<HTMLElement>(".phone-anim").forEach((phone, i) => {
         gsap.to(phone, {
           y: i === 2 ? -40 : -40,
-          ease: "power1.out",
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".showcase-section",
             start: "top top",
             end: "center 30%",
-            scrub: true,
+            scrub: 2,
           },
         });
       });
@@ -72,7 +71,7 @@ drop-shadow-[0_16px_5px_rgba(0,0,0,0.35)] shadow-black/10
 
       {/* Phones Showcase */}
       <div className="relative py-20">
-        <div className="flex justify-center items-end  flex-nowrap -mx-[50px] sm:-mx-[60px] md:-mx-[80px] lg:-mx-[100px]">
+        <div className="flex justify-center items-end  flex-nowrap -mx-[70px] sm:-mx-[60px] md:-mx-[80px] lg:-mx-[120px]">
           {/* Phone 1 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/Social_media_nz1xs1"
@@ -130,7 +129,7 @@ function PhoneMockup({
   return (
     <div
       className={`relative 
-    w-[180px] h-[340px]             // mobile
+    w-[180px] h-[360px]             // mobile
     sm:w-[200px] sm:h-[400px]       // small devices
     md:w-[260px] md:h-[500px]       // increased width
     lg:w-[300px] lg:h-[560px]       // increased width

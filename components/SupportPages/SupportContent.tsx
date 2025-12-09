@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { LiquidButton } from "../ui/liquid-glass-button";
 
 export default function SupportContent() {
   const pathname = usePathname();
@@ -241,12 +242,23 @@ export default function SupportContent() {
                 className="w-full md:col-span-2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
               ></textarea>
 
-              <button
+              {/* <button
                 type="submit"
                 className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition duration-300 font-semibold text-base md:text-lg shadow-md hover:shadow-lg md:col-span-2 w-fit"
               >
                 Send message
-              </button>
+              </button> */}
+              <div className="md:col-span-2">
+                {/* <button
+                  type="submit"
+                  className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition duration-300 font-semibold text-base md:text-lg shadow-md hover:shadow-lg"
+                >
+                  Send message
+                </button> */}
+                <LiquidButton type="submit" size="lg" radius="md">
+                  Send message
+                </LiquidButton>
+              </div>
             </form>
 
             <p className="text-gray-500 text-sm mt-4 mb-12">
