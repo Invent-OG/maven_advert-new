@@ -14,12 +14,12 @@ export default function Footer() {
         </div>
 
         {/* Right Side */}
-        <Link
-          href="mailto:hello@domain.com"
+        <a
+          href="mailto:Info@mavenadvert.com"
           className="flex items-center bg-orange-500 text-white px-4 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
         >
-          <FaEnvelope className="mr-2" /> hello@domain.com
-        </Link>
+          <FaEnvelope className="mr-2" /> Info@mavenadvert.com
+        </a>
       </div>
 
       {/* Footer */}
