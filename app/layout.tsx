@@ -58,6 +58,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AOSInit from "@/components/AOSInit";
 import LenisProvider from "./providers/LenisProvider";
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
@@ -89,6 +90,7 @@ export default function RootLayout({
             <main>{children}</main>
           ) : (
             <LenisProvider>
+              <AOSInit />
               {!isAdminRoute && <Navbar />}
               <main>{children}</main>
               {!isAdminRoute && <Footer />}

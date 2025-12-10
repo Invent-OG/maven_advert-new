@@ -12,12 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SaidThree() {
   const phoneRefs = useRef<HTMLDivElement[]>([]);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  /* 
+   AOS initialized globally
+  */
 
   // GSAP PHONE ANIMATION (same as MemberShip)
   useEffect(() => {

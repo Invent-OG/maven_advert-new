@@ -25,7 +25,9 @@ export default function FeatureOn() {
 
   useEffect(() => {
     const marquee = marqueeRef.current;
-    if (marquee) {
+    if (!marquee) return;
+
+    const ctx = gsap.context(() => {
       const totalWidth = marquee.scrollWidth / 3; // corrected to match 3x images
 
       gsap.fromTo(
@@ -38,7 +40,9 @@ export default function FeatureOn() {
           repeat: -1,
         }
       );
-    }
+    }, marqueeRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

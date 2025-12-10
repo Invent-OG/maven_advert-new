@@ -72,12 +72,7 @@ export default function StickyShowCaseThree() {
       }px`;
     }
   }, []);
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  // AOS initialized globally
 
   return (
     <div

@@ -50,7 +50,7 @@ export default function StickyShowcase() {
     md:py-4 
     mt-20 md:mt-0 
     md:max-w-4xl
-drop-shadow-[0_16px_5px_rgba(0,0,0,0.35)] shadow-black/10
+
   "
         >
           Build a Remarkable Brand Experience

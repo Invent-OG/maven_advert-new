@@ -7,12 +7,7 @@ import { CldImage } from "next-cloudinary";
 import Link from "next/link";
 
 export default function Said() {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  // AOS initialized globally
   return (
     <section className="w-full flex flex-col md:flex-row items-stretch bg-black text-white overflow-hidden min-h-[600px] md:min-h-[500px]">
       {/* Left Side - Image */}
