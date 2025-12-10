@@ -192,7 +192,7 @@ export default function SaidTwo() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: phonesRef.current,
-            start: "top bottom",
+            start: "top center",
             end: "bottom top",
             scrub: true,
           },
@@ -210,7 +210,7 @@ export default function SaidTwo() {
         background: "radial-gradient(ellipse at top, #C02900 0%, #000000 70%)",
       }}
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-0">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-10">
         {/* LEFT — Phones */}
         <div className="relative w-full md:w-1/2 flex justify-center">
           <div
