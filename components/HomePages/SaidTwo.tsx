@@ -192,9 +192,9 @@ export default function SaidTwo() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: phonesRef.current,
-            start: "top center",
+            start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 2,
           },
         }
       );

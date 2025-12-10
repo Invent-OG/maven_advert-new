@@ -27,9 +27,9 @@ export default function SaidThree() {
           ease: "power1.out",
           scrollTrigger: {
             trigger: phone,
-            start: "top bottom",
+            start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 2,
           },
         });
       });

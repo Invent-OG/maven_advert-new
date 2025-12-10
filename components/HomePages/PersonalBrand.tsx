@@ -50,7 +50,7 @@ function PersonalBrand() {
         >
           Accelerate Your Brand Growth{" "}
         </h2>
-        <p className="text-neutral-700 text-sm sm:text-base tracking-tight md:text-base lg:text-base max-w-sm mx-auto text-center">
+        <p className="text-neutral-700 text-sm sm:text-base tracking-tight md:text-base lg:text-base max-w-sm mx-auto text-start md:text-center">
           Unlock powerful tools and tailored solutions to grow your brand,
           enhance your operations, and launch digital experiences with ease.
         </p>
@@ -67,13 +67,13 @@ function PersonalBrand() {
             className="flex flex-col items-start text-start p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
           >
             {/* Icon with gray border */}
-            <div className="w-16 h-16 flex text-neutral-900 justify-center items-center mb-4 rounded-full border-1 border-gray-300">
+            <div className="w-16 h-16 flex text-neutral-950 justify-center items-center mb-4 rounded-full border-1 border-gray-300">
               {feature.icon}
             </div>
             <h3 className="text-lg sm:text-xl text-neutral-900 font-semibold mb-2">
               {feature.title}
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed sm:text-sm">
+            <p className="text-neutral-700 text-sm leading-relaxed sm:text-sm">
               {feature.description}
             </p>
           </div>
