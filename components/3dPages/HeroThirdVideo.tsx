@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useInView } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroThirdVideo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(containerRef, { margin: "200px 0px" });
 
   useLayoutEffect(() => {
     if (!containerRef.current || !videoRef.current) return;
@@ -34,6 +36,15 @@ export default function HeroThirdVideo() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isInView) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
   return (
     <div
       ref={containerRef}
@@ -42,10 +53,11 @@ export default function HeroThirdVideo() {
       <video
         ref={videoRef}
         src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765181947/Architectural_Walkthroughs_zyns0h.mp4"
-        autoPlay
+        poster="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765181947/Architectural_Walkthroughs_zyns0h.jpg"
         loop
         muted
         playsInline
+        preload="none"
         className="absolute top-0 left-0 w-full h-full md:object-contain object-cover"
       />
     </div>

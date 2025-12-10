@@ -81,14 +81,12 @@ export default function StickyShowcase() {
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/Social_media_nz1xs1"
             className="phone-anim translate-y-36 hidden sm:block"
-            priority
           />
 
           {/* Phone 2 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/website_pcfebi"
             className="phone-anim translate-y-24"
-            priority
           />
 
           {/* Phone 3 */}
@@ -102,14 +100,12 @@ export default function StickyShowcase() {
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/whats_app_jwltrs"
             className="phone-anim translate-y-24"
-            priority
           />
 
           {/* Phone 5 */}
           <PhoneMockup
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/E_commerce_bxapmz"
             className="phone-anim translate-y-36 hidden sm:block"
-            priority
           />
         </div>
       </div>
@@ -147,6 +143,7 @@ function PhoneMockup({
         alt="screen"
         fill
         className="object-cover  rounded-[2rem]"
+        priority={priority}
       />
     </div>
   );

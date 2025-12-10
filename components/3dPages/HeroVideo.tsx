@@ -41,6 +41,7 @@ export default function HeroVideo() {
       <video
         ref={videoRef}
         src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765181946/Banner_1_igaers.mp4"
+        poster="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765181946/Banner_1_igaers.jpg"
         className="
           absolute top-0 left-0 
           w-full h-full 
@@ -53,6 +54,7 @@ export default function HeroVideo() {
         autoPlay
         muted
         playsInline
+        preload="auto"
       />
     </section>
   );
