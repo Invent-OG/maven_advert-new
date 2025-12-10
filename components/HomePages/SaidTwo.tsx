@@ -183,20 +183,24 @@ export default function SaidTwo() {
   useEffect(() => {
     if (!phonesRef.current) return;
 
-    gsap.fromTo(
-      phonesRef.current,
-      { y: 80 },
-      {
-        y: -80,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: phonesRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        phonesRef.current,
+        { y: 80 },
+        {
+          y: -80,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: phonesRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    }, phonesRef); // Scope to phonesRef
+
+    return () => ctx.revert();
   }, []);
 
   return (

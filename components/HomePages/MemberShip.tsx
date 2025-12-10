@@ -90,20 +90,24 @@ export default function MemberShip() {
   const router = useRouter();
 
   useEffect(() => {
-    gsap.from(textRef.current, {
-      x: -60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
+    const ctx = gsap.context(() => {
+      gsap.from(textRef.current, {
+        x: -60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+
+      gsap.from(imgRef.current, {
+        x: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.2,
+      });
     });
 
-    gsap.from(imgRef.current, {
-      x: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.2,
-    });
+    return () => ctx.revert();
   }, []);
 
   return (

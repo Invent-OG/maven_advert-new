@@ -100,6 +100,12 @@ function LiquidButton({
   }) {
   const Comp = asChild ? Slot : "button";
 
+  /* ----------------------------------
+     Unique ID for this button's filter
+  ----------------------------------- */
+  const uniqueId = React.useId();
+  const filterId = `container-glass-${uniqueId}`;
+
   return (
     <>
       <Comp
@@ -110,6 +116,7 @@ function LiquidButton({
         )}
         {...props}
       >
+        {/* ... existing inner elements ... */}
         <div
           className={cn(
             "absolute top-0 left-0 z-0 h-full w-full transition-all",
@@ -126,22 +133,22 @@ function LiquidButton({
             "absolute top-0 left-0 isolate -z-10 h-full w-full overflow-hidden",
             radius === "md" ? "rounded-md" : "rounded-full"
           )}
-          style={{ backdropFilter: 'url("#container-glass")' }}
+          style={{ backdropFilter: `url("#${filterId}")` }}
         />
 
         <div className="pointer-events-none z-10 ">{children}</div>
-        <GlassFilter />
+        <GlassFilter id={filterId} />
       </Comp>
     </>
   );
 }
 
-function GlassFilter() {
+function GlassFilter({ id }: { id: string }) {
   return (
     <svg className="hidden">
       <defs>
         <filter
-          id="container-glass"
+          id={id}
           x="0%"
           y="0%"
           width="100%"
