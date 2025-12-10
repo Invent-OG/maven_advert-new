@@ -130,7 +130,7 @@ const Video = () => {
         >
           <video
             ref={videoRef}
-            className="absolute top-0 left-0 w-full h-full pointer-events-none object-cover"
+            className="absolute top-0 left-0 w-full h-full rounded-3xl pointer-events-none object-cover"
             src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765182540/asart-tyflow-tomato-soup-delivery_gpupuw.mp4"
             autoPlay
             loop
