@@ -75,7 +75,8 @@
 
 // export default GridVideos;
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useInView } from "framer-motion";
 
 const videoLinks = [
   "https://res.cloudinary.com/dr9gcshs6/video/upload/v1765182561/w-p-c-edited1_dpha5x.mp4",
@@ -97,48 +98,51 @@ const videoLinks = [
   "https://res.cloudinary.com/dr9gcshs6/video/upload/v1765182536/4_ncqaqc.mp4",
 ];
 
+function SmartVideo({ src, onClick }: { src: string; onClick: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(containerRef, { margin: "0px 0px -50px 0px" });
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (isInView) {
+      videoRef.current.play().catch(() => {
+        // Autoplay might be blocked or failed, handled silently
+      });
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="break-inside-avoid overflow-hidden rounded-none cursor-pointer group mb-4"
+      onClick={onClick}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        loop
+        muted
+        playsInline
+        preload="metadata" // Only load metadata initially
+        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    </div>
+  );
+}
+
 function GridVideos() {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
     <section className="w-full bg-black py-10">
-      {/* MOBILE — grid (prevents missing videos) */}
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 gap-4 sm:hidden">
+      {/* Unified Masonry Layout */}
+      <div className="max-w-7xl mx-auto px-4 columns-2 lg:columns-3 gap-4 space-y-4">
         {videoLinks.map((src, index) => (
-          <div
-            key={index}
-            onClick={() => setSelected(src)}
-            className="overflow-hidden cursor-pointer group"
-          >
-            <video
-              src={src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* DESKTOP / TABLET — masonry layout (unchanged) */}
-      <div className="max-w-7xl mx-auto px-4 hidden sm:block columns-2 lg:columns-3 gap-4 space-y-4">
-        {videoLinks.map((src, index) => (
-          <div
-            key={index}
-            onClick={() => setSelected(src)}
-            className="overflow-hidden rounded-none cursor-pointer group"
-          >
-            <video
-              src={src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
+          <SmartVideo key={index} src={src} onClick={() => setSelected(src)} />
         ))}
       </div>
 
