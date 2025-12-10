@@ -115,11 +115,19 @@ export default function MemberShip() {
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 md:gap-4">
         {/* TEXT BLOCK */}
         <div ref={textRef} className="w-full md:w-1/2 text-left md:text-left">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl  leading-tight tracking-tight">
+          <h2
+            className="text-4xl 
+    md:text-7xl 
+    lg:text-8xl 
+      font-medium 
+      tracking-tighter
+
+    text-neutral-900 "
+          >
             Automate Your Digital Workflow.
           </h2>
 
-          <p className="mt-6 text-lg text-neutral-600 max-w-md mx-auto md:mx-0">
+          <p  className="mt-6 text-lg text-neutral-600 max-w-md mx-auto md:mx-0">
             Seamlessly connect WhatsApp, CRM, and analytics tools to manage
             leads, nurture customers, and scale smarter.
           </p>

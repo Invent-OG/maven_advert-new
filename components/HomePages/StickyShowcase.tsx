@@ -37,7 +37,7 @@ export default function StickyShowcase() {
   return (
     <section
       ref={containerRef}
-      className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-white to-orange-50 overflow-hidden"
+      className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-blue-50 to-white overflow-hidden"
     >
       {/* Top content */}
       <div className="sticky top-0 z-10 flex flex-col items-center text-center px-4">
@@ -48,17 +48,18 @@ export default function StickyShowcase() {
     text-4xl 
     md:text-7xl 
     lg:text-8xl 
-    
+      font-medium
+      tracking-tighter
+
     text-neutral-900 
-    leading-[1.05]
-    tracking-tight
     md:py-4 
     mt-20 md:mt-0 
-    md:max-w-4xl
+    
 
   "
         >
-          Build a Remarkable Brand Experience
+          Build a Remarkable <br />
+          Brand Experience
         </h1>
 
         <p className="text-neutral-900 font-medium mt-2 mb-6">

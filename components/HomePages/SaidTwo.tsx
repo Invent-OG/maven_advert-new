@@ -205,7 +205,7 @@ export default function SaidTwo() {
 
   return (
     <section
-      className="w-full overflow-hidden text-white py-20 px-4"
+      className="w-full overflow-hidden text-white py-20 "
       style={{
         background: "radial-gradient(ellipse at top, #C02900 0%, #000000 70%)",
       }}

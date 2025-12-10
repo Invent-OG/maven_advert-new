@@ -102,7 +102,13 @@ const Video = () => {
       {/* Heading */}
       <h2
         data-aos="fade-down"
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-none xl:text-7xl  max-w-full sm:max-w-2xl md:max-w-3xl"
+        className="text-4xl 
+    md:text-7xl 
+    lg:text-8xl 
+      font-medium
+      tracking-tighter
+
+    text-white  max-w-full sm:max-w-2xl md:max-w-3xl"
       >
         The easiest way to elevate your brand{" "}
       </h2>
