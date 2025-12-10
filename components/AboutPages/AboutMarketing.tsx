@@ -172,7 +172,7 @@ function AboutMarketing() {
           className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16"
         >
           <div className="md:w-1/2 text-left">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0c1523] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 leading-tight">
               Committed staff are <br /> ready to help you.
             </h2>
           </div>

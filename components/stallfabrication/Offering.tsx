@@ -64,10 +64,10 @@ export default function Offering() {
     >
       {/* Section Header */}
       <div className="mb-16 px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-neutral-900  mb-4">
           Services We’re Offering{" "}
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-neutral-600  max-w-2xl mx-auto">
           At Maven Advert, we specialize in exhibition stall fabrication,
           corporate event setups, and Octanorm stall design — delivering
           creative, durable, and brand-focused solutions that make every space
@@ -116,10 +116,10 @@ export default function Offering() {
                 {/* Default White Content */}
                 <div className="bg-white h-full flex flex-col items-center justify-center p-10 transition-all duration-700 ease-in-out group-hover:opacity-0 group-hover:scale-95 text-center">
                   <div className="text-orange-500 mb-4">{offer.icon}</div>
-                  <h3 className="text-lg font-semibold text-[#0a1b3d] mb-3">
+                  <h3 className="text-lg font-semibold text-neutral-900  mb-3">
                     {offer.title}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-5">
+                  <p className="text-neutral-600  text-sm mb-5">
                     {offer.description}
                   </p>
                   <button className="text-orange-500 font-medium underline underline-offset-4 hover:text-orange-600 transition-all">

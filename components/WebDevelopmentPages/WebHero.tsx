@@ -45,11 +45,11 @@ export default function WebHero() {
     >
       {/* LEFT CONTENT */}
       <div className="relative z-20 w-1/2 flex flex-col space-y-4">
-        <p className="text-xs sm:text-sm md:text-base text-gray-500">
+        <p className="text-xs sm:text-sm md:text-base text-neutral-600">
           We Elevate Businesses{" "}
         </p>
 
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-neutral-800 leading-none">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-neutral-900 leading-none">
           Creative <br /> Solutions{" "}
         </h1>
       </div>

@@ -48,10 +48,10 @@ export default function StallGallery() {
     >
       {/* Heading */}
       <div className="mb-16 px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-neutral-900  mb-4">
           Explore Our Projects{" "}
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-neutral-600  max-w-2xl mx-auto">
           Experience how we turn ideas into impactful spaces through creativity,
           precision, and design excellence.
         </p>

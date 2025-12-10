@@ -1,6 +1,7 @@
 "use client";
+
 import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
@@ -8,71 +9,85 @@ import Image from "next/image";
 export default function AboutCompanyMarquee() {
   const marqueeRef = useRef<HTMLDivElement>(null);
 
+  const images = [
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651186/Clients_logo-07_fhw5hp.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651182/Clients_logo-11_nezn6z.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651182/Clients_logo-10_sssxoy.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651179/Clients_logo-08_lkpkoc.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651170/Clients_logo-03_a0ys49.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651167/Clients_logo-05_ia3u2t.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651162/Clients_logo-09_bp5pzt.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651159/Clients_logo-06_iuh7kf.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651155/Clients_logo-02_ilg12c.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651151/Clients_logo-01_et7hay.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651148/Clients_logo-04_dkdqyj.png",
+  ];
+
   useEffect(() => {
+    const marquee = marqueeRef.current;
+    if (!marquee) return;
+
     const ctx = gsap.context(() => {
-      const marquee = marqueeRef.current;
-      if (!marquee) return;
-      const totalWidth = marquee.scrollWidth / 2;
+      const totalWidth = marquee.scrollWidth / 3; // corrected to match 3x images
 
       gsap.fromTo(
         marquee,
         { x: 0 },
         {
           x: -totalWidth,
-          duration: 15,
-          ease: "none",
+          duration: 30,
+          ease: "linear",
           repeat: -1,
         }
       );
-    });
+    }, marqueeRef);
 
     return () => ctx.revert();
   }, []);
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
-
-  const logos = [
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-netflix-dark-gray.svg",
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-pingdom-dark-gray.svg",
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2024/01/logo-paypal-dark-gray.svg",
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-walmart-dark-gray.svg",
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-amazon-dark-gray.svg",
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-logitech-dark-gray.svg",
-    "https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/logo-pingdom-dark-gray.svg",
-  ];
 
   return (
-    <section data-aos="fade-up" className="w-full mb-10 bg-white py-12">
-      {/* The container that restricts width */}
-      <div className="relative mx-auto max-w-6xl overflow-hidden flex items-center justify-center">
-        {/* The animated marquee */}
+    <section className=" flex flex-col justify-center items-center mt-10 py-10 overflow-hidden">
+      <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 leading-tight text-center mb-8">
+        Brands We Work With
+      </h2>
+
+      <div className="overflow-hidden max-w-4xl w-full">
         <div
           ref={marqueeRef}
-          className="flex gap-16 whitespace-nowrap"
-          style={{ width: "max-content" }}
+          className="flex space-x-10 whitespace-nowrap w-max"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
         >
-          {[...logos, ...logos].map((logo, index) => (
+          {/* Repeat images 3 times for smooth infinite scroll */}
+          {[...images, ...images, ...images].map((src, index) => (
             // <img
             //   key={index}
-            //   src={logo}
-            //   alt={`Company logo ${index}`}
-            //   className="h-10 w-auto object-contain  transition-opacity duration-300"
+            //   src={src}
+            //   alt={`Featured ${index + 1}`}
+            //   className="h-24 object-contain inline-block select-none"
+            //   draggable={false}
             // />
+
             <Image
               key={index}
-              src={logo}
-              alt={`Company logo ${index}`}
-              width={120}
-              height={40}
-              className="h-10 w-auto object-contain transition-opacity duration-300"
+              src={src}
+              alt={`Featured ${index + 1}`}
+              className="h-32 object-contain inline-block select-none"
+              width={180}
+              height={180}
+              draggable={false}
             />
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 }

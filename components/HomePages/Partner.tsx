@@ -114,7 +114,7 @@ export default function Partner() {
         { x: 0 },
         {
           x: -totalWidth,
-          duration: 30,
+          duration: 10,
           ease: "linear",
           repeat: -1,
         }
@@ -142,7 +142,7 @@ export default function Partner() {
               alt={`Featured ${index + 1}`}
               className={`
                 object-contain inline-block select-none
-                ${src.includes("ten_digit_logo") ? "scale-140" : "scale-100"}
+                ${src.includes("ten_digit_logo") ? "scale-100" : "scale-100"}
               `}
               width={180}
               height={180}

@@ -5,10 +5,13 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Ruler, Building2 } from "lucide-react";
+import { LiquidButton } from "../ui/liquid-glass-button";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Architectura() {
+  const router = useRouter();
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -49,11 +52,11 @@ export default function Architectura() {
     >
       {/* Left Content */}
       <div className="fade-left max-w-xl text-left">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-6 leading-snug">
+        <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 leading-snug">
           Redefining Stall Experiences <br /> with Maven Advert​
         </h2>
 
-        <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-10">
+        <p className="text-neutral-600 text-base md:text-lg leading-relaxed mb-10">
           Maven Advert, a trusted name in exhibition stall fabrication across
           Tamil Nadu and South India, creates dynamic setups for corporate
           events and trade shows. We specialize in custom and Octanorm stall
@@ -67,10 +70,10 @@ export default function Architectura() {
               <Ruler className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[#0a1b3d] mb-1">
+              <h3 className="font-semibold text-lg text-neutral-900 mb-1">
                 Concept & Design Innovation​{" "}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-neutral-600 text-sm leading-relaxed">
                 We merge creativity with strategy to design custom exhibition
                 stalls that tell your brand story with purpose and impact.
               </p>
@@ -82,10 +85,10 @@ export default function Architectura() {
               <Building2 className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[#0a1b3d] mb-1">
+              <h3 className="font-semibold text-lg text-neutral-900 mb-1">
                 Build & Beyond​{" "}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-neutral-600  text-sm leading-relaxed">
                 From stall fabrication to installation, every detail is executed
                 with precision — ensuring a seamless and memorable brand
                 presence.
@@ -95,9 +98,16 @@ export default function Architectura() {
         </div>
 
         {/* Button */}
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-md flex items-center gap-2 transition-all duration-300">
+        {/* <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-md flex items-center gap-2 transition-all duration-300">
           More About Us <span className="text-lg">→</span>
-        </button>
+        </button> */}
+        <LiquidButton
+          onClick={() => router.push("/contact")}
+          className=""
+          size="xl"
+        >
+          Get Started
+        </LiquidButton>
       </div>
 
       {/* Right Image */}

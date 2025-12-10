@@ -20,7 +20,7 @@ export default function AboutHero() {
           Full-Service Marketing,
         </p>
 
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-neutral-800 leading-none">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-neutral-900 leading-none">
           Growth <br /> Engineers
         </h1>
       </div>

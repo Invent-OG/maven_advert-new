@@ -19,7 +19,7 @@ function AboutAward() {
           className="flex flex-col md:flex-row justify-between items-start md:items-center mb-20"
         >
           <div className="md:w-1/2 text-left">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0c1523] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 leading-tight">
               We elevate brands through creativity and innovation.
             </h2>
           </div>

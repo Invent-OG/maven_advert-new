@@ -70,17 +70,20 @@ function AboutCompany() {
       {/* Tabs Navigation */}
       <div
         data-aos="fade-down"
-        className="flex justify-start lg:justify-center noScrollbar border-b border-gray-200 overflow-x-auto whitespace-nowrap no-scrollbar px-2"
+        className="flex justify-start lg:justify-center noScrollbar overflow-x-auto whitespace-nowrap no-scrollbar gap-2 px-2 py-2"
       >
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 sm:px-6 py-3 text-sm font-medium flex-shrink-0 transition-all duration-300 ${
-              activeTab === tab.id
-                ? "text-black border-b-2 border-black"
-                : "text-gray-500 hover:text-black"
-            }`}
+            className={`
+        px-5 py-2 rounded-full text-sm font-medium flex-shrink-0 transition-all duration-300
+        ${
+          activeTab === tab.id
+            ? "bg-black text-white shadow-md"
+            : "bg-gray-100 text-neutral-900  hover:bg-neutral-300"
+        }
+      `}
           >
             {tab.title}
           </button>
@@ -120,26 +123,18 @@ function AboutCompany() {
           <h6 className="text-sm text-orange-500 font-bold  tracking-wide uppercase mb-3">
             {tabs[activeTab - 1].title}
           </h6>
-          <h2 className="text-3xl lg:text-5xl font-extrabold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 leading-tight mb-4">
             {tabs[activeTab - 1].heading}
           </h2>
           <p className="text-gray-600 mb-6 leading-relaxed">
             {tabs[activeTab - 1].description}
           </p>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="px-4 py-3 bg-gray-50 border border-gray-50 rounded-lg flex items-center gap-2 shadow-sm">
-              <span className="text-red-500 text-xl">🌐</span>
-              <span className="font-medium text-gray-800">
-                {tabs[activeTab - 1].feature}
-              </span>
-            </div>
-          </div>
-          <p className="text-black text-sm">
+          {/* <p className="text-black text-sm">
             Get your{" "}
             <span className="font-bold underline">first payment today</span> and
             grow your business.
-          </p>
+          </p> */}
 
           <div className="flex items-center gap-5 mt-8">
             {/* <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
@@ -154,9 +149,9 @@ function AboutCompany() {
             >
               Get Started
             </LiquidButton>
-            <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
+            {/* <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
               ✉️ Connect & Grow
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

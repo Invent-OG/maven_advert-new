@@ -27,7 +27,7 @@ function MarketingAgency() {
 
       {/* Header and Description */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-12 gap-6">
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 md:w-1/2">
+        <h2 className="text-3xl md:text-5xl font-bold text-neutral-900  md:w-1/2">
           Guiding brands to grow, engage, and succeed{" "}
         </h2>
         <p className="text-gray-500 text-md md:w-1/2">

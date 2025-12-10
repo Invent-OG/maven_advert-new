@@ -49,7 +49,7 @@ export default function WeProvide() {
     >
       {/* Heading */}
       <div className="mb-16 px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#0a1b3d] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
           What Makes Us Stand Apart{" "}
         </h2>
         <p className="text-gray-500 text-sm max-w-xl mx-auto">
@@ -82,7 +82,7 @@ export default function WeProvide() {
                 <div className="bg-orange-500 text-white w-16 h-16 rounded-full flex items-center justify-center mb-6">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-[#0a1b3d] mb-4">
+                <h3 className="text-xl font-semibold text-neutral-900 mb-4">
                   {service.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed">
