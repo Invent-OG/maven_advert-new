@@ -63,85 +63,10 @@ import AOSInit from "@/components/AOSInit";
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "./providers/QueryProvider";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import LenisProvider from "./providers/LenisProvider";
 
-const resistSans = localFont({
-  src: [
-    {
-      path: "../public/fonts/fonnts.com-resisttext-thin.otf",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-thinoblique.otf",
-      weight: "100",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-light.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-lightoblique.otf",
-      weight: "300",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-regularoblique.otf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-mediumoblique.otf",
-      weight: "500",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-bold.otf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-boldoblique.otf",
-      weight: "700",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-extrabold.otf",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-extraboldoblique.otf",
-      weight: "800",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-black.otf",
-      weight: "900",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/fonnts.com-resisttext-blackoblique.otf",
-      weight: "900",
-      style: "italic",
-    },
-  ],
-  display: "swap",
-  variable: "--font-resist-sans",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -154,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${resistSans.className} antialiased`}
+        className={`${inter.className} antialiased`}
         suppressHydrationWarning={true}
       >
         <LenisProvider>
