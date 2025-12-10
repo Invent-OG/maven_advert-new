@@ -25,7 +25,7 @@ export default function StickyShowcase() {
             trigger: ".showcase-section",
             start: "top top",
             end: "center 30%",
-            scrub: 2,
+            scrub: 1,
           },
         });
       });

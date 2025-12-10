@@ -239,7 +239,7 @@ export default function SaidTwo() {
 
         {/* RIGHT — MAIN PARAGRAPH */}
         <div className="w-full md:w-1/2 text-center md:text-left font-medium md:pl-10">
-          <p className="text-3xl sm:text-4xl md:text-5xl leading-tight  tracking-tight">
+          <p className="text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight">
             Growth Metrics,
             <br /> Performance
             <br /> Tracking,
