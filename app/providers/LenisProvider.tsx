@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useEffect, useRef } from "react";
 
-// @ts-expect-error - Lenis has no types
 import Lenis from "lenis";
 
 type LenisContextType = {
@@ -29,8 +28,8 @@ export default function LenisProvider({
     // create Lenis instance
     lenisRef.current = new Lenis({
       duration: 1.8,
-      smooth: true,
-      direction: "vertical",
+      // smooth: true, // Legacy option, removed
+      orientation: "vertical",
     });
 
     function raf(time: number) {
