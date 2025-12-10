@@ -67,7 +67,7 @@ export default function StickyShowCaseTwo() {
   return (
     <>
       <section className="showcase-section relative w-full min-h-screen p-10  overflow-hidden">
-        <h2 className=" text-4xl text-neutral-900 md:text-7xl font-bold text-center">
+        <h2 className=" text-4xl text-neutral-900 md:text-7xl font-normal text-center">
           Elevate Every <br /> Digital Move
         </h2>
         <p className="text-center text-xs md:text-sm text-gray-600 mt-4 mb-8 max-w-sm mx-auto px-4 sm:px-0 leading-relaxed">

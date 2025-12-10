@@ -43,7 +43,7 @@ export default function StickyShowcase() {
     text-4xl 
     md:text-7xl 
     lg:text-8xl 
-    font-extrabold 
+    
     text-neutral-900 
     leading-[1.05]
     tracking-tight

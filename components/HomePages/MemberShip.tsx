@@ -115,7 +115,7 @@ export default function MemberShip() {
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 md:gap-4">
         {/* TEXT BLOCK */}
         <div ref={textRef} className="w-full md:w-1/2 text-left md:text-left">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl  leading-tight tracking-tight">
             Automate Your Digital Workflow.
           </h2>
 

@@ -50,7 +50,7 @@ export default function SaidThree() {
         text-start md:text-left p-4 sm:p-8 md:p-2 
         order-2 md:order-1 space-y-6"
       >
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 leading-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl  text-neutral-900 leading-tight">
           Make your personal site now.
         </h2>
 

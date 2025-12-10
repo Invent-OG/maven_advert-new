@@ -63,12 +63,83 @@ import LenisProvider from "./providers/LenisProvider";
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "./providers/QueryProvider";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+const resistSans = localFont({
+  src: [
+    {
+      path: "../public/fonts/fonnts.com-resisttext-thin.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-thinoblique.otf",
+      weight: "100",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-lightoblique.otf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-regularoblique.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-mediumoblique.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-boldoblique.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-extrabold.otf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-extraboldoblique.otf",
+      weight: "800",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-black.otf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/fonnts.com-resisttext-blackoblique.otf",
+      weight: "900",
+      style: "italic",
+    },
+  ],
   display: "swap",
+  variable: "--font-resist-sans",
 });
 
 export default function RootLayout({
@@ -82,7 +153,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} antialiased`}
+        className={`${resistSans.className} antialiased`}
         suppressHydrationWarning={true}
       >
         <QueryProvider>

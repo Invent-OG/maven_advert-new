@@ -47,7 +47,7 @@ export default function FeatureOn() {
 
   return (
     <section className=" flex flex-col justify-center items-center mt-10 py-10 overflow-hidden">
-      <h2 className="md:text-5xl text-4xl font-bold text-center mb-8">
+      <h2 className="md:text-5xl text-4xl font-normal text-center mb-8">
         Brands We Work With
       </h2>
 

@@ -46,7 +46,7 @@ function PersonalBrand() {
         data-aos="fade-up"
         className="md:text-center text-start md:p-0 p-4 max-w-3xl mb-12"
       >
-        <h2 className="md:text-6xl text-3xl font-bold text-neutral-900 mb-6 leading-tight">
+        <h2 className="md:text-6xl text-3xl  text-neutral-900 mb-6 leading-tight">
           Launch your personal brand today
         </h2>
         <p className="text-sm sm:text-sm md:text-sm text-gray-700 leading-relaxed">
