@@ -73,10 +73,9 @@
 // export default Video;
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AOS from "aos";
 import "aos/dist/aos.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -85,12 +84,7 @@ const Video = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  // AOS initialized globally
 
   return (
     <div

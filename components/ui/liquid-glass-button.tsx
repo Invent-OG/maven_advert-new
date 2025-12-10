@@ -103,8 +103,11 @@ function LiquidButton({
   /* ----------------------------------
      Unique ID for this button's filter
   ----------------------------------- */
-  const uniqueId = React.useId();
-  const filterId = `container-glass-${uniqueId}`;
+  const [filterId, setFilterId] = React.useState("");
+
+  React.useEffect(() => {
+    setFilterId(`container-glass-${Math.random().toString(36).slice(2, 9)}`);
+  }, []);
 
   return (
     <>
@@ -117,7 +120,7 @@ function LiquidButton({
         {...props}
       >
         {/* ... existing inner elements ... */}
-        <div
+        <span
           className={cn(
             "absolute top-0 left-0 z-0 h-full w-full transition-all",
             radius === "md" ? "rounded-md" : "rounded-full"
@@ -128,16 +131,18 @@ function LiquidButton({
           }}
         />
 
-        <div
-          className={cn(
-            "absolute top-0 left-0 isolate -z-10 h-full w-full overflow-hidden",
-            radius === "md" ? "rounded-md" : "rounded-full"
-          )}
-          style={{ backdropFilter: `url("#${filterId}")` }}
-        />
+        {filterId && (
+          <span
+            className={cn(
+              "absolute top-0 left-0 isolate -z-10 h-full w-full overflow-hidden",
+              radius === "md" ? "rounded-md" : "rounded-full"
+            )}
+            style={{ backdropFilter: `url("#${filterId}")` }}
+          />
+        )}
 
-        <div className="pointer-events-none z-10 ">{children}</div>
-        <GlassFilter id={filterId} />
+        <span className="pointer-events-none z-10 ">{children}</span>
+        {filterId && <GlassFilter id={filterId} />}
       </Comp>
     </>
   );

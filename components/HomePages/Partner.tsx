@@ -29,10 +29,6 @@ function Partner() {
       const track = trackRef.current;
       if (!track) return;
 
-      // Duplicate logos for seamless infinite loop
-      const clones = track.innerHTML;
-      track.innerHTML += clones;
-
       gsap.to(track, {
         xPercent: -50,
         ease: "none",
@@ -55,7 +51,8 @@ function Partner() {
           ref={trackRef}
           className="flex gap-10 items-center whitespace-nowrap px-4"
         >
-          {logos.map((logo, i) => (
+          {/* Render logos twice for seamless loop */}
+          {[...logos, ...logos].map((logo, i) => (
             <div
               key={i}
               className="flex-shrink-0 opacity-90 hover:opacity-100 transition"

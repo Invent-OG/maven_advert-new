@@ -1,17 +1,10 @@
 "use client";
 import React from "react";
 import { CheckCircle, Zap, User, Globe } from "lucide-react";
-import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 function PersonalBrand() {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  // AOS initialized globally
   const features = [
     {
       icon: <CheckCircle size={24} className="text-black" />,

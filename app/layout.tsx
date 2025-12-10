@@ -59,7 +59,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AOSInit from "@/components/AOSInit";
-import LenisProvider from "./providers/LenisProvider";
+
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "./providers/QueryProvider";
@@ -160,7 +160,7 @@ export default function RootLayout({
           {isAdminRoute ? (
             <main>{children}</main>
           ) : (
-            <LenisProvider>
+            <>
               <AOSInit />
               {!isAdminRoute && <Navbar />}
               <main>{children}</main>
@@ -183,7 +183,7 @@ export default function RootLayout({
                   },
                 }}
               />
-            </LenisProvider>
+            </>
           )}
         </QueryProvider>
       </body>

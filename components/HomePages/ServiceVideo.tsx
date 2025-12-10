@@ -5,12 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 function ServiceVideo() {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  // AOS initialized globally
 
   return (
     <div className="flex items-center justify-center">

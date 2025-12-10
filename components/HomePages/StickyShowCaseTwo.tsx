@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -8,6 +8,8 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function StickyShowCaseTwo() {
+  const containerRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Floating animation for center phone
@@ -66,7 +68,10 @@ export default function StickyShowCaseTwo() {
 
   return (
     <>
-      <section className="showcase-section relative w-full min-h-screen p-10  overflow-hidden">
+      <section
+        ref={containerRef}
+        className="showcase-section relative w-full min-h-screen p-10  overflow-hidden"
+      >
         <h2 className=" text-4xl text-neutral-900 md:text-7xl font-normal text-center">
           Elevate Every <br /> Digital Move
         </h2>

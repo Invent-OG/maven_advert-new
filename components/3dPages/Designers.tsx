@@ -13,10 +13,16 @@ export default function Designers() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (el) {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const el = sectionRef.current; // safely access ref inside context
+      // Note: el is guaranteed non-null by check above, but context scope handles finding elements usually.
+      // However, keeping existing logic of finding .designer-card is fine if scoped.
+      // Actually, better to just let context scope do the work.
+
       gsap.fromTo(
-        el.querySelectorAll(".designer-card"),
+        ".designer-card", // Selector is now scoped to sectionRef
         { opacity: 0, y: 50 },
         {
           opacity: 1,
@@ -25,12 +31,14 @@ export default function Designers() {
           stagger: 0.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: el,
+            trigger: sectionRef.current,
             start: "top 80%",
           },
         }
       );
-    }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,24 +9,28 @@ export default function HeroVideo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!containerRef.current || !videoRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-        pin: true, // lock screen during zoom
-      },
-    });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          pin: true, // lock screen during zoom
+        },
+      });
 
-    tl.fromTo(
-      videoRef.current,
-      { scale: 1 },
-      { scale: 1.2, ease: "none", duration: 2 }
-    );
+      tl.fromTo(
+        videoRef.current,
+        { scale: 1 },
+        { scale: 1.2, ease: "none", duration: 2 }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (

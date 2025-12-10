@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -11,6 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function StickyShowcase() {
   const router = useRouter();
+
+  const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -33,7 +35,10 @@ export default function StickyShowcase() {
   }, []);
 
   return (
-    <section className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-white to-orange-50 overflow-hidden">
+    <section
+      ref={containerRef}
+      className="showcase-section relative w-full min-h-screen bg-gradient-to-b from-white to-orange-50 overflow-hidden"
+    >
       {/* Top content */}
       <div className="sticky top-0 z-10 flex flex-col items-center text-center px-4">
         <div className="md:mt-24 mt-24"></div>

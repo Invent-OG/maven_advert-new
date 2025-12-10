@@ -37,7 +37,6 @@ export default function SaidThree() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 

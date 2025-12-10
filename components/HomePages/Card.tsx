@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React from "react";
 import Image from "next/image";
+import "aos/dist/aos.css";
 
 // Card Component
 type CardProps = {
@@ -12,12 +11,7 @@ type CardProps = {
 };
 
 function Card({ image, title, description }: CardProps) {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-    });
-  }, []);
+  // AOS initialized globally
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 flex flex-col items-center h-[360px] w-[340px] hover:-translate-y-1">
       {/* Image Section */}
