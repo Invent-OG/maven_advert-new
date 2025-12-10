@@ -96,7 +96,7 @@ export default function StickyShowCaseThree() {
       </h4>
       <p
         data-aos="fade-up"
-        className="text-white text-center text-sm sm:text-sm md:text-base mb-6"
+        className="text-white text-center  text-sm sm:text-base tracking-tight md:text-base lg:text-base mb-6"
       >
         See the updated design (left) against the old version (right)
       </p>

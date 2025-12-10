@@ -62,7 +62,7 @@ export default function StickyShowcase() {
           Brand Experience
         </h1>
 
-        <p className="text-neutral-900 font-medium mt-2 mb-6">
+        <p className=" mt-2 mb-6 text-neutral-700 text-sm sm:text-base tracking-tight md:text-base lg:text-base">
           Design, Launch, and grow with Maven.
         </p>
 

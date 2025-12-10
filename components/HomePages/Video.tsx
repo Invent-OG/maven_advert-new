@@ -116,7 +116,7 @@ const Video = () => {
       {/* Subtext */}
       <p
         data-aos="fade-down"
-        className="text-xs sm:text-sm md:text-xl lg:text-base text-gray-300 mt-2 py-8 sm:mt-3 max-w-full sm:max-w-lg px-2 sm:px-0 leading-relaxed"
+        className="text-white text-sm sm:text-base tracking-tight md:text-base lg:text-base mt-2 py-8 sm:mt-3 max-w-full sm:max-w-lg px-2 sm:px-0"
       >
         No complicated tools. Just a fast, seamless way to explore creative
         solutions that engage, Inspire, and deliver results.

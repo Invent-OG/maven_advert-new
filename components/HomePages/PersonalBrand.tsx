@@ -50,9 +50,9 @@ function PersonalBrand() {
         >
           Accelerate Your Brand Growth{" "}
         </h2>
-        <p className="text-sm sm:text-sm md:text-sm text-gray-700 leading-relaxed">
-          Choose your pathway, shape your strategy, and expand your brand
-          presence.
+        <p className="text-neutral-700 text-sm sm:text-base tracking-tight md:text-base lg:text-base max-w-sm mx-auto text-center">
+          Unlock powerful tools and tailored solutions to grow your brand,
+          enhance your operations, and launch digital experiences with ease.
         </p>
       </div>
 

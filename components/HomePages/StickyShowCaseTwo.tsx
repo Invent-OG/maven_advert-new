@@ -78,12 +78,12 @@ export default function StickyShowCaseTwo() {
     lg:text-8xl 
       font-medium
       tracking-tighter
-
+    mb-4
     text-neutral-900  text-center"
         >
           Elevate Every <br /> Digital Move
         </h2>
-        <p className="text-center text-xs md:text-sm text-gray-600 mt-4 mb-8 max-w-sm mx-auto px-4 sm:px-0 leading-relaxed">
+        <p className="text-center text-neutral-700 text-sm sm:text-base tracking-tight md:text-base lg:text-base mb-8 max-w-sm mx-auto px-4 sm:px-0">
           Maven Advert gives you powerful solutions to build, market, and scale
           effortlessly. Unlock your potential, execute your vision, and grow
           with impact.
