@@ -34,10 +34,10 @@ function Card({ image, title, description }: CardProps) {
       </div>
 
       {/* Title + Description */}
-      <h3 className="text-base font-semibold text-black mt-5 mb-1 text-start w-full">
+      <h3 className="text-base font-semibold text-neutral-900 mt-5 mb-1 text-start w-full">
         {title}
       </h3>
-      <p className="text-sm text-start text-gray-700 leading-relaxed w-full">
+      <p className="text-base text-start text-neutral-700 leading-relaxed w-full">
         {description}
       </p>
     </div>
@@ -127,7 +127,7 @@ export default function EverythingYouNeed() {
   ];
 
   return (
-    <section className="bg-white py-20 px-4">
+    <section className="bg-gradient-to-b from-white to-blue-50 py-20 px-4">
       {/* Section Heading */}
       <div className="max-w-6xl mx-auto mb-16 text-center">
         <h2
@@ -141,7 +141,7 @@ export default function EverythingYouNeed() {
         >
           Everything Your <br /> Brand Needs
         </h2>
-        <p className="text-gray-500 max-w-sm mx-auto text-sm md:text-sm leading-relaxed">
+        <p className="text-neutral-700 text-sm sm:text-base tracking-tight md:text-base lg:text-base max-w-sm mx-auto">
           A blend of creativity, technology and strategy designed to build
           brands and drive growth.
         </p>

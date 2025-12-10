@@ -70,7 +70,7 @@ export default function StickyShowCaseTwo() {
     <>
       <section
         ref={containerRef}
-        className="showcase-section relative w-full min-h-screen p-10  overflow-hidden"
+        className="showcase-section bg-gradient-to-b from-white to-blue-50 relative w-full min-h-screen p-10  overflow-hidden"
       >
         <h2
           className=" text-4xl 

@@ -36,13 +36,23 @@ export default function Said() {
       {/* Right Side - Testimonial */}
       <div
         data-aos="fade-left"
-        className="w-full md:w-1/2 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a] flex flex-col justify-center p-10 md:p-16"
+        className="w-full md:w-1/2 bg-gradient-to-b from-white/20 to-black/90 flex flex-col justify-center p-10 md:p-16"
       >
         {/* Quote Text */}
-        <blockquote className="text-3xl md:text-4xl font-medium italic leading-snug mb-8">
-          A mini website builder more aimed for professionals Love the
-          aesthetic.
-        </blockquote>
+        <div className="relative">
+          <span className="text-white/70 text-6xl absolute -top-6 -left-2 select-none">
+            “
+          </span>
+
+          <blockquote className="text-white text-3xl md:text-4xl font-extralight mb-8 pl-6">
+            A mini website builder more aimed for professionals — love the
+            aesthetic.
+          </blockquote>
+
+          <span className="text-white/70 text-6xl absolute -mb-4 right-0 select-none">
+            ”
+          </span>
+        </div>
       </div>
     </section>
   );
