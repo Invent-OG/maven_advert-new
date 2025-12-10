@@ -40,12 +40,11 @@ function PersonalBrand() {
         className="md:text-center text-start md:p-0 p-4 max-w-3xl mb-12"
       >
         <h2 className="md:text-6xl text-3xl  text-neutral-900 mb-6 leading-tight">
-          Launch your personal brand today
+          Accelerate Your Brand Growth{" "}
         </h2>
         <p className="text-sm sm:text-sm md:text-sm text-gray-700 leading-relaxed">
-          Pick a template, edit a few sections, and share. No design skills
-          needed— <br className="hidden md:block" />
-          just a fast, effortless way to build your brand.
+          Choose your pathway, shape your strategy, and expand your brand
+          presence.
         </p>
       </div>
 
@@ -60,10 +59,10 @@ function PersonalBrand() {
             className="flex flex-col items-start text-start p-6 sm:p-8 border border-neutral-200 rounded-xl hover:shadow-lg transition-shadow"
           >
             {/* Icon with gray border */}
-            <div className="w-16 h-16 flex justify-center items-center mb-4 rounded-full border-1 border-gray-300">
+            <div className="w-16 h-16 flex text-neutral-900 justify-center items-center mb-4 rounded-full border-1 border-gray-300">
               {feature.icon}
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold mb-2">
+            <h3 className="text-lg sm:text-xl text-neutral-900 font-semibold mb-2">
               {feature.title}
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed sm:text-sm">

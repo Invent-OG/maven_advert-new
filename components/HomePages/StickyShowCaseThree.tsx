@@ -105,7 +105,7 @@ export default function StickyShowCaseThree() {
           <div className="absolute top-0 left-0 h-full w-full overflow-hidden z-0 flex justify-center items-center">
             <div className="w-[95%] h-[96%] relative rounded-[2rem] overflow-hidden">
               <Image
-                src="https://images.pexels.com/photos/6800789/pexels-photo-6800789.jpeg"
+                src="https://images.pexels.com/photos/8384510/pexels-photo-8384510.jpeg"
                 alt="Right Image"
                 fill
                 className="object-cover"

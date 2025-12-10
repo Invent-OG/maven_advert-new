@@ -64,6 +64,7 @@ import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "./providers/QueryProvider";
 import localFont from "next/font/local";
+import LenisProvider from "./providers/LenisProvider";
 
 const resistSans = localFont({
   src: [
@@ -156,36 +157,38 @@ export default function RootLayout({
         className={`${resistSans.className} antialiased`}
         suppressHydrationWarning={true}
       >
-        <QueryProvider>
-          {isAdminRoute ? (
-            <main>{children}</main>
-          ) : (
-            <>
-              <AOSInit />
-              {!isAdminRoute && <Navbar />}
+        <LenisProvider>
+          <QueryProvider>
+            {isAdminRoute ? (
               <main>{children}</main>
-              {!isAdminRoute && <Footer />}
-              <Toaster
-                position="top-center"
-                containerStyle={{ zIndex: 9999 }}
-                toastOptions={{
-                  duration: 4000,
-                  style: {
-                    borderRadius: "10px",
-                    background: "#333",
-                    color: "#fff",
-                  },
-                  success: {
-                    iconTheme: { primary: "#22c55e", secondary: "#fff" },
-                  },
-                  error: {
-                    iconTheme: { primary: "#ef4444", secondary: "#fff" },
-                  },
-                }}
-              />
-            </>
-          )}
-        </QueryProvider>
+            ) : (
+              <>
+                <AOSInit />
+                {!isAdminRoute && <Navbar />}
+                <main>{children}</main>
+                {!isAdminRoute && <Footer />}
+                <Toaster
+                  position="top-center"
+                  containerStyle={{ zIndex: 9999 }}
+                  toastOptions={{
+                    duration: 4000,
+                    style: {
+                      borderRadius: "10px",
+                      background: "#333",
+                      color: "#fff",
+                    },
+                    success: {
+                      iconTheme: { primary: "#22c55e", secondary: "#fff" },
+                    },
+                    error: {
+                      iconTheme: { primary: "#ef4444", secondary: "#fff" },
+                    },
+                  }}
+                />
+              </>
+            )}
+          </QueryProvider>
+        </LenisProvider>
       </body>
     </html>
   );

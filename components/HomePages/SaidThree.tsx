@@ -49,14 +49,14 @@ export default function SaidThree() {
         text-start md:text-left p-4 sm:p-8 md:p-2 
         order-2 md:order-1 space-y-6"
       >
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl  text-neutral-900 leading-tight">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl  tracking-tight  text-neutral-900 leading-tight">
           Make your personal site now.
         </h2>
 
-        <p className="text-gray-700 text-sm sm:text-base md:text-sm max-w-lg font-semibold  leading-relaxed">
-          MavenAdvert has partnered with MemberSpace to help you sell
-          members-only content on your site. Build a thriving community and
-          unlock exclusive access for your members.
+        <p className="text-lg text-neutral-600  sm:text-base md:text-lg max-w-lg  leading-relaxed">
+          MavenAdvert has partnered with MemberSpace to help you sell members
+          only content on your site. Build a thriving community and unlock
+          exclusive access for your members.
         </p>
       </div>
 

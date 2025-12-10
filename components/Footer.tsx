@@ -41,11 +41,11 @@ export default function Footer() {
 
           {/* Column 2: Marketo - London */}
           <div>
-            <h3 className="font-semibold mb-2">Marketo - London</h3>
+            <h3 className="font-semibold mb-2">Maven Advert</h3>
             <p className="text-gray-400 mb-2">
-              401 Broadway, 24th Floor, Orchard View, London, UK
+              13a, Kulalar Street, Peelamedu, Coimbatore - 641004
             </p>
-            <p className="text-gray-400">Free: 123 456 7890</p>
+            <p className="text-gray-400">Free: 1234567890</p>
           </div>
 
           {/* Column 3: Marketo - France */}
