@@ -373,7 +373,10 @@ export default function SaidTwo() {
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-10">
         {/* LEFT — Phones */}
-        <div className="relative w-full md:w-1/2 flex justify-center">
+        <div
+          data-aos="fade-right"
+          className="relative w-full md:w-1/2 flex justify-center"
+        >
           <div className="relative w-[280px] sm:w-[300px] md:w-[450px] lg:w-[520px]">
             {/* BACK PHONE — no animation */}
             <Image
@@ -397,7 +400,10 @@ export default function SaidTwo() {
         </div>
 
         {/* RIGHT — MAIN PARAGRAPH */}
-        <div className="w-full md:w-1/2 text-center md:text-left font-medium md:pl-10">
+        <div
+          data-aos="fade-left"
+          className="w-full md:w-1/2 text-center md:text-left font-medium md:pl-10"
+        >
           <p className="text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight">
             Growth Metrics,
             <br /> Performance
