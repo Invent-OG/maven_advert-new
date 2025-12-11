@@ -162,7 +162,7 @@ export default function SaidThree() {
           ease: "none",
           scrollTrigger: {
             trigger: phone,
-            start: "top bottom",
+            start: "top center",
             end: "bottom top",
             scrub: true, // smooth forward & reverse
           },

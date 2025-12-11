@@ -274,7 +274,7 @@ export default function SaidTwo() {
         ease: "none",
         scrollTrigger: {
           trigger: el,
-          start: "top bottom",
+          start: "top center",
           end: "bottom top",
           scrub: true, // smooth reverse & forward
         },
