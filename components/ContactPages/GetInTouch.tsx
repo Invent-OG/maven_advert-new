@@ -10,6 +10,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaPhoneAlt,
+  FaPaperPlane,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { gsap } from "gsap";
@@ -194,7 +195,6 @@ export default function GetInTouch() {
               />
               <FaUser className="absolute right-2 top-2.5 text-gray-400" />
             </div>
-
             <div className="relative">
               <input
                 name="email"
@@ -205,7 +205,6 @@ export default function GetInTouch() {
               />
               <FaEnvelope className="absolute right-2 top-2.5 text-gray-400" />
             </div>
-
             <div className="relative">
               <input
                 name="whatsappNumber"
@@ -216,7 +215,6 @@ export default function GetInTouch() {
               />
               <FaPhoneAlt className="absolute right-2 top-2.5 text-gray-400" />
             </div>
-
             <div className="relative">
               <textarea
                 name="message"
@@ -226,7 +224,6 @@ export default function GetInTouch() {
               ></textarea>
               <FaComment className="absolute right-2 top-9.5 text-gray-400" />
             </div>
-
             {/* <button
               type="submit"
               disabled={loading}
@@ -242,9 +239,18 @@ export default function GetInTouch() {
               disabled={loading}
               className="mt-6"
               size="xl"
-              radius={"md"}
             >
-              {loading ? "Sending..." : "Send message"}
+              {loading ? (
+                <>
+                  {/* Optional: Add a spinner icon if you have one imported, e.g., FaSpinner */}
+                  Sending...
+                </>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  {/* Relatable Send Icon */}
+                  Send message <FaPaperPlane className="w-4 h-4" />{" "}
+                </span>
+              )}
             </LiquidButton>
           </form>
 

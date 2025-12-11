@@ -5,6 +5,7 @@ import AboutHero from "@/components/AboutPages/AboutHero";
 import AboutMarketing from "@/components/AboutPages/AboutMarketing";
 import AboutMarquee from "@/components/AboutPages/AboutMarquee";
 import MarketingAgency from "@/components/AboutPages/MarketingAgency";
+import TeamImages from "@/components/TeamPages/TeamImages";
 import React from "react";
 export const metadata = {
   title: "Maven Advert | Strategy, Creativity & Digital Growth",
@@ -21,6 +22,7 @@ function page() {
       <AboutMarquee />
       <AboutMarketing />
       <AboutCompanyMarquee />
+      <TeamImages />
     </>
   );
 }

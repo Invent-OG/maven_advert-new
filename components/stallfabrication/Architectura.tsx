@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Ruler, Building2 } from "lucide-react";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { useRouter } from "next/navigation";
+import { FaRocket } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,7 +107,10 @@ export default function Architectura() {
           className=""
           size="xl"
         >
-          Get Started
+          <span className="flex items-center justify-center gap-2">
+            {/* Rocket Icon */}
+            Get Started <FaRocket className="w-4 h-4" />
+          </span>
         </LiquidButton>
       </div>
 

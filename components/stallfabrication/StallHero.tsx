@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Play } from "lucide-react";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { useRouter } from "next/navigation";
+import { FaRocket } from "react-icons/fa";
 
 export default function StallHero() {
   const router = useRouter();
@@ -44,9 +45,11 @@ export default function StallHero() {
               onClick={() => router.push("/contact")}
               className=""
               size="xl"
-              radius={"md"}
             >
-              Get Started
+              <span className="flex items-center justify-center gap-2">
+                {/* Rocket Icon */}
+                Get Started <FaRocket className="w-4 h-4" />
+              </span>
             </LiquidButton>
 
             {/* <button className="flex items-center gap-3 text-[#0a1b3d] font-semibold group">
