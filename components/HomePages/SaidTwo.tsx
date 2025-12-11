@@ -168,6 +168,88 @@
 // );
 
 // PhoneMockup.displayName = "PhoneMockup";
+// "use client";
+
+// import React, { useEffect, useRef } from "react";
+// import Image from "next/image";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// export default function SaidTwo() {
+//   const phonesRef = useRef(null);
+
+//   useEffect(() => {
+//     if (!phonesRef.current) return;
+
+//     const ctx = gsap.context(() => {
+//       gsap.fromTo(
+//         phonesRef.current,
+//         { y: -150 },
+//         {
+//           y: -80,
+//           ease: "power2.out",
+//           scrollTrigger: {
+//             trigger: phonesRef.current,
+//             start: "top bottom",
+//             end: "bottom top",
+//             scrub: true,
+//           },
+//         }
+//       );
+//     }, phonesRef); // Scope to phonesRef
+
+//     return () => ctx.revert();
+//   }, []);
+
+//   return (
+//     <section
+//       className="w-full overflow-hidden text-white py-20 "
+//       style={{
+//         background: "radial-gradient(ellipse at top, #C02900 0%, #000000 70%)",
+//       }}
+//     >
+//       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-10">
+//         {/* LEFT — Phones */}
+//         <div className="relative w-full md:w-1/2 flex justify-center">
+//           <div
+//             ref={phonesRef}
+//             className="relative w-[280px] sm:w-[300px] md:w-[450px] lg:w-[520px]"
+//           >
+//             {/* BACK PHONE */}
+//             <Image
+//               src="https://res.cloudinary.com/dr9gcshs6/image/upload/phone1_ujwx3x"
+//               alt="analytics phone"
+//               width={800}
+//               height={800}
+//               className="absolute -left-10 sm:-left-16 md:-left-24 top-12 opacity-80 pointer-events-none"
+//             />
+
+//             {/* FRONT PHONE */}
+//             <Image
+//               src="https://res.cloudinary.com/dr9gcshs6/image/upload/phone2_wqfevl"
+//               alt="instagram phone"
+//               width={800}
+//               height={800}
+//               className="relative z-10 md:-right-14 -right-10 pointer-events-none"
+//             />
+//           </div>
+//         </div>
+
+//         {/* RIGHT — MAIN PARAGRAPH */}
+//         <div className="w-full md:w-1/2 text-center md:text-left font-medium md:pl-10">
+//           <p className="text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight">
+//             Growth Metrics,
+//             <br /> Performance
+//             <br /> Tracking,
+//             <br /> Lasting Impact
+//           </p>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -178,34 +260,33 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SaidTwo() {
-  const phonesRef = useRef(null);
+  const phonesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!phonesRef.current) return;
 
+    const el = phonesRef.current;
+
+    // Simple scroll up-down animation
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        phonesRef.current,
-        { y: 80 },
-        {
-          y: -80,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: phonesRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 2,
-          },
-        }
-      );
-    }, phonesRef); // Scope to phonesRef
+      gsap.to(el, {
+        y: -80, // move up slightly
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true, // smooth reverse & forward
+        },
+      });
+    }, phonesRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
     <section
-      className="w-full overflow-hidden text-white py-20 "
+      className="w-full overflow-hidden text-white py-20"
       style={{
         background: "radial-gradient(ellipse at top, #C02900 0%, #000000 70%)",
       }}
