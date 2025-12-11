@@ -158,11 +158,11 @@ export default function SaidThree() {
 
       phones.forEach((phone, i) => {
         gsap.to(phone, {
-          y: -80 - i * 20, // slight parallax difference
+          y: -120 - i * 40, // slight parallax difference
           ease: "none",
           scrollTrigger: {
             trigger: phone,
-            start: "top center",
+            start: "top bottom",
             end: "bottom top",
             scrub: true, // smooth forward & reverse
           },
@@ -205,7 +205,7 @@ export default function SaidThree() {
       <div
         data-aos="fade-left"
         className="flex-1 flex justify-center inline-block items-start relative 
-        order-1 md:order-2 pb-10 pt-12 md:pt-0"
+        order-1 md:order-2  pt-12 md:pt-0"
       >
         <div className="relative flex justify-center items-end right-[40px] md:right-[0px]">
           {/* PHONE 1 */}
@@ -214,7 +214,7 @@ export default function SaidThree() {
               if (el) phoneRefs.current[0] = el;
             }}
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/phone1_ujwx3x"
-            className="phone-anim relative z-0 left-[110px] top-[100px]"
+            className="phone-anim relative z-0 left-[110px] top-[50px]"
           />
 
           {/* PHONE 2 */}
@@ -223,7 +223,7 @@ export default function SaidThree() {
               if (el) phoneRefs.current[1] = el;
             }}
             screen="https://res.cloudinary.com/dr9gcshs6/image/upload/phone2_wqfevl"
-            className="phone-anim relative z-10 top-[180px] right-[20px] md:right-[100px] translate-y-[60px]"
+            className="phone-anim relative z-10 top-[120px] right-[20px] md:right-[100px] translate-y-[60px]"
           />
         </div>
       </div>
