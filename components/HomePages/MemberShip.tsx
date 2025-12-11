@@ -83,6 +83,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { useRouter } from "next/navigation";
+import { FaBolt, FaRocket } from "react-icons/fa";
 
 export default function MemberShip() {
   const textRef = useRef(null);
@@ -127,16 +128,21 @@ export default function MemberShip() {
             Automate Your Digital Workflow.
           </h2>
 
-          <p  className="mt-6 text-lg text-neutral-600 max-w-md mx-auto md:mx-0">
+          <p className="mt-6 text-lg text-neutral-600 max-w-md mx-auto md:mx-0">
             Seamlessly connect WhatsApp, CRM, and analytics tools to manage
             leads, nurture customers, and scale smarter.
           </p>
 
-          <div className="mt-8 flex justify-start md:justify-start">
-            <LiquidButton onClick={() => router.push("/contact")} size="xl">
+          <LiquidButton
+            onClick={() => router.push("/contact")}
+            className="mt-6"
+            size="xl"
+          >
+            <span className="flex items-center gap-2">
               Get Started
-            </LiquidButton>
-          </div>
+              <FaRocket />
+            </span>
+          </LiquidButton>
         </div>
 
         {/* IMAGE BLOCK */}

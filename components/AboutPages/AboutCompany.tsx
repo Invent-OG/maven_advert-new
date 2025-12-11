@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import AnimatedButton from "../ui/AnimatedButton";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { useRouter } from "next/navigation";
+import { FaRocket } from "react-icons/fa";
 
 const tabs = [
   {
@@ -142,13 +143,15 @@ function AboutCompany() {
             </button> */}
             {/* <AnimatedButton> Discover More →</AnimatedButton> */}
             <LiquidButton
-              onClick={() => router.push("/contact")}
-              className=""
-              size="xl"
-              radius={"md"}
-            >
-              Get Started
-            </LiquidButton>
+                        onClick={() => router.push("/contact")}
+                        className="mt-6"
+                        size="xl"
+                      >
+                        <span className="flex items-center gap-2">
+                          Get Started
+                          <FaRocket />
+                        </span>
+                      </LiquidButton>
             {/* <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
               ✉️ Connect & Grow
             </button> */}

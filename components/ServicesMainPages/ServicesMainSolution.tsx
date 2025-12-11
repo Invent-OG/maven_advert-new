@@ -2,13 +2,16 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaRocket } from "react-icons/fa";
 import { gsap } from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { LiquidButton } from "../ui/liquid-glass-button";
+import { useRouter } from "next/navigation";
 
 function ServicesMainSolution() {
   const floatingRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     // Animate the small image gently up and down
@@ -112,9 +115,16 @@ function ServicesMainSolution() {
 
           {/* ---------- BUTTONS ---------- */}
           <div className="flex flex-wrap px-4 gap-4">
-            <button className="bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition flex items-center gap-2">
-              Case studies →
-            </button>
+            <LiquidButton
+              onClick={() => router.push("/contact")}
+              className=""
+              size="xl"
+            >
+              <span className="flex items-center gap-2">
+                Get Started
+                <FaRocket />
+              </span>
+            </LiquidButton>
             <button className="text-gray-900 font-medium flex items-center gap-2 hover:text-orange-500 transition">
               How it works →
             </button>

@@ -252,15 +252,12 @@ export default function WebContent() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition resize-vertical"
                 ></textarea>
               </div>
-              <div className="md:col-span-2">
-                {/* <button
-                  type="submit"
-                  className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition duration-300 font-semibold text-base md:text-lg shadow-md hover:shadow-lg"
-                >
-                  Send message
-                </button> */}
-                <LiquidButton type="submit" size="lg" radius="md">
-                  Contact now
+              <div className="md:col-span-2 mt-2">
+                {/* Custom Button Integration */}
+                <LiquidButton type="submit" size="lg">
+                  <span className="flex items-center gap-2">
+                    Contact now <FaPaperPlane />
+                  </span>
                 </LiquidButton>
               </div>
             </form>

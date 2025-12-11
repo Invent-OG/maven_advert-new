@@ -38,7 +38,7 @@ export default function Footer() {
       */}
       <footer className="bg-neutral-950 text-white pt-40 pb-12 relative z-0">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 border-b border-zinc-800 pb-12">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 border-b border-zinc-800 pb-12">
             {/* Column 1: Brand Identity */}
             <div className="flex flex-col items-start space-y-6">
               <div className="bg-white/5 p-3 rounded-lg inline-block">

@@ -255,8 +255,10 @@ export default function SupportContent() {
                 >
                   Send message
                 </button> */}
-                <LiquidButton type="submit" size="lg" radius="md">
-                  Send message
+                <LiquidButton type="submit" size="lg">
+                  <span className="flex items-center gap-2">
+                    Contact now <FaPaperPlane />
+                  </span>
                 </LiquidButton>
               </div>
             </form>

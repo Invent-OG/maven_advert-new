@@ -2,12 +2,15 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
-import { FaBullhorn } from "react-icons/fa";
+import { FaBullhorn, FaRocket } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { LiquidButton } from "../ui/liquid-glass-button";
+import { useRouter } from "next/navigation";
 
 function ServicesMainPlan() {
   const floatingRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   // Smooth up & down animation for smaller image
   useEffect(() => {
@@ -85,12 +88,19 @@ function ServicesMainPlan() {
 
           {/* Buttons */}
           <div className="flex items-center gap-6 mt-12">
-            <button className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-md text-sm font-medium transition-all duration-300">
+            {/* <button className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-md text-sm font-medium transition-all duration-300">
               How it works →
-            </button>
+            </button> */}
+            <LiquidButton
+              onClick={() => router.push("/contact")}
+              className=""
+              size="xl"
+            >
+              <span className="flex items-center gap-2">How it works →</span>
+            </LiquidButton>
 
             <button className="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-orange-500 transition">
-              ▶ Play video
+              ▶  Play video
             </button>
           </div>
         </div>

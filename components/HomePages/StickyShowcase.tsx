@@ -6,6 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { LiquidButton } from "../ui/liquid-glass-button";
+import { FaBolt } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,7 +72,10 @@ export default function StickyShowcase() {
           className="mt-6"
           size="xl"
         >
-          Get Started
+          <span className="flex items-center gap-2">
+            Get Started
+            <FaBolt />
+          </span>
         </LiquidButton>
       </div>
 
