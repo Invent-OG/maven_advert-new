@@ -68,7 +68,7 @@ export const metadata = {
       ": Design. Launch. Grow. Maven Advert merges creativity, technology, and strategy to build remarkable brands and elevate every digital move with purpose.",
     images: [
       {
-        url: "/favicon.svg",
+        url: "/favicon.ico",
         width: 1200,
         height: 630,
         alt: "Maven Advert Logo",
