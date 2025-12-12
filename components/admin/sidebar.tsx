@@ -136,7 +136,7 @@
 //           <div className="flex items-center gap-2 mb-8">
 //             <Image
 //               title="Maven-Logo"
-//               src="/favicon.ico"
+//               src="/favicon.svg"
 //               alt="Maven Advert"
 //               width={50}
 //               height={50}
@@ -365,7 +365,7 @@
 //               )}
 //             >
 //               <Image
-//                 src="/favicon.ico"
+//                 src="/favicon.svg"
 //                 alt="Maven Advert"
 //                 fill
 //                 className="object-contain"
