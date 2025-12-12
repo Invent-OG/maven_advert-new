@@ -68,7 +68,7 @@ export const metadata = {
       ": Design. Launch. Grow. Maven Advert merges creativity, technology, and strategy to build remarkable brands and elevate every digital move with purpose.",
     images: [
       {
-        url: "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651201/logos_png-02_ykasmr.png",
+        url: "/favicon.ico",
         width: 1200,
         height: 630,
         alt: "Maven Advert Logo",
@@ -81,12 +81,12 @@ export const metadata = {
     title: "Elevate Your Brand with Maven Advert | Digital Growth",
     description:
       ": Design. Launch. Grow. Maven Advert merges creativity, technology, and strategy to build remarkable brands and elevate every digital move with purpose.",
-    images: ["https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651201/logos_png-02_ykasmr.png"],
+    images: ["/favicon.ico"],
   },
   icons: {
-    icon: "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651201/logos_png-02_ykasmr.png",
-    shortcut: "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651201/logos_png-02_ykasmr.png",
-    apple: "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651201/logos_png-02_ykasmr.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
