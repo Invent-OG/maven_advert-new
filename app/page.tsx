@@ -81,12 +81,12 @@ export const metadata = {
     title: "Elevate Your Brand with Maven Advert | Digital Growth",
     description:
       ": Design. Launch. Grow. Maven Advert merges creativity, technology, and strategy to build remarkable brands and elevate every digital move with purpose.",
-    images: ["/favicon.svg"],
+    images: ["/favicon.ico"],
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
