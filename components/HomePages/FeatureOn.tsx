@@ -22,6 +22,7 @@ export default function FeatureOn() {
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651155/Clients_logo-02_ilg12c.png",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651151/Clients_logo-01_et7hay.png",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651148/Clients_logo-04_dkdqyj.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765344348/shanthi_gears_logo_egphq9.webp"
   ];
 
   useEffect(() => {

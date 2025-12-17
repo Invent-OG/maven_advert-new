@@ -111,6 +111,8 @@ function page() {
       <StickyShowcase />
       <Partner />
       <StickyShowCaseTwo />
+      <FeatureOn />
+
       <EverythingYouNeed />
       <Said />
       <Video />
@@ -120,7 +122,6 @@ function page() {
       <ServiceVideo />
       <SaidTwo />
       <MemberShip />
-      <FeatureOn />
       <SaidThree />
     </>
   );

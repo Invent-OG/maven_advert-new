@@ -112,7 +112,7 @@ export default function EverythingYouNeed() {
     },
     {
       image:
-        "https://framerusercontent.com/images/87bY5xcFN4asDCaH1lXq6XTdjCo.jpg?scale-down-to=512",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765962306/empty-modern-corridor_qj90bh.jpg",
       title: "Experiential Spaces & Installations",
       description:
         "Trade show stalls, Exhibitions, and brand environments designed to leave lasting impressions.",

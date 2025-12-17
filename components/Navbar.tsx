@@ -670,7 +670,7 @@ function Navbar() {
 
   const menuLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    { name: "About", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/casestudies" },
     { name: "Contact", href: "/contact" },
