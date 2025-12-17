@@ -70,7 +70,7 @@ export default function Footer() {
                 <li className="flex items-center group">
                   <FaPhoneAlt className="mr-3 text-orange-600 group-hover:text-white transition-colors" />
                   <span className="group-hover:text-white transition-colors">
-                    Free: 1234567890
+                    Free: +91 7418418012
                   </span>
                 </li>
               </ul>

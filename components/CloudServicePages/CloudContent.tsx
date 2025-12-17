@@ -91,11 +91,13 @@ export default function CloudContent() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 bg-orange-500 px-4 py-3 rounded-md transition hover:bg-orange-600">
                   <FaEnvelope className="text-white" />
-                  <span className="text-sm md:text-base">info@mavenadvert.com​</span>
+                  <span className="text-sm md:text-base">
+                    info@mavenadvert.com​
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 px-1">
                   <FaPhone className="text-orange-500" />
-                  <span className="text-sm md:text-base">+1 123 456 7890</span>
+                  <span className="text-sm md:text-base">+91 7418418012</span>
                 </div>
               </div>
             </div>

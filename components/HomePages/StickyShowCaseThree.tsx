@@ -111,7 +111,7 @@ export default function StickyShowCaseThree() {
           <div className="absolute top-0 left-0 h-full w-full overflow-hidden z-0 flex justify-center items-center">
             <div className="w-[95%] h-[96%] relative rounded-[2rem] overflow-hidden">
               <Image
-                src="https://images.pexels.com/photos/8384510/pexels-photo-8384510.jpeg"
+                src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1765965984/web2_aaxuck.png"
                 alt="Right Image"
                 fill
                 className="object-cover"
@@ -126,7 +126,7 @@ export default function StickyShowCaseThree() {
           >
             <div className="w-[100%] h-[96%] relative rounded-l-[2rem] overflow-hidden">
               <Image
-                src="https://images.pexels.com/photos/8885555/pexels-photo-8885555.jpeg"
+                src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1765965983/web1_lnkv9u.png"
                 alt="Left Image"
                 fill
                 className="object-cover"

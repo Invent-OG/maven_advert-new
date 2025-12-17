@@ -11,6 +11,7 @@ import {
   FaLinkedinIn,
   FaPhoneAlt,
   FaPaperPlane,
+  FaGlobe,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { gsap } from "gsap";
@@ -136,7 +137,7 @@ export default function GetInTouch() {
                 </p>
                 <p className="text-gray-500 text-lg ">
                   13a, Kulalar Street, Peelamedu,<br />
-Coimbatore - 641004
+                  Coimbatore - 641004
                 </p>
               </div>
             </div>
@@ -151,7 +152,7 @@ Coimbatore - 641004
                   Feel free to get in touch?
                 </p>
                 <p className="text-gray-500 text-lg">
-                  Phone: 1-800-222-000
+                  Phone: +91 7418418012
 
                 </p>
               </div>
@@ -271,26 +272,42 @@ Coimbatore - 641004
         </span>
         <div className="w-32 border-t border-gray-300 hidden md:block"></div>
         <div className="flex items-center gap-4">
-          <div className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all">
+          <a
+            href="https://www.facebook.com/mavenadvert/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all"
+          >
             <FaFacebookF className="text-gray-900 transition-all group-hover:text-white z-10" />
             <span className="absolute inset-0 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-all"></span>
-          </div>
-          <div className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all">
-            <FaDribbble className="text-gray-900 transition-all group-hover:text-white z-10" />
-            <span className="absolute inset-0 rounded-full bg-pink-500 opacity-0 group-hover:opacity-100 transition-all"></span>
-          </div>
-          <div className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all">
-            <FaXTwitter className="text-gray-900 transition-all group-hover:text-white z-10" />
-            <span className="absolute inset-0 rounded-full bg-blue-400 opacity-0 group-hover:opacity-100 transition-all"></span>
-          </div>
-          <div className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all">
+          </a>
+          <a
+            href="https://www.mavenadvert.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all"
+          >
+            <FaGlobe className="text-gray-900 transition-all group-hover:text-white z-10" />
+            <span className="absolute inset-0 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-all"></span>
+          </a>
+          <a
+            href="https://www.instagram.com/maven_advert/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all"
+          >
             <FaInstagram className="text-gray-900 transition-all group-hover:text-white z-10" />
             <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-all"></span>
-          </div>
-          <div className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all">
+          </a>
+          <a
+            href="https://www.linkedin.com/company/maven-advert/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group w-12 h-12 flex items-center justify-center rounded-full transition-all"
+          >
             <FaLinkedinIn className="text-gray-900 transition-all group-hover:text-white z-10" />
             <span className="absolute inset-0 rounded-full bg-blue-700 opacity-0 group-hover:opacity-100 transition-all"></span>
-          </div>
+          </a>
         </div>
       </div>
     </section>

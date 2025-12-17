@@ -82,7 +82,7 @@ export default function WebContent() {
             </div>
 
             {/* CONTACT BOX */}
-            <div className="bg-gray-900 text-white p-6 rounded-lg shadow-md">
+            <div className="bg-gray-900 text-white p-6  rounded-lg shadow-md">
               <h3 className="text-lg font-semibold mb-3">Get in Touch​</h3>
               <p className="text-sm text-gray-300 mb-6 leading-relaxed">
                 We help your brand reach its full potential through innovative
@@ -92,11 +92,13 @@ export default function WebContent() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 bg-orange-500 px-4 py-3 rounded-md transition hover:bg-orange-600">
                   <FaEnvelope className="text-white" />
-                  <span className="text-sm md:text-base">info@mavenadvert.com​</span>
+                  <span className="text-sm md:text-base">
+                    info@mavenadvert.com​
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 px-1">
                   <FaPhone className="text-orange-500" />
-                  <span className="text-sm md:text-base">+1 123 456 7890</span>
+                  <span className="text-sm md:text-base">+91 7418418012</span>
                 </div>
               </div>
             </div>
@@ -344,5 +346,3 @@ function ContactForm() {
     </form>
   );
 }
-
-

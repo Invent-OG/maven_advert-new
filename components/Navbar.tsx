@@ -689,7 +689,7 @@ function Navbar() {
         setShowNavbar(true);
       }
 
-      setLastScrollY(currentScrollY); 
+      setLastScrollY(currentScrollY);
     };
 
     // Throttle scroll events for better performance
@@ -957,11 +957,11 @@ function Navbar() {
               <div className="space-y-2">
                 <div className="flex items-center space-x-3 text-gray-600 text-sm">
                   <FaPhone className="w-4 h-4 text-orange-500" />
-                  <span>+1 (555) 123-4567</span>
+                  <span> +91 7418418012</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600 text-sm">
                   <FaEnvelope className="w-4 h-4 text-orange-500" />
-                  <span>info@yourcompany.com</span>
+                  <span>info@mavenadvert.com</span>
                 </div>
               </div>
             </div>
