@@ -135,8 +135,8 @@ export default function GetInTouch() {
                   Are you ready for coffee?
                 </p>
                 <p className="text-gray-500 text-lg ">
-                  401 Broadway, 24th Floor, <br />
-                  Orchard View, London
+                  13a, Kulalar Street, Peelamedu,<br />
+Coimbatore - 641004
                 </p>
               </div>
             </div>
@@ -151,8 +151,8 @@ export default function GetInTouch() {
                   Feel free to get in touch?
                 </p>
                 <p className="text-gray-500 text-lg">
-                  Phone: 1-800-222-000 <br />
-                  Fax: 1-800-222-002
+                  Phone: 1-800-222-000
+
                 </p>
               </div>
             </div>
@@ -167,8 +167,7 @@ export default function GetInTouch() {
                   How can we help you?
                 </p>
                 <p className="text-gray-500 text-lg">
-                  info@yourdomain.com <br />
-                  help@yourdomain.com
+                  info@mavenadvert.com
                 </p>
               </div>
             </div>

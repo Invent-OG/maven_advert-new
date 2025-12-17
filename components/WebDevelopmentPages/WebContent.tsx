@@ -92,7 +92,7 @@ export default function WebContent() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 bg-orange-500 px-4 py-3 rounded-md transition hover:bg-orange-600">
                   <FaEnvelope className="text-white" />
-                  <span className="text-sm md:text-base">info@domain.com​</span>
+                  <span className="text-sm md:text-base">info@mavenadvert.com​</span>
                 </div>
                 <div className="flex items-center gap-3 px-1">
                   <FaPhone className="text-orange-500" />
