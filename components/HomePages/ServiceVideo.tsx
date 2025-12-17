@@ -8,7 +8,7 @@ function ServiceVideo() {
   // AOS initialized globally
 
   return (
-    <div className="flex mb-10 items-center justify-center w-full px-4">
+    <div className="flex  mb-10 items-center justify-center w-full px-4">
       <div 
         data-aos="fade-down"
         className="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-gray-200/20 bg-gray-900"
@@ -21,7 +21,7 @@ function ServiceVideo() {
         </div>
 
         {/* Video Content */}
-        <div className="relative aspect-video bg-black">
+        <div className="relative aspect-video ">
           <video
             src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765961218/2_1_r7hw2c.mp4"
             autoPlay

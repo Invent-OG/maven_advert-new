@@ -33,7 +33,7 @@ function PersonalBrand() {
   ];
 
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center items-center bg-white px-4 sm:px-6 md:px-12 lg:px-20 py-16">
+    <section className="w-full min-h-screen flex flex-col justify-center items-center  px-4 sm:px-6 md:px-12 lg:px-20 py-16">
       {/* Heading */}
       <div
         data-aos="fade-up"
