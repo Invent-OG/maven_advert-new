@@ -453,7 +453,7 @@ function Navbar() {
 
   const menuLinks = [
     { name: "Home", href: "/", icon: <FaHome /> },
-    { name: "About", href: "/about", icon: <FaInfoCircle /> },
+    { name: "About", href: "/", icon: <FaInfoCircle /> },
     { name: "Services", href: "/services", icon: <FaLayerGroup /> },
     { name: "Case Studies", href: "/casestudies", icon: <FaBriefcase /> },
     { name: "Contact", href: "/contact", icon: <FaEnvelope /> },
