@@ -213,57 +213,7 @@ export default function SeoContent() {
               Get in touch with us
             </h3>
 
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <input
-                type="text"
-                placeholder="Your name"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-
-              <input
-                type="text"
-                placeholder="Your phone"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-
-              <input
-                type="text"
-                placeholder="Subject"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-
-              <textarea
-                rows={5}
-                placeholder="Your message"
-                className="w-full md:col-span-2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              ></textarea>
-
-              {/* <button
-                type="submit"
-                className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition duration-300 font-semibold text-base md:text-lg shadow-md hover:shadow-lg md:col-span-2 w-fit"
-              >
-                Send message
-              </button> */}
-              <div className="md:col-span-2">
-                {/* <button
-                  type="submit"
-                  className="bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition duration-300 font-semibold text-base md:text-lg shadow-md hover:shadow-lg"
-                >
-                  Send message
-                </button> */}
-                <LiquidButton type="submit" size="lg">
-                                  <span className="flex items-center gap-2">
-                                    Contact now <FaPaperPlane />
-                                  </span>
-                                </LiquidButton>
-              </div>
-            </form>
+            <ContactForm />
 
             <p className="text-gray-500 text-sm mt-4 mb-12">
               We are committed to protecting your privacy. We’ll never share
@@ -273,5 +223,109 @@ export default function SeoContent() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactForm() {
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          whatsappNumber: formData.phone,
+          message: formData.message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Thanks! Your message has been sent successfully.");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      } else {
+        alert("Something went wrong: " + (data.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+    >
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Your name"
+        required
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
+      />
+
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Your email address"
+        required
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
+      />
+
+      <input
+        type="tel"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        placeholder="Your phone"
+        required
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
+      />
+
+      <textarea
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        rows={5}
+        placeholder="Your message"
+        required
+        className="w-full md:col-span-2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
+      ></textarea>
+
+      <div className="md:col-span-2">
+        <LiquidButton type="submit" size="lg">
+          <span className="flex items-center gap-2">
+            {isSubmitting ? "Sending..." : "Contact now"}{" "}
+            {!isSubmitting && <FaPaperPlane />}
+          </span>
+        </LiquidButton>
+      </div>
+    </form>
   );
 }

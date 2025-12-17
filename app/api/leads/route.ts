@@ -217,7 +217,7 @@ export async function POST(req: Request) {
     try {
       const adminEmail = await resend.emails.send({
         from: "Acme <onboarding@resend.dev>",
-        to: "rahulachuz68@gmail.com",
+        to: "info@mavenadvert.com",
         subject: `📩 New Lead: ${name}`,
         html: `
 <!DOCTYPE html>
