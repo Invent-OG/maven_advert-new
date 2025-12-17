@@ -163,7 +163,7 @@ const Video = () => {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col py-12 sm:py-16 md:py-20 items-center justify-center bg-gradient-to-b from-[#1a3c8b] via-[#000000] to-black text-white text-center px-4 sm:px-6 md:px-8 lg:px-12"
+      className="flex flex-col py-12 sm:py-16 md:py-20 items-center justify-center bg-gradient-to-b from-[#021A28] via-[#000000] to-black text-white text-center px-4 sm:px-6 md:px-8 lg:px-12"
     >
       {/* Top Text */}
       <p

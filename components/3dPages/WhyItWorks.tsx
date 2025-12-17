@@ -28,9 +28,9 @@ export default function WhyItWorks() {
     <section className="flex flex-col lg:flex-row max-w-7xl mx-auto py-24 px-6 gap-32">
       {/* Left Sticky Title */}
       <div className="lg:w-1/2 w-full md:sticky top-24 self-start">
-        <h2 className="text-6xl md:text-9xl font-extrabold text-neutral-900">
-          WHY IT <br />
-          WORKS
+        <h2 className="text-6xl md:text-8xl font-extrabold text-neutral-900">
+               3D Animation Services
+
         </h2>
       </div>
 
