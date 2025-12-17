@@ -48,18 +48,18 @@ export default function Designers() {
     >
       {/* Title */}
       <h2 className="text-5xl md:text-9xl font-extrabold text-black leading-tight">
-        CONNECT WITH <br /> THE DESIGNERS
+        Curious What’s Possible With 3D?
       </h2>
 
       {/* Subtitle */}
       <p className="mt-6 text-gray-500 text-sm md:text-base max-w-lg">
-        Want to learn more, request more content, interview us, or just chat?
-        We’d love to connect. Reach out if you want!
+        <span className="font-bold text-neutral-900">Curious about what we can create for you?</span> <br />
+Connect with us—let’s bring your ideas to life in 3D.
       </p>
 
-      {/* Designers List */}
+      {/* Designers List
       <div className="mt-12 flex flex-col gap-6 w-full max-w-sm">
-        {/* Designer 1 */}
+        Designer 1
         <div className="designer-card flex items-center justify-between bg-white  rounded-xl shadow-sm hover:shadow-md transition-all p-4">
           <div className="flex items-center gap-4">
             <div className="relative w-14 h-14 rounded-lg overflow-hidden">
@@ -94,7 +94,7 @@ export default function Designers() {
           </div>
         </div>
 
-        {/* Designer 2 */}
+        Designer 2
         <div className="designer-card flex items-center justify-between bg-white  rounded-xl shadow-sm hover:shadow-md transition-all p-4">
           <div className="flex items-center gap-4">
             <div className="relative w-14 h-14 rounded-lg overflow-hidden">
@@ -128,7 +128,7 @@ export default function Designers() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

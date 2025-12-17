@@ -6,27 +6,27 @@ import Image from "next/image";
 const tipsData = [
   {
     id: "01",
-    title: "PICK A TOOL AND STICK TO IT",
+    title: "CGI Advertisement",
     description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
+      "We create cinematic CGI ads by building realistic 3D models, adding photoreal lighting, and blending them seamlessly into real footage. From concept to final composite, we craft visually striking ads that highlight products, enhance brand impact, and capture audience attention across digital platforms.",
     image:
       "https://images.pexels.com/photos/18983802/pexels-photo-18983802.jpeg",
     label: "MIDJOURNEY",
   },
   {
     id: "02",
-    title: "REFINE PROMPTS IN SMALL STEPS",
+    title: "3D Product Animation",
     description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
+      "At Maven Advert, we craft 3D product animation videos that turn your ideas into visually compelling stories. As a leading 3D product animation company in Coimbatore, we highlight every feature, texture, and mechanism with precision, creating product animations that engage customers, boost understanding, and elevate your brand across digital platforms.",
     image:
       "https://images.pexels.com/photos/34447498/pexels-photo-34447498.jpeg",
     label: "DALLE-3",
   },
   {
     id: "03",
-    title: "USE REFERENCE IMAGES",
+    title: "Industrial Animation",
     description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
+      "We create industrial 3D animation videos that simplify complex machinery, processes, and prototypes. As a top 3D animation company in Coimbatore, we use detailed simulations, cutaway views, and exploded diagrams to showcase engineering precision. Our animations help businesses explain products, demonstrate workflows, and engage clients with clarity and impact.",
     image:
       "https://images.pexels.com/photos/29325065/pexels-photo-29325065.jpeg",
     label: "LEONARDO",

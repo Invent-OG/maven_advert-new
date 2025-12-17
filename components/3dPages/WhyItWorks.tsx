@@ -6,39 +6,21 @@ import Image from "next/image";
 const tipsData = [
   {
     id: "01",
-    title: "PICK A TOOL AND STICK TO IT",
+    title: "3D Character Animation",
     description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
+      "We bring characters to life with 3D character animation that captures realistic movements, expressions, and emotions. As a leading 3D animation company in Coimbatore, we craft animations that make storytelling engaging and immersive, helping brands, films, and campaigns connect with their audience on a deeper level.",
     image:
       "https://cdn.prod.website-files.com/63f9f100025c058594957cca%2F6871acefa162f4b7055b7e9c_Humanize-min20-poster-00001.jpg",
     label: "MIDJOURNEY",
   },
   {
     id: "02",
-    title: "REFINE PROMPTS IN SMALL STEPS",
+    title: "Architectural walkthroughs",
     description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
+      "We transform blueprints into immersive architectural walkthroughs, creating photorealistic 3D environments for residential and commercial projects. Our 3D animation services in Coimbatore highlight materials, lighting, and spatial design, allowing clients to experience spaces virtually before construction begins.",
     image:
       "https://images.pexels.com/photos/34447498/pexels-photo-34447498.jpeg",
     label: "DALLE-3",
-  },
-  {
-    id: "03",
-    title: "USE REFERENCE IMAGES",
-    description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
-    image:
-      "https://images.pexels.com/photos/29325065/pexels-photo-29325065.jpeg",
-    label: "LEONARDO",
-  },
-  {
-    id: "04", // ⭐ FIXED — previously duplicated "03"
-    title: "Digital",
-    description:
-      "Every image generator has its own visual style, so using the same prompt across different tools can produce completely different results. This variability makes it hard to iterate quickly or maintain consistency across a project. The fastest way to get reliable, usable outputs is to pick one tool and learn how it behaves. Once you're familiar with its quirks, you’ll spend less time troubleshooting and more time creating.",
-    image:
-      "https://images.pexels.com/photos/34036469/pexels-photo-34036469.jpeg",
-    label: "MARKETING",
   },
 ];
 

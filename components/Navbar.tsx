@@ -674,7 +674,7 @@ function Navbar() {
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/casestudies" },
     { name: "Contact", href: "/contact" },
-    { name: "Stall Fabrication", href: "/contact", isButton: true },
+    // { name: "Stall Fabrication", href: "/contact", isButton: true },
     { name: "3D Modelling", href: "/threed", isButton: true },
   ];
 

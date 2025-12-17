@@ -114,7 +114,7 @@ function page() {
       <EverythingYouNeed />
       <Said />
       <Video />
-      <DynamicTestimonials />
+      {/* <DynamicTestimonials /> */}
       <StickyShowCaseThree />
       <PersonalBrand />
       <ServiceVideo />

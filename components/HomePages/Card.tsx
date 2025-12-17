@@ -124,6 +124,13 @@ export default function EverythingYouNeed() {
       description:
         "Advanced analytics and optimization to continuously refine campaigns and strategy outcomes.",
     },
+    {
+      image:
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646964/Assets-07_hglckz.jpg",
+      title: "Performance Intelligence & Insights",
+      description:
+        "Advanced analytics and optimization to continuously refine campaigns and strategy outcomes.",
+    },
   ];
 
   return (
