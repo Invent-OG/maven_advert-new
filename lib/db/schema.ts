@@ -64,6 +64,8 @@ export const portfolios = pgTable("portfolios", {
   content: text("content"), // extra content for layout
   layoutId: integer("layout_id").notNull(),
   images: text("images").notNull(), // store as JSON string array
+  websiteUrl: text("website_url"),
+  blocks: text("blocks"), // New: Store dynamic builder blocks as JSON string
   createdAt: timestamp("created_at").defaultNow().notNull(),
   createdBy: uuid("created_by").references(() => users.id),
 });

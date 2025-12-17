@@ -674,7 +674,7 @@ function Navbar() {
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/casestudies" },
     { name: "Contact", href: "/contact" },
-    { name: "Stall Fabrication", href: "/stallfabrication", isButton: true },
+    { name: "Stall Fabrication", href: "/contact", isButton: true },
     { name: "3D Modelling", href: "/threed", isButton: true },
   ];
 
@@ -689,7 +689,7 @@ function Navbar() {
         setShowNavbar(true);
       }
 
-      setLastScrollY(currentScrollY);
+      setLastScrollY(currentScrollY); 
     };
 
     // Throttle scroll events for better performance

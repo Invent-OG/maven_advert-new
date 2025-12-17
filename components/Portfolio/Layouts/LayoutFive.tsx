@@ -1,13 +1,17 @@
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 export default function Layout5({
   title,
   description,
   content,
   images,
+  websiteUrl,
 }: {
   title: string;
   description: string;
   content: string;
   images: string[];
+  websiteUrl?: string | null;
 }) {
   return (
     <div className="w-full flex flex-col gap-10 pb-20">
@@ -38,6 +42,18 @@ export default function Layout5({
           className="rounded-xl w-full"
         />
       </section>
+      {/* FIXED FLOATING VISIT BUTTON */}
+      {websiteUrl && (
+        <a
+          href={websiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
+        >
+          <span>Visit Site</span>
+          <FaExternalLinkAlt className="w-3 h-3" />
+        </a>
+      )}
     </div>
   );
 }

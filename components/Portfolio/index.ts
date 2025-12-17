@@ -9,6 +9,7 @@ export type PortfolioLayoutProps = {
   description: string;
   content: string;
   images: string[];
+  websiteUrl?: string | null;
 };
 
 export const PortfolioLayouts: Record<

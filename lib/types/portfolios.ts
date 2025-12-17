@@ -12,6 +12,42 @@ export const PortfolioLayoutSchema = z.object({
 });
 export type PortfolioLayout = z.infer<typeof PortfolioLayoutSchema>;
 
+export type PortfolioBlockType =
+  | "hero"
+  | "text"
+  | "image_full"
+  | "image_grid"
+  | "gallery"
+  | "spacer"
+  | "stats_grid"
+  | "image_text_split"
+  | "gallery_text_split"
+  | "image_with_text";
+
+export interface PortfolioBlock {
+  id: string;
+  type: PortfolioBlockType;
+  content: any; // Type depends on block type
+}
+
+// Zod schema for a block (simplified for now as "any" content, or specific objects)
+export const PortfolioBlockContentSchema = z.object({
+  id: z.string(),
+  type: z.enum([
+    "hero",
+    "text",
+    "image_full",
+    "image_grid",
+    "gallery",
+    "spacer",
+    "stats_grid",
+    "image_text_split",
+    "gallery_text_split",
+    "image_with_text",
+  ]),
+  content: z.any(),
+});
+
 // Main portfolio schema
 export const PortfolioSchema = z.object({
   id: z.string().uuid().optional(),
@@ -19,9 +55,11 @@ export const PortfolioSchema = z.object({
   description: z.string().min(1, "Description is required"),
   content: z.string().optional(),
   // layoutId references a PortfolioLayout id
-  layoutId: z.number().min(1, "layoutId must be a valid layout number"),
+  layoutId: z.number().min(0, "layoutId must be a valid layout number"),
   // images — array of URLs (you can change to accept file names if needed)
   images: z.array(z.string().min(1)).optional().default([]),
+  websiteUrl: z.string().optional().nullable(),
+  blocks: z.array(PortfolioBlockContentSchema).optional(),
   createdAt: z
     .preprocess((arg) => (arg ? new Date(arg as string) : undefined), z.date())
     .optional(),

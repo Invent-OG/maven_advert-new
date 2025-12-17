@@ -226,6 +226,9 @@ import React, { useState } from "react";
 
 import { useCreatePortfolio } from "@/lib/queries/portfolio";
 import { PortfolioLayouts } from "@/components/Portfolio";
+import PortfolioBuilder from "@/components/admin/portfolio/PortfolioBuilder";
+import BlockRenderer from "@/components/Portfolio/BlockRenderer";
+import { PortfolioBlock } from "@/lib/types/portfolios";
 
 const layouts = [
   {
@@ -272,42 +275,61 @@ function Page() {
   const [selectedLayout, setSelectedLayout] = useState<number | null>(null);
   const [imagesPreview, setImagesPreview] = useState<string[]>([]);
   const requiredImages = selectedLayout ? layoutImageCounts[selectedLayout] : 0;
+  
+  // Basic Info
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
+
+  // Builder Mode State
+  const [isBuilderMode, setIsBuilderMode] = useState(true);
+  const [blocks, setBlocks] = useState<PortfolioBlock[]>([]);
 
   const createMutation = useCreatePortfolio();
 
   const handleSave = async () => {
-    if (!selectedLayout) return alert("Select a layout first");
+    // Validation
     if (!title || !description)
       return alert("Title and description are required");
 
-    const finalImages = Array.from({ length: requiredImages }).map((_, index) =>
-      (imagesPreview[index] || "").trim()
-    );
-
-    if (requiredImages > 0 && finalImages.some((img) => !img)) {
-      return alert(
-        `Please provide all ${requiredImages} image URLs required for this layout.`
+    // Legacy Mode Validation
+    if (!isBuilderMode) {
+      if (!selectedLayout) return alert("Select a layout first");
+      const finalImages = Array.from({ length: requiredImages }).map((_, index) =>
+        (imagesPreview[index] || "").trim()
       );
+      if (requiredImages > 0 && finalImages.some((img) => !img)) {
+        return alert(
+          `Please provide all ${requiredImages} image URLs required for this layout.`
+        );
+      }
+    } else {
+        // Builder Mode Validation
+        if (blocks.length === 0) return alert("Please add at least one content block.");
     }
 
     try {
-      await createMutation.mutateAsync({
+      const payload: any = {
         title,
         description,
-        content,
-        layoutId: selectedLayout,
-        images: finalImages.filter((img) => img.length > 0),
-      });
+        content: isBuilderMode ? "" : content,
+        layoutId: isBuilderMode ? 0 : selectedLayout, // 0 for builder mode
+        images: isBuilderMode ? [] : imagesPreview.filter((img) => img.length > 0),
+        websiteUrl: websiteUrl.trim() || null,
+        blocks: isBuilderMode ? blocks : [],
+      };
+
+      await createMutation.mutateAsync(payload);
 
       alert("Portfolio saved to database!");
 
       setTitle("");
       setDescription("");
       setContent("");
+      setWebsiteUrl("");
       setImagesPreview([]);
+      setBlocks([]);
       setSelectedLayout(null);
     } catch (err) {
       alert("Failed to save portfolio");
@@ -361,6 +383,19 @@ function Page() {
                     onChange={(e) => setDescription(e.target.value)}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter portfolio description"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Website URL
+                    <span className="text-gray-400 font-normal ml-2">(Optional)</span>
+                  </label>
+                  <input
+                    value={websiteUrl}
+                    onChange={(e) => setWebsiteUrl(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
+                    placeholder="https://example.com"
                   />
                 </div>
 
@@ -420,48 +455,72 @@ function Page() {
               </div>
             </div>
 
-            {/* Layout Selection Card */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 transition-all duration-300 hover:shadow-xl">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-3 border-b border-gray-200">
-                Select Portfolio Layout
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {layouts.map((layout) => (
-                  <div
-                    key={layout.id}
-                    onClick={() => setSelectedLayout(layout.id)}
-                    className={`group cursor-pointer rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                      selectedLayout === layout.id
-                        ? "border-blue-500 shadow-lg scale-105 bg-blue-50"
-                        : "border-gray-200 hover:border-blue-300 hover:shadow-md"
-                    }`}
-                  >
-                    <div className="aspect-video overflow-hidden rounded-t-xl">
-                      <img
-                        src={layout.preview}
-                        alt={layout.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-4 text-center">
-                      <p
-                        className={`font-semibold transition-colors duration-200 ${
-                          selectedLayout === layout.id
-                            ? "text-blue-600"
-                            : "text-gray-800 group-hover:text-blue-600"
-                        }`}
-                      >
-                        {layout.name}
-                      </p>
-                      <div className="flex items-center justify-center mt-2">
-                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                          {layoutImageCounts[layout.id]} images
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+
+
+            {/* Mode Toggle */}
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                 <div className="flex items-center gap-4 mb-6">
+                    <button 
+                         onClick={() => setIsBuilderMode(true)}
+                         className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${isBuilderMode ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                    >
+                         Page Builder (New)
+                    </button>
+                    <button 
+                         onClick={() => setIsBuilderMode(false)}
+                         className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${!isBuilderMode ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                    >
+                         Legacy Layouts
+                    </button>
+                 </div>
+
+                 {isBuilderMode ? (
+                     <PortfolioBuilder blocks={blocks} onChange={setBlocks} />
+                 ) : (
+                    <>
+                        {/* Legacy Layout Selection Content */}
+                        <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-3 border-b border-gray-200">
+                            Select Portfolio Layout
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {layouts.map((layout) => (
+                            <div
+                                key={layout.id}
+                                onClick={() => setSelectedLayout(layout.id)}
+                                className={`group cursor-pointer rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
+                                selectedLayout === layout.id
+                                    ? "border-blue-500 shadow-lg scale-105 bg-blue-50"
+                                    : "border-gray-200 hover:border-blue-300 hover:shadow-md"
+                                }`}
+                            >
+                                <div className="aspect-video overflow-hidden rounded-t-xl">
+                                <img
+                                    src={layout.preview}
+                                    alt={layout.name}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                />
+                                </div>
+                                <div className="p-4 text-center">
+                                <p
+                                    className={`font-semibold transition-colors duration-200 ${
+                                    selectedLayout === layout.id
+                                        ? "text-blue-600"
+                                        : "text-gray-800 group-hover:text-blue-600"
+                                    }`}
+                                >
+                                    {layout.name}
+                                </p>
+                                <div className="flex items-center justify-center mt-2">
+                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                                    {layoutImageCounts[layout.id]} images
+                                    </span>
+                                </div>
+                                </div>
+                            </div>
+                            ))}
+                        </div>
+                    </>
+                 )}
             </div>
 
             {/* Action Buttons */}
@@ -486,7 +545,9 @@ function Page() {
                   setTitle("");
                   setDescription("");
                   setContent("");
+                  setWebsiteUrl("");
                   setImagesPreview([]);
+                  setBlocks([]);
                   setSelectedLayout(null);
                 }}
                 className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 transform hover:scale-105"
@@ -498,130 +559,101 @@ function Page() {
 
           {/* Right Column - Preview */}
           <div className="xl:sticky xl:top-4 h-fit">
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 transition-all duration-300">
-              <div className="flex items-center justify-between mb-6 pb-3 border-b border-gray-200">
+            <div className={`bg-white rounded-2xl shadow-lg border border-gray-100 transition-all duration-300 ${!isBuilderMode ? 'p-6' : 'p-2'}`}>
+              <div className="flex items-center justify-between mb-6 pb-3 border-b border-gray-200 px-4 pt-4">
                 <h2 className="text-2xl font-semibold text-gray-800">
                   Live Preview
                 </h2>
-                {selectedLayout && (
-                  <span className="text-sm font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    Active Layout
-                  </span>
+                {isBuilderMode ? (
+                     <span className="text-sm font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full flex items-center gap-2">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                        Page Builder
+                     </span>
+                ) : (
+                    selectedLayout && (
+                    <span className="text-sm font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full flex items-center gap-2">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        Active Layout
+                    </span>
+                    )
                 )}
               </div>
 
-              {selectedLayout ? (
-                <div className="space-y-4">
-                  <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
-                    <p className="text-sm text-blue-700 font-medium">
-                      Previewing:{" "}
-                      <span className="font-bold">
-                        {layouts.find((l) => l.id === selectedLayout)?.name}
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className="border-2 border-dashed border-gray-300 rounded-2xl overflow-hidden bg-gray-50 min-h-[600px] flex items-center justify-center">
-                    {(() => {
-                      const LayoutComponent = PortfolioLayouts[selectedLayout];
-                      return LayoutComponent ? (
-                        <div className="w-full transform scale-90 origin-top">
-                          <LayoutComponent
-                            title={title || "Your Portfolio Title"}
-                            description={
-                              description ||
-                              "Your portfolio description will appear here"
-                            }
-                            content={
-                              content ||
-                              "<p>Add your detailed content here...</p>"
-                            }
-                            images={
-                              imagesPreview.length > 0
-                                ? imagesPreview
-                                : Array.from({ length: requiredImages }).map(
-                                    (_, i) =>
-                                      `https://via.placeholder.com/800x600/3B82F6/FFFFFF?text=Image+${
-                                        i + 1
-                                      }`
-                                  )
-                            }
-                          />
-                        </div>
+              {isBuilderMode ? (
+                  <div className="min-h-[600px] border-2 border-dashed border-gray-200 rounded-xl bg-white overflow-hidden">
+                      {blocks.length > 0 ? (
+                           <BlockRenderer blocks={blocks} />
                       ) : (
-                        <div className="text-center p-8">
-                          <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
-                            <svg
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={1.5}
-                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                              />
-                            </svg>
+                          <div className="flex flex-col items-center justify-center h-[400px] text-gray-400">
+                               <p>Start adding blocks to see preview</p>
                           </div>
-                          <p className="text-gray-500">
-                            Layout component not found
-                          </p>
-                        </div>
-                      );
-                    })()}
+                      )}
                   </div>
+              ) : (
+                  // Legacy Preview Logic
+                  selectedLayout ? (
+                    <div className="space-y-4">
+                    <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+                        <p className="text-sm text-blue-700 font-medium">
+                        Previewing:{" "}
+                        <span className="font-bold">
+                            {layouts.find((l) => l.id === selectedLayout)?.name}
+                        </span>
+                        </p>
+                    </div>
 
-                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                    <h4 className="font-semibold text-gray-800 mb-3">
-                      Preview Information
-                    </h4>
-                    <ul className="text-sm text-gray-600 space-y-2">
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span>Real-time preview updates as you type</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span>
-                          Layout automatically adjusts to your content
-                        </span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                        <span>
-                          Placeholder images shown until URLs provided
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
+                    <div className="border-2 border-dashed border-gray-300 rounded-2xl overflow-hidden bg-gray-50 min-h-[600px] flex items-center justify-center">
+                        {(() => {
+                        const LayoutComponent = PortfolioLayouts[selectedLayout];
+                        return LayoutComponent ? (
+                            <div className="w-full transform scale-90 origin-top">
+                            <LayoutComponent
+                                title={title || "Your Portfolio Title"}
+                                description={
+                                description ||
+                                "Your portfolio description will appear here"
+                                }
+                                content={
+                                content ||
+                                "<p>Add your detailed content here...</p>"
+                                }
+                                images={
+                                imagesPreview.length > 0
+                                    ? imagesPreview
+                                    : Array.from({ length: requiredImages }).map(
+                                        (_, i) =>
+                                        `https://via.placeholder.com/800x600/3B82F6/FFFFFF?text=Image+${
+                                            i + 1
+                                        }`
+                                    )
+                                }
+                            />
+                            </div>
+                        ) : (
+                            <div className="text-center p-8">
+                                <p className="text-gray-500">
+                                    Layout component not found
+                                </p>
+                            </div>
+                        );
+                        })()}
+                    </div>
                 </div>
               ) : (
                 <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 text-gray-300">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
                   <h3 className="text-xl font-semibold text-gray-700 mb-3">
                     No Layout Selected
                   </h3>
                   <p className="text-gray-500 max-w-md mx-auto">
-                    Choose a layout from the selection panel to see a live
-                    preview of your portfolio design.
+                    Choose a layout or switch to Page Builder mode.
                   </p>
                 </div>
-              )}
+              )
+            )}
             </div>
           </div>
+          </div>
         </div>
-      </div>
     </div>
   );
 }

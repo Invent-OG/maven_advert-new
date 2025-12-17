@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { PortfolioLayouts } from "@/components/Portfolio";
-import { Portfolio } from "@/lib/types/portfolios";
+import { Portfolio, PortfolioBlock } from "@/lib/types/portfolios";
+import BlockRenderer from "@/components/Portfolio/BlockRenderer";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function CaseStudyDetailPage({
   params,
@@ -40,6 +42,7 @@ export default function CaseStudyDetailPage({
           ...found,
           images,
           layoutId: Number(found.layoutId),
+          blocks: typeof found.blocks === 'string' ? JSON.parse(found.blocks) : (found.blocks || []),
         });
       } catch (err) {
         console.error("Failed to load portfolio:", err);
@@ -54,12 +57,33 @@ export default function CaseStudyDetailPage({
   if (loading) return <div className="p-10">Loading...</div>;
   if (!portfolio) return <div className="p-10">Portfolio Not Found</div>;
 
+  // Check for Dynamic Blocks first
+  if (portfolio.blocks && portfolio.blocks.length > 0) {
+      return (
+          <div className="w-full min-h-screen bg-white pb-20">
+              <BlockRenderer blocks={portfolio.blocks} />
+               {portfolio.websiteUrl && (
+                    <a
+                    href={portfolio.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
+                    >
+                    <span>Visit Site</span>
+                    <FaExternalLinkAlt className="w-3 h-3" />
+                    </a>
+                )}
+          </div>
+      );
+  }
+
   const Layout = PortfolioLayouts[portfolio.layoutId];
 
+  // If no Blocks AND no valid Layout (e.g. layoutId 0 but blocks empty for some reason), show error or fallback
   if (!Layout) {
     return (
       <div className="p-10 text-red-600">
-        Invalid layout selected for this portfolio.
+        Empty portfolio or invalid configuration.
       </div>
     );
   }
@@ -70,6 +94,7 @@ export default function CaseStudyDetailPage({
       description={portfolio.description}
       content={portfolio.content ?? ""}
       images={portfolio.images ?? []}
+      websiteUrl={portfolio.websiteUrl}
     />
   );
 }

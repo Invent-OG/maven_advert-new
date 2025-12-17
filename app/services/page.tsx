@@ -20,7 +20,7 @@ function page() {
       <ServicesMainGrowth />
       <ServicesMainCard />
       <ServicesMainPlan />
-      <ServicesMainFeedBack />
+      {/* <ServicesMainFeedBack /> */}
     </div>
   );
 }

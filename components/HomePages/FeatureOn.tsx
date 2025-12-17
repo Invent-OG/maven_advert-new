@@ -11,6 +11,7 @@ export default function FeatureOn() {
 
   const images = [
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651186/Clients_logo-07_fhw5hp.png",
+    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765353428/OG_logo_black_xortdx.png",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651182/Clients_logo-11_nezn6z.png",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651182/Clients_logo-10_sssxoy.png",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651179/Clients_logo-08_lkpkoc.png",

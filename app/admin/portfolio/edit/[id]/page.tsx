@@ -255,13 +255,16 @@ import {
   Calendar,
   Image as ImageIcon,
 } from "lucide-react";
+import PortfolioBuilder from "@/components/admin/portfolio/PortfolioBuilder";
+import { PortfolioBlock } from "@/lib/types/portfolios";
+import BlockRenderer from "@/components/Portfolio/BlockRenderer";
 
 export default function EditPortfolioPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id = params.id;
+  const { id } = React.use(params);
   const router = useRouter();
 
   const updateMutation = useUpdatePortfolio();
@@ -273,8 +276,13 @@ export default function EditPortfolioPage({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
   const [imagesPreview, setImagesPreview] = useState<string[]>([]);
   const [selectedLayout, setSelectedLayout] = useState<number | null>(null);
+
+  // Builder Mode State
+  const [isBuilderMode, setIsBuilderMode] = useState(false);
+  const [blocks, setBlocks] = useState<PortfolioBlock[]>([]);
 
   const layouts = [
     {
@@ -352,6 +360,7 @@ export default function EditPortfolioPage({
         setTitle(found.title);
         setDescription(found.description);
         setContent(found.content ?? "");
+        setWebsiteUrl(found.websiteUrl ?? "");
 
         try {
           const images =
@@ -361,6 +370,19 @@ export default function EditPortfolioPage({
           setImagesPreview(images);
         } catch {
           setImagesPreview([]);
+        }
+
+
+        try {
+            const loadedBlocks = typeof found.blocks === 'string' ? JSON.parse(found.blocks) : (found.blocks || []);
+            setBlocks(loadedBlocks);
+            
+            // Auto switch to builder mode if layoutId is 0 or if blocks exist
+            if (Number(found.layoutId) === 0 || loadedBlocks.length > 0) {
+                setIsBuilderMode(true);
+            }
+        } catch {
+            setBlocks([]);
         }
 
         setSelectedLayout(Number(found.layoutId));
@@ -405,14 +427,18 @@ export default function EditPortfolioPage({
     }
 
     try {
-      await updateMutation.mutateAsync({
+      const payload: any = {
         id,
         title,
         description,
-        content,
-        layoutId: selectedLayout || 1,
-        images: imagesPreview.filter((url) => url.trim().length > 0),
-      });
+        content: isBuilderMode ? "" : content,
+        layoutId: isBuilderMode ? 0 : (selectedLayout || 1),
+        images: isBuilderMode ? [] : imagesPreview.filter((url) => url.trim().length > 0),
+        websiteUrl: websiteUrl.trim() || null,
+        blocks: isBuilderMode ? blocks : [],
+      };
+
+      await updateMutation.mutateAsync(payload);
 
       alert("Portfolio updated successfully!");
     } catch (e) {
@@ -543,95 +569,132 @@ export default function EditPortfolioPage({
                     placeholder="Add content in HTML format"
                   />
                 </div>
+
+                <div>
+                   <label className="block text-sm font-medium text-gray-700 mb-2">
+                     Website URL (Optional)
+                   </label>
+                   <input
+                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                     value={websiteUrl}
+                     onChange={(e) => setWebsiteUrl(e.target.value)}
+                     placeholder="https://example.com"
+                   />
+                 </div>
               </div>
             </div>
 
-            {/* Images */}
+          
+            {/* BUILDER / IMAGES SECTION */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  Portfolio Images
-                </h2>
-                {selectedLayout && (
-                  <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-2 rounded-lg">
-                    <ImageIcon className="h-4 w-4" />
-                    <span className="text-sm font-medium">
-                      {currentValidImages}/{requiredImages} images
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {selectedLayout ? (
-                <div className="space-y-4">
-                  {Array.from({ length: requiredImages }).map((_, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg bg-gray-50"
-                    >
-                      <div className="flex-1">
-                        <label className="text-sm font-medium text-gray-700 mb-1 block">
-                          Image {index + 1} *
-                        </label>
-                        <input
-                          value={imagesPreview[index] || ""}
-                          onChange={(e) =>
-                            updateImageUrl(index, e.target.value)
-                          }
-                          placeholder="https://res.cloudinary.com/.."
-                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                        />
-                      </div>
-                      <button
-                        onClick={() => clearImageUrl(index)}
-                        className="bg-red-500 hover:bg-red-600 text-white p-2 rounded"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      {isBuilderMode ? "Page Content Blocks" : "Portfolio Images"}
+                    </h2>
+                    
+                    {/* Tiny Toggle for switching if needed, though mostly auto-detected */}
+                    <div className="flex bg-gray-100 p-1 rounded-lg">
+                         <button 
+                            onClick={() => setIsBuilderMode(false)}
+                            className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${!isBuilderMode ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                         >
+                            Layout Mode
+                         </button>
+                         <button 
+                            onClick={() => setIsBuilderMode(true)}
+                            className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${isBuilderMode ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                         >
+                            Builder Mode
+                         </button>
                     </div>
-                  ))}
                 </div>
-              ) : (
-                <div className="text-center py-8 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                  <ImageIcon className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-600 font-medium">
-                    Select a layout first to add images
-                  </p>
-                </div>
-              )}
 
-              {currentValidImages > 0 && (
-                <div className="mt-8">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-4">
-                    Image Previews
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {imagesPreview
-                      .filter((url) => url.trim() !== "")
-                      .map((img, index) => (
-                        <div key={index} className="relative">
-                          <img
-                            src={img}
-                            className="w-full h-32 object-cover rounded border"
-                          />
-                          <span className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                            {index + 1}
-                          </span>
+                {isBuilderMode ? (
+                    <PortfolioBuilder blocks={blocks} onChange={setBlocks} />
+                ) : (
+                    <>
+                        {selectedLayout && (
+                        <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-2 rounded-lg mb-4">
+                            <ImageIcon className="h-4 w-4" />
+                            <span className="text-sm font-medium">
+                            {currentValidImages}/{requiredImages} images
+                            </span>
                         </div>
-                      ))}
-                  </div>
-                </div>
-              )}
+                        )}
+                        
+                        {selectedLayout ? (
+                            <div className="space-y-4">
+                            {Array.from({ length: requiredImages }).map((_, index) => (
+                                <div
+                                key={index}
+                                className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg bg-gray-50"
+                                >
+                                <div className="flex-1">
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">
+                                    Image {index + 1} *
+                                    </label>
+                                    <input
+                                    value={imagesPreview[index] || ""}
+                                    onChange={(e) =>
+                                        updateImageUrl(index, e.target.value)
+                                    }
+                                    placeholder="https://res.cloudinary.com/.."
+                                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                                    />
+                                </div>
+                                <button
+                                    onClick={() => clearImageUrl(index)}
+                                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded"
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                </button>
+                                </div>
+                            ))}
+                            </div>
+                        ) : (
+                            <div className="text-center py-8 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                            <ImageIcon className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                            <p className="text-gray-600 font-medium">
+                                Select a layout first to add images
+                            </p>
+                            </div>
+                        )}
+
+                        {currentValidImages > 0 && (
+                            <div className="mt-8">
+                            <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                                Image Previews
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {imagesPreview
+                                .filter((url) => url.trim() !== "")
+                                .map((img, index) => (
+                                    <div key={index} className="relative">
+                                    <img
+                                        src={img}
+                                        className="w-full h-32 object-cover rounded border"
+                                    />
+                                    <span className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                                        {index + 1}
+                                    </span>
+                                    </div>
+                                ))}
+                            </div>
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
           </div>
 
           {/* Right Panel */}
           <div className="space-y-6">
             {/* Layout Selection */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-6">
-                Select Layout
-              </h2>
+            {!isBuilderMode && (
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 className="text-xl font-semibold text-gray-800 mb-6">
+                    Select Layout
+                </h2>
               <div className="grid grid-cols-1 gap-4">
                 {layouts.map((layout) => (
                   <div
@@ -662,6 +725,7 @@ export default function EditPortfolioPage({
                 ))}
               </div>
             </div>
+            )}
 
             {/* Actions */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-4">

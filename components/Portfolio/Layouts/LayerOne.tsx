@@ -166,17 +166,20 @@
 /* eslint-disable @next/next/no-img-element */
 
 import React from "react";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function LayerOne({
   title,
   description,
   content,
   images,
+  websiteUrl,
 }: {
   title: string;
   description: string;
   content: string;
   images: string[];
+  websiteUrl?: string | null;
 }) {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
@@ -298,6 +301,19 @@ export default function LayerOne({
           </ul>
         </div>
       </section>
+
+      {/* FIXED FLOATING VISIT BUTTON */}
+      {websiteUrl && (
+        <a
+          href={websiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
+        >
+          <span>Visit Site</span>
+          <FaExternalLinkAlt className="w-3 h-3" />
+        </a>
+      )}
     </div>
   );
 }

@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { title, description, content, layoutId, images, createdBy } = body;
+    const { title, description, content, layoutId, images, createdBy, websiteUrl, blocks } = body;
 
     if (!title || !description || typeof layoutId !== "number" || !images) {
       return NextResponse.json(
@@ -24,6 +24,8 @@ export async function POST(req: Request) {
         content,
         layoutId,
         images: JSON.stringify(images),
+        websiteUrl,
+        blocks: blocks ? JSON.stringify(blocks) : null,
         createdBy,
       })
       .returning();
@@ -48,6 +50,7 @@ export async function GET() {
     const parsed = data.map((p) => ({
       ...p,
       images: p.images ? JSON.parse(p.images) : [],
+      blocks: p.blocks ? JSON.parse(p.blocks) : [],
     }));
 
     return NextResponse.json(parsed, { status: 200 });
@@ -64,7 +67,7 @@ export async function GET() {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const { id, title, description, content, layoutId, images } = body;
+    const { id, title, description, content, layoutId, images, websiteUrl, blocks } = body;
 
     if (!id) {
       return NextResponse.json(
@@ -88,6 +91,8 @@ export async function PUT(req: Request) {
         content,
         layoutId,
         images: images ? JSON.stringify(images) : undefined,
+        websiteUrl,
+        blocks: blocks ? JSON.stringify(blocks) : undefined,
       })
       .where(eq(portfolios.id, id))
       .returning();

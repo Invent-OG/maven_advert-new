@@ -12,7 +12,6 @@ export default function Partner() {
   const images = [
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765344977/ten_digit_logo_o4fhau.webp",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765344314/Interakt_logo_uywjgb.webp",
-    "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765353428/OG_logo_black_xortdx.png",
     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1765344315/Zoho_partner_logo_lvdbrd.webp",
   ];
 
@@ -39,13 +38,13 @@ export default function Partner() {
   }, []);
 
   return (
-    <section className="flex flex-col justify-start items-center overflow-hidden ">
+    <section className="relative flex flex-col justify-start items-center overflow-hidden ">
       {/* ===== PROFESSIONAL HEADING ===== */}
       <h2
-        className="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900  text-center"
+        className="absolute text-3xl md:text-4xl font-semibold  text-neutral-900  text-center"
         data-aos="fade-up"
       >
-        Trusted Partners{" "}
+        Platform Partners{" "}
       </h2>
 
       {/* ===== LOGO MARQUEE ===== */}
@@ -68,7 +67,7 @@ export default function Partner() {
                 ${src.includes("ten_digit_logo") ? "scale-100" : "scale-100"}
               `}
               width={180}
-              height={180}
+              height={10}
               draggable={false}
             />
           ))}
