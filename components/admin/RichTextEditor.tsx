@@ -4,6 +4,13 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
+import UnderlineExtension from "@tiptap/extension-underline";
+import HighlightExtension from "@tiptap/extension-highlight";
+import SubscriptExtension from "@tiptap/extension-subscript";
+import SuperscriptExtension from "@tiptap/extension-superscript";
+import { Color as ColorExtension } from "@tiptap/extension-color";
+import { TextStyle } from "@tiptap/extension-text-style";
+
 import {
   Bold,
   Italic,
@@ -19,6 +26,14 @@ import {
   AlignRight,
   Undo,
   Redo,
+  Underline as UnderlineIcon,
+  Strikethrough,
+  Code,
+  Highlighter,
+  Subscript as SubscriptIcon,
+  Superscript as SuperscriptIcon,
+  Quote,
+  Minus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -50,6 +65,12 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
+      UnderlineExtension,
+      HighlightExtension,
+      SubscriptExtension,
+      SuperscriptExtension,
+      TextStyle,
+      ColorExtension,
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -73,143 +94,211 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     const previousUrl = editor.getAttributes("link").href;
     const url = prompt("URL", previousUrl);
 
-    // cancelled
-    if (url === null) {
-      return;
-    }
-
-    // empty
+    if (url === null) return;
     if (url === "") {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
       return;
     }
-
-    // update link
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   };
 
   return (
-    <div className="border rounded-md overflow-hidden">
-      <div className="bg-muted p-2 flex flex-wrap gap-1 border-b">
-        <Button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={editor.isActive("bold") ? "bg-muted-foreground/20" : ""}
-        >
-          <Bold className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={editor.isActive("italic") ? "bg-muted-foreground/20" : ""}
-        >
-          <Italic className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          className={
-            editor.isActive("heading", { level: 1 })
-              ? "bg-muted-foreground/20"
-              : ""
-          }
-        >
-          <Heading1 className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          className={
-            editor.isActive("heading", { level: 2 })
-              ? "bg-muted-foreground/20"
-              : ""
-          }
-        >
-          <Heading2 className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          className={
-            editor.isActive("heading", { level: 3 })
-              ? "bg-muted-foreground/20"
-              : ""
-          }
-        >
-          <Heading3 className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={
-            editor.isActive("bulletList") ? "bg-muted-foreground/20" : ""
-          }
-        >
-          <List className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={
-            editor.isActive("orderedList") ? "bg-muted-foreground/20" : ""
-          }
-        >
-          <ListOrdered className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={setLink}
-          className={editor.isActive("link") ? "bg-muted-foreground/20" : ""}
-        >
-          <LinkIcon className="h-4 w-4" />
-        </Button>
-        <Button onClick={addImage}>
-          <ImageIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().setTextAlign("left").run()}
-          className={
-            editor.isActive({ textAlign: "left" })
-              ? "bg-muted-foreground/20"
-              : ""
-          }
-        >
-          <AlignLeft className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().setTextAlign("center").run()}
-          className={
-            editor.isActive({ textAlign: "center" })
-              ? "bg-muted-foreground/20"
-              : ""
-          }
-        >
-          <AlignCenter className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().setTextAlign("right").run()}
-          className={
-            editor.isActive({ textAlign: "right" })
-              ? "bg-muted-foreground/20"
-              : ""
-          }
-        >
-          <AlignRight className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().undo()}
-        >
-          <Undo className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().redo()}
-        >
-          <Redo className="h-4 w-4" />
-        </Button>
+    <div className="border rounded-md overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+      <div className="bg-muted/50 p-2 flex flex-wrap gap-1 border-b items-center">
+        
+        {/* History */}
+        <div className="flex items-center gap-1 border-r pr-2 mr-1">
+          <Button
+            variant="ghost" size="icon" className="h-8 w-8"
+            onClick={() => editor.chain().focus().undo().run()}
+            disabled={!editor.can().undo()}
+            title="Undo"
+          >
+            <Undo className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className="h-8 w-8"
+            onClick={() => editor.chain().focus().redo().run()}
+            disabled={!editor.can().redo()}
+            title="Redo"
+          >
+            <Redo className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Basic Formatting */}
+        <div className="flex items-center gap-1 border-r pr-2 mr-1">
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("bold") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            title="Bold"
+          >
+            <Bold className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("italic") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            title="Italic"
+          >
+            <Italic className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("underline") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleUnderline().run()}
+            title="Underline"
+          >
+            <UnderlineIcon className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("strike") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            title="Strikethrough"
+          >
+            <Strikethrough className="h-4 w-4" />
+          </Button>
+          <Button
+             variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("code") ? "bg-muted-foreground/20 text-black" : ""}`}
+             onClick={() => editor.chain().focus().toggleCode().run()}
+             title="Inline Code"
+          >
+             <Code className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("highlight") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleHighlight().run()}
+            title="Highlight"
+          >
+            <Highlighter className="h-4 w-4" />
+          </Button>
+          <div className="flex items-center h-8 w-8 justify-center">
+             <input 
+              type="color" 
+              className="w-6 h-6 p-0 border-0 rounded cursor-pointer"
+              onInput={(e) => editor.chain().focus().setColor((e.target as HTMLInputElement).value).run()}
+              value={editor.getAttributes('textStyle').color || "#000000"}
+              title="Text Color"
+            />
+          </div>
+        </div>
+        
+        {/* Scripts */}
+        <div className="flex items-center gap-1 border-r pr-2 mr-1">
+             <Button
+                variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("subscript") ? "bg-muted-foreground/20 text-black" : ""}`}
+                onClick={() => editor.chain().focus().toggleSubscript().run()}
+                title="Subscript"
+             >
+                <SubscriptIcon className="h-4 w-4" />
+             </Button>
+             <Button
+                variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("superscript") ? "bg-muted-foreground/20 text-black" : ""}`}
+                onClick={() => editor.chain().focus().toggleSuperscript().run()}
+                title="Superscript"
+             >
+                <SuperscriptIcon className="h-4 w-4" />
+             </Button>
+        </div>
+
+        {/* Headings */}
+        <div className="flex items-center gap-1 border-r pr-2 mr-1">
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("heading", { level: 1 }) ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+            title="Heading 1"
+          >
+            <Heading1 className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("heading", { level: 2 }) ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+            title="Heading 2"
+          >
+            <Heading2 className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("heading", { level: 3 }) ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+            title="Heading 3"
+          >
+            <Heading3 className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Alignment */}
+        <div className="flex items-center gap-1 border-r pr-2 mr-1">
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive({ textAlign: "left" }) ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().setTextAlign("left").run()}
+            title="Align Left"
+          >
+            <AlignLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive({ textAlign: "center" }) ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().setTextAlign("center").run()}
+            title="Align Center"
+          >
+            <AlignCenter className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive({ textAlign: "right" }) ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().setTextAlign("right").run()}
+            title="Align Right"
+          >
+            <AlignRight className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Lists & Quotes */}
+        <div className="flex items-center gap-1 border-r pr-2 mr-1">
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("bulletList") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            title="Bullet List"
+          >
+            <List className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("orderedList") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            title="Ordered List"
+          >
+            <ListOrdered className="h-4 w-4" />
+          </Button>
+          <Button 
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("blockquote") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            title="Blockquote"
+          >
+            <Quote className="h-4 w-4" />
+          </Button>
+           <Button 
+            variant="ghost" size="icon" className="h-8 w-8"
+            onClick={() => editor.chain().focus().setHorizontalRule().run()}
+            title="Horizontal Rule"
+          >
+            <Minus className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Inserts */}
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost" size="icon" className={`h-8 w-8 ${editor.isActive("link") ? "bg-muted-foreground/20 text-black" : ""}`}
+            onClick={setLink}
+            title="Link"
+          >
+            <LinkIcon className="h-4 w-4" />
+          </Button>
+          <Button onClick={addImage} variant="ghost" size="icon" className="h-8 w-8" title="Image">
+            <ImageIcon className="h-4 w-4" />
+          </Button>
+        </div>
+
       </div>
       <EditorContent
         editor={editor}
-        className="p-4 min-h-[300px] prose max-w-none"
+        className="p-4 min-h-[350px] prose prose-sm max-w-none focus:outline-none"
       />
     </div>
   );

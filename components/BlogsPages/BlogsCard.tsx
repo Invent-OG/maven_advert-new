@@ -69,7 +69,7 @@ export default function BlogsCard() {
   return (
     <section ref={sectionRef} className="py-20 bg-white overflow-hidden">
       {/* Header */}
-      <div className="text-center mb-14 px-4">
+      <div className="text-center mt-6 mb-14 px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
           Our Latest News
         </h2>
