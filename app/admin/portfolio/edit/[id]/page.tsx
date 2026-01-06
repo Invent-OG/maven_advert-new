@@ -258,6 +258,7 @@ import {
 import PortfolioBuilder from "@/components/admin/portfolio/PortfolioBuilder";
 import { PortfolioBlock } from "@/lib/types/portfolios";
 import BlockRenderer from "@/components/Portfolio/BlockRenderer";
+import { Toaster, toast } from "sonner";
 
 export default function EditPortfolioPage({
   params,
@@ -349,10 +350,10 @@ export default function EditPortfolioPage({
   };
 
   const handleUpdate = async () => {
-    if (!id) return alert("Invalid ID");
+    if (!id) return toast.error("Invalid ID");
 
     if (!title.trim() || !description.trim()) {
-      return alert("Title and description are required");
+      return toast.error("Title and description are required");
     }
 
     try {
@@ -369,16 +370,16 @@ export default function EditPortfolioPage({
 
       await updateMutation.mutateAsync(payload);
 
-      alert("Portfolio updated successfully!");
+      toast.success("Portfolio updated successfully!");
     } catch (e) {
       console.error(e);
-      alert("Failed to update portfolio");
+      toast.error("Failed to update portfolio");
     }
   };
 
   const handleDelete = async () => {
     if (!id) {
-      alert("Invalid ID");
+      toast.error("Invalid ID");
       return;
     }
     if (
@@ -390,10 +391,10 @@ export default function EditPortfolioPage({
 
     try {
       await deleteMutation.mutateAsync(id);
-      alert("Portfolio deleted successfully!");
+      toast.success("Portfolio deleted successfully!");
       window.location.href = "/admin/portfolio";
     } catch (e) {
-      alert("Failed to delete portfolio");
+      toast.error("Failed to delete portfolio");
     }
   };
 
@@ -409,6 +410,7 @@ export default function EditPortfolioPage({
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
+      <Toaster richColors position="top-right" />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
