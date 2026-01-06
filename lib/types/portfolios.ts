@@ -22,7 +22,8 @@ export type PortfolioBlockType =
   | "stats_grid"
   | "image_text_split"
   | "gallery_text_split"
-  | "image_with_text";
+  | "image_with_text"
+  | "tabbed_content";
 
 export interface PortfolioBlock {
   id: string;
@@ -44,6 +45,7 @@ export const PortfolioBlockContentSchema = z.object({
     "image_text_split",
     "gallery_text_split",
     "image_with_text",
+    "tabbed_content",
   ]),
   content: z.any(),
 });

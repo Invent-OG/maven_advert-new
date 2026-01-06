@@ -327,7 +327,65 @@ const PortfolioCard = ({
   onDelete,
   deletingId,
 }: PortfolioCardProps) => {
-  const heroImage = portfolio.images[0] ?? "/placeholder.svg";
+  /* Logic to find the first valid image from blocks if portfolio.images is empty */
+  let heroImage = portfolio.images[0];
+  let isFromBlocks = false;
+
+  if (!heroImage && portfolio.blocks && Array.isArray(portfolio.blocks)) {
+    // 1. Try to find a HERO block image
+    const heroBlock = portfolio.blocks.find(
+      (b) => b.type === "hero" && b.content?.image
+    );
+    if (heroBlock) {
+      heroImage = heroBlock.content.image;
+      isFromBlocks = true;
+    }
+
+    // 2. If no Hero, try Image Full, split, or text split
+    if (!heroImage) {
+      const singleImgBlock = portfolio.blocks.find(
+        (b) =>
+          (b.type === "image_full" ||
+            b.type === "image_with_text" ||
+            b.type === "image_text_split") &&
+          b.content?.image
+      );
+      if (singleImgBlock) {
+        heroImage = singleImgBlock.content.image;
+        isFromBlocks = true;
+      }
+    }
+
+    // 3. If still nothing, try Gallery/Grid
+    if (!heroImage) {
+      const galleryBlock = portfolio.blocks.find(
+        (b) =>
+          (b.type === "gallery" ||
+            b.type === "image_grid" ||
+            b.type === "gallery_text_split") &&
+          Array.isArray(b.content?.images) &&
+          b.content.images.length > 0
+      );
+      if (galleryBlock) {
+        heroImage = galleryBlock.content.images[0];
+        isFromBlocks = true;
+      }
+    }
+  }
+
+  // Fallback if truly nothing found
+  heroImage = heroImage ?? "/placeholder.svg";
+
+  // Resolve Cloudinary URL if needed (simple helper inline)
+  const resolveImageSrc = (value: string) => {
+    if (!value) return "/placeholder.svg";
+    if (value.startsWith("http") || value.startsWith("/")) return value;
+    const cloudName = "dr9gcshs6"; // Hardcoded from observed logs, ideally env var
+    return `https://res.cloudinary.com/${cloudName}/image/upload/${value}`;
+  };
+
+  const displayImage = resolveImageSrc(heroImage);
+
   const formattedDate = portfolio.createdAt
     ? new Date(portfolio.createdAt).toLocaleDateString("en-US", {
         year: "numeric",
@@ -342,7 +400,7 @@ const PortfolioCard = ({
       {/* Image Section */}
       <div className="relative h-48 w-full bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
         <img
-          src={heroImage}
+          src={displayImage}
           alt={portfolio.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
@@ -358,7 +416,9 @@ const PortfolioCard = ({
         {/* Image Count Badge */}
         <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-200">
           <Image className="h-3 w-3" />
-          <span>{portfolio.images.length} images</span>
+          <span>
+            {isFromBlocks ? "Block Content" : `${portfolio.images.length} images`}
+          </span>
         </div>
       </div>
 

@@ -1,10 +1,6 @@
 import React from "react";
 
-export type PortfolioBlock = {
-  id: string;
-  type: "hero" | "text" | "image_full" | "image_grid" | "gallery" | "spacer" | "stats_grid" | "image_text_split" | "gallery_text_split" | "image_with_text";
-  content: any;
-};
+import { PortfolioBlock } from "@/lib/types/portfolios";
 
 const resolveImageSrc = (value?: string) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -105,7 +101,7 @@ export default function BlockRenderer({
                     {block.content.images?.map((img: string, idx: number) => (
                       <div
                         key={idx} 
-                        className={`relative overflow-hidden rounded-lg ${
+                        className={`relative overflow-hidden rounded-none ${
                           idx % 5 === 0 ? 'md:col-span-2 md:row-span-2' : ''
                         }`}
                       >
@@ -186,55 +182,7 @@ export default function BlockRenderer({
                     </section>
                 );
 
-            case "gallery_text_split":
-                 return (
-                    <section key={block.id} className="w-full bg-[#0a2e1d] text-white"> {/* Dark Green Theme as per image */}
-                        <div className={`flex flex-col ${block.content.reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} min-h-[600px]`}>
-                             {/* Grid Images Side */}
-                             <div className="w-full lg:w-1/2 p-4 lg:p-12 self-center">
-                                <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto perspective-1000">
-                                     {Array.from({ length: 4 }).map((_, idx) => {
-                                         const img = block.content.images?.[idx];
-                                         if(!img) return <div key={idx} className="bg-white/5 rounded-xl aspect-[4/3]" />;
-                                         
-                                         // Staggered effect classes
-                                         const transforms = [
-                                             "lg:translate-y-8",
-                                             "lg:-translate-y-8", 
-                                             "lg:translate-y-4", 
-                                             "lg:-translate-y-4"
-                                         ];
-                                         
-                                         return (
-                                             <div key={idx} className={`rounded-xl overflow-hidden shadow-2xl transition-transform duration-500 hover:z-10 hover:scale-105 ${transforms[idx] || ''}`}>
-                                                 <img 
-                                                     src={resolveImageSrc(img)} 
-                                                     className="w-full h-full object-cover aspect-[4/3]" 
-                                                     alt={`Gallery ${idx}`}
-                                                 />
-                                             </div>
-                                         )
-                                     })}
-                                </div>
-                             </div>
 
-                             {/* Content Side */}
-                             <div className="w-full lg:w-1/2 p-10 lg:p-20 flex flex-col justify-center">
-                                <ul className="space-y-8">
-                                    {block.content.points?.map((point: any, idx: number) => (
-                                        <li key={idx} className="flex gap-6 items-start group">
-                                            <div className="mt-2 w-2 h-2 rotate-45 bg-white group-hover:bg-green-400 transition-colors duration-300 shrink-0" />
-                                            <div className="flex-1">
-                                                <p className="font-bold text-xl mb-2 text-white leading-tight">{point.title}</p>
-                                                <p className="text-gray-300 text-sm leading-relaxed">{point.description}</p>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                             </div>
-                        </div>
-                    </section>
-                 );
 
             case "image_with_text":
                 return (
@@ -242,7 +190,7 @@ export default function BlockRenderer({
                         <div className={`flex flex-col ${block.content.reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
                             {/* Image */}
                             <div className="w-full lg:w-1/2">
-                                <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
+                                <div className="relative rounded-none overflow-hidden shadow-2xl aspect-[4/3] group">
                                     <img 
                                         src={resolveImageSrc(block.content.image)} 
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

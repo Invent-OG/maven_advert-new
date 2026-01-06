@@ -75,8 +75,6 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
         return <Columns className="w-5 h-5" />;
       case "image_text_split":
         return <SplitSquareVertical className="w-5 h-5" />;
-      case "gallery_text_split":
-        return <LayoutTemplate className="w-5 h-5" />;
       case "image_with_text":
         return <BookOpen className="w-5 h-5" />;
       default:
@@ -102,8 +100,6 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
         return "Stats Grid";
       case "image_text_split":
         return "Featured Split";
-      case "gallery_text_split":
-        return "Gallery Split";
       case "image_with_text":
           return "Image & Text";
       default:
@@ -145,15 +141,6 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
                  { title: "Point Three", description: "Detailed description for point three." },
              ]
          };
-      case "gallery_text_split":
-          return {
-              image: "",
-              points: [
-                 { title: "Feature One", description: "Description regarding feature one." },
-                 { title: "Feature Two", description: "Description regarding feature two." },
-                 { title: "Feature Three", description: "Description regarding feature three." },
-              ]
-          };
       case "image_with_text":
           return {
               image: "",
@@ -181,7 +168,6 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
             "spacer",
             "stats_grid",
             "image_text_split",
-            "gallery_text_split",
             "image_with_text",
           ] as PortfolioBlockType[]
         ).map((type) => (
@@ -406,7 +392,7 @@ function BlockEditor({
                     value={block.content.height || 50}
                     onChange={(e) => onChange({ height: Number(e.target.value) })}
                     className="w-full p-2 border rounded"
-                 />
+                />
             </div>
         )
     
@@ -545,80 +531,6 @@ function BlockEditor({
                  </div>
             </div>
         );
-
-    case "gallery_text_split":
-         return (
-            <div className="space-y-6">
-                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Main Image (Left Side)</label>
-                    <input 
-                        value={block.content.image || ""}
-                        onChange={(e) => onChange({ image: e.target.value })}
-                        placeholder="https://..."
-                        className="w-full p-2 border rounded"
-                    />
-                 </div>
-
-                 <div className="border-t pt-4">
-                    <div className="flex items-center justify-between bg-gray-50 p-2 rounded border mb-4">
-                        <span className="text-sm font-medium text-gray-700">Flip Layout (Content Left)</span>
-                        <label className="relative inline-flex items-center cursor-pointer">
-                            <input 
-                                type="checkbox" 
-                                checked={block.content.reverse || false}
-                                onChange={(e) => onChange({ reverse: e.target.checked })}
-                                className="sr-only peer" 
-                            />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                        </label>
-                    </div>
-                     <p className="text-sm font-medium text-gray-700 mb-3">Bullet Points (Right Side)</p>
-                     <div className="space-y-3">
-                         {block.content.points?.map((point: any, idx: number) => (
-                             <div key={idx} className="flex gap-3 items-start p-3 bg-gray-50 rounded border">
-                                 <div className="flex-1 space-y-2">
-                                     <input 
-                                         value={point.title}
-                                         onChange={(e) => {
-                                             const newPoints = [...block.content.points];
-                                             newPoints[idx] = { ...point, title: e.target.value };
-                                             onChange({ points: newPoints });
-                                         }}
-                                         placeholder="Point Title"
-                                         className="w-full text-sm font-bold bg-white border rounded px-2 py-1"
-                                     />
-                                     <textarea 
-                                         value={point.description}
-                                         onChange={(e) => {
-                                             const newPoints = [...block.content.points];
-                                             newPoints[idx] = { ...point, description: e.target.value };
-                                             onChange({ points: newPoints });
-                                         }}
-                                          placeholder="Point Description"
-                                         className="w-full text-sm text-gray-600 bg-white border rounded px-2 py-1 resize-none h-[60px]"
-                                     />
-                                 </div>
-                                  <button 
-                                     onClick={() => {
-                                         const newPoints = block.content.points.filter((_: any, i: number) => i !== idx);
-                                         onChange({ points: newPoints });
-                                     }}
-                                     className="text-red-500 hover:bg-red-50 p-1 rounded"
-                                 >
-                                     <X className="w-4 h-4" />
-                                 </button>
-                             </div>
-                         ))}
-                          <button 
-                            onClick={() => onChange({ points: [...(block.content.points || []), { title: "New Feature", description: "Feature description." }] })}
-                            className="text-sm text-blue-600 font-medium hover:underline flex items-center gap-1"
-                         >
-                             <Plus className="w-4 h-4" /> Add Feature
-                         </button>
-                     </div>
-                 </div>
-            </div>
-         );
 
 
 
