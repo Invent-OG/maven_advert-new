@@ -398,7 +398,7 @@ import {
   FaBriefcase,
   FaLayerGroup,
   FaTools,
-  FaCube
+  FaCube,
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { CldImage } from "next-cloudinary";
@@ -505,7 +505,11 @@ function Navbar() {
           <div className="flex justify-between items-center h-full">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="block" onClick={() => setMenuOpen(false)}>
+              <Link
+                href="/"
+                className="block"
+                onClick={() => setMenuOpen(false)}
+              >
                 <CldImage
                   src="logos_png-01_nllylj"
                   alt="Logo"
@@ -519,7 +523,11 @@ function Navbar() {
             </div>
 
             {/* Desktop Menu - "Pill Style" Items */}
-            <div className={`hidden lg:flex items-center justify-center gap-1 h-full ${menuOpen ? "hidden" : ""}`}>
+            <div
+              className={`hidden lg:flex items-center justify-center gap-1 h-full ${
+                menuOpen ? "hidden" : ""
+              }`}
+            >
               {menuLinks.map((item) =>
                 item.name === "Services" ? (
                   <div
@@ -550,14 +558,18 @@ function Navbar() {
                     {/* Desktop Dropdown */}
                     <div
                       className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-96 p-2 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 transform transition-all duration-300 origin-top
-                      ${servicesOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-2 invisible"}
+                      ${
+                        servicesOpen
+                          ? "opacity-100 translate-y-0 visible"
+                          : "opacity-0 -translate-y-2 invisible"
+                      }
                       `}
                     >
                       {/* Invisible bridge */}
-                       <div className="absolute -top-4 left-0 w-full h-4 bg-transparent" />
-                       
-                       {/* Arrow Tip */}
-                       <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-gray-100 rotate-45"></div>
+                      <div className="absolute -top-4 left-0 w-full h-4 bg-transparent" />
+
+                      {/* Arrow Tip */}
+                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-gray-100 rotate-45"></div>
 
                       <div className="grid gap-1 p-1 bg-white relative z-10 rounded-xl">
                         {services.map((service, idx) => (
@@ -579,9 +591,12 @@ function Navbar() {
                         ))}
                       </div>
                       <div className="mt-2 pt-2 border-t border-gray-100 px-2 pb-1 relative z-10 bg-white rounded-b-xl">
-                         <Link href="/services" className="flex items-center justify-center gap-2 text-xs font-bold text-orange-500 hover:text-orange-600 py-1 uppercase tracking-wide">
-                            View all services <FaArrowRight className="w-3 h-3"/>
-                         </Link>
+                        <Link
+                          href="/services"
+                          className="flex items-center justify-center gap-2 text-xs font-bold text-orange-500 hover:text-orange-600 py-1 uppercase tracking-wide"
+                        >
+                          View all services <FaArrowRight className="w-3 h-3" />
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -591,7 +606,8 @@ function Navbar() {
                       href={item.href}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-full text-white font-bold text-[13px] shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 whitespace-nowrap"
                       style={{
-                        background: "linear-gradient(180deg, #ff914d 0%, #ff5200 100%)", // Orange gradient matching brand
+                        background:
+                          "linear-gradient(180deg, #ff914d 0%, #ff5200 100%)", // Orange gradient matching brand
                       }}
                     >
                       {item.name}
@@ -619,10 +635,20 @@ function Navbar() {
 
             {/* Mobile Toggle */}
             <div className="lg:hidden flex items-center gap-4">
-               {/* Mobile Socials (Mini) */}
+              {/* Mobile Socials (Mini) */}
               <div className="hidden sm:flex items-center gap-2">
-                   <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"><FaFacebookF size={14}/></a>
-                   <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-pink-50 hover:text-pink-600 transition-colors"><FaInstagram size={14}/></a>
+                <a
+                  href="#"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                >
+                  <FaFacebookF size={14} />
+                </a>
+                <a
+                  href="#"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-pink-50 hover:text-pink-600 transition-colors"
+                >
+                  <FaInstagram size={14} />
+                </a>
               </div>
 
               <button
@@ -634,74 +660,112 @@ function Navbar() {
               </button>
             </div>
           </div>
-          
+
           {/* Mobile Menu Content - Accordion Expansion */}
           {menuOpen && (
-          <div
-            className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out pb-6`}
-          >
-             <div className="flex flex-col space-y-2 mt-4 border-t border-gray-100 pt-4">
-                {menuLinks.map((item) => 
-                   item.name === "Services" ? (
-                      <div key="mobile-services" className="rounded-2xl bg-gray-50 overflow-hidden">
-                         <button 
-                            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                            className="w-full flex items-center justify-between px-5 py-4 text-left font-semibold text-gray-800"
-                         >
-                            <span className="flex items-center gap-3"><span className="text-orange-500">{item.icon}</span> Services</span>
-                            <FaChevronDown className={`transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`}/>
-                         </button>
-                         <div className={`transition-all duration-300 ease-in-out ${mobileServicesOpen ? "max-h-[600px] opacity-100 pb-4" : "max-h-0 opacity-0"}`}>
-                            <div className="px-3 space-y-1">
-                               {services.map((service, i) => (
-                                  <Link 
-                                    key={i} 
-                                    href={service.href}
-                                    onClick={() => setMenuOpen(false)}
-                                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-white text-gray-600 hover:text-orange-600 hover:shadow-sm transition-all"
-                                  >
-                                     <div className="text-orange-500">{service.icon}</div>
-                                     <span className="text-sm font-medium">{service.title}</span>
-                                  </Link>
-                               ))}
-                            </div>
-                         </div>
+            <div
+              className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out pb-6`}
+            >
+              <div className="flex flex-col space-y-2 mt-4 border-t border-gray-100 pt-4">
+                {menuLinks.map((item) =>
+                  item.name === "Services" ? (
+                    <div
+                      key="mobile-services"
+                      className="rounded-2xl bg-gray-50 overflow-hidden"
+                    >
+                      <button
+                        onClick={() =>
+                          setMobileServicesOpen(!mobileServicesOpen)
+                        }
+                        className="w-full flex items-center justify-between px-5 py-4 text-left font-semibold text-gray-800"
+                      >
+                        <span className="flex items-center gap-3">
+                          <span className="text-orange-500">{item.icon}</span>{" "}
+                          Services
+                        </span>
+                        <FaChevronDown
+                          className={`transition-transform duration-300 ${
+                            mobileServicesOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <div
+                        className={`transition-all duration-300 ease-in-out ${
+                          mobileServicesOpen
+                            ? "max-h-[600px] opacity-100 pb-4"
+                            : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="px-3 space-y-1">
+                          {services.map((service, i) => (
+                            <Link
+                              key={i}
+                              href={service.href}
+                              onClick={() => setMenuOpen(false)}
+                              className="flex items-center gap-3 p-3 rounded-xl hover:bg-white text-gray-600 hover:text-orange-600 hover:shadow-sm transition-all"
+                            >
+                              <div className="text-orange-500">
+                                {service.icon}
+                              </div>
+                              <span className="text-sm font-medium">
+                                {service.title}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                   ) : item.isButton ? (
-                      <Link 
-                         key={item.name}
-                         href={item.href}
-                         onClick={() => setMenuOpen(false)}
-                        className="mt-4 flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold shadow-lg shadow-orange-500/20 active:scale-95 transition-transform"
+                    </div>
+                  ) : item.isButton ? (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="mt-4 flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold shadow-lg shadow-orange-500/20 active:scale-95 transition-transform"
+                    >
+                      {item.name} <FaArrowRight />
+                    </Link>
+                  ) : (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center gap-3 px-5 py-3 rounded-xl font-medium transition-colors ${
+                        pathname === item.href
+                          ? "bg-orange-50 text-orange-600"
+                          : "text-gray-600 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span
+                        className={
+                          pathname === item.href
+                            ? "text-orange-500"
+                            : "text-gray-400"
+                        }
                       >
-                         {item.name} <FaArrowRight/>
-                      </Link>
-                   ) : (
-                      <Link
-                         key={item.name}
-                         href={item.href}
-                         onClick={() => setMenuOpen(false)}
-                         className={`flex items-center gap-3 px-5 py-3 rounded-xl font-medium transition-colors ${pathname === item.href ? "bg-orange-50 text-orange-600" : "text-gray-600 hover:bg-gray-50"}`} 
-                      >
-                         <span className={pathname === item.href ? "text-orange-500" : "text-gray-400"}>{item.icon}</span>
-                         {item.name}
-                      </Link>
-                   )
+                        {item.icon}
+                      </span>
+                      {item.name}
+                    </Link>
+                  )
                 )}
 
                 {/* Mobile Contact Footer */}
                 <div className="mt-6 pt-6 border-t border-gray-100 flex flex-col gap-3 px-2">
-                   <div className="flex items-center gap-3 text-sm text-gray-500">
-                      <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center"><FaPhone size={12}/></div>
-                      <span>+91 7418418012</span>
-                   </div>
-                   <div className="flex items-center gap-3 text-sm text-gray-500">
-                      <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center"><FaEnvelope size={12}/></div>
-                      <span>info@mavenadvert.com</span>
-                   </div>
+                  <div className="flex items-center gap-3 text-sm text-gray-500">
+                    <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
+                      <FaPhone size={12} />
+                    </div>
+                    <span>+91 7418418012</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-gray-500">
+                    <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
+                      <FaEnvelope size={12} />
+                    </div>
+                    <span>info@mavenadvert.com</span>
+                  </div>
                 </div>
-             </div>
-          </div>
+              </div>
+            </div>
           )}
         </div>
       </nav>

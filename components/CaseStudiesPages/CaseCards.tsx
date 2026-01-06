@@ -36,15 +36,49 @@ export default function CaseCards() {
         const res = await fetch("/api/portfolio", { cache: "no-store" });
         const data: Portfolio[] = await res.json();
 
-        const parsed: CaseItem[] = data.map((p) => ({
-          id: p.id,
-          title: p.title,
-          category: p.description || "General",
-          subtitle: p.description || "General",
-          image:
-            Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : null,
-          websiteUrl: p.websiteUrl,
-        }));
+const parsed: CaseItem[] = data.map((p) => {
+          let imageUrl =
+            Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : null;
+
+          if (!imageUrl && p.blocks && Array.isArray(p.blocks)) {
+            // Priority 1: Single image blocks
+            const imageBlock = p.blocks.find(
+              (b) =>
+                (b.type === "hero" ||
+                  b.type === "image_full" ||
+                  b.type === "image_with_text" ||
+                  b.type === "image_text_split") &&
+                b.content?.image
+            );
+            if (imageBlock) {
+              imageUrl = imageBlock.content.image;
+            }
+
+            // Priority 2: Gallery/Grid blocks (take first image)
+            if (!imageUrl) {
+              const galleryBlock = p.blocks.find(
+                (b) =>
+                  (b.type === "gallery" ||
+                    b.type === "image_grid" ||
+                    b.type === "gallery_text_split") &&
+                  Array.isArray(b.content?.images) &&
+                  b.content.images.length > 0
+              );
+              if (galleryBlock) {
+                imageUrl = galleryBlock.content.images[0];
+              }
+            }
+          }
+
+          return {
+            id: p.id,
+            title: p.title,
+            category: p.description || "General",
+            subtitle: p.description || "General",
+            image: imageUrl,
+            websiteUrl: p.websiteUrl,
+          };
+        });
 
         setItems(parsed);
       } catch (e) {
@@ -95,77 +129,91 @@ export default function CaseCards() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14"
         >
           {filteredItems.map((item) => (
-            <div key={item.id} className="group relative">
-              <Link href={`/casestudies/${item.id}`} className="block">
-                <div className="relative overflow-hidden bg-white rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            <div
+              key={item.id}
+              className="group relative flex flex-col items-start gap-4"
+              data-aos="fade-up"
+            >
+              <Link href={`/casestudies/${item.id}`} className="block w-full">
+                {/* Image Container */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100 rounded-none cursor-pointer">
                   {item.image ? (
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={800}
-                      height={320}
-                      className="
-                        w-full h-[320px]
-                        object-cover
-                        transition-transform duration-700
-                        group-hover:scale-105
-                      "
+                      fill
+                      className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
                     />
                   ) : (
-                    <div className="w-full h-[320px] bg-gray-200 flex items-center justify-center text-gray-400">
-                      No Image
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gray-200">
+                      <span className="text-sm font-medium uppercase tracking-wider">
+                        No Image
+                      </span>
                     </div>
                   )}
 
-                  {/* Gradient Overlay for better text readability */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
+                  {/* Overlay on Hover */}
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                  {/* Visit Live Site Badge (Floating) */}
+                  {item.websiteUrl && (
+                    <div
+                      className="absolute top-4 right-4 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 transform sm:translate-y-2 sm:group-hover:translate-y-0"
+                      onClick={(e) => e.stopPropagation()} // Prevent navigation when clicking this button
+                    >
+                      <a
+                        href={item.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-none shadow-lg hover:bg-[#DFB025] hover:text-white transition-colors border border-gray-100"
+                      >
+                        Visit Site <FaExternalLinkAlt className="w-3 h-3" />
+                      </a>
+                    </div>
+                  )}
                 </div>
 
-                {/* Title + Short subtitle */}
-                <div className="mt-6 flex items-center justify-between px-2">
-                  <div className="flex flex-col gap-1">
-                    <h3 className="text-[18px] font-semibold text-gray-900 group-hover:text-amber-600 transition-colors">
+                {/* Content Section */}
+                <div className="mt-5 w-full flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight group-hover:text-[#DFB025] transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p
-                      className="text-[14px] text-gray-500 max-w-[200px] overflow-hidden whitespace-nowrap text-ellipsis"
-                      title={item.subtitle}
-                    >
-                      {item.subtitle}
-                    </p>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-2 group-hover:translate-x-0 transform">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="text-[#DFB025]"
+                      >
+                        <path
+                          d="M7 17L17 7"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M7 7H17V17"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
                   </div>
+
+                  <p className="text-sm md:text-base text-gray-500 line-clamp-2 leading-relaxed max-w-[90%]">
+                    {item.subtitle}
+                  </p>
                   
-                  {/* Arrow indicating detail view */}
-                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-amber-100 group-hover:text-amber-600 transition-all">
-                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform -rotate-45">
-                        <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                     </svg>
-                  </div>
+                  {/* Optional: Add a subtle line or just keep it clean */}
+                  <div className="w-0 group-hover:w-full h-[1px] bg-[#DFB025] mt-4 transition-all duration-500 ease-out" />
                 </div>
               </Link>
-
-              {/* Website Redirect Button (Admin added) - Always Visible */}
-              {item.websiteUrl && (
-                <a
-                  href={item.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    absolute top-4 right-4 
-                    bg-white/95 backdrop-blur-sm text-gray-900 
-                    px-4 py-2 rounded-full 
-                    text-xs font-semibold 
-                    shadow-lg hover:shadow-xl hover:bg-white hover:scale-105
-                    transform transition-all duration-300 z-10
-                    flex items-center gap-2 border border-gray-100
-                  "
-                  title="Visit Live Website"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Visit Site <FaExternalLinkAlt className="w-3 h-3 text-amber-500" />
-                </a>
-              )}
             </div>
           ))}
         </div>
