@@ -47,10 +47,9 @@ export default function Designers() {
       className="w-full flex flex-col items-center justify-center py-24 bg-white text-center"
     >
       {/* Title */}
-      <h2 className="text-5xl md:text-9xl font-extrabold text-black leading-tight">
+      <h2 className="text-5xl md:text-9xl font-extrabold text-black ">
         Curious What’s Possible With 3D?
       </h2>
-
       {/* Subtitle */}
       <p className="mt-6 text-gray-500 text-sm md:text-base max-w-lg">
         <span className="font-bold text-neutral-900">Curious about what we can create for you?</span> <br />

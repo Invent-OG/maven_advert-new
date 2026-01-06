@@ -66,7 +66,7 @@ function GridVideos() {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <section className="w-full bg-black py-10">
+    <section className="w-full bg-white py-10">
       {/* Unified Masonry Layout */}
       <div className="max-w-7xl mx-auto px-4 columns-2 lg:columns-3 gap-4 space-y-4">
         {videoLinks.map((src, index) => (
