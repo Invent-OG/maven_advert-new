@@ -10,42 +10,42 @@ const teamData = [
     role: "Co-Founder",
     bio: "Driven by ambition and creativity, bringing a strong vision and passion for transforming ideas into impactful brand growth.",
     image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722330/Banner_SIva_ezgnah.png",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/siva_azqmta.webp",
   },
   {
     name: "Gokul",
     role: "Co-Founder",
     bio: "Recognized for strategic thinking and problem-solving, constantly learning and communicating with clarity to drive smart execution.",
     image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722330/Banner_Gokul_tunkfx.png",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/gokul_dlziz7.webp",
   },
   {
     name: "Sathiya",
     role: "Digital Marketing Executive",
     bio: "Calm under pressure, handling situations confidently while contributing with passion in teamdriven environments.",
     image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722331/Banner_Sathiya_vxkliu.png",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/sathiya_kamao7.webp",
   },
   {
     name: "Subitcha",
     role: "Creative Designer",
     bio: "With a strong eye for visuals, shaping meaningful brand identities through thoughtful and evolving design.",
     image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722330/Banner_Subi_lkz5rs.png",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/subi_njp43a.webp",
   },
   {
     name: "Jeevan",
     role: "Creative Designer",
     bio: "Blending innovation with expression, delivering fresh perspectives, clear goals, and a constant drive to explore new ideas.",
     image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722330/Banner_Jeevan_sykqgi.png",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/jeevan_aaky3p.webp",
   },
   {
     name: "Vignesh",
     role: "Marketing Executive",
     bio: "Focused on growth and outreach, combining strong communication with proactive marketing execution.",
     image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763722331/Banner_Vignesh_scesxe.png",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/vignesh_vli9op.webp",
   },
 ];
 
