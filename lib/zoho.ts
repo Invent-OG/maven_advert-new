@@ -16,7 +16,7 @@ const ZOHO_BASE_URL = `https://www.zohoapis.${dc.toLowerCase()}/bigin/v2`;
  */
 const REDIRECT_URI =
   process.env.ZOHO_REDIRECT_URI ||
-  "http://localhost:3000/api/zoho/oauth/callback";
+  "https://www.mavenadvert.com/api/auth/callback/zoho";
 
 /* -----------------------------------------------------------------
    🔐 Step 1: Get Access Token using the Refresh Token

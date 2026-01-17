@@ -8,9 +8,10 @@ const envPath = path.resolve(process.cwd(), ".env");
 if (fs.existsSync(envPath)) {
   const envConfig = fs.readFileSync(envPath, "utf-8");
   envConfig.split("\n").forEach((line) => {
-    const [key, value] = line.split("=");
+    const [key, ...rest] = line.split("=");
+    const value = rest.join("=");
     if (key && value) {
-      process.env[key.trim()] = value.trim();
+      process.env[key.trim()] = value.trim().replace(/^["']|["']$/g, '');
     }
   });
 }
@@ -18,9 +19,9 @@ if (fs.existsSync(envPath)) {
 const CLIENT_ID = process.env.ZOHO_CLIENT_ID;
 const CLIENT_SECRET = process.env.ZOHO_CLIENT_SECRET;
 const DC = process.env.ZOHO_DC || "in";
-// Hardcoding to ensure it matches what the user expects/configured in Zoho
 const REDIRECT_URI =
-  "http://maven-advert-new.vercel.app/api/zoho/oauth/callback";
+  process.env.ZOHO_REDIRECT_URI ||
+  "https://www.mavenadvert.com/api/auth/callback/zoho";
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
   console.error("❌ Missing ZOHO_CLIENT_ID or ZOHO_CLIENT_SECRET in .env");

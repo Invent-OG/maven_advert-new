@@ -160,9 +160,17 @@ export async function POST(req: Request) {
        ✅ Send Thank-You Email to User
     ---------------------------------- */
     try {
+      // In Resend testing mode, we can only send to the verified email
+      const isTestMode = !process.env.RESEND_DOMAIN_VERIFIED; // Assuming this might be a flag, or we just hardcode the check
+      const verifiedEmail = "Info@mavenadvert.com";
+      
+      const emailRecipient = (process.env.NODE_ENV === "development" && email !== verifiedEmail) 
+        ? verifiedEmail 
+        : email;
+
       const userEmail = await resend.emails.send({
         from: "Acme <onboarding@resend.dev>", // works until domain verified
-        to: email,
+        to: emailRecipient,
         subject: "Thank you for contacting Maven Advert!",
         html: `
 <!DOCTYPE html>
@@ -217,7 +225,7 @@ export async function POST(req: Request) {
     try {
       const adminEmail = await resend.emails.send({
         from: "Acme <onboarding@resend.dev>",
-        to: "info@mavenadvert.com",
+        to: "Info@mavenadvert.com",
         subject: `📩 New Lead: ${name}`,
         html: `
 <!DOCTYPE html>

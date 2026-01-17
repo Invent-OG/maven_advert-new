@@ -68,31 +68,41 @@ const TeamCard = ({ member }: { member: MemberType }) => {
     const overlay = overlayRef.current;
     if (!card || !overlay) return;
 
+    const onMouseEnter = () => {
+      gsap.to(overlay, {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    };
+
+    const onMouseLeave = () => {
+      gsap.to(overlay, {
+        y: 140,
+        opacity: 0,
+        duration: 0.35,
+        ease: "power2.in",
+      });
+    };
+
     // Desktop GSAP Hover Animation
     if (window.innerWidth > 768) {
       gsap.set(overlay, { y: 140, opacity: 0 });
 
-      card.addEventListener("mouseenter", () => {
-        gsap.to(overlay, {
-          y: 0,
-          opacity: 1,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      });
-
-      card.addEventListener("mouseleave", () => {
-        gsap.to(overlay, {
-          y: 140,
-          opacity: 0,
-          duration: 0.35,
-          ease: "power2.in",
-        });
-      });
+      card.addEventListener("mouseenter", onMouseEnter);
+      card.addEventListener("mouseleave", onMouseLeave);
     } else {
       // Mobile: overlay always visible
       gsap.set(overlay, { y: 0, opacity: 1 });
     }
+
+    return () => {
+      if (card) {
+        card.removeEventListener("mouseenter", onMouseEnter);
+        card.removeEventListener("mouseleave", onMouseLeave);
+      }
+    };
   }, []);
 
   return (
