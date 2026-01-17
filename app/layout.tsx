@@ -65,6 +65,7 @@ import { Toaster } from "react-hot-toast";
 import QueryProvider from "./providers/QueryProvider";
 import { Inter } from "next/font/google";
 import LenisProvider from "./providers/LenisProvider";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,6 +83,12 @@ export default function RootLayout({
         className={`${inter.className} antialiased`}
         suppressHydrationWarning={true}
       >
+        <Script
+          src="https://cdn-in.pagesense.io/js/mavenadvert/da6dbad7d7624e8db32cbed1b852ee0c.js"
+          strategy="afterInteractive"
+
+          
+        />
         <LenisProvider>
           <QueryProvider>
             {isAdminRoute ? (
