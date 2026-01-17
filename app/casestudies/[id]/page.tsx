@@ -67,7 +67,7 @@ export default function CaseStudyDetailPage({
                     href={portfolio.websiteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
+                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
                     >
                     <span>Visit Site</span>
                     <FaExternalLinkAlt className="w-3 h-3" />
