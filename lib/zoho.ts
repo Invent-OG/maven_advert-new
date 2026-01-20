@@ -66,11 +66,13 @@ export async function addLeadToZohoBigin({
   email,
   whatsappNumber,
   message,
+  leadSource,
 }: {
   name: string;
   email: string;
   whatsappNumber: string;
   message: string;
+  leadSource: string;
 }): Promise<unknown> {
   try {
     const token = await getAccessToken();
@@ -88,7 +90,7 @@ export async function addLeadToZohoBigin({
           Email: email,
           Mobile: whatsappNumber,
           Description: message,
-          Source: "Website Contact Form",
+          Lead_Source: leadSource,
         },
       ],
     };

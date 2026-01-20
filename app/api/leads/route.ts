@@ -286,6 +286,7 @@ export async function POST(req: Request) {
         email,
         whatsappNumber,
         message,
+        leadSource: "Website Contact Form",
       });
     } catch (zohoError) {
       console.error("❌ Failed to sync to Zoho Bigin:", zohoError);
