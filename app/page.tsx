@@ -93,19 +93,8 @@ export const metadata = {
 function page() {
   return (
     <>
-      {/* Zoho SalesIQ Script */}
-      <Script id="zoho-salesiq-init">
-        {`
-          window.$zoho = window.$zoho || {};
-          $zoho.salesiq = $zoho.salesiq || { ready: function() {} };
-        `}
-      </Script>
-
-      <Script
-        id="zoho-salesiq-widget"
-        src="https://salesiq.zohopublic.in/widget?wc=siqbac25e2bbb21c1d7cefbf92a45f8cfd1d3b35275b8d31a353b41cd92aa91a996"
-        defer
-      />
+    
+    
 
       {/* Your Original Components (NO CHANGE) */}
       <StickyShowcase />
