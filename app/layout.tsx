@@ -86,8 +86,6 @@ export default function RootLayout({
         <Script
           src="https://cdn-in.pagesense.io/js/mavenadvert/da6dbad7d7624e8db32cbed1b852ee0c.js"
           strategy="afterInteractive"
-
-          
         />
         <LenisProvider>
           <QueryProvider>
@@ -121,8 +119,15 @@ export default function RootLayout({
             )}
           </QueryProvider>
         </LenisProvider>
-  {/* Zoho SalesIQ Script */}
-        <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.in/widget?wc=siqbac25e2bbb21c1d7cefbf92a45f8cfd1d3b35275b8d31a353b41cd92aa91a996" defer></script>
+        {/* Zoho SalesIQ Script */}
+        <Script id="zoho-init" strategy="afterInteractive">
+          {`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
+        </Script>
+        <Script
+          id="zsiqscript"
+          src="https://salesiq.zohopublic.in/widget?wc=siqbac25e2bbb21c1d7cefbf92a45f8cfd1d3b35275b8d31a353b41cd92aa91a996"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
