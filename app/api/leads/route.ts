@@ -25,7 +25,7 @@ interface ErrorResponse {
 /* -----------------------------
    Initialize Email Client
 ----------------------------- */
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialized inside handler to avoid build errors
 
 /* -----------------------------
    GET: Fetch Leads (Admin)
@@ -41,7 +41,7 @@ export async function GET(req: Request) {
     if (page < 1 || limit < 1) {
       return NextResponse.json<ErrorResponse>(
         { error: "Invalid pagination parameters" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -56,8 +56,8 @@ export async function GET(req: Request) {
           ilike(leadsTable.name, pattern),
           ilike(leadsTable.whatsappNumber, pattern),
           ilike(leadsTable.email, pattern),
-          ilike(leadsTable.message, pattern)
-        )
+          ilike(leadsTable.message, pattern),
+        ),
       );
     }
 
@@ -68,8 +68,8 @@ export async function GET(req: Request) {
       filters.push(
         and(
           gte(leadsTable.createdAt, dateObj),
-          lt(leadsTable.createdAt, nextDay)
-        )
+          lt(leadsTable.createdAt, nextDay),
+        ),
       );
     }
 
@@ -77,8 +77,8 @@ export async function GET(req: Request) {
       filters.length === 0
         ? undefined
         : filters.length === 1
-        ? filters[0]
-        : and(...filters);
+          ? filters[0]
+          : and(...filters);
 
     const [{ total }] = await (whereClause
       ? db.select({ total: count() }).from(leadsTable).where(whereClause)
@@ -119,7 +119,7 @@ export async function GET(req: Request) {
     console.error("Server error:", message);
     return NextResponse.json<ErrorResponse>(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -128,6 +128,7 @@ export async function GET(req: Request) {
    POST: Add Lead + Send Emails
 ----------------------------- */
 export async function POST(req: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await req.json();
     const { name, email, message, whatsappNumber } = body;
@@ -135,7 +136,7 @@ export async function POST(req: Request) {
     if (!name || !email || !message || !whatsappNumber) {
       return NextResponse.json(
         { success: false, error: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -163,10 +164,11 @@ export async function POST(req: Request) {
       // In Resend testing mode, we can only send to the verified email
       const isTestMode = !process.env.RESEND_DOMAIN_VERIFIED; // Assuming this might be a flag, or we just hardcode the check
       const verifiedEmail = "Info@mavenadvert.com";
-      
-      const emailRecipient = (process.env.NODE_ENV === "development" && email !== verifiedEmail) 
-        ? verifiedEmail 
-        : email;
+
+      const emailRecipient =
+        process.env.NODE_ENV === "development" && email !== verifiedEmail
+          ? verifiedEmail
+          : email;
 
       const userEmail = await resend.emails.send({
         from: "Acme <onboarding@resend.dev>", // works until domain verified
@@ -298,7 +300,7 @@ export async function POST(req: Request) {
     console.error("POST /api/leads error:", err);
     return NextResponse.json(
       { success: false, error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -314,7 +316,7 @@ export async function DELETE(req: Request) {
     if (!id) {
       return NextResponse.json(
         { success: false, error: "Lead ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -326,7 +328,7 @@ export async function DELETE(req: Request) {
     console.error("Server error:", message);
     return NextResponse.json(
       { success: false, error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
