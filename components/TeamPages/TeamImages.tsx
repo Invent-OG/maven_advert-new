@@ -150,6 +150,12 @@ const TeamCard = ({ member }: { member: MemberType }) => {
         className="absolute inset-x-0 bottom-0 bg-black/95 text-white p-6 backdrop-blur-lg"
       >
         <div className="space-y-4">
+          <div className="space-y-1">
+            <h3 className="text-xl font-bold text-white">{member.name}</h3>
+            <p className="text-xs uppercase tracking-widest text-gray-400">
+              {member.role}
+            </p>
+          </div>
           <div
             className="h-[3px] w-10 rounded-full"
             style={{ backgroundColor: accentColor }}
