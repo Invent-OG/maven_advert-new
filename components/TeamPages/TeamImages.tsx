@@ -60,6 +60,7 @@ const accentColor = "#fb923c";
 const TeamCard = ({ member }: { member: MemberType }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [isMobileExpanded, setIsMobileExpanded] = React.useState(false);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -102,7 +103,8 @@ const TeamCard = ({ member }: { member: MemberType }) => {
       card.addEventListener("mouseenter", onMouseEnter);
       card.addEventListener("mouseleave", onMouseLeave);
     } else {
-      gsap.set(overlay, { y: 0, opacity: 1 });
+      // Mobile: initially hidden
+      gsap.set(overlay, { y: 160, opacity: 0 });
     }
 
     return () => {
@@ -113,9 +115,37 @@ const TeamCard = ({ member }: { member: MemberType }) => {
     };
   }, []);
 
+  const handleCardClick = () => {
+    if (window.innerWidth <= 768) {
+      const overlay = overlayRef.current;
+      if (!overlay) return;
+
+      if (isMobileExpanded) {
+        // Hide
+        gsap.to(overlay, {
+          y: 160,
+          opacity: 0,
+          duration: 0.35,
+          ease: "power2.in",
+        });
+        setIsMobileExpanded(false);
+      } else {
+        // Show
+        gsap.to(overlay, {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        setIsMobileExpanded(true);
+      }
+    }
+  };
+
   return (
     <div
       ref={cardRef}
+      onClick={handleCardClick}
       className="relative overflow-hidden rounded-2xl  hover:shadow-2xl transition-all duration-300 cursor-pointer"
     >
       {/* IMAGE */}
