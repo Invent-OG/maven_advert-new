@@ -14,7 +14,6 @@ export default function StallHero() {
         loop
         muted
         playsInline
-        poster="https://stunning-buttercream-accb8c.netlify.app/assets/images/home1/banner/bg.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       >
         <source
