@@ -42,7 +42,7 @@ function ServicesMainSolution() {
         >
           {/* Main image */}
           <Image
-            src="https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/demo-marketing-services-02.jpg.webp"
+            src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1763647207/vectors-03_h9m8n9.jpg"
             alt="Promote Your Business"
             width={600}
             height={500}
@@ -51,7 +51,7 @@ function ServicesMainSolution() {
           />
 
           {/* Floating small image */}
-          <div
+          {/* <div
             ref={floatingRef}
             className="absolute bottom-[-10px] left-[50px] md:left-[80px] w-[220px] md:w-[280px] z-20"
           >
@@ -62,10 +62,10 @@ function ServicesMainSolution() {
               height={180}
               className="rounded-2xl shadow-lg"
             />
-          </div>
+          </div> */}
 
           {/* Decorative gradient arrow shape (optional) */}
-          <div className="absolute right-[-30px] top-1/2 transform -translate-y-1/2 w-[120px] h-[40px] bg-gradient-to-r from-orange-500 to-red-400 rotate-[-20deg] rounded-lg opacity-80 hidden md:block"></div>
+          {/* <div className="absolute right-[-30px] top-1/2 transform -translate-y-1/2 w-[120px] h-[40px] bg-gradient-to-r from-orange-500 to-red-400 rotate-[-20deg] rounded-lg opacity-80 hidden md:block"></div> */}
         </div>
 
         {/* ---------- RIGHT CONTENT SECTION ---------- */}

@@ -43,7 +43,7 @@ export const useGetPortfolios = () => {
         normalized.map(({ images, ...rest }) => ({
           ...rest,
           images,
-        }))
+        })),
       );
 
       if (!parsed.success) {
@@ -56,6 +56,29 @@ export const useGetPortfolios = () => {
         images: item.images ?? [],
       })) as ClientPortfolio[];
     },
+  });
+};
+
+// ---------------------
+// Fetch Single Portfolio
+// ---------------------
+export const usePortfolio = (id: string) => {
+  return useQuery({
+    queryKey: ["portfolio", id],
+    queryFn: async (): Promise<ClientPortfolio> => {
+      const res = await fetch(`/api/portfolio/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch portfolio");
+
+      const data = await res.json();
+
+      // Validation could replace this simple cast
+      // ensuring images is array
+      return {
+        ...data,
+        images: Array.isArray(data.images) ? data.images : [],
+      } as ClientPortfolio;
+    },
+    enabled: !!id,
   });
 };
 
@@ -108,7 +131,7 @@ export const useUpdatePortfolio = () => {
 
       if (!parsed.success) {
         throw new Error(
-          parsed.error.issues[0]?.message || "Invalid update input"
+          parsed.error.issues[0]?.message || "Invalid update input",
         );
       }
 

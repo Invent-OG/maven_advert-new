@@ -39,7 +39,7 @@ export default function StickyShowCaseTwo() {
               end: "bottom 65%",
               scrub: true,
             },
-          }
+          },
         );
       });
 
@@ -58,7 +58,7 @@ export default function StickyShowCaseTwo() {
               end: "bottom 65%",
               scrub: true,
             },
-          }
+          },
         );
       });
     });

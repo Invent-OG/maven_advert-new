@@ -18,6 +18,10 @@ const tabs = [
     description:
       "We go beyond trends — analysing audience behavior, market potential, and brand positioning to build purposeful campaigns that drive measurable growth.",
     feature: "Strategy shapes success.",
+    image:
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770990330/Gemini_Generated_Image_lvxl46lvxl46lvxl_xx0lzt.png",
+    overlayImage:
+      "https://images.pexels.com/photos/34193142/pexels-photo-34193142.jpeg",
   },
   {
     id: 2,
@@ -26,6 +30,10 @@ const tabs = [
     description:
       "We design brands, campaigns, and experiences that resonate deeply and drive real growth.",
     feature: "Details define excellence.",
+    image:
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770990399/Gemini_Generated_Image_ujphifujphifujph_kdpo3d.png",
+    overlayImage:
+      "https://images.pexels.com/photos/34193142/pexels-photo-34193142.jpeg",
   },
   {
     id: 3,
@@ -34,6 +42,10 @@ const tabs = [
     description:
       "Our team brings years of strategic knowledge, creative depth, and proven results — helping brands evolve with purpose and precision.",
     feature: "Experience builds trust.",
+    image:
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770990499/Gemini_Generated_Image_ctlqpdctlqpdctlq_1_ym94pw.png",
+    overlayImage:
+      "https://images.pexels.com/photos/34193142/pexels-photo-34193142.jpeg",
   },
   {
     id: 4,
@@ -42,6 +54,10 @@ const tabs = [
     description:
       "We believe in partnerships that inspire progress — combining ideas, strategy, and creativity to shape lasting success.",
     feature: "Together, we grow.",
+    image:
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770990578/Gemini_Generated_Image_p2l0kdp2l0kdp2l0_fblzge.png",
+    overlayImage:
+      "https://images.pexels.com/photos/34193142/pexels-photo-34193142.jpeg",
   },
 ];
 
@@ -78,11 +94,11 @@ function AboutCompany() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`
-        px-5 py-2 rounded-full text-sm font-medium flex-shrink-0 transition-all duration-300
+        px-5 py-2 rounded-full text-sm font-medium cursor-pointer flex-shrink-0 transition-all duration-300
         ${
           activeTab === tab.id
-            ? "bg-black text-white shadow-md"
-            : "bg-gray-100 text-neutral-900  hover:bg-neutral-300"
+            ? "bg-orange-500 text-white shadow-md"
+            : "bg-gray-100 text-neutral-900  hover:bg-orange-500/20"
         }
       `}
           >
@@ -92,7 +108,7 @@ function AboutCompany() {
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 py-14 gap-10">
+      <div className="flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 py-14 gap-5">
         {/* Left Image */}
         <div
           data-aos="fade-right"
@@ -100,61 +116,51 @@ function AboutCompany() {
         >
           <div className="relative">
             <Image
-              src="https://images.pexels.com/photos/15443240/pexels-photo-15443240.jpeg"
+              src={tabs[activeTab - 1].image}
               alt="Main illustration"
               width={400}
               height={400}
               className="rounded-xl shadow-lg"
             />
-            <Image
-              src="https://images.pexels.com/photos/34193142/pexels-photo-34193142.jpeg"
+            {/* <Image
+              // src={tabs[activeTab - 1].overlayImage}
+              src={
+                "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763651201/logos_png-02_ykasmr.png"
+              }
               alt="Floating overlay"
-              width={150} // smaller width
-              height={100} // smaller height (keeps aspect ratio)
-              className="absolute -bottom-10 lg:-left-10 rounded-2xl -left-5 float-img"
-            />
+              width={800} // smaller width
+              height={800} // smaller height (keeps aspect ratio)
+              className="absolute -bottom-10 -left-40 pb-5 rounded-2xl lg:-left-50 "
+            /> */}
           </div>
         </div>
 
         {/* Right Content */}
         <div
           data-aos="fade-left"
-          className="w-full flex flex-col gap-8 lg:w-1/2 "
+          className="w-full flex flex-col gap-5 lg:w-1/2 "
         >
-          <h6 className="text-sm text-orange-500 font-bold  tracking-wide uppercase mb-3">
+          <h6 className="text-sm text-orange-500 font-bold  tracking-wide uppercase ">
             {tabs[activeTab - 1].title}
           </h6>
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 leading-tight ">
             {tabs[activeTab - 1].heading}
           </h2>
           <p className="text-gray-600 mb-6 leading-relaxed">
             {tabs[activeTab - 1].description}
           </p>
 
-          {/* <p className="text-black text-sm">
-            Get your{" "}
-            <span className="font-bold underline">first payment today</span> and
-            grow your business.
-          </p> */}
-
-          <div className="flex items-center gap-5 mt-8">
-            {/* <button className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition">
-              Discover More →
-            </button> */}
-            {/* <AnimatedButton> Discover More →</AnimatedButton> */}
+          <div className="flex items-center gap-5 mt-2">
             <LiquidButton
-                        onClick={() => router.push("/contact")}
-                        className="mt-6"
-                        size="xl"
-                      >
-                        <span className="flex items-center gap-2">
-                          Get Started
-                          <FaRocket />
-                        </span>
-                      </LiquidButton>
-            {/* <button className="text-gray-700 text-sm font-medium flex items-center gap-2 hover:text-black transition">
-              ✉️ Connect & Grow
-            </button> */}
+              onClick={() => router.push("/contact")}
+              className="mt-6"
+              size="xl"
+            >
+              <span className="flex items-center gap-2">
+                Get Started
+                <FaRocket />
+              </span>
+            </LiquidButton>
           </div>
         </div>
       </div>

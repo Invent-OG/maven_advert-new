@@ -11,7 +11,7 @@ const services = [
     description:
       "We build landing pages, integrate CRM, implement chatbots, and set up analytics to streamline your sales process",
     image:
-      "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803430/Digital_Sales_Infrastructure_Automation_okxnw0.jpg",
     link: "/services/app-development",
   },
   {
@@ -19,7 +19,7 @@ const services = [
     description:
       "We optimize your presence on Amazon and Flipkart, run targeted product ads, and boost cross-sales to increase revenue",
     image:
-      "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803433/ECommerce_Marketing_Product_Promotion_zeiord.jpg",
     link: "/services/app-development",
   },
   {
@@ -27,7 +27,7 @@ const services = [
     description:
       "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
     image:
-      "https://images.pexels.com/photos/3182770/pexels-photo-3182770.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803443/Social_Media_Growth_Brand_Engagement_ls7r7t.jpg",
     link: "/services/app-development",
   },
   {
@@ -35,7 +35,7 @@ const services = [
     description:
       "We design Google Ads, retargeting campaigns, and lead funnels to maximize ROI and drive measurable results",
     image:
-      "https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803426/Digital_Advertising_ROI_Campaigns_g70lnn.jpg",
     link: "/services/app-development",
   },
   {
@@ -43,15 +43,7 @@ const services = [
     description:
       "We leverage SEO, blogs, YouTube, and email/WhatsApp campaigns to enhance visibility and attract your target audience",
     image:
-      "https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "/services/app-development",
-  },
-  {
-    title: "Social Media Growth & Brand Engagement:",
-    description:
-      "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
-    image:
-      "https://images.pexels.com/photos/3182770/pexels-photo-3182770.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803494/Search_Content_Marketing_ozdo1x.jpg",
     link: "/services/app-development",
   },
 ];

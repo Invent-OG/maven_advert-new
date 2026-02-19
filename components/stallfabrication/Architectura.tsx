@@ -19,37 +19,15 @@ export default function Architectura() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const text = section.querySelectorAll(".fade-left");
-    const image = section.querySelector(".fade-right");
-
-    gsap.from(text, {
-      x: -60,
-      opacity: 0,
-      duration: 1.2,
-      ease: "power3.out",
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-      },
-    });
-
-    gsap.from(image, {
-      x: 60,
-      opacity: 0,
-      duration: 1.4,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-      },
-    });
+    // GSAP animation removed to fix visibility issue
+    // const text = section.querySelectorAll(".fade-left");
+    // const image = section.querySelector(".fade-right");
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-24 bg-white flex flex-col lg:flex-row items-center justify-between gap-12 px-6 md:px-16 lg:px-28 overflow-hidden"
+      className="relative w-full py-24 bg-white max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 px-6 md:px-16 lg:px-28 overflow-hidden"
     >
       {/* Left Content */}
       <div className="fade-left max-w-xl text-left">
@@ -119,7 +97,7 @@ export default function Architectura() {
         <div className="relative">
           <div className="absolute -bottom-3 -right-3 w-full h-full border-12 border-orange-500 rounded-sm z-0"></div>
           <Image
-            src="https://images.pexels.com/photos/7333995/pexels-photo-7333995.jpeg"
+            src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1770123057/2_copy_wpntes.jpg"
             alt="Architect Worker"
             width={550}
             height={550}

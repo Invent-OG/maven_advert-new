@@ -373,7 +373,7 @@ export default function SettingsPage() {
 
                     <Button
                       type="submit"
-                      className="w-full h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-200 font-semibold text-white"
+                      className="w-full h-12 rounded-xl bg-orange-600 hover:bg-orange-700 shadow-lg hover:shadow-xl transition-all duration-200 font-semibold text-white"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -401,19 +401,23 @@ export default function SettingsPage() {
                     <User className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl font-bold text-gray-900">
-                      Profile Information
-                    </CardTitle>
-                    <p className="text-gray-600 mt-1">
-                      Your personal and account details
-                    </p>
+                    <div className="max-w-4xl mx-auto space-y-8">
+                      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+                          Settings
+                        </h1>
+                        <p className="text-gray-500 mt-1">
+                          Manage your account settings and preferences
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center">
                       <span className="text-white font-bold text-lg">
                         {currentUser?.name?.charAt(0).toUpperCase() || "A"}
                       </span>
@@ -430,8 +434,8 @@ export default function SettingsPage() {
 
                   <div className="space-y-4">
                     <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <User className="h-5 w-5 text-blue-600" />
+                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <User className="h-5 w-5 text-orange-600" />
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-500 mb-1">
@@ -444,8 +448,8 @@ export default function SettingsPage() {
                     </div>
 
                     <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                        <Mail className="h-5 w-5 text-green-600" />
+                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <Mail className="h-5 w-5 text-orange-600" />
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-500 mb-1">
@@ -458,8 +462,8 @@ export default function SettingsPage() {
                     </div>
 
                     <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <Badge className="h-5 w-5 text-purple-600" />
+                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <Badge className="h-5 w-5 text-orange-600" />
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-500 mb-1">

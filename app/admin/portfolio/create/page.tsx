@@ -1,659 +1,347 @@
-// "use client";
-// import React, { useState } from "react";
-
-// import { useCreatePortfolio } from "@/lib/queries/portfolio";
-// import { PortfolioLayouts } from "@/components/Portfolio";
-
-// const layouts = [
-//   {
-//     id: 1,
-//     name: "Layout One",
-//     preview:
-//       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763022373/layout_sample_mfmpsg.png",
-//   },
-//   {
-//     id: 2,
-//     name: "Layout Two",
-//     preview:
-//       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763026462/layout_sample_e2vxrz.png",
-//   },
-//   {
-//     id: 3,
-//     name: "Layout Three",
-//     preview:
-//       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763021475/layout_sample_cetkfk.png",
-//   },
-//   {
-//     id: 4,
-//     name: "Layout Four",
-//     preview:
-//       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763027868/layout_sample_wdsc7y.png",
-//   },
-//   {
-//     id: 5,
-//     name: "Layout Five",
-//     preview:
-//       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763021835/layout_sample_ubp4zv.png",
-//   },
-// ];
-
-// const layoutImageCounts: Record<number, number> = {
-//   1: 6,
-//   2: 5,
-//   3: 6,
-//   4: 5,
-//   5: 5,
-// };
-
-// function Page() {
-//   const [selectedLayout, setSelectedLayout] = useState<number | null>(null);
-//   const [imagesPreview, setImagesPreview] = useState<string[]>([]);
-//   const requiredImages = selectedLayout ? layoutImageCounts[selectedLayout] : 0;
-//   const [title, setTitle] = useState("");
-//   const [description, setDescription] = useState("");
-//   const [content, setContent] = useState("");
-
-//   const createMutation = useCreatePortfolio();
-
-//   const handleSave = async () => {
-//     if (!selectedLayout) return alert("Select a layout first");
-//     if (!title || !description)
-//       return alert("Title and description are required");
-
-//     const finalImages = Array.from({ length: requiredImages }).map((_, index) =>
-//       (imagesPreview[index] || "").trim()
-//     );
-
-//     if (requiredImages > 0 && finalImages.some((img) => !img)) {
-//       return alert(
-//         `Please provide all ${requiredImages} image URLs required for this layout.`
-//       );
-//     }
-
-//     try {
-//       await createMutation.mutateAsync({
-//         title,
-//         description,
-//         content,
-//         layoutId: selectedLayout,
-//         images: finalImages.filter((img) => img.length > 0),
-//       });
-
-//       alert("Portfolio saved to database!");
-
-//       setTitle("");
-//       setDescription("");
-//       setContent("");
-//       setImagesPreview([]);
-//       setSelectedLayout(null);
-//     } catch (err) {
-//       alert("Failed to save portfolio");
-//       console.error(err);
-//     }
-//   };
-
-//   return (
-//     <div className="p-6">
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//         <div>
-//           <h1 className="text-3xl font-bold">Portfolio Layout Manager</h1>
-
-//           <div className="bg-white p-5 rounded-lg shadow">
-//             <label className="block font-medium mb-2">Title</label>
-//             <input
-//               value={title}
-//               onChange={(e) => setTitle(e.target.value)}
-//               className="border p-2 rounded w-full"
-//             />
-
-//             <label className="block font-medium mt-4 mb-2">Description</label>
-//             <input
-//               value={description}
-//               onChange={(e) => setDescription(e.target.value)}
-//               className="border p-2 rounded w-full"
-//             />
-
-//             <label className="block font-medium mt-4 mb-2">
-//               Content (HTML)
-//             </label>
-//             <textarea
-//               value={content}
-//               onChange={(e) => setContent(e.target.value)}
-//               className="border p-2 rounded w-full"
-//               rows={5}
-//             />
-
-//             <label className="block font-medium mt-4 mb-2">
-//               Portfolio Image URLs
-//             </label>
-
-//             <div className="space-y-3">
-//               {Array.from({ length: requiredImages }).map((_, index) => (
-//                 <div key={index} className="flex items-center gap-3">
-//                   <input
-//                     value={imagesPreview[index] || ""}
-//                     onChange={(e) => {
-//                       const updated = [...imagesPreview];
-//                       updated[index] = e.target.value;
-//                       setImagesPreview(updated);
-//                     }}
-//                     placeholder={`Image ${index + 1} URL`}
-//                     className="border p-2 rounded w-full"
-//                   />
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-
-//           <div>
-//             <h2 className="text-xl font-semibold mb-3">
-//               Select Portfolio Layout
-//             </h2>
-//             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//               {layouts.map((layout) => (
-//                 <div
-//                   key={layout.id}
-//                   onClick={() => setSelectedLayout(layout.id)}
-//                   className={`border rounded-lg p-3 cursor-pointer transition hover:shadow-lg ${
-//                     selectedLayout === layout.id
-//                       ? "border-blue-500 shadow-xl"
-//                       : ""
-//                   }`}
-//                 >
-//                   {/* eslint-disable-next-line @next/next/no-img-element */}
-//                   <img
-//                     src={layout.preview}
-//                     alt={layout.name}
-//                     className="w-full h-48 object-cover rounded-md"
-//                   />
-//                   <p className="text-center mt-2 font-medium">{layout.name}</p>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-
-//           <div className="flex items-center gap-4">
-//             <button
-//               onClick={handleSave}
-//               className="bg-blue-600 text-white px-4 py-2 rounded"
-//             >
-//               Save Portfolio
-//             </button>
-//             <button
-//               onClick={() => {
-//                 setTitle("");
-//                 setDescription("");
-//                 setContent("");
-//                 setImagesPreview([]);
-//                 setSelectedLayout(null);
-//               }}
-//               className="border px-4 py-2 rounded"
-//             >
-//               Reset
-//             </button>
-//           </div>
-//         </div>
-
-//         <div>
-//           {selectedLayout && (
-//             <>
-//               {(() => {
-//                 const LayoutComponent = PortfolioLayouts[selectedLayout];
-//                 return LayoutComponent ? (
-//                   <div className="border rounded bg-white p-4">
-//                     <LayoutComponent
-//                       title={title}
-//                       description={description}
-//                       content={content}
-//                       images={imagesPreview}
-//                     />
-//                   </div>
-//                 ) : (
-//                   <p>No preview available</p>
-//                 );
-//               })()}
-//             </>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Page;
 "use client";
 import React, { useState } from "react";
-
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronDown,
+  Layout,
+  Palette,
+  Monitor,
+  Smartphone,
+  Tablet,
+  Save,
+  ArrowLeft,
+  Eye,
+  Settings,
+  Layers,
+} from "lucide-react";
 import { useCreatePortfolio } from "@/lib/queries/portfolio";
-import { PortfolioLayouts } from "@/components/Portfolio";
 import PortfolioBuilder from "@/components/admin/portfolio/PortfolioBuilder";
 import BlockRenderer from "@/components/Portfolio/BlockRenderer";
 import { PortfolioBlock } from "@/lib/types/portfolios";
+import { GradientPicker } from "@/components/admin/portfolio/GradientPicker";
+import { useRouter } from "next/navigation";
 
-const layouts = [
-  {
-    id: 1,
-    name: "Layout One",
-    preview:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763022373/layout_sample_mfmpsg.png",
-  },
-  {
-    id: 2,
-    name: "Layout Two",
-    preview:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763026462/layout_sample_e2vxrz.png",
-  },
-  {
-    id: 3,
-    name: "Layout Three",
-    preview:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763021475/layout_sample_cetkfk.png",
-  },
-  {
-    id: 4,
-    name: "Layout Four",
-    preview:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763027868/layout_sample_wdsc7y.png",
-  },
-  {
-    id: 5,
-    name: "Layout Five",
-    preview:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763021835/layout_sample_ubp4zv.png",
-  },
-];
+// --- UI Components ---
 
-const layoutImageCounts: Record<number, number> = {
-  1: 6,
-  2: 5,
-  3: 6,
-  4: 5,
-  5: 5,
+const Section = ({
+  title,
+  icon: Icon,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  icon: any;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <div className="border-b border-gray-100 last:border-0">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+      >
+        <div className="flex items-center gap-3 text-gray-700 font-medium">
+          <Icon className="w-5 h-5 text-gray-400" />
+          {title}
+        </div>
+        <ChevronDown
+          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="p-4 pt-0 space-y-4">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 };
 
+// --- Page Component ---
+
 function Page() {
-  const [selectedLayout, setSelectedLayout] = useState<number | null>(null);
-  const [imagesPreview, setImagesPreview] = useState<string[]>([]);
-  const requiredImages = selectedLayout ? layoutImageCounts[selectedLayout] : 0;
-  
+  const router = useRouter();
+
   // Basic Info
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [content, setContent] = useState("");
   const [websiteUrl, setWebsiteUrl] = useState("");
 
-  // Builder Mode State
-  const [isBuilderMode, setIsBuilderMode] = useState(true);
+  // Page Styling
+  const [backgroundColor, setBackgroundColor] = useState("#ffffff");
+  // Gradient State
+  const [gradientEnabled, setGradientEnabled] = useState(false);
+  const [gradientStart, setGradientStart] = useState("#ffffff");
+  const [gradientEnd, setGradientEnd] = useState("#000000");
+  const [gradientDirection, setGradientDirection] = useState("to right");
+
+  // Content
   const [blocks, setBlocks] = useState<PortfolioBlock[]>([]);
+
+  // Preview Mode
+  const [previewDevice, setPreviewDevice] = useState<
+    "desktop" | "tablet" | "mobile"
+  >("desktop");
+
+  const gradient = gradientEnabled
+    ? `linear-gradient(${gradientDirection}, ${gradientStart}, ${gradientEnd})`
+    : "";
 
   const createMutation = useCreatePortfolio();
 
   const handleSave = async () => {
-    // Validation
     if (!title || !description)
       return alert("Title and description are required");
-
-    // Legacy Mode Validation
-    if (!isBuilderMode) {
-      if (!selectedLayout) return alert("Select a layout first");
-      const finalImages = Array.from({ length: requiredImages }).map((_, index) =>
-        (imagesPreview[index] || "").trim()
-      );
-      if (requiredImages > 0 && finalImages.some((img) => !img)) {
-        return alert(
-          `Please provide all ${requiredImages} image URLs required for this layout.`
-        );
-      }
-    } else {
-        // Builder Mode Validation
-        if (blocks.length === 0) return alert("Please add at least one content block.");
-    }
+    if (blocks.length === 0)
+      return alert("Please add at least one content block.");
 
     try {
+      const settings = {
+        backgroundColor,
+        gradient,
+        gradientEnabled,
+        gradientStart,
+        gradientEnd,
+        gradientDirection,
+      };
+
       const payload: any = {
         title,
         description,
-        content: isBuilderMode ? "" : content,
-        layoutId: isBuilderMode ? 0 : selectedLayout, // 0 for builder mode
-        images: isBuilderMode ? [] : imagesPreview.filter((img) => img.length > 0),
-        websiteUrl: websiteUrl.trim() || null,
-        blocks: isBuilderMode ? blocks : [],
+        content: JSON.stringify(settings),
+        layoutId: 0,
+        images: [],
+        websiteUrl: websiteUrl.trim() || undefined,
+        blocks: blocks,
       };
 
       await createMutation.mutateAsync(payload);
-
-      alert("Portfolio saved to database!");
-
-      setTitle("");
-      setDescription("");
-      setContent("");
-      setWebsiteUrl("");
-      setImagesPreview([]);
-      setBlocks([]);
-      setSelectedLayout(null);
+      alert("Portfolio saved successfully!");
+      // Reset logic or redirect could act here
+      router.push("/admin/portfolio");
     } catch (err) {
       alert("Failed to save portfolio");
       console.error(err);
     }
   };
 
+  const deviceWidths = {
+    desktop: "w-full",
+    tablet: "w-[768px]",
+    mobile: "w-[375px]",
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          {/* Left Column - Form and Controls */}
-          <div className="space-y-8">
-            {/* Header */}
-            <div className="text-center xl:text-left">
-              <h1 className="text-4xl font-bold text-gray-900 mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Portfolio Layout Manager
-              </h1>
-              <p className="text-gray-600 text-lg">
-                Create and customize your portfolio layouts
-              </p>
-            </div>
-
-            {/* Content Card */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 transition-all duration-300 hover:shadow-xl">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-3 border-b border-gray-200">
-                Portfolio Content
-              </h2>
-
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Title
-                    <span className="text-red-500 ml-1">*</span>
-                  </label>
-                  <input
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
-                    placeholder="Enter your portfolio title"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Description
-                    <span className="text-red-500 ml-1">*</span>
-                  </label>
-                  <input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
-                    placeholder="Enter portfolio description"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Website URL
-                    <span className="text-gray-400 font-normal ml-2">(Optional)</span>
-                  </label>
-                  <input
-                    value={websiteUrl}
-                    onChange={(e) => setWebsiteUrl(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
-                    placeholder="https://example.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Content (HTML)
-                  </label>
-                  <textarea
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none resize-vertical min-h-[120px]"
-                    placeholder="Add your HTML content here..."
-                    rows={5}
-                  />
-                </div>
-
-                {selectedLayout && (
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Portfolio Image URLs
-                      <span className="ml-2 text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">
-                        {requiredImages} images required
-                      </span>
-                    </label>
-                    <div className="space-y-3">
-                      {Array.from({ length: requiredImages }).map(
-                        (_, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center gap-3 group"
-                          >
-                            <div className="flex-1 relative">
-                              <input
-                                value={imagesPreview[index] || ""}
-                                onChange={(e) => {
-                                  const updated = [...imagesPreview];
-                                  updated[index] = e.target.value;
-                                  setImagesPreview(updated);
-                                }}
-                                placeholder={`https://example.com/image-${
-                                  index + 1
-                                }.jpg`}
-                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none font-mono text-sm"
-                              />
-                              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">
-                                  {index + 1}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-
-
-            {/* Mode Toggle */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-                 <div className="flex items-center gap-4 mb-6">
-                    <button 
-                         onClick={() => setIsBuilderMode(true)}
-                         className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${isBuilderMode ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                    >
-                         Page Builder (New)
-                    </button>
-                    <button 
-                         onClick={() => setIsBuilderMode(false)}
-                         className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${!isBuilderMode ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                    >
-                         Legacy Layouts
-                    </button>
-                 </div>
-
-                 {isBuilderMode ? (
-                     <PortfolioBuilder blocks={blocks} onChange={setBlocks} />
-                 ) : (
-                    <>
-                        {/* Legacy Layout Selection Content */}
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-3 border-b border-gray-200">
-                            Select Portfolio Layout
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {layouts.map((layout) => (
-                            <div
-                                key={layout.id}
-                                onClick={() => setSelectedLayout(layout.id)}
-                                className={`group cursor-pointer rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                                selectedLayout === layout.id
-                                    ? "border-blue-500 shadow-lg scale-105 bg-blue-50"
-                                    : "border-gray-200 hover:border-blue-300 hover:shadow-md"
-                                }`}
-                            >
-                                <div className="aspect-video overflow-hidden rounded-t-xl">
-                                <img
-                                    src={layout.preview}
-                                    alt={layout.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                />
-                                </div>
-                                <div className="p-4 text-center">
-                                <p
-                                    className={`font-semibold transition-colors duration-200 ${
-                                    selectedLayout === layout.id
-                                        ? "text-blue-600"
-                                        : "text-gray-800 group-hover:text-blue-600"
-                                    }`}
-                                >
-                                    {layout.name}
-                                </p>
-                                <div className="flex items-center justify-center mt-2">
-                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                                    {layoutImageCounts[layout.id]} images
-                                    </span>
-                                </div>
-                                </div>
-                            </div>
-                            ))}
-                        </div>
-                    </>
-                 )}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-              <button
-                onClick={handleSave}
-                disabled={createMutation.isPending}
-                className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-8 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
-              >
-                {createMutation.isPending ? (
-                  <span className="flex items-center justify-center gap-3">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Saving Portfolio...
-                  </span>
-                ) : (
-                  "Save Portfolio"
-                )}
-              </button>
-
-              <button
-                onClick={() => {
-                  setTitle("");
-                  setDescription("");
-                  setContent("");
-                  setWebsiteUrl("");
-                  setImagesPreview([]);
-                  setBlocks([]);
-                  setSelectedLayout(null);
-                }}
-                className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 transform hover:scale-105"
-              >
-                Reset All
-              </button>
-            </div>
+    <div className="h-screen flex bg-gray-50 overflow-hidden font-sans">
+      {/* --- LEFT SIDEBAR (EDITOR) --- */}
+      <div className="w-[450px] flex-shrink-0 bg-white border-r border-gray-200 flex flex-col z-20 shadow-2xl">
+        {/* Header */}
+        <div className="h-16 flex items-center justify-between px-4 border-b border-gray-100 bg-white">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.back()}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-500"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <span className="font-bold text-gray-800 text-lg tracking-tight">
+              Editor
+            </span>
           </div>
-
-          {/* Right Column - Preview */}
-          <div className="xl:sticky xl:top-4 h-fit">
-            <div className={`bg-white rounded-2xl shadow-lg border border-gray-100 transition-all duration-300 ${!isBuilderMode ? 'p-6' : 'p-2'}`}>
-              <div className="flex items-center justify-between mb-6 pb-3 border-b border-gray-200 px-4 pt-4">
-                <h2 className="text-2xl font-semibold text-gray-800">
-                  Live Preview
-                </h2>
-                {isBuilderMode ? (
-                     <span className="text-sm font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-                        Page Builder
-                     </span>
-                ) : (
-                    selectedLayout && (
-                    <span className="text-sm font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full flex items-center gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                        Active Layout
-                    </span>
-                    )
-                )}
-              </div>
-
-              {isBuilderMode ? (
-                  <div className="min-h-[600px] border-2 border-dashed border-gray-200 rounded-xl bg-white overflow-hidden">
-                      {blocks.length > 0 ? (
-                           <BlockRenderer blocks={blocks} />
-                      ) : (
-                          <div className="flex flex-col items-center justify-center h-[400px] text-gray-400">
-                               <p>Start adding blocks to see preview</p>
-                          </div>
-                      )}
-                  </div>
-              ) : (
-                  // Legacy Preview Logic
-                  selectedLayout ? (
-                    <div className="space-y-4">
-                    <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
-                        <p className="text-sm text-blue-700 font-medium">
-                        Previewing:{" "}
-                        <span className="font-bold">
-                            {layouts.find((l) => l.id === selectedLayout)?.name}
-                        </span>
-                        </p>
-                    </div>
-
-                    <div className="border-2 border-dashed border-gray-300 rounded-2xl overflow-hidden bg-gray-50 min-h-[600px] flex items-center justify-center">
-                        {(() => {
-                        const LayoutComponent = PortfolioLayouts[selectedLayout];
-                        return LayoutComponent ? (
-                            <div className="w-full transform scale-90 origin-top">
-                            <LayoutComponent
-                                title={title || "Your Portfolio Title"}
-                                description={
-                                description ||
-                                "Your portfolio description will appear here"
-                                }
-                                content={
-                                content ||
-                                "<p>Add your detailed content here...</p>"
-                                }
-                                images={
-                                imagesPreview.length > 0
-                                    ? imagesPreview
-                                    : Array.from({ length: requiredImages }).map(
-                                        (_, i) =>
-                                        `https://via.placeholder.com/800x600/3B82F6/FFFFFF?text=Image+${
-                                            i + 1
-                                        }`
-                                    )
-                                }
-                            />
-                            </div>
-                        ) : (
-                            <div className="text-center p-8">
-                                <p className="text-gray-500">
-                                    Layout component not found
-                                </p>
-                            </div>
-                        );
-                        })()}
-                    </div>
-                </div>
-              ) : (
-                <div className="text-center py-16">
-                  <h3 className="text-xl font-semibold text-gray-700 mb-3">
-                    No Layout Selected
-                  </h3>
-                  <p className="text-gray-500 max-w-md mx-auto">
-                    Choose a layout or switch to Page Builder mode.
-                  </p>
-                </div>
-              )
-            )}
-            </div>
-          </div>
+          <div className="flex gap-2">
+            <button
+              // Just for visual parity, maybe preview in new tab
+              className="p-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-blue-600 transition-colors"
+              title="Preview Live"
+            >
+              <Eye className="w-5 h-5" />
+            </button>
           </div>
         </div>
+
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200 hover:scrollbar-thumb-gray-300">
+          <Section title="General Info" icon={Settings} defaultOpen>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  Portfolio Title
+                </label>
+                <input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+                  placeholder="My Portfolio"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  Description
+                </label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={3}
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none"
+                  placeholder="Brief description..."
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  Website URL
+                </label>
+                <input
+                  value={websiteUrl}
+                  onChange={(e) => setWebsiteUrl(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Appearance" icon={Palette} defaultOpen>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                  Background Color
+                </label>
+                <div className="flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm border border-gray-200 ring-2 ring-white">
+                    <input
+                      type="color"
+                      value={backgroundColor}
+                      onChange={(e) => setBackgroundColor(e.target.value)}
+                      className="absolute inset-0 w-[150%] h-[150%] -top-1/4 -left-1/4 p-0 border-none cursor-pointer"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    value={backgroundColor}
+                    onChange={(e) => setBackgroundColor(e.target.value)}
+                    className="flex-1 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-mono text-gray-600 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-gray-100">
+                <GradientPicker
+                  value={{
+                    start: gradientStart,
+                    end: gradientEnd,
+                    direction: gradientDirection,
+                    enabled: gradientEnabled,
+                  }}
+                  onChange={(val) => {
+                    setGradientEnabled(val.enabled);
+                    setGradientStart(val.start);
+                    setGradientEnd(val.end);
+                    setGradientDirection(val.direction);
+                  }}
+                />
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Content Blocks" icon={Layers} defaultOpen>
+            <div className="mb-2">
+              <p className="text-xs text-gray-400 mb-4">
+                Drag and drop blocks to rearrange. Click to edit.
+              </p>
+              <PortfolioBuilder blocks={blocks} onChange={setBlocks} />
+            </div>
+          </Section>
+        </div>
+
+        {/* Footer Actions */}
+        <div className="p-4 border-t border-gray-200 bg-white space-y-3">
+          <button
+            onClick={handleSave}
+            disabled={createMutation.isPending}
+            className="w-full flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded-xl font-medium transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-600/20"
+          >
+            {createMutation.isPending ? (
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <Save className="w-4 h-4" />
+            )}
+            Save Portfolio
+          </button>
+        </div>
+      </div>
+
+      {/* --- RIGHT PREVIEW --- */}
+      <div className="flex-1 bg-[#F3F4F6] relative flex flex-col min-w-0">
+        {/* Toolbar */}
+        <div className="h-14 flex items-center justify-center gap-1 mt-4">
+          <div className="bg-white p-1 rounded-lg border border-gray-200 shadow-sm flex gap-1">
+            <button
+              onClick={() => setPreviewDevice("desktop")}
+              className={`p-2 rounded-md transition-all ${previewDevice === "desktop" ? "bg-gray-100 text-gray-900" : "text-gray-400 hover:text-gray-600"}`}
+            >
+              <Monitor className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setPreviewDevice("tablet")}
+              className={`p-2 rounded-md transition-all ${previewDevice === "tablet" ? "bg-gray-100 text-gray-900" : "text-gray-400 hover:text-gray-600"}`}
+            >
+              <Tablet className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setPreviewDevice("mobile")}
+              className={`p-2 rounded-md transition-all ${previewDevice === "mobile" ? "bg-gray-100 text-gray-900" : "text-gray-400 hover:text-gray-600"}`}
+            >
+              <Smartphone className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Device Frame */}
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-8 flex justify-center items-start scrollbar-thin">
+          <div
+            className={`
+                transition-all duration-300 ease-in-out bg-white shadow-2xl origin-top
+                ${deviceWidths[previewDevice]}
+                ${previewDevice === "mobile" ? "min-h-[667px] rounded-[3rem] border-8 border-gray-800" : ""}
+                ${previewDevice === "tablet" ? "min-h-[1024px] rounded-[2rem] border-8 border-gray-800" : ""}
+                ${previewDevice === "desktop" ? "min-h-full rounded-lg border border-gray-200" : ""}
+             `}
+          >
+            {/* Screen Content */}
+            <div
+              className={`w-full h-full overflow-hidden bg-white ${previewDevice !== "desktop" ? "rounded-[2.5rem]" : ""}`}
+              style={{
+                background: gradient || backgroundColor,
+                minHeight: "100%",
+              }}
+            >
+              {blocks.length > 0 ? (
+                <BlockRenderer blocks={blocks} />
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-gray-300 space-y-4 p-10 text-center">
+                  <Layout className="w-16 h-16 opacity-50" />
+                  <p className="text-lg font-medium">Your canvas is empty</p>
+                  <p className="text-sm">
+                    Add blocks from the left panel to start building.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

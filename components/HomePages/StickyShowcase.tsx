@@ -199,17 +199,16 @@
 //         <div className="md:mt-24 mt-24"></div>
 
 //         <h1
-//           className="        
-//     text-4xl 
-//     md:text-7xl 
-//     lg:text-8xl 
+//           className="
+//     text-4xl
+//     md:text-7xl
+//     lg:text-8xl
 //       font-medium
 //       tracking-tighter
 
-//     text-neutral-900 
-//     md:py-4 
-//     mt-20 md:mt-0 
-    
+//     text-neutral-900
+//     md:py-4
+//     mt-20 md:mt-0
 
 //   "
 //         >
@@ -288,7 +287,7 @@
 // }: PhoneMockupProps) {
 //   return (
 //     <div
-//       className={`relative 
+//       className={`relative
 //     w-[180px] h-[360px]             // mobile
 //     sm:w-[200px] sm:h-[400px]       // small devices
 //     md:w-[260px] md:h-[500px]       // increased width

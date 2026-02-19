@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useRef } from "react";
 
 import Lenis from "lenis";
+import { usePathname } from "next/navigation";
 
 type LenisContextType = {
   lenis?: Lenis | null;
@@ -22,13 +23,15 @@ export default function LenisProvider({
   const lenisRef = useRef<Lenis | null>(null);
   const rafRef = useRef<number | null>(null);
 
+  const pathname = usePathname();
+  const isExcluded = pathname.startsWith("/admin");
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || isExcluded) return;
 
     // create Lenis instance
     lenisRef.current = new Lenis({
       duration: 1.8,
-      // smooth: true, // Legacy option, removed
       orientation: "vertical",
     });
 
@@ -41,9 +44,10 @@ export default function LenisProvider({
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lenisRef.current?.destroy();
       lenisRef.current = null;
     };
-  }, []);
+  }, [isExcluded]);
 
   return (
     <LenisContext.Provider value={{ lenis: lenisRef.current }}>

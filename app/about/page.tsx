@@ -18,7 +18,7 @@ function page() {
       <AboutHero />
       <MarketingAgency />
       <AboutCompany />
-      <AboutAward />
+      {/* <AboutAward /> */}
       <AboutMarquee />
       <AboutMarketing />
       <AboutCompanyMarquee />

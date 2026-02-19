@@ -17,7 +17,7 @@ function MarketingAgency() {
     });
   }, []);
   return (
-    <section className="w-full bg-white py-16 px-6 md:px-20 min-h-screen">
+    <section className="w-full bg-white py-16 px-6 md:px-20 ">
       {/* Top Badge */}
       <div className="mb-4">
         <span className="inline-block bg-orange-500 text-white text-xs font-semibold px-4 py-1 rounded-full">
@@ -26,7 +26,7 @@ function MarketingAgency() {
       </div>
 
       {/* Header and Description */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-12 gap-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start  gap-6">
         <h2 className="text-3xl md:text-5xl font-bold text-neutral-900  md:w-1/2">
           Guiding brands to grow, engage, and succeed{" "}
         </h2>
@@ -64,7 +64,8 @@ function MarketingAgency() {
             Expert Execution{" "}
           </h4>
           <p className="text-gray-500 text-base">
-            Delivering ideas that move fast, scale smart, and perform better.{" "}
+            Delivering ideas that move fast, scale smart, and perform
+            better.{" "}
           </p>
         </div>
 

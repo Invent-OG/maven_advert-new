@@ -54,6 +54,7 @@
 // }
 "use client";
 
+import { ReactNode } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -73,6 +74,7 @@ interface DeleteConfirmationProps {
   title?: string;
   description?: string;
   triggerClassName?: string;
+  trigger?: ReactNode;
 }
 
 export function DeleteConfirmation({
@@ -80,17 +82,22 @@ export function DeleteConfirmation({
   title = "Are you sure?",
   description = "This action cannot be undone. This will permanently delete this item.",
   triggerClassName,
+  trigger,
 }: DeleteConfirmationProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`h-9 w-9 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 border border-red-100 transition-all duration-200 ${triggerClassName}`}
-        >
-          <Trash2 className="h-4 w-4" />
-        </Button>
+        {trigger ? (
+          trigger
+        ) : (
+          <Button
+            variant="ghost"
+            size="sm"
+            className={`h-9 w-9 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 border border-red-100 transition-all duration-200 ${triggerClassName}`}
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        )}
       </AlertDialogTrigger>
       <AlertDialogContent className="border-0 shadow-2xl rounded-2xl max-w-md mx-4">
         {/* Warning Icon */}

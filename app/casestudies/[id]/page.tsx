@@ -42,7 +42,10 @@ export default function CaseStudyDetailPage({
           ...found,
           images,
           layoutId: Number(found.layoutId),
-          blocks: typeof found.blocks === 'string' ? JSON.parse(found.blocks) : (found.blocks || []),
+          blocks:
+            typeof found.blocks === "string"
+              ? JSON.parse(found.blocks)
+              : found.blocks || [],
         });
       } catch (err) {
         console.error("Failed to load portfolio:", err);
@@ -59,22 +62,37 @@ export default function CaseStudyDetailPage({
 
   // Check for Dynamic Blocks first
   if (portfolio.blocks && portfolio.blocks.length > 0) {
-      return (
-          <div className="w-full min-h-screen bg-white pb-20">
-              <BlockRenderer blocks={portfolio.blocks} />
-               {portfolio.websiteUrl && (
-                    <a
-                    href={portfolio.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
-                    >
-                    <span>Visit Site</span>
-                    <FaExternalLinkAlt className="w-3 h-3" />
-                    </a>
-                )}
-          </div>
-      );
+    return (
+      <div
+        className="w-full min-h-screen pb-20 transition-colors duration-300"
+        style={{
+          background: (() => {
+            try {
+              if (portfolio.content && portfolio.content.startsWith("{")) {
+                const settings = JSON.parse(portfolio.content);
+                return (
+                  settings.gradient || settings.backgroundColor || "#ffffff"
+                );
+              }
+            } catch {}
+            return "#ffffff";
+          })(),
+        }}
+      >
+        <BlockRenderer blocks={portfolio.blocks} />
+        {portfolio.websiteUrl && (
+          <a
+            href={portfolio.websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all duration-300 font-medium"
+          >
+            <span>Visit Site</span>
+            <FaExternalLinkAlt className="w-3 h-3" />
+          </a>
+        )}
+      </div>
+    );
   }
 
   const Layout = PortfolioLayouts[portfolio.layoutId];

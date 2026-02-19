@@ -232,14 +232,14 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-gray-100 overflow-hidden p-4">
+    <div className="h-screen flex items-center justify-center bg-gray-50 overflow-hidden p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full max-w-md"
       >
-        <Card className="border-0 shadow-xl rounded-3xl overflow-hidden bg-white/80 backdrop-blur-sm">
+        <Card className="border-0 shadow-xl rounded-3xl overflow-hidden bg-white">
           <CardHeader className="text-center space-y-4 pb-8 pt-10">
             <motion.div
               initial={{ y: -20, opacity: 0 }}
@@ -263,7 +263,7 @@ export default function AdminLoginPage() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              <CardTitle className="text-3xl font-bold text-gray-900">
                 Admin Portal
               </CardTitle>
               <CardDescription className="text-gray-600 mt-2 text-base">
@@ -299,12 +299,12 @@ export default function AdminLoginPage() {
                       </FormLabel>
                       <FormControl>
                         <div className="relative group">
-                          <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 transition-colors group-focus-within:text-blue-500" />
+                          <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 transition-colors group-focus-within:text-orange-500" />
                           <Input
                             type="email"
                             placeholder="admin@example.com"
                             {...field}
-                            className="h-12 pl-12 pr-4 rounded-xl border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                            className="h-12 pl-12 pr-4 rounded-xl border-2 border-gray-200 bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
                           />
                         </div>
                       </FormControl>
@@ -323,12 +323,12 @@ export default function AdminLoginPage() {
                       </FormLabel>
                       <FormControl>
                         <div className="relative group">
-                          <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 transition-colors group-focus-within:text-blue-500" />
+                          <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 transition-colors group-focus-within:text-orange-500" />
                           <Input
                             type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
                             {...field}
-                            className="h-12 pl-12 pr-12 rounded-xl border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                            className="h-12 pl-12 pr-12 rounded-xl border-2 border-gray-200 bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
                           />
                           <Button
                             type="button"
@@ -356,7 +356,7 @@ export default function AdminLoginPage() {
                 >
                   <Button
                     type="submit"
-                    className="w-full h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                    className="w-full h-12 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                     disabled={loginMutation.isPending}
                   >
                     {loginMutation.isPending ? (

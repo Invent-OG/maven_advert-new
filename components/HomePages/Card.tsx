@@ -19,11 +19,6 @@ function Card({ image, title, description }: CardProps) {
         data-aos="fade-down"
         className="w-[300px] h-[220px] rounded-2xl overflow-hidden border-2 border-gray-200 shadow-inner relative transition-transform duration-300 hover:scale-105"
       >
-        {/* <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover rounded-xl"
-        /> */}
         <Image
           src={image}
           alt={title}
@@ -49,28 +44,28 @@ export default function EverythingYouNeed() {
   const cards = [
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646973/Assets-02_y4x2uf.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646968/Assets-09_dhtjek.jpg",
       title: "Strategic Digital Architecture",
       description:
         "Build your brand’s online journey with data-driven insights and cohesive digital strategies.",
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646971/Assets-01_aw3d3u.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646957/Assets-06_rxotfq.jpg",
       title: "Interactive Web Experiences",
       description:
         "Develop websites that engage, convert, and reflect your brand’s identity seamlessly.",
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646968/Assets-09_dhtjek.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646959/Assets-08_vyeouj.jpg",
       title: "Brand Identity Crafting",
       description:
         "Transform any digital visual into a cohesive brand language that resonates",
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646966/Assets-04_howr7p.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646971/Assets-01_aw3d3u.jpg",
       title: "Targeted Growth Campaigns",
       description:
         "ROI-focused advertising across Google, social, and display networks to maximize impact.",
@@ -84,28 +79,28 @@ export default function EverythingYouNeed() {
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646962/Assets-05_ud3c7i.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646956/Assets-03_ov31ny.jpg",
       title: "eCommerce Growth Engine",
       description:
         "Optimize marketplaces and product listings to drive traffic, conversions, and repeat sales.",
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646959/Assets-08_vyeouj.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646973/Assets-02_y4x2uf.jpg",
       title: "Automated Sales Systems",
       description:
         "CRM, Chatbots, Landing pages, and analytics engineered to streamline and boost sales.",
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646957/Assets-06_rxotfq.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646962/Assets-05_ud3c7i.jpg",
       title: "Social Amplification & Engagement",
       description:
         "Grow audience, Enhance Brand Visibility, and foster meaningful social connections.",
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646956/Assets-03_ov31ny.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646966/Assets-04_howr7p.jpg",
       title: "Visual Storytelling & Production",
       description:
         "Corporate films, Brand shoots, and Photography that capture your brand essence.",
@@ -119,14 +114,7 @@ export default function EverythingYouNeed() {
     },
     {
       image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646964/Assets-07_hglckz.jpg",
-      title: "Performance Intelligence & Insights",
-      description:
-        "Advanced analytics and optimization to continuously refine campaigns and strategy outcomes.",
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1763646964/Assets-07_hglckz.jpg",
+        "https://res.cloudinary.com/dr9gcshs6/image/upload/v1771061376/man-showing-achieve-business-goals-with-growth-graphs-goals-business_fu9pxp.jpg",
       title: "Performance Intelligence & Insights",
       description:
         "Advanced analytics and optimization to continuously refine campaigns and strategy outcomes.",

@@ -33,7 +33,7 @@ function ServicesMainPlan() {
 
   return (
     <>
-      <section className="bg-white py-24 px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-20">
+      <section className="bg-white py-24 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-20">
         {/* LEFT SIDE */}
         <div data-aos="fade-down" className="w-full md:w-1/2">
           {/* Subtitle */}
@@ -100,7 +100,7 @@ function ServicesMainPlan() {
             </LiquidButton>
 
             <button className="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-orange-500 transition">
-              ▶  Play video
+              ▶ Play video
             </button>
           </div>
         </div>
@@ -113,16 +113,16 @@ function ServicesMainPlan() {
           {/* Large Image */}
           <div className="relative w-[360px] md:w-[420px] lg:w-[460px]">
             <Image
-              src="https://crafto.themezaa.com/marketing/wp-content/uploads/sites/10/2023/11/demo-marketing-home-06.jpg.webp"
+              src="https://res.cloudinary.com/dr9gcshs6/image/upload/v1770957693/vectors_wdzcod.jpg"
               alt="Marketing process main image"
               width={460}
               height={500}
-              className="rounded-xl shadow-lg object-cover"
+              className=" object-cover"
             />
           </div>
 
           {/* Floating small image */}
-          <div
+          {/* <div
             ref={floatingRef}
             className="absolute bottom-0 right-0 w-[180px] md:w-[200px] translate-x-8 translate-y-8"
           >
@@ -133,7 +133,7 @@ function ServicesMainPlan() {
               height={150}
               className="rounded-xl shadow-xl object-cover"
             />
-          </div>
+          </div> */}
         </div>
       </section>
       <p className="text-lg font-bold text-center flex items-center justify-center gap-2">

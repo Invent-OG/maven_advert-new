@@ -1,8 +1,5 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { Play } from "lucide-react";
 import { LiquidButton } from "../ui/liquid-glass-button";
 import { useRouter } from "next/navigation";
 import { FaRocket } from "react-icons/fa";
@@ -10,13 +7,25 @@ import { FaRocket } from "react-icons/fa";
 export default function StallHero() {
   const router = useRouter();
   return (
-    <section
-      className="relative w-full min-h-screen flex flex-col items-center justify-center text-center lg:text-left px-6 md:px-16 lg:px-28 overflow-hidden bg-cover bg-center"
-      style={{
-        backgroundImage:
-          "url('https://stunning-buttercream-accb8c.netlify.app/assets/images/home1/banner/bg.jpg')",
-      }}
-    >
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center lg:text-left px-6 md:px-16 lg:px-28 overflow-hidden bg-black">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="https://stunning-buttercream-accb8c.netlify.app/assets/images/home1/banner/bg.jpg"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source
+          src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1770123100/2_zwkxdq.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/30 z-0"></div>
+
       {/* Content Wrapper */}
       <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 py-20 lg:py-32">
         {/* Left Content */}
@@ -25,11 +34,11 @@ export default function StallHero() {
             Innovative Stall Fabricators in South India{" "}
           </p>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-none">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold leading-none">
             Bringing brands alive with innovative stalls.
           </h1>
 
-          <p className="text-gray-600 text-base md:text-base mt-6 mb-10">
+          <p className="text-white/60 text-base md:text-base mt-6 mb-10">
             At Maven Advert, we specialize in custom stall fabrication across
             Tamil Nadu and South India — delivering creative, durable, and
             brand-focused setups. Whether it’s a trade show, product launch, or
@@ -43,12 +52,12 @@ export default function StallHero() {
             </button> */}
             <LiquidButton
               onClick={() => router.push("/contact")}
-              className=""
+              className="text-white"
               size="xl"
             >
-              <span className="flex items-center justify-center gap-2">
+              <span className="flex items-center text-white justify-center gap-2">
                 {/* Rocket Icon */}
-                Get Started <FaRocket className="w-4 h-4" />
+                Get Started <FaRocket className="w-4 h-4 text-white" />
               </span>
             </LiquidButton>
 

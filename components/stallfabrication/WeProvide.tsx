@@ -11,8 +11,7 @@ export default function WeProvide() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    // GSAP animation placeholder removed
   }, []);
 
   const services = [
