@@ -11,6 +11,7 @@ import Said from "@/components/HomePages/Said";
 import SaidThree from "@/components/HomePages/SaidThree";
 import SaidTwo from "@/components/HomePages/SaidTwo";
 import ServiceVideo from "@/components/HomePages/ServiceVideo";
+import CinematicVideo from "@/components/HomePages/CinematicVideo";
 
 export const metadata = {
   title: "Elevate Your Brand with Maven Advert | Digital Growth",
@@ -60,6 +61,8 @@ function page() {
       <StickyShowCaseThree />
       <PersonalBrand />
       <ServiceVideo />
+      <CinematicVideo />
+
       <SaidTwo />
       <MemberShip />
       {/* <SaidThree /> */}
