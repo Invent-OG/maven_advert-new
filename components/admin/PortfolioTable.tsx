@@ -13,26 +13,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Edit2,
-  Trash2,
-  Calendar,
-  Search,
-  Filter,
-  Eye,
-  Layout,
-  User,
-  LogOut,
-} from "lucide-react";
+import { Edit2, Trash2, Eye, Layout, User } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
 import { ClientPortfolio } from "@/lib/queries/portfolio";
-import { toast } from "sonner";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -41,7 +24,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { format } from "date-fns";
-import { cn } from "@/lib/utils";
 import { DeleteConfirmation } from "@/components/admin/DeleteConfirmation";
 
 interface PortfolioTableProps {
@@ -223,14 +205,14 @@ export default function PortfolioTable({
                     </TableCell>
                     <TableCell className="py-4">
                       <div className="flex items-center gap-4">
-                        <div className="relative h-16 w-24 rounded-xl overflow-hidden border border-gray-200 shadow-sm shrink-0">
+                        {/* <div className="relative h-16 w-24 rounded-xl overflow-hidden border border-gray-200 shadow-sm shrink-0">
                           <Image
                             src={resolveImage(portfolio)}
                             alt={portfolio.title}
                             fill
                             className="object-cover"
                           />
-                        </div>
+                        </div> */}
                         <div className="flex-1 min-w-0 max-w-md">
                           <Link
                             href={`/admin/portfolio/edit/${portfolio.id}`}
