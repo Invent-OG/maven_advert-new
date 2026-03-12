@@ -9,7 +9,7 @@ export default function StallHero() {
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center lg:text-left px-6 md:px-16 lg:px-28 overflow-hidden bg-black">
       {/* Video Background */}
-      <video
+      <video 
         autoPlay
         loop
         muted

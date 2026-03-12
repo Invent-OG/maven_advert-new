@@ -201,7 +201,7 @@ export default function TeamImages() {
             Meet the Innovators
           </h2>
           <p className="text-base text-neutral-600 leading-relaxed">
-            Meet the team of 6 experts who drive our success with creativity,
+            Meet the team of experts who drive our success with creativity,
             strategy, and execution excellence.
           </p>
         </div>

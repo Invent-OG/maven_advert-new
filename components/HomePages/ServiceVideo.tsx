@@ -22,14 +22,14 @@ function ServiceVideo() {
 
         {/* Video Content */}
         <div className="relative aspect-video ">
-          <video
-            src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765961218/2_1_r7hw2c.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
+          <video 
+        src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1765961218/2_1_r7hw2c.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+      />
         </div>
       </div>
     </div>

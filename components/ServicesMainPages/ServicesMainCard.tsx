@@ -12,7 +12,7 @@ const services = [
       "We build landing pages, integrate CRM, implement chatbots, and set up analytics to streamline your sales process",
     image:
       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803430/Digital_Sales_Infrastructure_Automation_okxnw0.jpg",
-    link: "/services/app-development",
+    link: "/services/digital-sales-infrastructure",
   },
   {
     title: "ECommerce Marketing & Product Promotion",
@@ -20,7 +20,7 @@ const services = [
       "We optimize your presence on Amazon and Flipkart, run targeted product ads, and boost cross-sales to increase revenue",
     image:
       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803433/ECommerce_Marketing_Product_Promotion_zeiord.jpg",
-    link: "/services/app-development",
+    link: "/services/ecommerce-marketing",
   },
   {
     title: "Social Media Growth & Brand Engagement:",
@@ -28,7 +28,7 @@ const services = [
       "We create engaging content, manage campaigns, and collaborate with influencers to grow your brand’s reach and engagement.",
     image:
       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803443/Social_Media_Growth_Brand_Engagement_ls7r7t.jpg",
-    link: "/services/app-development",
+    link: "/services/social-media-growth",
   },
   {
     title: "Digital Advertising & ROI Campaigns",
@@ -36,7 +36,7 @@ const services = [
       "We design Google Ads, retargeting campaigns, and lead funnels to maximize ROI and drive measurable results",
     image:
       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803426/Digital_Advertising_ROI_Campaigns_g70lnn.jpg",
-    link: "/services/app-development",
+    link: "/services/digital-advertising",
   },
   {
     title: "Search & Content Marketing",
@@ -44,7 +44,7 @@ const services = [
       "We leverage SEO, blogs, YouTube, and email/WhatsApp campaigns to enhance visibility and attract your target audience",
     image:
       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1770803494/Search_Content_Marketing_ozdo1x.jpg",
-    link: "/services/app-development",
+    link: "/services/search-optimization",
   },
 ];
 

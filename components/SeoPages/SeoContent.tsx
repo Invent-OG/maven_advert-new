@@ -22,27 +22,27 @@ export default function SeoContent() {
     {
       name: "Digital Sales Infrastructure & Automation",
       icon: <FaUserFriends />,
-      href: "/digital-sales",
+      href: "/services/digital-sales-infrastructure",
     },
     {
       name: "ECommerce Marketing & Product Promotion",
       icon: <FaPaperPlane />,
-      href: "/ecommerce-marketing",
+      href: "/services/ecommerce-marketing",
     },
     {
       name: "Social Media Growth & Brand Engagement",
       icon: <FaBriefcase />,
-      href: "/social-media",
+      href: "/services/social-media-growth",
     },
     {
       name: "Digital Advertising & ROI Campaigns",
       icon: <FaBullhorn />,
-      href: "/digital-advertising",
+      href: "/services/digital-advertising",
     },
     {
       name: "Search & Content Marketing",
       icon: <FaSearch />,
-      href: "/search-content",
+      href: "/services/search-optimization",
     },
   ];
 

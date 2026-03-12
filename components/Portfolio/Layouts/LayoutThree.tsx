@@ -27,17 +27,17 @@
 //       </section>
 
 //       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-20">
-//         <img src={images?.[1] || "/layout3/item1.jpg"} className="rounded-xl" />
-//         <img src={images?.[2] || "/layout3/item2.jpg"} className="rounded-xl" />
-//         <img src={images?.[3] || "/layout3/item3.jpg"} className="rounded-xl" />
-//         <img src={images?.[4] || "/layout3/item4.jpg"} className="rounded-xl" />
+//         <img src={images?.[1] || "/layout3/item1.jpg"} className="rounded-xl"  alt="Maven Advert Image"/>
+//         <img src={images?.[2] || "/layout3/item2.jpg"} className="rounded-xl"  alt="Maven Advert Image"/>
+//         <img src={images?.[3] || "/layout3/item3.jpg"} className="rounded-xl"  alt="Maven Advert Image"/>
+//         <img src={images?.[4] || "/layout3/item4.jpg"} className="rounded-xl"  alt="Maven Advert Image"/>
 //       </section>
 
 //       <section className="w-full flex justify-center px-6 md:px-20">
 //         <img
 //           src={images?.[5] || "/layout3/item5.jpg"}
 //           className="rounded-xl w-full max-w-3xl"
-//         />
+//          alt="Maven Advert Image"/>
 //       </section>
 
 //       {content && (
@@ -90,7 +90,7 @@ export default function Layout3({
         <img
           src={images?.[1] || "/layout3/item1.jpg"}
           className="rounded-none w-full max-w-6xl h-[300px] sm:h-[420px] md:h-[520px] object-cover"
-        />
+         alt="Maven Advert Image"/>
       </section>
 
       {/* ====================== 4. THREE IMAGES IN A ROW ====================== */}
@@ -99,17 +99,17 @@ export default function Layout3({
           <img
             src={images?.[2] || "/layout3/item2.jpg"}
             className="rounded-none w-full h-[260px] sm:h-[300px] md:h-[340px] object-cover"
-          />
+           alt="Maven Advert Image"/>
 
           <img
             src={images?.[3] || "/layout3/item3.jpg"}
             className="rounded-none w-full h-[260px] sm:h-[300px] md:h-[340px] object-cover"
-          />
+           alt="Maven Advert Image"/>
 
           <img
             src={images?.[4] || "/layout3/item4.jpg"}
             className="rounded-none w-full h-[260px] sm:h-[300px] md:h-[340px] object-cover"
-          />
+           alt="Maven Advert Image"/>
         </div>
       </section>
 
@@ -118,7 +118,7 @@ export default function Layout3({
         <img
           src={images?.[5] || "/layout3/item5.jpg"}
           className="rounded-none w-full max-w-6xl h-[300px] sm:h-[420px] md:h-[520px] object-cover"
-        />
+         alt="Maven Advert Image"/>
       </section>
 
       {/* ====================== 6. FINAL CONTENT TEXT ====================== */}

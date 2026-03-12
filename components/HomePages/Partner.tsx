@@ -30,7 +30,7 @@ export default function Partner() {
           duration: 10,
           ease: "linear",
           repeat: -1,
-        }
+        },
       );
     }, marqueeRef);
 
@@ -61,7 +61,7 @@ export default function Partner() {
             <Image
               key={index}
               src={src}
-              alt={`Featured ${index + 1}`}
+              alt={`Maven Advert Partner Brand Logo ${index + 1}`}
               className={`
                 object-contain inline-block select-none
                 ${src.includes("ten_digit_logo") ? "scale-100" : "scale-100"}

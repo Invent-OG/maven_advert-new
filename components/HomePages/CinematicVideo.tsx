@@ -1,10 +1,37 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import "aos/dist/aos.css";
 
 const CinematicVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && videoRef.current) {
+            videoRef.current
+              .play()
+              .catch((e) => console.log("Auto-play prevented", e));
+          } else if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }, // Play when 10% visible
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="flex flex-col py-16 sm:py-20 md:py-24 items-center justify-center bg-black text-center px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
@@ -47,13 +74,13 @@ const CinematicVideo = () => {
           >
             <div className="relative aspect-video bg-black">
               <video
+                preload="none"
+                playsInline
                 ref={videoRef}
                 className="absolute top-0 left-0 w-full h-full object-cover"
                 src="https://res.cloudinary.com/dr9gcshs6/video/upload/v1771553759/MAV_TRON_LANDSCAPE_wrmrii.mp4"
-                autoPlay
                 loop
                 muted
-                playsInline
                 controls
               ></video>
             </div>

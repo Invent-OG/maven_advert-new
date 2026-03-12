@@ -99,9 +99,9 @@ function ServicesMainPlan() {
               <span className="flex items-center gap-2">How it works →</span>
             </LiquidButton>
 
-            <button className="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-orange-500 transition">
+            {/* <button className="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-orange-500 transition">
               ▶ Play video
-            </button>
+            </button> */}
           </div>
         </div>
 

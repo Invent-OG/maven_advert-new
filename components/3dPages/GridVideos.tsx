@@ -25,6 +25,31 @@ const videoLinks = [
 function SmartVideo({ src, onClick, index }: { src: string; onClick: () => void, index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && videoRef.current) {
+            videoRef.current.play().catch(e => console.log("Auto-play prevented", e));
+          } else if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        });
+      },
+      { threshold: 0.1 } // Play when 10% visible
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
   const isInView = useInView(containerRef, { margin: "0px 0px -50px 0px" });
 
   useEffect(() => {
@@ -87,7 +112,6 @@ function GridVideos() {
           >
             <video
               src={selected}
-              autoPlay
               loop
               muted
               controls

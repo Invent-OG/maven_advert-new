@@ -97,7 +97,7 @@ export default function Footer() {
                 More
               </h3>
               <ul className="space-y-3">
-                <FooterLink href="/threed" label="3D" />
+                <FooterLink href="/3d-modelling" label="3D" />
                 <FooterLink
                   href="/stallfabrication"
                   label="Stall Fabrication"

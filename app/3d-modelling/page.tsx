@@ -1,3 +1,4 @@
+import CinematicVideo from "@/components/HomePages/CinematicVideo";
 import Designers from "@/components/3dPages/Designers";
 import GridVideos from "@/components/3dPages/GridVideos";
 import HeroFourthVideo from "@/components/3dPages/HeroFourthVideo";
@@ -17,6 +18,7 @@ function page() {
       <HeroThirdVideo />
       <WhyItWorks />
       <HeroFourthVideo />
+      <CinematicVideo />
       <GridVideos />
       <Designers />
     </>

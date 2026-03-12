@@ -155,7 +155,7 @@ function PhoneMockup({ screen, className }: PhoneMockupProps) {
       {/* Screen (inside frame, inset applied) */}
       <Image
         src={screen}
-        alt="screen"
+        alt="Digital App Product Mockup"
         fill
         className="object-cover rounded-[1.8rem] z-0"
         style={{
@@ -188,7 +188,12 @@ function SideImage({ src, className }: SideImageProps) {
         xl:w-[240px] xl:h-[200px] 
         rounded-2xl overflow-hidden shadow-lg ${className || ""}`}
     >
-      <Image src={src} alt="side" fill className="object-contain bg-white" />
+      <Image
+        src={src}
+        alt="Creative Work Example"
+        fill
+        className="object-contain bg-white"
+      />
     </div>
   );
 }

@@ -84,14 +84,14 @@ export default function StallGallery() {
               className="gallery-card relative overflow-hidden rounded-md cursor-pointer group"
               onClick={() => setSelectedVideo(item.videoUrl)}
             >
-              <video
-                src={item.videoUrl}
-                className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
-                // autoPlay
-                muted
-                loop
-                playsInline
-              />
+              <video 
+        src={item.videoUrl}
+        className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
               <div className="absolute inset-0 bg-black/30 group-hover:bg-orange-500/90 transition-all duration-500 ease-in-out"></div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
                 <div className="bg-white rounded-full p-4 text-orange-500 shadow-lg">
@@ -110,14 +110,14 @@ export default function StallGallery() {
               className="gallery-card relative overflow-hidden rounded-md cursor-pointer group"
               onClick={() => setSelectedVideo(item.videoUrl)}
             >
-              <video
-                src={item.videoUrl}
-                className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
-                // autoPlay
-                muted
-                loop
-                playsInline
-              />
+              <video 
+        src={item.videoUrl}
+        className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
               <div className="absolute inset-0 bg-black/30 group-hover:bg-orange-500/90 transition-all duration-500 ease-in-out"></div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
                 <div className="bg-white rounded-full p-4 text-orange-500 shadow-lg">
@@ -136,14 +136,14 @@ export default function StallGallery() {
               className="gallery-card relative overflow-hidden rounded-md cursor-pointer group"
               onClick={() => setSelectedVideo(item.videoUrl)}
             >
-              <video
-                src={item.videoUrl}
-                className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
-                // autoPlay
-                muted
-                loop
-                playsInline
-              />
+              <video 
+        src={item.videoUrl}
+        className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
               <div className="absolute inset-0 bg-black/30 group-hover:bg-orange-500/90 transition-all duration-500 ease-in-out"></div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out">
                 <div className="bg-white rounded-full p-4 text-orange-500 shadow-lg">
@@ -163,13 +163,13 @@ export default function StallGallery() {
         >
           <div className="relative w-full max-w-5xl mx-auto p-4 md:p-8">
             <div className="relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl bg-black">
-              <video
-                src={selectedVideo}
-                className="w-full h-full object-contain"
-                controls
-                // autoPlay
-                playsInline
-              />
+              <video 
+        src={selectedVideo}
+        className="w-full h-full object-contain"
+        controls
+        autoPlay
+        playsInline
+      />
             </div>
             <button
               onClick={() => setSelectedVideo(null)}

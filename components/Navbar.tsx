@@ -43,35 +43,35 @@ function Navbar() {
       title: "Digital Sales Infrastructure & Automation",
       description:
         "We build landing pages, integrate CRM, implement Automation, and set up analytics to streamline your sales process",
-      href: "/services/web-development",
+      href: "/services/digital-sales-infrastructure",
     },
     {
       icon: <FaMobileAlt className="w-5 h-5" />,
       title: "Ecommerce Marketing & Product Promotion",
       description:
         "We optimize your presence on Amazon and Flipkart, Run targeted product ads, and boost cross-sales to increase revenue",
-      href: "/services/app-development",
+      href: "/services/ecommerce-marketing",
     },
     {
       icon: <FaInstagram className="w-5 h-5" />,
       title: "Social Media Growth & Brand Engagement",
       description:
         "We create engaging content, manage campaigns, and collaborate to grow your brand's reach and success",
-      href: "/services/cloud-services",
+      href: "/services/social-media-growth",
     },
     {
       icon: <FaChartLine className="w-5 h-5" />,
       title: "Digital Advertising & ROI Campaigns",
       description:
         "We design Google Ads, Retargeting Campaigns, and Lead funnels to maximize ROI and drive measurable results",
-      href: "/services/seo-optimization",
+      href: "/services/digital-advertising",
     },
     {
       icon: <FaHeadset className="w-5 h-5" />,
       title: "Search & Content Marketing",
       description:
         "We leverage SEO, blogs, YouTube, and email/WhatsApp campaigns to enhance visibility and attract your target audience",
-      href: "/services/support",
+      href: "/services/search-optimization",
     },
   ];
 
@@ -87,7 +87,12 @@ function Navbar() {
       isButton: true,
       icon: <FaTools />,
     },
-    { name: "3D Modelling", href: "/threed", isButton: true, icon: <FaCube /> },
+    {
+      name: "3D Modelling",
+      href: "/3d-modelling",
+      isButton: true,
+      icon: <FaCube />,
+    },
   ];
 
   useEffect(() => {

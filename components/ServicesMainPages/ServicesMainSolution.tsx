@@ -125,9 +125,9 @@ function ServicesMainSolution() {
                 <FaRocket />
               </span>
             </LiquidButton>
-            <button className="text-gray-900 font-medium flex items-center gap-2 hover:text-orange-500 transition">
+            {/* <button className="text-gray-900 font-medium flex items-center gap-2 hover:text-orange-500 transition">
               How it works →
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

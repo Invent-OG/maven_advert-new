@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+# Host
+Host: https://mavenadvert.com
+
+# Sitemaps
+Sitemap: https://mavenadvert.com/sitemap.xml

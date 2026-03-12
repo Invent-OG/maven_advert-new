@@ -352,7 +352,7 @@ export default function StickyShowcase() {
         <div className="mt-28" />
 
         <h1 className="text-4xl md:text-7xl lg:text-8xl font-medium tracking-tighter text-neutral-900">
-          Build a Remarkable <br /> Brand Experience
+          Your Complete business <br /> growth ecosystem
         </h1>
 
         <p className="mt-6 mb-6 text-neutral-700 text-sm sm:text-base">
@@ -461,7 +461,7 @@ function PhoneMockup({
     >
       <Image
         src={screen}
-        alt="screen"
+        alt="Mobile App Interface Showcase"
         fill
         className="object-contain  "
         priority={priority}
