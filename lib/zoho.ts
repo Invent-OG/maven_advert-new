@@ -111,7 +111,7 @@ export async function addLeadToZohoBigin({
     if (axios.isAxiosError(error)) {
       console.error("❌ Zoho Bigin API Error:", {
         status: error.response?.status,
-        data: error.response?.data,
+        data: JSON.stringify(error.response?.data, null, 2),
       });
     } else {
       console.error("❌ Unexpected error adding contact to Zoho Bigin:", error);
