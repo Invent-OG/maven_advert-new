@@ -6,19 +6,16 @@ import {
   FaEnvelope,
   FaComment,
   FaFacebookF,
-  FaDribbble,
   FaInstagram,
   FaLinkedinIn,
   FaPhoneAlt,
   FaPaperPlane,
   FaGlobe,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { gsap } from "gsap";
 import toast from "react-hot-toast"; // ✅ import toast
 import AOS from "aos";
 import "aos/dist/aos.css";
-import AnimatedButton from "../ui/AnimatedButton";
 import Link from "next/link";
 import { LiquidButton } from "../ui/liquid-glass-button";
 
@@ -48,7 +45,7 @@ export default function GetInTouch() {
               rotation: 0,
               duration: 0.6,
               ease: "back.out(1.7)",
-            }
+            },
           );
         },
       });
@@ -68,12 +65,20 @@ export default function GetInTouch() {
 
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
+
     const name = formData.get("name");
     const email = formData.get("email");
-    const whatsappNumber = formData.get("whatsappNumber");
+    const whatsappNumberRaw = formData.get("whatsappNumber") as string;
     const message = formData.get("message");
 
-    // Show loading toast
+    // ✅ Add +91
+    const whatsappNumber = whatsappNumberRaw.startsWith("+91")
+      ? whatsappNumberRaw
+      : `+91${whatsappNumberRaw}`;
+
+    // ✅ Add date
+    const createdAt = new Date().toISOString();
+
     const toastId = toast.loading("Sending your message...", {
       position: "top-right",
     });
@@ -82,7 +87,13 @@ export default function GetInTouch() {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, whatsappNumber, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          whatsappNumber,
+          message,
+          createdAt,
+        }),
       });
 
       const result = await res.json();
@@ -136,7 +147,8 @@ export default function GetInTouch() {
                   Are you ready for coffee?
                 </p>
                 <p className="text-gray-500 text-lg ">
-                  13a, Kulalar Street, Peelamedu,<br />
+                  13a, Kulalar Street, Peelamedu,
+                  <br />
                   Coimbatore - 641004
                 </p>
               </div>
@@ -151,10 +163,7 @@ export default function GetInTouch() {
                 <p className="font-bold text-xl text-gray-900">
                   Feel free to get in touch?
                 </p>
-                <p className="text-gray-500 text-lg">
-                  Phone: +91 7418418012
-
-                </p>
+                <p className="text-gray-500 text-lg">Phone: +91 7418418012</p>
               </div>
             </div>
 
@@ -167,9 +176,7 @@ export default function GetInTouch() {
                 <p className="font-bold text-xl text-gray-900">
                   How can we help you?
                 </p>
-                <p className="text-gray-500 text-lg">
-                  info@mavenadvert.com
-                </p>
+                <p className="text-gray-500 text-lg">info@mavenadvert.com</p>
               </div>
             </div>
           </div>
