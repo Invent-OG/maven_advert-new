@@ -11,13 +11,13 @@ const teamData = [
     image:
       "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/siva_azqmta.webp",
   },
-  {
-    name: "Gokul",
-    role: "Co-Founder",
-    bio: "Recognized for strategic thinking and problem-solving, constantly learning and communicating with clarity to drive smart execution.",
-    image:
-      "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/gokul_dlziz7.webp",
-  },
+  // {
+  //   name: "Gokul",
+  //   role: "Co-Founder",
+  //   bio: "Recognized for strategic thinking and problem-solving, constantly learning and communicating with clarity to drive smart execution.",
+  //   image:
+  //     "https://res.cloudinary.com/dr9gcshs6/image/upload/v1767706796/gokul_dlziz7.webp",
+  // },
   {
     name: "Sathiya",
     role: "Digital Marketing Executive",
