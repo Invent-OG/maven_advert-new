@@ -19,7 +19,15 @@ export default function CaseStudyDetailPage({
     async function loadData() {
       try {
         const res = await fetch("/api/portfolio");
-        const data: Portfolio[] = await res.json();
+        const json = await res.json();
+
+        if (!res.ok || !Array.isArray(json)) {
+          console.error("Failed to fetch portfolios or data is not an array:", json);
+          setLoading(false);
+          return;
+        }
+
+        const data = json as Portfolio[];
 
         const found = data.find((p) => p.id === id);
         if (!found) {

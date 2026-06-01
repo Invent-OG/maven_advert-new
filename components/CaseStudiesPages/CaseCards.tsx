@@ -34,9 +34,17 @@ export default function CaseCards() {
     async function loadPortfolios() {
       try {
         const res = await fetch("/api/portfolio", { cache: "no-store" });
-        const data: Portfolio[] = await res.json();
+        const json = await res.json();
 
-const parsed: CaseItem[] = data.map((p) => {
+        if (!res.ok || !Array.isArray(json)) {
+          console.error("Failed to fetch portfolios or data is not an array:", json);
+          setItems([]);
+          return;
+        }
+
+        const data = json as Portfolio[];
+
+        const parsed: CaseItem[] = data.map((p) => {
           let imageUrl =
             Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : null;
 
