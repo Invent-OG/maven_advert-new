@@ -57,6 +57,8 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
         content: initialData.content || "",
         imageUrl: initialData.imageUrl || "",
         category: initialData.category || "",
+        metaTitle: (initialData as any).metaTitle || "",
+        metaDescription: (initialData as any).metaDescription || "",
       }
     : undefined;
 
@@ -72,6 +74,8 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
       content: "",
       imageUrl: "",
       category: "",
+      metaTitle: "",
+      metaDescription: "",
     },
   });
 
@@ -137,19 +141,52 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
                 )}
               />
 
-              {/* <FormField
+              <FormField
                 control={form.control}
                 name="slug"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Slug</FormLabel>
+                    <FormLabel>Slug (Blog URL Link)</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Enter blog slug" />
+                      <Input {...field} placeholder="e.g. digital-marketing-guide (optional, auto-generated if left empty)" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              /> */}
+              />
+
+              <div className="border-t pt-4 mt-6">
+                <h3 className="text-sm font-semibold text-gray-700 mb-4">SEO Metadata Settings</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="metaTitle"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Meta Title</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="Meta Title for search engines" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="metaDescription"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Meta Description</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="Meta Description for search engines" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
 
               <FormField
                 control={form.control}

@@ -2,10 +2,14 @@
 "use client";
 
 import { useBlog, useBlogs } from "@/lib/queries/blogs";
+import { blogs as fallbackBlogs } from "@/data/blogs";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { Calendar, Timer } from "lucide-react";
+import { BsPersonFill } from "react-icons/bs";
+
 
 export default function BlogsId() {
   const { id } = useParams();
@@ -14,7 +18,71 @@ export default function BlogsId() {
 
   const { data, isLoading, isError } = useBlog(id as string);
   const { data: recentData } = useBlogs(1, 6, "", undefined);
-  const recent = recentData?.blogs ?? [];
+
+  // Find local fallback blog if it exists
+  const localBlog = useMemo(() => {
+    return fallbackBlogs.find(
+      (b) => b.id.toString() === id || b.id.toLowerCase() === (id as string)?.toLowerCase()
+    );
+  }, [id]);
+
+  // Determine post content safely with fallbacks
+  const postData = useMemo(() => {
+    if (data?.blog) {
+      return data.blog;
+    }
+    if (localBlog) {
+      return {
+        id: localBlog.id.toString(),
+        title: localBlog.title,
+        heading: localBlog.title,
+        description: localBlog.excerpt,
+        imageUrl: localBlog.cover,
+        author: localBlog.author || "Maven Advert Team",
+        readTime: localBlog.readTime || "5 min",
+        createdAt: localBlog.date || "Recent",
+        content: localBlog.content, // already formatted array or string
+        tags: localBlog.tags || localBlog.categories || [],
+        category: localBlog.categories?.[0] || "General",
+      };
+    }
+    return null;
+  }, [data?.blog, localBlog]);
+
+  // Merge database recent blogs and fallback blogs (excluding current post)
+  const recent = useMemo(() => {
+    const dbBlogs = recentData?.blogs || [];
+    const dbIds = new Set(dbBlogs.map((b) => b.id?.toString() || ""));
+    const dbSlugs = new Set(dbBlogs.map((b) => b.slug?.toLowerCase() || ""));
+
+    const formattedDbBlogs = dbBlogs.map((b) => ({
+      id: b.id?.toString() || "",
+      slug: b.slug || "",
+      title: b.title,
+      imageUrl: b.imageUrl,
+      readTime: b.readTime || "5 min",
+      createdAt: b.createdAt ? new Date(b.createdAt).toISOString() : "",
+    }));
+
+    const formattedFallbacks = fallbackBlogs
+      .filter(
+        (fb) =>
+          !dbIds.has(fb.id?.toString() || "") &&
+          !dbSlugs.has(fb.id?.toLowerCase() || "") &&
+          fb.id?.toString() !== id &&
+          fb.id?.toLowerCase() !== (id as string)?.toLowerCase()
+      )
+      .map((fb) => ({
+        id: fb.id?.toString() || "",
+        slug: fb.id?.toString() || "",
+        title: fb.title,
+        imageUrl: fb.cover,
+        readTime: fb.readTime || "5 min",
+        createdAt: fb.date || "",
+      }));
+
+    return [...formattedDbBlogs, ...formattedFallbacks];
+  }, [recentData?.blogs, id]);
 
   const handleLike = () => {
     if (isLiked) setLikeCount(likeCount - 1);
@@ -22,7 +90,8 @@ export default function BlogsId() {
     setIsLiked(!isLiked);
   };
 
-  if (isLoading)
+  // Show loading spinner ONLY if database query is loading and we don't have local fallback data
+  if (isLoading && !localBlog)
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
@@ -32,7 +101,8 @@ export default function BlogsId() {
       </div>
     );
 
-  if (isError || !data?.blog)
+  // Show error ONLY if we have no valid post (either from DB or fallback list) and API call has failed or finished
+  if ((isError || !postData) && !isLoading)
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
@@ -49,148 +119,143 @@ export default function BlogsId() {
       </div>
     );
 
-  type PostType = typeof data.blog & { tags?: string[] };
-  const post = data.blog as PostType;
+  type PostType = NonNullable<typeof postData> & { tags?: string[] };
+  const post = postData as PostType;
 
   return (
-    <div className="min-h-screen bg-white mt-10 overflow-x-hidden">
-      {/* Header */}
-      <header className="border-b-2 border-gray-900 py-6">
-        <div className="max-w-6xl mx-auto px-4 relative">
-          
-          <div className="pt-8 text-center">
-            <div className="w-20 h-1 bg-gray-900 mx-auto mb-4"></div>
-            <h1 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 leading-tight mx-auto max-w-2xl">
-              {post.title}
-            </h1>
-            
+    <div className="min-h-screen bg-gray-50/50 overflow-x-hidden pb-24">
+      {/* Premium Hero Banner */}
+      <section className="relative bg-gray-950 text-white overflow-hidden pt-44 pb-36 px-6 text-center">
+        {/* Background Gradients & Effects */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-orange-600/20 via-gray-950 to-gray-950 -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-orange-500/10 rounded-full blur-[120px] -z-10" />
+
+        {/* Dynamic mesh design */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10" />
+
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumbs */}
+          <div className="flex justify-center items-center gap-2.5 text-[10px] sm:text-xs font-bold text-orange-400 uppercase tracking-widest mb-6">
+            <Link href="/" className="hover:text-white transition-colors">HOME</Link>
+            <span>•</span>
+            <Link href="/blogs" className="hover:text-white transition-colors">BLOGS</Link>
+            <span>•</span>
+            <span className="text-gray-400 truncate max-w-[150px]">{post.category}</span>
           </div>
-          
+
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-8 leading-tight max-w-3xl mx-auto text-white">
+            {post.title}
+          </h1>
+
+          {/* Premium Meta Row */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-400 font-medium">
+            <span className="flex items-center gap-1.5 text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full">
+              <BsPersonFill />
+
+              BY {post.author?.toUpperCase()}
+            </span>
+            <span className="text-gray-800">•</span>
+            <span className="flex items-center gap-1.5">
+              <Calendar />{post.createdAt
+                ? new Date(post.createdAt).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })
+                : "Recent"}
+            </span>
+            <span className="text-gray-800">•</span>
+            <span className="flex items-center gap-1.5">
+              <Timer /> {post.readTime} READ
+            </span>
+          </div>
         </div>
-        <Link
-             href="/blogs"
-              className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-2"
-            >
-              BACK TO ARTICLES →
-            </Link>
-      </header>
+      </section>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+      {/* Main Section */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-4 -mt-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
           {/* MAIN CONTENT */}
-          <article className="lg:col-span-3">
-            {/* Meta Information */}
-            <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 mb-8 border-b pb-4">
-              <div className="flex flex-wrap gap-3 items-center">
-                <span className="font-semibold">
-                  BY {post.author?.toUpperCase()}
-                </span>
-                <span>•</span>
-                <span>
-                  {post.createdAt
-                    ? new Date(post.createdAt).toLocaleDateString("en-US", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })
-                    : ""}
-                </span>
-                <span>•</span>
-                <span>{post.readTime} READ</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                  LIVE
-                </span>
-                <span className="text-gray-500">Updated recently</span>
-              </div>
-            </div>
-
+          <article className="lg:col-span-3 bg-white border border-gray-100 rounded-3xl p-6 sm:p-10 shadow-xl shadow-gray-200/50">
             {/* Featured Image */}
-            <div className="mb-8 border border-gray-300 bg-white">
-              <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden">
-                <Image
-                  src={post.imageUrl}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <div className="p-4 text-sm text-gray-600 border-t border-gray-300 flex justify-between items-center">
-                <span>Featured image for {post.title}</span>
-                <span className="text-xs text-gray-500">
-                  Photo: Editorial Team
-                </span>
-              </div>
+            <div className="mb-10 overflow-hidden rounded-2xl border border-gray-100 shadow-sm relative w-full h-64 sm:h-[350px] md:h-[450px]">
+              <Image
+                src={post.imageUrl}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
 
-            {/* LIKE ONLY (Share + Comment Removed) */}
-            <div className="flex items-center justify-start mb-8 p-4 bg-gray-50 border border-gray-200">
-              <button
-                onClick={handleLike}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                  isLiked
-                    ? "bg-red-50 text-red-600 border border-red-200"
-                    : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50"
-                }`}
-              >
-                <span
-                  className={`text-lg ${
-                    isLiked ? "text-red-500" : "text-gray-500"
-                  }`}
-                >
-                  {isLiked ? "❤️" : "🤍"}
-                </span>
-                <span
-                  className={`font-semibold ${
-                    isLiked ? "text-red-600" : "text-gray-600"
-                  }`}
-                >
-                  {likeCount}
-                </span>
-              </button>
-            </div>
-
-            {/* Article Summary */}
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-              <h3 className="font-serif font-bold text-gray-900 text-lg mb-3">
+            {/* Article Summary Card */}
+            <div className="bg-orange-50/60 border-l-4 border-orange-500 p-6 rounded-r-2xl mb-10 shadow-sm">
+              <h3 className="text-xs font-bold text-orange-800 tracking-wider mb-2 font-mono">
                 ARTICLE SUMMARY
               </h3>
-              <p className="text-gray-700 leading-6">
-                This comprehensive exploration delves into the key aspects of
-                modern content creation, offering insights and practical advice
-                for writers and creators looking to make an impact in
-                today&apos;s digital landscape.
+              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+                {post.description}
               </p>
             </div>
 
-            {/* Content */}
-            <div className="space-y-6">
+            {/* Content Body */}
+            <div className="space-y-6 text-gray-800 font-serif text-lg leading-relaxed md:text-[19px] prose max-w-none">
               {Array.isArray(post.content) ? (
-                post.content.map((block: string, idx: number) => (
-                  <div
-                    key={idx}
-                    className="text-gray-700 leading-7 text-justify font-serif text-lg [&>p]:mb-4 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-6 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:mt-5 [&>h3]:mb-3 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>li]:mb-2"
-                    dangerouslySetInnerHTML={{ __html: block }}
-                  />
-                ))
+                post.content.map((block: any, idx: number) => {
+                  if (typeof block === "string") {
+                    return (
+                      <div
+                        key={idx}
+                        className="text-gray-800 leading-relaxed text-justify [&>p]:mb-6 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-8 [&>h2]:mb-4 [&>h2]:text-gray-900 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:mt-6 [&>h3]:mb-3 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-6 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-6 [&>li]:mb-2 [&>li]:text-gray-700"
+                        dangerouslySetInnerHTML={{ __html: block }}
+                      />
+                    );
+                  } else if (block && block.type === "quote") {
+                    return (
+                      <blockquote
+                        key={idx}
+                        className="border-l-4 border-orange-500 pl-6 py-4 italic my-8 text-gray-800 bg-orange-50/20 font-serif text-lg sm:text-xl rounded-r-xl shadow-sm"
+                      >
+                        &ldquo;{block.text}&rdquo;
+                      </blockquote>
+                    );
+                  }
+                  return null;
+                })
               ) : (
                 <div
-                  className="text-gray-700 leading-7 text-justify font-serif text-lg [&>p]:mb-4 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-6 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:mt-5 [&>h3]:mb-3 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>li]:mb-2"
+                  className="text-gray-800 leading-relaxed text-justify [&>p]:mb-6 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-8 [&>h2]:mb-4 [&>h2]:text-gray-900 [&>h3]:text-xl [&>h3]:font-bold [&>h3]:mt-6 [&>h3]:mb-3 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-6 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-6 [&>li]:mb-2 [&>li]:text-gray-700"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               )}
             </div>
 
+            {/* Premium Interactive Like Widget */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-6 border-y border-gray-100 my-10">
+              <span className="text-sm text-gray-500 font-semibold uppercase tracking-wider">
+                Was this article helpful to you?
+              </span>
+              <button
+                onClick={handleLike}
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95 ${isLiked
+                  ? "bg-red-500 text-white shadow-lg shadow-red-500/25"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+              >
+                <span>{isLiked ? "❤️" : "🤍"}</span>
+                <span>{likeCount} {likeCount === 1 ? 'Like' : 'Likes'}</span>
+              </button>
+            </div>
+
             {/* Tags */}
-            <div className="border-t border-gray-300 pt-8 mt-12">
-              <div className="flex flex-wrap gap-3 mb-6">
-                <span className="font-semibold text-gray-900">Tags:</span>
+            <div className="mt-8">
+              <div className="flex flex-wrap gap-2.5 items-center">
+                <span className="font-bold text-xs uppercase tracking-wider text-gray-400 mr-2">Tags:</span>
                 {(post.tags ?? []).map((tag: string) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 text-sm border border-gray-300 hover:bg-gray-200 cursor-pointer transition-colors"
+                    className="px-4 py-1.5 bg-gray-50 text-gray-600 text-xs font-semibold rounded-full border border-gray-100 hover:bg-orange-50 hover:text-orange-600 hover:border-orange-200 cursor-pointer transition-colors"
                   >
                     #{tag}
                   </span>
@@ -199,35 +264,33 @@ export default function BlogsId() {
             </div>
 
             {/* Related Articles */}
-            <div className="mt-16 border-t border-gray-300 pt-12">
-              <h3 className="font-serif font-bold text-gray-900 text-2xl mb-8 text-center">
-                RELATED ARTICLES YOU MIGHT ENJOY
+            <div className="mt-16 border-t border-gray-100 pt-12">
+              <h3 className="font-sans font-extrabold text-gray-900 text-xl sm:text-2xl mb-8 tracking-tight text-center sm:text-left">
+                Related Articles You Might Enjoy
               </h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {recent.slice(0, 3).map((r) => (
                   <Link
                     key={r.id}
-                    href={`/blogs/${r.id}`}
-                    className="group border border-gray-300 hover:border-gray-400 transition-all duration-300 hover:shadow-lg"
+                    href={`/blogs/${r.slug || r.id}`}
+                    className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-orange-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-44 overflow-hidden bg-gray-50">
                       <Image
                         src={r.imageUrl}
                         alt={r.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <div className="p-4">
-                      <h4 className="font-serif font-semibold text-gray-900 text-sm mb-2 line-clamp-2 group-hover:text-blue-800 transition-colors">
+                    <div className="p-4 flex flex-col flex-grow">
+                      <h4 className="font-sans font-bold text-gray-900 text-sm mb-3 line-clamp-2 group-hover:text-orange-500 transition-colors leading-snug">
                         {r.title}
                       </h4>
-                      <div className="flex items-center justify-between text-xs text-gray-600">
-                        <span>{r.readTime}</span>
+                      <div className="flex items-center justify-between text-[11px] font-semibold text-gray-400 mt-auto">
+                        <span>⏱️ {r.readTime}</span>
                         <span>
-                          {r.createdAt
-                            ? new Date(r.createdAt).getFullYear()
-                            : ""}
+                          {r.createdAt ? new Date(r.createdAt).getFullYear() : ""}
                         </span>
                       </div>
                     </div>
@@ -236,34 +299,33 @@ export default function BlogsId() {
               </div>
             </div>
 
-            {/* Explore More */}
-            <div className="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 p-8 border border-blue-200">
-              <h3 className="font-serif font-bold text-gray-900 text-2xl mb-4 text-center">
-                READY TO EXPLORE MORE?
+            {/* Explore More Container */}
+            <div className="mt-12 bg-gradient-to-br from-orange-500 to-red-600 p-8 sm:p-10 rounded-3xl text-white shadow-xl shadow-orange-500/20 text-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -z-10" />
+              <h3 className="font-sans font-extrabold text-white text-2xl sm:text-3xl mb-3">
+                Ready to Explore More?
               </h3>
-              <p className="text-gray-700 text-center mb-6 max-w-2xl mx-auto">
-                Dive deeper into our collection of articles and discover more
-                insights that matter to you.
+              <p className="text-orange-50 text-sm sm:text-base mb-6 max-w-xl mx-auto leading-relaxed">
+                Dive deeper into our collection of articles and discover strategies to fuel your digital growth.
               </p>
-              <div className="text-center">
-                <Link
-                  href="/blogs"
-                  className="inline-block bg-gray-900 text-white px-8 py-3 font-semibold hover:bg-gray-800 transition-colors"
-                >
-                  BROWSE ALL ARTICLES
-                </Link>
-              </div>
+              <Link
+                href="/blogs"
+                className="inline-block bg-white text-orange-600 hover:bg-orange-50 rounded-full font-bold px-8 py-3.5 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all text-sm tracking-wide"
+              >
+                BROWSE ALL ARTICLES
+              </Link>
             </div>
           </article>
 
-          {/* RIGHT SIDEBAR (ASIDE restored) */}
-          <aside className="space-y-8 order-last lg:order-last lg:col-span-1">
+          {/* RIGHT SIDEBAR */}
+          <aside className="space-y-6 lg:col-span-1">
+
             {/* Table of Contents */}
-            <div className="border border-gray-300 p-6 bg-white">
-              <h3 className="font-serif font-bold text-gray-900 text-lg mb-4 border-b pb-2">
-                IN THIS ARTICLE
+            <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+              <h3 className="font-sans font-bold text-gray-900 text-sm uppercase tracking-wider mb-4 border-b border-gray-100 pb-3">
+                In This Article
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
                   "Introduction",
                   "Key Insights",
@@ -275,31 +337,31 @@ export default function BlogsId() {
                   <Link
                     key={index}
                     href={`#section-${index}`}
-                    className="block text-sm text-gray-700 hover:text-blue-800 transition-colors py-1 border-b border-gray-100 last:border-b-0"
+                    className="block text-sm text-gray-600 hover:text-orange-500 hover:translate-x-1 transition-all py-1.5 border-b border-gray-50 last:border-b-0 font-medium"
                   >
-                    {item}
+                    • {item}
                   </Link>
                 ))}
               </div>
             </div>
 
             {/* Trending Stories */}
-            <div className="border border-gray-300 p-6">
-              <h3 className="font-serif font-bold text-gray-900 text-lg mb-4 border-b pb-2">
-                TRENDING STORIES
+            <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+              <h3 className="font-sans font-bold text-gray-900 text-sm uppercase tracking-wider mb-4 border-b border-gray-100 pb-3">
+                Trending Stories
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {recent.slice(0, 3).map((r) => (
                   <Link
                     key={r.id}
-                    href={`/blogs/${r.id}`}
+                    href={`/blogs/${r.slug || r.id}`}
                     className="block group"
                   >
-                    <p className="font-serif text-gray-900 group-hover:text-blue-800 leading-tight text-sm mb-2 line-clamp-2">
+                    <p className="font-sans font-bold text-gray-800 text-sm group-hover:text-orange-500 transition-colors leading-snug line-clamp-2 mb-1.5">
                       {r.title}
                     </p>
-                    <div className="text-xs text-gray-600 flex items-center gap-2">
-                      <span>{r.readTime}</span>
+                    <div className="text-[10px] font-bold text-gray-400 flex items-center gap-2 uppercase tracking-wide">
+                      <span>⏱️ {r.readTime}</span>
                       <span>•</span>
                       <span>
                         {r.createdAt ? new Date(r.createdAt).getFullYear() : ""}
@@ -311,9 +373,9 @@ export default function BlogsId() {
             </div>
 
             {/* Popular Tags */}
-            <div className="border border-gray-300 p-6 bg-white">
-              <h3 className="font-serif font-bold text-gray-900 text-lg mb-4 border-b pb-2">
-                POPULAR TAGS
+            <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+              <h3 className="font-sans font-bold text-gray-900 text-sm uppercase tracking-wider mb-4 border-b border-gray-100 pb-3">
+                Popular Tags
               </h3>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -328,7 +390,7 @@ export default function BlogsId() {
                 ].map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 text-xs border border-gray-300 hover:bg-gray-200 cursor-pointer transition-colors"
+                    className="px-3 py-1 bg-gray-50 text-gray-600 text-xs font-semibold rounded-full border border-gray-100 hover:bg-orange-50 hover:text-orange-600 hover:border-orange-100 transition-all cursor-pointer"
                   >
                     #{tag}
                   </span>
@@ -336,6 +398,7 @@ export default function BlogsId() {
               </div>
             </div>
           </aside>
+
         </div>
       </div>
     </div>

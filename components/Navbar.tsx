@@ -23,6 +23,7 @@ import {
   FaLayerGroup,
   FaTools,
   FaCube,
+  FaBookOpen,
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { CldImage } from "next-cloudinary";
@@ -80,6 +81,7 @@ function Navbar() {
     { name: "About", href: "/about", icon: <FaInfoCircle /> },
     { name: "Services", href: "/services", icon: <FaLayerGroup /> },
     { name: "Case Studies", href: "/casestudies", icon: <FaBriefcase /> },
+    { name: "Blogs", href: "/blogs", icon: <FaBookOpen /> },
     { name: "Contact", href: "/contact", icon: <FaEnvelope /> },
     {
       name: "Stall Fabrication",
@@ -128,11 +130,10 @@ function Navbar() {
       <nav
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out
         ${showNavbar ? "top-6 opacity-100" : "-top-40 opacity-0"}
-        ${
-          menuOpen
+        ${menuOpen
             ? "w-[95%] sm:w-[90%] rounded-3xl bg-white shadow-2xl"
-            : "w-[85%] max-w-[1200px] h-[70px] rounded-[40px] bg-white shadow-xl border border-gray-100"
-        }
+            : "w-[94%] lg:w-[92%] xl:w-[85%] max-w-[1240px] h-[70px] rounded-[40px] bg-white shadow-xl border border-gray-100"
+          }
         `}
       >
         <div className={`px-8 h-full flex flex-col justify-center`}>
@@ -158,9 +159,8 @@ function Navbar() {
 
             {/* Desktop Menu - "Pill Style" Items */}
             <div
-              className={`hidden lg:flex items-center justify-center gap-1 h-full ${
-                menuOpen ? "hidden" : ""
-              }`}
+              className={`hidden lg:flex items-center justify-center gap-1 h-full ${menuOpen ? "hidden" : ""
+                }`}
             >
               {menuLinks.map((item) =>
                 item.name === "Services" ? (
@@ -172,31 +172,28 @@ function Navbar() {
                   >
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-2 px-3 xl:px-4 h-full rounded-full transition-all duration-300 font-sans text-[14px] font-medium tracking-wide
-                        ${
-                          pathname.startsWith("/services")
-                            ? "bg-gray-100 text-gray-900 scale-105"
-                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:scale-105"
+                      className={`flex items-center gap-1.5 xl:gap-2 px-2 xl:px-3.5 h-full rounded-full transition-all duration-300 font-sans text-[13px] xl:text-[14px] font-medium tracking-wide
+                        ${pathname.startsWith("/services")
+                          ? "bg-gray-100 text-gray-900 scale-105"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:scale-105"
                         }
                       `}
                     >
                       <span className="text-lg opacity-80">{item.icon}</span>
                       <span>Services</span>
                       <FaChevronDown
-                        className={`w-2.5 h-2.5 transition-transform duration-300 opacity-60 ${
-                          servicesOpen ? "rotate-180" : ""
-                        }`}
+                        className={`w-2.5 h-2.5 transition-transform duration-300 opacity-60 ${servicesOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </Link>
 
                     {/* Desktop Dropdown */}
                     <div
                       className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-96 p-2 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 transform transition-all duration-300 origin-top
-                      ${
-                        servicesOpen
+                      ${servicesOpen
                           ? "opacity-100 translate-y-0 visible"
                           : "opacity-0 -translate-y-2 invisible"
-                      }
+                        }
                       `}
                     >
                       {/* Invisible bridge */}
@@ -238,7 +235,7 @@ function Navbar() {
                   <div key={item.name} className="pl-1">
                     <Link
                       href={item.href}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-full text-white font-bold text-[13px] shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 whitespace-nowrap"
+                      className="flex items-center gap-1.5 px-3 py-2 xl:px-4 xl:py-2.5 rounded-full text-white font-bold text-[12px] xl:text-[13px] shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 whitespace-nowrap"
                       style={{
                         background:
                           "linear-gradient(180deg, #ff914d 0%, #ff5200 100%)", // Orange gradient matching brand
@@ -252,11 +249,10 @@ function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`flex items-center gap-2 px-3 xl:px-4 h-12 rounded-full transition-all duration-300 font-sans text-[14px] font-medium tracking-wide whitespace-nowrap
-                      ${
-                        pathname === item.href
-                          ? "bg-gray-100 text-gray-900 scale-105"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:scale-105"
+                    className={`flex items-center gap-1.5 xl:gap-2 px-2.5 xl:px-3.5 h-12 rounded-full transition-all duration-300 font-sans text-[13px] xl:text-[14px] font-medium tracking-wide whitespace-nowrap
+                      ${pathname === item.href
+                        ? "bg-gray-100 text-gray-900 scale-105"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:scale-105"
                       }
                     `}
                   >
@@ -318,17 +314,15 @@ function Navbar() {
                           Services
                         </span>
                         <FaChevronDown
-                          className={`transition-transform duration-300 ${
-                            mobileServicesOpen ? "rotate-180" : ""
-                          }`}
+                          className={`transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                       <div
-                        className={`transition-all duration-300 ease-in-out ${
-                          mobileServicesOpen
-                            ? "max-h-[600px] opacity-100 pb-4"
-                            : "max-h-0 opacity-0"
-                        }`}
+                        className={`transition-all duration-300 ease-in-out ${mobileServicesOpen
+                          ? "max-h-[600px] opacity-100 pb-4"
+                          : "max-h-0 opacity-0"
+                          }`}
                       >
                         <div className="px-3 space-y-1">
                           {services.map((service, i) => (
@@ -363,11 +357,10 @@ function Navbar() {
                       key={item.name}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center gap-3 px-5 py-3 rounded-xl font-medium transition-colors ${
-                        pathname === item.href
-                          ? "bg-orange-50 text-orange-600"
-                          : "text-gray-600 hover:bg-gray-50"
-                      }`}
+                      className={`flex items-center gap-3 px-5 py-3 rounded-xl font-medium transition-colors ${pathname === item.href
+                        ? "bg-orange-50 text-orange-600"
+                        : "text-gray-600 hover:bg-gray-50"
+                        }`}
                     >
                       <span
                         className={

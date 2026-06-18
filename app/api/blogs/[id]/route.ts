@@ -4,6 +4,7 @@ import { blogs } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { z, ZodError } from "zod";
 import { createBlogSchema } from "@/lib/types/blogs";
+import { validate as isUuid } from "uuid";
 
 /**
  * GET - Fetch a single blog by ID
@@ -15,7 +16,10 @@ export async function GET(
   try {
     const { id } = await context.params; // ✅ await the params
 
-    const [blog] = await db.select().from(blogs).where(eq(blogs.id, id));
+    const isIdUuid = isUuid(id);
+    const [blog] = isIdUuid
+      ? await db.select().from(blogs).where(eq(blogs.id, id))
+      : await db.select().from(blogs).where(eq(blogs.slug, id));
 
     if (!blog) {
       return NextResponse.json(
@@ -36,6 +40,8 @@ export async function GET(
        author: blog.author,
        readTime: blog.readTime,
        createdAt: blog.createdAt,
+       metaTitle: blog.metaTitle,
+       metaDescription: blog.metaDescription,
 
        // 🔥 Convert string → array for UI
        content: blog.content?.includes("\n")
@@ -95,6 +101,9 @@ export async function PUT(
         author: blogs.author,
         readTime: blogs.readTime,
         createdAt: blogs.createdAt,
+        slug: blogs.slug,
+        metaTitle: blogs.metaTitle,
+        metaDescription: blogs.metaDescription,
       });
 
     return NextResponse.json({ success: true, blog: updatedBlog });

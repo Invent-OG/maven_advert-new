@@ -117,6 +117,8 @@ export async function POST(request: NextRequest) {
         heading,
         author: data.author.trim(),
         readTime: data.readTime.trim(),
+        metaTitle: data.metaTitle?.trim(),
+        metaDescription: data.metaDescription?.trim(),
       })
       .returning({
         id: blogs.id,
@@ -130,6 +132,8 @@ export async function POST(request: NextRequest) {
         author: blogs.author,
         readTime: blogs.readTime,
         createdAt: blogs.createdAt,
+        metaTitle: blogs.metaTitle,
+        metaDescription: blogs.metaDescription,
       });
 
     return NextResponse.json({ success: true, blog });

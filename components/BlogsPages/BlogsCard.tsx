@@ -49,8 +49,8 @@ export default function BlogsCard() {
       const createdAt = apiPost.createdAt
         ? new Date(apiPost.createdAt).toLocaleDateString()
         : "date" in post
-        ? post.date
-        : "—";
+          ? post.date
+          : "—";
       const slug = apiPost.slug || post.id?.toString() || "";
 
       return {
@@ -118,7 +118,7 @@ export default function BlogsCard() {
               </p>
 
               <Link
-                href={`/blogs/${post.id}`}
+                href={`/blogs/${post.slug || post.id}`}
                 className="text-orange-500 text-sm font-medium hover:underline mt-auto"
               >
                 Read More →

@@ -142,6 +142,23 @@ export default function CaseCards() {
               className="group relative flex flex-col items-start gap-4"
               data-aos="fade-up"
             >
+              {/* Visit Live Site Badge (Floating) - Positioned outside <Link> to avoid <a> nested inside <a> */}
+              {item.websiteUrl && (
+                <div
+                  className="absolute top-4 right-4 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 transform sm:translate-y-2 sm:group-hover:translate-y-0"
+                  onClick={(e) => e.stopPropagation()} // Prevent navigation when clicking this button
+                >
+                  <a
+                    href={item.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-1.5 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-none shadow-lg hover:bg-[#DFB025] hover:text-white transition-colors border border-gray-100"
+                  >
+                    Visit Site <FaExternalLinkAlt className="w-3 h-3" />
+                  </a>
+                </div>
+              )}
+
               <Link href={`/casestudies/${item.id}`} className="block w-full">
                 {/* Image Container */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100 rounded-none cursor-pointer">
@@ -162,23 +179,6 @@ export default function CaseCards() {
 
                   {/* Overlay on Hover */}
                   <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                  {/* Visit Live Site Badge (Floating) */}
-                  {item.websiteUrl && (
-                    <div
-                      className="absolute top-4 right-4 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 transform sm:translate-y-2 sm:group-hover:translate-y-0"
-                      onClick={(e) => e.stopPropagation()} // Prevent navigation when clicking this button
-                    >
-                      <a
-                        href={item.websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-3 py-1.5 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-none shadow-lg hover:bg-[#DFB025] hover:text-white transition-colors border border-gray-100"
-                      >
-                        Visit Site <FaExternalLinkAlt className="w-3 h-3" />
-                      </a>
-                    </div>
-                  )}
                 </div>
 
                 {/* Content Section */}

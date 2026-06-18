@@ -30,6 +30,8 @@ export const blogs = pgTable("blogs", {
   heading: text("heading").notNull(),
   author: text("author").notNull(),
   readTime: text("read_time").notNull(),
+  metaTitle: text("meta_title"),
+  metaDescription: text("meta_description"),
 });
 export const testimonials = pgTable("testimonials", {
   id: uuid("id").defaultRandom().primaryKey(),

@@ -1,10 +1,10 @@
-import BlogsCard from "@/components/BlogsPages/BlogsCard";
+import BlogsArchive from "@/components/BlogsPages/BlogsArchive";
 import React from "react";
 
 function page() {
   return (
     <>
-      <BlogsCard />
+      <BlogsArchive />
     </>
   );
 }

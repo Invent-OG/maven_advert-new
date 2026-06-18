@@ -419,6 +419,8 @@ interface Blog {
   slug?: string;
   createdAt?: string | Date;
   heading?: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 interface BlogTableProps {

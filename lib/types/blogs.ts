@@ -12,6 +12,8 @@ export const blogSchema = z.object({
   heading: z.string().optional(), // 👈 optional now
   author: z.string().min(1, "Author is required"),
   readTime: z.string().min(1, "Read time is required"),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });
 
 export const createBlogSchema = blogSchema.omit({
