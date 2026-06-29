@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Maven Advert",
   description: "Digital Marketing Agency",
+  verification: {
+    google: "SuR_RBkV1GgB0p9V1Rli7bwzvlrpwwikTdYfTAZuCEk",
+  },
 };
 
 export default function RootLayout({
