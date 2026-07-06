@@ -82,7 +82,7 @@ export async function addLeadToZohoBigin({
       throw new Error("Missing required fields for Zoho contact");
     }
 
-    // 📨 Build the Zoho Bigin contact payload
+    // 📨 Build the Zoho Bigin contact payload (using upsert logic)
     const payload = {
       data: [
         {
@@ -93,19 +93,20 @@ export async function addLeadToZohoBigin({
           Lead_Source: leadSource,
         },
       ],
+      duplicate_check_fields: ["Email"],
     };
 
-    console.log("📤 Sending contact to Zoho Bigin:", payload);
+    console.log("📤 Sending/Upserting contact to Zoho Bigin:", payload);
 
-    // 🧠 POST request to Zoho Bigin API
-    const response = await axios.post(`${ZOHO_BASE_URL}/Contacts`, payload, {
+    // 🧠 POST request to Zoho Bigin API (using upsert endpoint to handle duplicates gracefully)
+    const response = await axios.post(`${ZOHO_BASE_URL}/Contacts/upsert`, payload, {
       headers: {
         Authorization: `Zoho-oauthtoken ${token}`,
         "Content-Type": "application/json",
       },
     });
 
-    console.log("✅ Contact successfully added to Zoho Bigin:", response.data);
+    console.log("✅ Contact successfully upserted in Zoho Bigin:", response.data);
     return response.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {

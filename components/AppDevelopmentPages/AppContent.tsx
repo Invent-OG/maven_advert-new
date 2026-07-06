@@ -250,11 +250,25 @@ function ContactForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === "phone") {
+      const cleanValue = value.replace(/[^0-9+\s\-()]/g, "");
+      setFormData({ ...formData, [name]: cleanValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // ✅ Validate Phone Number length (only counting digits)
+    const phoneDigitsOnly = formData.phone.replace(/[^0-9]/g, "");
+    if (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15) {
+      alert("Please enter a valid phone number (10 to 15 digits).");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -317,6 +331,8 @@ function ContactForm() {
         onChange={handleChange}
         placeholder="Your phone"
         required
+        pattern="^\+?[0-9\s\-()]{10,15}$"
+        title="Please enter a valid phone number (10 to 15 digits)"
         className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
       />
 

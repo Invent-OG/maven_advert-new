@@ -61,7 +61,6 @@ export default function GetInTouch() {
   // ✅ Handle form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
@@ -70,6 +69,17 @@ export default function GetInTouch() {
     const email = formData.get("email");
     const whatsappNumberRaw = formData.get("whatsappNumber") as string;
     const message = formData.get("message");
+
+    // ✅ Validate Phone Number
+    const phoneDigitsOnly = whatsappNumberRaw.replace(/[^0-9]/g, "");
+    if (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15) {
+      toast.error("Please enter a valid phone number (10 to 15 digits).", {
+        position: "top-right",
+      });
+      return;
+    }
+
+    setLoading(true);
 
     // ✅ Add +91
     const whatsappNumber = whatsappNumberRaw.startsWith("+91")
@@ -215,9 +225,11 @@ export default function GetInTouch() {
             <div className="relative">
               <input
                 name="whatsappNumber"
-                type="text"
+                type="tel"
                 placeholder="Enter your number*"
                 required
+                pattern="^\+?[0-9\s\-()]{10,15}$"
+                title="Please enter a valid phone number (10 to 15 digits)"
                 className="w-full border-b border-gray-300 focus:outline-none py-6 pr-10"
               />
               <FaPhoneAlt className="absolute right-2 top-2.5 text-gray-400" />
