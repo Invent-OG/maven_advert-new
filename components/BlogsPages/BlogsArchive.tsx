@@ -33,7 +33,7 @@ export default function BlogsArchive() {
 
     const formattedDbBlogs = dbBlogs.map((b) => ({
       id: b.id?.toString() || "",
-      slug: b.slug || "",
+      slug: (b.slug || "").replace(/^\//, ""),
       title: b.title,
       excerpt: b.description,
       imageUrl: b.imageUrl,
@@ -53,7 +53,7 @@ export default function BlogsArchive() {
       .filter((fb) => !dbIds.has(fb.id?.toString() || "") && !dbSlugs.has(fb.id?.toLowerCase() || ""))
       .map((fb) => ({
         id: fb.id?.toString() || "",
-        slug: fb.id?.toString() || "",
+        slug: (fb.id?.toString() || "").replace(/^\//, ""),
         title: fb.title,
         excerpt: fb.excerpt,
         imageUrl: fb.cover,

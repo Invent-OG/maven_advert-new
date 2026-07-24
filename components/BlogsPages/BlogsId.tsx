@@ -11,8 +11,13 @@ import { Calendar, Timer } from "lucide-react";
 import { BsPersonFill } from "react-icons/bs";
 
 
-export default function BlogsId() {
-  const { id } = useParams();
+interface BlogsIdProps {
+  id?: string;
+}
+
+export default function BlogsId({ id: propId }: BlogsIdProps) {
+  const params = useParams();
+  const id = propId || (Array.isArray(params?.id) ? params.id.join("/") : (params?.id as string));
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(24);
 
@@ -57,7 +62,7 @@ export default function BlogsId() {
 
     const formattedDbBlogs = dbBlogs.map((b) => ({
       id: b.id?.toString() || "",
-      slug: b.slug || "",
+      slug: (b.slug || "").replace(/^\//, ""),
       title: b.title,
       imageUrl: b.imageUrl,
       readTime: b.readTime || "5 min",
@@ -74,7 +79,7 @@ export default function BlogsId() {
       )
       .map((fb) => ({
         id: fb.id?.toString() || "",
-        slug: fb.id?.toString() || "",
+        slug: (fb.id?.toString() || "").replace(/^\//, ""),
         title: fb.title,
         imageUrl: fb.cover,
         readTime: fb.readTime || "5 min",
@@ -156,7 +161,7 @@ export default function BlogsId() {
             </span>
             <span className="text-gray-800">•</span>
             <span className="flex items-center gap-1.5">
-              <Calendar />{post.createdAt
+              <Calendar />{post.createdAt && !isNaN(new Date(post.createdAt).getTime())
                 ? new Date(post.createdAt).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",

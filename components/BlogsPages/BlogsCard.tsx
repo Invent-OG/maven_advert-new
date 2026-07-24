@@ -51,7 +51,7 @@ export default function BlogsCard() {
         : "date" in post
           ? post.date
           : "—";
-      const slug = apiPost.slug || post.id?.toString() || "";
+      const slug = (apiPost.slug || post.id?.toString() || "").replace(/^\//, "");
 
       return {
         id: apiPost.id || post.id?.toString() || slug,

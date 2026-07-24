@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { blogs } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import { z, ZodError } from "zod";
 import { createBlogSchema } from "@/lib/types/blogs";
 import { validate as isUuid } from "uuid";
@@ -11,15 +11,22 @@ import { validate as isUuid } from "uuid";
  */
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> } // ✅ correct type
+  context: { params: Promise<{ id: string[] }> } // ✅ correct type
 ) {
   try {
-    const { id } = await context.params; // ✅ await the params
+    const { id: idSegments } = await context.params; // ✅ await the params
+    const fullId = idSegments.join("/");
+    const fullIdWithSlash = "/" + fullId;
 
-    const isIdUuid = isUuid(id);
+    const isIdUuid = isUuid(idSegments[0]);
     const [blog] = isIdUuid
-      ? await db.select().from(blogs).where(eq(blogs.id, id))
-      : await db.select().from(blogs).where(eq(blogs.slug, id));
+      ? await db.select().from(blogs).where(eq(blogs.id, idSegments[0]))
+      : await db.select().from(blogs).where(
+          or(
+            eq(blogs.slug, fullId),
+            eq(blogs.slug, fullIdWithSlash)
+          )
+        );
 
     if (!blog) {
       return NextResponse.json(
@@ -72,14 +79,24 @@ export async function GET(
  */
 export async function PUT(
   req: NextRequest, // ✅ must be NextRequest (not Request)
-  context: { params: Promise<{ id: string }> } // ✅ must be Promise type
+  context: { params: Promise<{ id: string[] }> } // ✅ must be Promise type
 ) {
   try {
-    const { id } = await context.params;
+    const { id: idSegments } = await context.params;
+    const fullId = idSegments.join("/");
+    const fullIdWithSlash = "/" + fullId;
     const body = await req.json();
     const data = createBlogSchema.parse(body);
 
-    const [existing] = await db.select().from(blogs).where(eq(blogs.id, id));
+    const isIdUuid = isUuid(idSegments[0]);
+    const [existing] = isIdUuid
+      ? await db.select().from(blogs).where(eq(blogs.id, idSegments[0]))
+      : await db.select().from(blogs).where(
+          or(
+            eq(blogs.slug, fullId),
+            eq(blogs.slug, fullIdWithSlash)
+          )
+        );
     if (!existing) {
       return NextResponse.json(
         { success: false, error: "Blog not found" },
@@ -90,7 +107,7 @@ export async function PUT(
     const [updatedBlog] = await db
       .update(blogs)
       .set(data)
-      .where(eq(blogs.id, id))
+      .where(eq(blogs.id, existing.id))
       .returning({
         id: blogs.id,
         title: blogs.title,
@@ -129,12 +146,22 @@ export async function PUT(
  */
 export async function DELETE(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string[] }> }
 ) {
   try {
-    const { id } = await context.params;
+    const { id: idSegments } = await context.params;
+    const fullId = idSegments.join("/");
+    const fullIdWithSlash = "/" + fullId;
 
-    const [blog] = await db.select().from(blogs).where(eq(blogs.id, id));
+    const isIdUuid = isUuid(idSegments[0]);
+    const [blog] = isIdUuid
+      ? await db.select().from(blogs).where(eq(blogs.id, idSegments[0]))
+      : await db.select().from(blogs).where(
+          or(
+            eq(blogs.slug, fullId),
+            eq(blogs.slug, fullIdWithSlash)
+          )
+        );
     if (!blog) {
       return NextResponse.json(
         { success: false, error: "Blog not found" },
@@ -142,7 +169,7 @@ export async function DELETE(
       );
     }
 
-    await db.delete(blogs).where(eq(blogs.id, id));
+    await db.delete(blogs).where(eq(blogs.id, blog.id));
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("DELETE /blogs/[id] error:", error);
