@@ -102,7 +102,7 @@ export default function BlogsId() {
     );
 
   // Show error ONLY if we have no valid post (either from DB or fallback list) and API call has failed or finished
-  if ((isError || !postData) && !isLoading)
+  if (!postData && !isLoading)
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
