@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Download,
   ExternalLink,
+  Image as ImageIcon,
 } from "lucide-react";
 
 interface BlockRendererProps {
@@ -36,6 +37,11 @@ const BlockWrapper: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
     return str.match(/^[0-9]+$/) ? `${str}px` : str;
   };
 
+  const hasGradient =
+    Boolean(block.content.gradient) &&
+    block.content.gradient.trim() !== "" &&
+    block.content.gradient !== "none";
+
   const cssVars = {
     "--pt": getVal(block.content.paddingTop),
     "--pb": getVal(block.content.paddingBottom),
@@ -43,14 +49,11 @@ const BlockWrapper: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
     "--pr": getVal(block.content.paddingRight),
     "--mt": getVal(block.content.marginTop),
     "--mb": getVal(block.content.marginBottom),
-    "--bw": block.content.borderWidth ? `${block.content.borderWidth}` : "0px",
-    "--br": block.content.borderRadius
-      ? `${block.content.borderRadius}`
-      : "0px",
+    "--bw": getVal(block.content.borderWidth),
+    "--br": getVal(block.content.borderRadius),
     "--bc": block.content.borderColor || "transparent",
     "--bg": block.content.backgroundColor || "transparent",
     "--text": block.content.textColor || "inherit",
-    "--grad": block.content.gradient || "none",
   } as React.CSSProperties;
 
   return (
@@ -71,7 +74,9 @@ const BlockWrapper: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
           ${block.content.borderWidth ? "border-solid" : "border-none"}
         `}
         style={{
-          background: "var(--grad, var(--bg))",
+          background: hasGradient
+            ? block.content.gradient
+            : "var(--bg)",
           color: "var(--text)",
         }}
       >
@@ -84,6 +89,9 @@ const BlockWrapper: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
 const BlockContent: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
   switch (block.type) {
     case "hero":
+      const hasHeroBg =
+        Boolean(block.content.backgroundColor) ||
+        (Boolean(block.content.gradient) && block.content.gradient !== "none");
       return (
         <div
           className="relative min-h-[50vh] @md:min-h-[60vh] flex items-center justify-center bg-cover bg-center text-white w-full py-12 @md:py-0"
@@ -91,7 +99,8 @@ const BlockContent: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
             backgroundImage: block.content.image
               ? `url(${block.content.image})`
               : "none",
-            backgroundColor: !block.content.image ? "#1a1a1a" : "transparent",
+            backgroundColor:
+              !block.content.image && !hasHeroBg ? "#1a1a1a" : "transparent",
           }}
         >
           {block.content.image && (
@@ -550,6 +559,86 @@ const BlockContent: React.FC<{ block: PortfolioBlock }> = ({ block }) => {
                     Small Image 2
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+    case "showcase_split":
+      const showcaseImages = (block.content.images || []).filter(
+        (img: string) => img && img.trim() !== "",
+      );
+      const isShowcaseReverse = block.content.reverse;
+
+      return (
+        <div className="py-12 @md:py-20">
+          <div className="max-w-7xl mx-auto px-4 @md:px-8">
+            <div
+              className={`flex flex-col @lg:flex-row gap-8 @lg:gap-14 items-center ${
+                isShowcaseReverse ? "@lg:flex-row-reverse" : ""
+              }`}
+            >
+              {/* Text Side */}
+              <div className="w-full @lg:w-[36%] space-y-6">
+                <div className="space-y-4">
+                  <h2 className="text-3xl @md:text-4xl @lg:text-5xl font-extrabold leading-tight tracking-tight text-inherit uppercase">
+                    {block.content.title || "LOREM IPSUM"}
+                  </h2>
+                  <p className="text-sm @md:text-base leading-relaxed text-inherit opacity-85 font-normal whitespace-pre-line">
+                    {block.content.description}
+                  </p>
+                </div>
+
+                {block.content.buttonText && (
+                  <div className="pt-2">
+                    <a
+                      href={block.content.buttonLink || "#"}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-gray-900 font-semibold text-sm hover:bg-gray-100 hover:scale-105 transition-all shadow-md"
+                    >
+                      {block.content.buttonText}
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {/* Showcase 3 Cards Grid */}
+              <div className="w-full @lg:w-[64%]">
+                <div
+                  className={`grid grid-cols-1 @sm:grid-cols-2 ${
+                    showcaseImages.length >= 3
+                      ? "@md:grid-cols-3"
+                      : showcaseImages.length === 2
+                      ? "@md:grid-cols-2"
+                      : "@md:grid-cols-1"
+                  } gap-4 @lg:gap-6`}
+                >
+                  {(showcaseImages.length > 0
+                    ? showcaseImages
+                    : ["", "", ""]
+                  ).map((img: string, idx: number) => (
+                    <div
+                      key={idx}
+                      className="relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 border border-white/10 aspect-[3/4] flex items-center justify-center group transform hover:-translate-y-1.5 transition-all duration-300"
+                    >
+                      {img ? (
+                        <img
+                          src={img}
+                          alt={`Showcase ${idx + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center justify-center p-6 text-center text-inherit opacity-40">
+                          <ImageIcon className="w-10 h-10 mb-2" />
+                          <span className="text-xs font-semibold uppercase tracking-wider">
+                            Card {idx + 1}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

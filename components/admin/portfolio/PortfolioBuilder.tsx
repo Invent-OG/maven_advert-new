@@ -94,6 +94,8 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
         return <ListChecks className="w-5 h-5" />;
       case "bento_grid":
         return <LayoutTemplate className="w-5 h-5" />;
+      case "showcase_split":
+        return <Columns className="w-5 h-5" />;
       default:
         return <Type className="w-5 h-5" />;
     }
@@ -131,6 +133,8 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
         return "Features";
       case "bento_grid":
         return "Bento Grid";
+      case "showcase_split":
+        return "Showcase Split";
       default:
         return "Block";
     }
@@ -252,6 +256,22 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
             },
           ],
         };
+      case "showcase_split":
+        return {
+          title: "LOREM IPSUM",
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+          images: [
+            "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1589365278144-c9e705f843ba?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80",
+          ],
+          buttonText: "",
+          buttonLink: "",
+          reverse: false,
+          backgroundColor: "#161b17",
+          textColor: "#ffffff",
+        };
       default:
         return {};
     }
@@ -270,6 +290,7 @@ export default function PortfolioBuilder({ blocks, onChange }: Props) {
             "gallery",
             "spacer",
             "stats_grid",
+            "showcase_split",
             "image_text_split",
             "gallery_text_split",
             "image_with_text",
@@ -1237,6 +1258,127 @@ function BlockEditor({
               <Plus className="w-3 h-3" /> Add Feature
             </button>
           </div>
+          <BlockStyleControls content={block.content} onChange={onChange} />
+        </div>
+      );
+
+    case "showcase_split":
+      return (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-sm font-medium text-gray-700">
+              Flip Layout (Cards Left)
+            </span>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={block.content.reverse || false}
+                onChange={(e) => onChange({ reverse: e.target.checked })}
+                className="sr-only peer"
+              />
+              <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+              Title
+            </label>
+            <input
+              value={block.content.title || ""}
+              onChange={(e) => onChange({ title: e.target.value })}
+              placeholder="e.g. LOREM IPSUM"
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+              Description
+            </label>
+            <textarea
+              value={block.content.description || ""}
+              onChange={(e) => onChange({ description: e.target.value })}
+              placeholder="Detailed description..."
+              rows={4}
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                Button Text (Optional)
+              </label>
+              <input
+                value={block.content.buttonText || ""}
+                onChange={(e) => onChange({ buttonText: e.target.value })}
+                placeholder="e.g. View Project"
+                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                Button Link
+              </label>
+              <input
+                value={block.content.buttonLink || ""}
+                onChange={(e) => onChange({ buttonLink: e.target.value })}
+                placeholder="https://..."
+                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-blue-500"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Showcase Cards (3 Columns)
+              </label>
+              <span className="text-xs text-gray-400">
+                {(block.content.images || []).length} cards
+              </span>
+            </div>
+            <div className="space-y-2">
+              {(block.content.images || []).map((img: string, idx: number) => (
+                <div key={idx} className="flex gap-2 items-center">
+                  <div className="relative flex-1">
+                    <input
+                      value={img}
+                      onChange={(e) => {
+                        const newImages = [...(block.content.images || [])];
+                        newImages[idx] = e.target.value;
+                        onChange({ images: newImages });
+                      }}
+                      placeholder={`Card ${idx + 1} Image URL`}
+                      className="w-full px-3 py-2 pl-9 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+                    />
+                    <ImageIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5" />
+                  </div>
+                  <button
+                    onClick={() => {
+                      const newImages = (block.content.images || []).filter(
+                        (_: any, i: number) => i !== idx,
+                      );
+                      onChange({ images: newImages });
+                    }}
+                    className="text-gray-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() =>
+                onChange({ images: [...(block.content.images || []), ""] })
+              }
+              className="mt-3 w-full py-2 border-2 border-dashed border-gray-200 rounded-lg text-sm text-gray-500 font-medium hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all flex items-center justify-center gap-2"
+            >
+              <Plus className="w-4 h-4" /> Add Card Image
+            </button>
+          </div>
+
           <BlockStyleControls content={block.content} onChange={onChange} />
         </div>
       );

@@ -15,7 +15,8 @@ export type PortfolioBlockType =
   | "features"
   | "cta"
   | "gallery_text_split"
-  | "bento_grid";
+  | "bento_grid"
+  | "showcase_split";
 
 export interface PortfolioBlock {
   id: string;
@@ -41,6 +42,7 @@ export const PortfolioBlockSchema = z.object({
     "cta",
     "gallery_text_split",
     "bento_grid",
+    "showcase_split",
   ]),
   content: z.any(),
 });
