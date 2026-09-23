@@ -320,7 +320,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Download, Trash2, Mail, Phone } from "lucide-react";
+import { Search, Download, Trash2, Mail, Phone, ChevronDown, ChevronUp } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { useLeads, useDeleteLead } from "@/lib/queries/leads";
@@ -338,6 +338,48 @@ import { Skeleton } from "../ui/skeleton";
 import { leadSchema } from "@/lib/types/leads";
 
 type Lead = z.infer<typeof leadSchema>;
+
+function ExpandableMessage({ message }: { message?: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  if (!message) {
+    return <span className="text-gray-400 italic text-sm">No message provided</span>;
+  }
+
+  const isLong = message.length > 50;
+
+  return (
+    <div className={`transition-all duration-200 ${isExpanded ? "max-w-md" : "max-w-[240px]"}`}>
+      <p
+        className={`text-sm text-gray-600 leading-relaxed break-words whitespace-pre-wrap ${
+          !isExpanded && isLong ? "line-clamp-2" : ""
+        }`}
+      >
+        {message}
+      </p>
+      {isLong && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded((prev) => !prev);
+          }}
+          className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors mt-1 inline-flex items-center gap-1 focus:outline-none cursor-pointer"
+        >
+          {isExpanded ? (
+            <>
+              Show less <ChevronUp className="h-3 w-3" />
+            </>
+          ) : (
+            <>
+              Show more <ChevronDown className="h-3 w-3" />
+            </>
+          )}
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function LeadTabs() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -692,15 +734,7 @@ export default function LeadTabs() {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <div className="max-w-[240px]">
-                          <span className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-                            {lead.message || (
-                              <span className="text-gray-400 italic">
-                                No message provided
-                              </span>
-                            )}
-                          </span>
-                        </div>
+                        <ExpandableMessage message={lead.message} />
                       </TableCell>
                       <TableCell>
                         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-3 py-1.5 rounded-full border border-blue-100">
@@ -785,9 +819,7 @@ export default function LeadTabs() {
 
                     {lead.message && (
                       <div className="pt-2 border-t border-gray-100">
-                        <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
-                          {lead.message}
-                        </p>
+                        <ExpandableMessage message={lead.message} />
                       </div>
                     )}
                   </div>
