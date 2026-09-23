@@ -28,7 +28,7 @@ export default function BlogPreview({
       <CardContent className="p-6">
         <h3 className="text-xl font-semibold mb-4">{title}</h3>
         <div
-          className="prose max-w-none"
+          className="prose max-w-none [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:my-4 [&_img]:block"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </CardContent>

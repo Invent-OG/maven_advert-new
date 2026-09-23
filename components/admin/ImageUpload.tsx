@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, X, Loader2 } from "lucide-react";
+import { Upload, X, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
@@ -75,12 +75,13 @@ export default function ImageUpload({
   const removeImage = () => {
     setPreview(null);
     onChange("");
+    toast.success("Image removed");
   };
 
   return (
     <div className="space-y-4">
       {preview ? (
-        <div className="relative">
+        <div className="relative rounded-md overflow-hidden border">
           <Image
             src={preview}
             alt="Preview"
@@ -90,10 +91,19 @@ export default function ImageUpload({
             style={{ objectFit: "cover" }}
           />
           <Button
-            className="absolute top-2 right-2"
-            onClick={removeImage}
+            type="button"
+            variant="destructive"
+            size="sm"
+            className="absolute top-2 right-2 flex items-center gap-1.5 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white shadow-md z-10"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              removeImage();
+            }}
+            title="Delete featured image"
           >
-            <X className="h-4 w-4" />
+            <Trash2 className="h-4 w-4" />
+            <span>Delete</span>
           </Button>
         </div>
       ) : (
