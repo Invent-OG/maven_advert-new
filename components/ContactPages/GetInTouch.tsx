@@ -25,9 +25,11 @@ export default function GetInTouch() {
   const helloRef = useRef(null);
   const [langIndex, setLangIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const formLoadedAtRef = useRef<number>(Date.now());
 
   // GSAP animation for "Hello" text
   useEffect(() => {
+    formLoadedAtRef.current = Date.now();
     const interval = setInterval(() => {
       gsap.to(helloRef.current, {
         opacity: 0,
@@ -69,6 +71,7 @@ export default function GetInTouch() {
     const email = formData.get("email");
     const whatsappNumberRaw = formData.get("whatsappNumber") as string;
     const message = formData.get("message");
+    const hp_website = formData.get("hp_website") as string;
 
     // ✅ Validate Phone Number
     const phoneDigitsOnly = whatsappNumberRaw.replace(/[^0-9]/g, "");
@@ -103,6 +106,8 @@ export default function GetInTouch() {
           whatsappNumber,
           message,
           createdAt,
+          hp_website,
+          _formLoadedAt: formLoadedAtRef.current,
         }),
       });
 
@@ -202,6 +207,16 @@ export default function GetInTouch() {
           </h2>
 
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            {/* Honeypot field for bot trapping */}
+            <div style={{ display: "none", position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
+              <input
+                name="hp_website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="relative">
               <input
                 name="name"

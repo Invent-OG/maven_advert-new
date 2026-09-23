@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db, leads as leadsTable } from "@/lib/db";
 import { and, count, desc, eq, gte, ilike, lt, or } from "drizzle-orm";
 import { addLeadToZohoBigin } from "@/lib/zoho";
+import { validateAntiSpam } from "@/lib/antiSpam";
 
 /* -----------------------------
    Type Definitions
@@ -131,6 +132,40 @@ export async function POST(req: Request) {
         { success: false, error: "All fields are required" },
         { status: 400 },
       );
+    }
+
+    // Extract client IP address
+    const forwardedFor = req.headers.get("x-forwarded-for");
+    const realIp = req.headers.get("x-real-ip");
+    const clientIp = forwardedFor
+      ? forwardedFor.split(",")[0].trim()
+      : realIp || "unknown";
+
+    // 🛡️ Multi-layer Anti-Spam Check
+    const spamCheck = validateAntiSpam(body, clientIp);
+
+    if (spamCheck.isRateLimited) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Too many submissions. Please wait a few minutes before trying again.",
+        },
+        { status: 429 },
+      );
+    }
+
+    if (spamCheck.isSpam) {
+      console.warn(`🛡️ [Anti-Spam] Blocked spam lead from ${clientIp}:`, {
+        reason: spamCheck.reason,
+        name,
+        email,
+      });
+
+      // Silently return success to mislead the bot, without inserting to DB or syncing to Zoho
+      return NextResponse.json({
+        success: true,
+        message: "Message received successfully.",
+      });
     }
 
     const [insertedLead] = await db

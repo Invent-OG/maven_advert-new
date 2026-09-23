@@ -237,7 +237,9 @@ function ContactForm() {
     email: "",
     phone: "",
     message: "",
+    hp_website: "",
   });
+  const formLoadedAtRef = React.useRef<number>(Date.now());
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const handleChange = (
@@ -273,6 +275,8 @@ function ContactForm() {
           email: formData.email,
           whatsappNumber: formData.phone,
           message: formData.message,
+          hp_website: formData.hp_website,
+          _formLoadedAt: formLoadedAtRef.current,
         }),
       });
 
@@ -280,7 +284,7 @@ function ContactForm() {
 
       if (data.success) {
         alert("Thanks! Your message has been sent successfully.");
-        setFormData({ name: "", email: "", phone: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", message: "", hp_website: "" });
       } else {
         alert("Something went wrong: " + (data.error || "Unknown error"));
       }
@@ -297,6 +301,18 @@ function ContactForm() {
       onSubmit={handleSubmit}
       className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
     >
+      {/* Honeypot field for bot trapping */}
+      <div style={{ display: "none", position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
+        <input
+          name="hp_website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.hp_website}
+          onChange={handleChange}
+        />
+      </div>
+
       <input
         type="text"
         name="name"
