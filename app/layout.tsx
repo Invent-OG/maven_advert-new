@@ -1,10 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import ClientLayout from "@/components/ClientLayout";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Maven Advert",
@@ -21,7 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-sans antialiased">
         <GoogleTagManager gtmId="GTM-PXM9CLGB" />
         <ClientLayout>{children}</ClientLayout>
       </body>
