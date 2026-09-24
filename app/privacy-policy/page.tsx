@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Maven Advert",
   description:
     "Privacy Policy for Maven Advert. Learn how we collect, use, and protect your information.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

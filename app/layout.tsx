@@ -4,8 +4,26 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import ClientLayout from "@/components/ClientLayout";
 
 export const metadata = {
-  title: "Maven Advert",
-  description: "Digital Marketing Agency",
+  metadataBase: new URL("https://www.mavenadvert.com"),
+  title: {
+    default: "Maven Advert | Digital Marketing & Advertising Agency",
+    template: "%s | Maven Advert",
+  },
+  description: "Digital Marketing Agency offering SEO, PPC, Web Development, and Creative Advertising.",
+  alternates: {
+    canonical: "./",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   verification: {
     google: "SuR_RBkV1GgB0p9V1Rli7bwzvlrpwwikTdYfTAZuCEk",
   },

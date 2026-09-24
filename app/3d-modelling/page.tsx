@@ -9,6 +9,15 @@ import TipsTrick from "@/components/3dPages/TipsTrick";
 import WhyItWorks from "@/components/3dPages/WhyItWorks";
 import React from "react";
 
+export const metadata = {
+  title: "3D Modelling & Visualization | Maven Advert",
+  description:
+    "Transform concepts into immersive visual realities with cutting-edge 3D modelling, animation, and CGI product design.",
+  alternates: {
+    canonical: "/3d-modelling",
+  },
+};
+
 function page() {
   return (
     <>

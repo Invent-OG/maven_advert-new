@@ -18,6 +18,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
 import { LiquidButton } from "../ui/liquid-glass-button";
+import CountryCodeSelect, {
+  COUNTRIES,
+  CountryItem,
+} from "./CountryCodeSelect";
 
 const languages = ["Hello", "Hola", "Bonjour", "Ciao"];
 
@@ -25,6 +29,7 @@ export default function GetInTouch() {
   const helloRef = useRef(null);
   const [langIndex, setLangIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<CountryItem>(COUNTRIES[0]);
   const formLoadedAtRef = useRef<number>(Date.now());
 
   // GSAP animation for "Hello" text
@@ -69,14 +74,14 @@ export default function GetInTouch() {
 
     const name = formData.get("name");
     const email = formData.get("email");
-    const whatsappNumberRaw = formData.get("whatsappNumber") as string;
+    const whatsappNumberRaw = (formData.get("whatsappNumber") as string) || "";
     const message = formData.get("message");
     const hp_website = formData.get("hp_website") as string;
 
-    // ✅ Validate Phone Number
+    // ✅ Validate Phone Number (6 to 15 digits)
     const phoneDigitsOnly = whatsappNumberRaw.replace(/[^0-9]/g, "");
-    if (phoneDigitsOnly.length < 10 || phoneDigitsOnly.length > 15) {
-      toast.error("Please enter a valid phone number (10 to 15 digits).", {
+    if (phoneDigitsOnly.length < 6 || phoneDigitsOnly.length > 15) {
+      toast.error("Please enter a valid phone number (6 to 15 digits).", {
         position: "top-right",
       });
       return;
@@ -84,10 +89,10 @@ export default function GetInTouch() {
 
     setLoading(true);
 
-    // ✅ Add +91
-    const whatsappNumber = whatsappNumberRaw.startsWith("+91")
-      ? whatsappNumberRaw
-      : `+91${whatsappNumberRaw}`;
+    // ✅ Combine with selected country code if not already formatted with international + prefix
+    const whatsappNumber = whatsappNumberRaw.trim().startsWith("+")
+      ? whatsappNumberRaw.trim().replace(/[^\d+]/g, "")
+      : `${selectedCountry.code}${phoneDigitsOnly}`;
 
     // ✅ Add date
     const createdAt = new Date().toISOString();
@@ -120,6 +125,7 @@ export default function GetInTouch() {
           position: "top-right",
         });
         form.reset();
+        setSelectedCountry(COUNTRIES[0]);
       } else {
         toast.error("❌ Failed to send message. Please try again later.", {
           position: "top-right",
@@ -237,17 +243,21 @@ export default function GetInTouch() {
               />
               <FaEnvelope className="absolute right-2 top-2.5 text-gray-400" />
             </div>
-            <div className="relative">
+            <div className="relative border-b border-gray-300 flex items-center focus-within:border-orange-500 transition-colors">
+              {/* Mobile Number Extension Selector */}
+              <CountryCodeSelect
+                value={selectedCountry}
+                onChange={setSelectedCountry}
+              />
+              <div className="h-6 w-px bg-gray-200 mx-1.5 shrink-0" />
               <input
                 name="whatsappNumber"
                 type="tel"
-                placeholder="Enter your number*"
+                placeholder="Enter your phone number*"
                 required
-                pattern="^\+?[0-9\s\-()]{10,15}$"
-                title="Please enter a valid phone number (10 to 15 digits)"
-                className="w-full border-b border-gray-300 focus:outline-none py-6 pr-10"
+                className="w-full bg-transparent focus:outline-none py-6 pr-10 text-gray-900 placeholder:text-gray-400 text-base"
               />
-              <FaPhoneAlt className="absolute right-2 top-2.5 text-gray-400" />
+              <FaPhoneAlt className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
             </div>
             <div className="relative">
               <textarea

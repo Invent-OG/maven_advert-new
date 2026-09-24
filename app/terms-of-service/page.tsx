@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Terms & Conditions | Maven Advert",
   description:
     "Terms of Service and Conditions for using Maven Advert's website and services.",
+  alternates: {
+    canonical: "/terms-of-service",
+  },
 };
 
 export default function TermsOfServicePage() {

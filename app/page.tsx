@@ -18,6 +18,9 @@ export const metadata = {
   title: "Elevate Your Brand with Maven Advert | Digital Growth",
   description:
     ": Design. Launch. Grow. Maven Advert merges creativity, technology, and strategy to build remarkable brands and elevate every digital move with purpose.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Elevate Your Brand with Maven Advert | Digital Growth",
     description:

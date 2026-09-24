@@ -11,6 +11,9 @@ export const metadata = {
   title: "Maven Advert | Strategy, Creativity & Digital Growth",
   description:
     "We craft data-driven strategies and creative experiences that build trust, spark engagement, and drive measurable growth for visionary brands.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 function page() {
   return (

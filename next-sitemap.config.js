@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mavenadvert.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mavenadvert.com',
   generateRobotsTxt: true,
   sitemapSize: 5000,
   changefreq: 'monthly',
@@ -10,6 +10,12 @@ module.exports = {
   
   // Custom transform function to set priorities/changefreq based on path
   transform: async (config, path) => {
+    // Exclude any raw UUID blog URLs from sitemap (only index canonical human-friendly slugs)
+    const uuidRegex = /^\/blogs\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (uuidRegex.test(path)) {
+      return null;
+    }
+
     // Custom logic for different paths
     let priority = config.priority;
     let changefreq = config.changefreq;

@@ -10,6 +10,9 @@ export const metadata = {
   title: "Integrated Brand Solutions | Automation, Strategy & Growth",
   description:
     "Drive measurable results with data-driven marketing, eCommerce ads, CRM automation, and brand engagement strategies that accelerate growth.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 function page() {
