@@ -103,7 +103,7 @@ export default function Footer() {
                   label="Stall Fabrication"
                 />
                 <FooterLink href="/contact" label="Contact" />
-                <FooterLink href="/admin/login" label="Admin" />
+                <FooterLink href="/admin/login" label="Admin" rel="nofollow" />
               </ul>
             </div>
           </div>
@@ -134,10 +134,19 @@ export default function Footer() {
 }
 
 // Helper component for cleaner link styling
-const FooterLink = ({ href, label }: { href: string; label: string }) => (
+const FooterLink = ({
+  href,
+  label,
+  rel,
+}: {
+  href: string;
+  label: string;
+  rel?: string;
+}) => (
   <li>
     <Link
       href={href}
+      rel={rel}
       className="group flex items-center text-zinc-400 hover:text-white transition-all duration-300"
     >
       <span className="mr-2 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-orange-600 text-xs">

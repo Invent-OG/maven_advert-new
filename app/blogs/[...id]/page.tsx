@@ -53,10 +53,11 @@ export async function generateStaticParams() {
   }
 }
 
+// app/blogs/[...id]/page.tsx
 export async function generateMetadata({ params }: { params: Promise<{ id: string[] }> }) {
   const { id: idSegments } = await params;
   const fullId = idSegments.join("/");
-  const fullIdWithSlash = "/" + fullId;
+  const cleanId = fullId.replace(/^\/+|\/+$/g, "").replace(/^blog\//, "");
   
   let dbBlog = null;
   try {
@@ -65,8 +66,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       ? await db.select().from(blogs).where(eq(blogs.id, idSegments[0]))
       : await db.select().from(blogs).where(
           or(
+            eq(blogs.slug, cleanId),
             eq(blogs.slug, fullId),
-            eq(blogs.slug, fullIdWithSlash)
+            eq(blogs.slug, "/" + cleanId)
           )
         );
     dbBlog = blog;
@@ -75,7 +77,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 
   if (dbBlog) {
-    const canonicalSlug = dbBlog.slug ? dbBlog.slug.replace(/^\//, "") : dbBlog.id;
+    const canonicalSlug = dbBlog.slug
+      ? dbBlog.slug.replace(/^\/+|\/+$/g, "").replace(/^blog\//, "")
+      : dbBlog.id;
     return {
       title: dbBlog.metaTitle || dbBlog.title,
       description: dbBlog.metaDescription || dbBlog.description,
@@ -94,11 +98,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   // Fallback to local static blog
   const localBlog = fallbackBlogs.find(
-    (b) => b.id.toString() === fullId || b.id.toLowerCase() === fullId.toLowerCase()
+    (b) =>
+      b.id.toString() === cleanId ||
+      b.id.toLowerCase() === cleanId.toLowerCase() ||
+      b.id.toString() === fullId ||
+      b.id.toLowerCase() === fullId.toLowerCase()
   );
 
   if (localBlog) {
-    const canonicalSlug = localBlog.id.replace(/^\//, "");
+    const canonicalSlug = localBlog.id.replace(/^\/+|\/+$/g, "");
     return {
       title: localBlog.title,
       description: localBlog.excerpt,
@@ -127,15 +135,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function Page({ params }: { params: Promise<{ id: string[] }> }) {
   const { id: idSegments } = await params;
   const fullId = idSegments.join("/");
-  const fullIdWithSlash = "/" + fullId;
+  const cleanId = fullId.replace(/^\/+|\/+$/g, "").replace(/^blog\//, "");
 
-  // 1. If accessed by UUID but blog has a slug, permanently redirect (308/301) to canonical slug
+  // 1. If accessed by UUID but blog has a slug, permanently redirect (308) to canonical slug
   const isIdUuid = isUuid(idSegments[0]);
   if (isIdUuid) {
     try {
       const [blog] = await db.select().from(blogs).where(eq(blogs.id, idSegments[0]));
       if (blog?.slug) {
-        const canonicalSlug = blog.slug.replace(/^\//, "");
+        const canonicalSlug = blog.slug.replace(/^\/+|\/+$/g, "").replace(/^blog\//, "");
         permanentRedirect(`/blogs/${canonicalSlug}`);
       }
     } catch (e) {
@@ -143,15 +151,21 @@ export default async function Page({ params }: { params: Promise<{ id: string[] 
     }
   }
 
-  // 2. Verify article exists
+  // 2. If accessed via legacy "/blogs/blog/..." or un-sanitized slashes, redirect to canonical clean slug
+  if (!isIdUuid && fullId !== cleanId) {
+    permanentRedirect(`/blogs/${cleanId}`);
+  }
+
+  // 3. Verify article exists
   let exists = false;
   try {
     const [blog] = isIdUuid
       ? await db.select().from(blogs).where(eq(blogs.id, idSegments[0]))
       : await db.select().from(blogs).where(
           or(
+            eq(blogs.slug, cleanId),
             eq(blogs.slug, fullId),
-            eq(blogs.slug, fullIdWithSlash)
+            eq(blogs.slug, "/" + cleanId)
           )
         );
     if (blog) exists = true;
@@ -161,15 +175,19 @@ export default async function Page({ params }: { params: Promise<{ id: string[] 
 
   if (!exists) {
     const localBlog = fallbackBlogs.find(
-      (b) => b.id.toString() === fullId || b.id.toLowerCase() === fullId.toLowerCase()
+      (b) =>
+        b.id.toString() === cleanId ||
+        b.id.toLowerCase() === cleanId.toLowerCase() ||
+        b.id.toString() === fullId ||
+        b.id.toLowerCase() === fullId.toLowerCase()
     );
     if (localBlog) exists = true;
   }
 
-  // 3. If article does not exist, trigger true HTTP 404 (prevents Soft 404 in Google Search Console)
+  // 4. If article does not exist, trigger true HTTP 404 (prevents Soft 404 in Google Search Console)
   if (!exists) {
     notFound();
   }
 
-  return <BlogsId id={fullId} />;
+  return <BlogsId id={cleanId} />;
 }

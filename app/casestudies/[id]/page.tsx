@@ -1,72 +1,140 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { notFound } from "next/navigation";
+import { db } from "@/lib/db";
+import { portfolios } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
+import { validate as isUuid } from "uuid";
 import { PortfolioLayouts } from "@/components/Portfolio";
 import { Portfolio, PortfolioBlock } from "@/lib/types/portfolios";
 import BlockRenderer from "@/components/Portfolio/BlockRenderer";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { Metadata } from "next";
 
-export default function CaseStudyDetailPage({
+export async function generateStaticParams() {
+  try {
+    const allPortfolios = await db.select({ id: portfolios.id }).from(portfolios);
+    return allPortfolios.map((p) => ({
+      id: p.id,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params for casestudies:", error);
+    return [];
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  if (!isUuid(id)) {
+    return {
+      title: "Case Study Not Found | Maven Advert",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  try {
+    const [found] = await db
+      .select()
+      .from(portfolios)
+      .where(eq(portfolios.id, id));
+
+    if (!found) {
+      return {
+        title: "Case Study Not Found | Maven Advert",
+        robots: { index: false, follow: false },
+      };
+    }
+
+    let images: string[] = [];
+    try {
+      images =
+        typeof found.images === "string" ? JSON.parse(found.images) : found.images;
+    } catch {
+      images = [];
+    }
+
+    const title = `${found.title} | Case Study | Maven Advert`;
+    const description =
+      found.description ||
+      "Explore this client success story and creative case study by Maven Advert.";
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: `/casestudies/${found.id}`,
+      },
+      openGraph: {
+        title,
+        description,
+        url: `/casestudies/${found.id}`,
+        type: "article",
+        images: images.length > 0 ? [{ url: images[0] }] : undefined,
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata for casestudy:", error);
+    return {
+      title: "Case Study | Maven Advert",
+      robots: { index: false, follow: false },
+    };
+  }
+}
+
+export default async function CaseStudyDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = React.use(params);
-  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { id } = await params;
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const res = await fetch("/api/portfolio");
-        const json = await res.json();
+  if (!isUuid(id)) {
+    notFound();
+  }
 
-        if (!res.ok || !Array.isArray(json)) {
-          console.error("Failed to fetch portfolios or data is not an array:", json);
-          setLoading(false);
-          return;
-        }
+  let found: typeof portfolios.$inferSelect | undefined;
+  try {
+    const [result] = await db
+      .select()
+      .from(portfolios)
+      .where(eq(portfolios.id, id));
+    found = result;
+  } catch (error) {
+    console.error("Error fetching portfolio from DB:", error);
+  }
 
-        const data = json as Portfolio[];
+  if (!found) {
+    notFound();
+  }
 
-        const found = data.find((p) => p.id === id);
-        if (!found) {
-          console.error("Portfolio not found");
-          setLoading(false);
-          return;
-        }
+  let images: string[] = [];
+  try {
+    images =
+      typeof found.images === "string" ? JSON.parse(found.images) : found.images;
+  } catch {
+    images = [];
+  }
 
-        let images: string[] = [];
-        try {
-          images =
-            typeof found.images === "string"
-              ? JSON.parse(found.images)
-              : found.images;
-        } catch {
-          images = [];
-        }
+  let blocks: PortfolioBlock[] = [];
+  try {
+    blocks =
+      typeof found.blocks === "string"
+        ? JSON.parse(found.blocks)
+        : found.blocks || [];
+  } catch {
+    blocks = [];
+  }
 
-        setPortfolio({
-          ...found,
-          images,
-          layoutId: Number(found.layoutId),
-          blocks:
-            typeof found.blocks === "string"
-              ? JSON.parse(found.blocks)
-              : found.blocks || [],
-        });
-      } catch (err) {
-        console.error("Failed to load portfolio:", err);
-      }
-
-      setLoading(false);
-    }
-
-    loadData();
-  }, [id]);
-
-  if (loading) return <div className="p-10">Loading...</div>;
-  if (!portfolio) return <div className="p-10">Portfolio Not Found</div>;
+  const portfolio: Portfolio = {
+    ...found,
+    images,
+    layoutId: Number(found.layoutId),
+    blocks,
+  };
 
   // Check for Dynamic Blocks first
   if (portfolio.blocks && portfolio.blocks.length > 0) {
@@ -105,13 +173,8 @@ export default function CaseStudyDetailPage({
 
   const Layout = PortfolioLayouts[portfolio.layoutId];
 
-  // If no Blocks AND no valid Layout (e.g. layoutId 0 but blocks empty for some reason), show error or fallback
   if (!Layout) {
-    return (
-      <div className="p-10 text-red-600">
-        Empty portfolio or invalid configuration.
-      </div>
-    );
+    notFound();
   }
 
   return (

@@ -16,15 +16,16 @@ export async function GET(
   try {
     const { id: idSegments } = await context.params; // ✅ await the params
     const fullId = idSegments.join("/");
-    const fullIdWithSlash = "/" + fullId;
+    const cleanId = fullId.replace(/^\/+|\/+$/g, "").replace(/^blog\//, "");
 
     const isIdUuid = isUuid(idSegments[0]);
     const [blog] = isIdUuid
       ? await db.select().from(blogs).where(eq(blogs.id, idSegments[0]))
       : await db.select().from(blogs).where(
           or(
+            eq(blogs.slug, cleanId),
             eq(blogs.slug, fullId),
-            eq(blogs.slug, fullIdWithSlash)
+            eq(blogs.slug, "/" + cleanId)
           )
         );
 

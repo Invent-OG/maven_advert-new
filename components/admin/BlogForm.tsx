@@ -82,13 +82,22 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
   const onSubmit = async (data: BlogFormData) => {
     setIsSubmitting(true);
     try {
+      const cleanData: BlogFormData = {
+        ...data,
+        slug: (data.slug || "")
+          .trim()
+          .toLowerCase()
+          .replace(/^\/+|\/+$/g, "")
+          .replace(/^blog\//, "")
+          .replace(/\s+/g, "-"),
+      };
       if (initialData?.id) {
         await updateBlogMutation.mutateAsync({
           id: initialData.id,
-          data,
+          data: cleanData,
         });
       } else {
-        await createBlogMutation.mutateAsync(data);
+        await createBlogMutation.mutateAsync(cleanData);
       }
 
       toast.success(

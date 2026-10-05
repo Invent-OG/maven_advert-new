@@ -48,6 +48,70 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/blog",
+        destination: "/blogs",
+        permanent: true,
+      },
+      {
+        source: "/blog/:slug*",
+        destination: "/blogs/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/case-studies",
+        destination: "/casestudies",
+        permanent: true,
+      },
+      {
+        source: "/case-studies/:path*",
+        destination: "/casestudies/:path*",
+        permanent: true,
+      },
+      {
+        source: "/case-study",
+        destination: "/casestudies",
+        permanent: true,
+      },
+      {
+        source: "/case-study/:path*",
+        destination: "/casestudies/:path*",
+        permanent: true,
+      },
+      {
+        source: "/portfolio",
+        destination: "/casestudies",
+        permanent: true,
+      },
+      {
+        source: "/portfolio/:path*",
+        destination: "/casestudies/:path*",
+        permanent: true,
+      },
+      {
+        source: "/3d",
+        destination: "/3d-modelling",
+        permanent: true,
+      },
+      {
+        source: "/3dmodeling",
+        destination: "/3d-modelling",
+        permanent: true,
+      },
+      {
+        source: "/3d-modeling",
+        destination: "/3d-modelling",
+        permanent: true,
+      },
+      {
+        source: "/stall-fabrication",
+        destination: "/stallfabrication",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

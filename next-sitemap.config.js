@@ -10,9 +10,9 @@ module.exports = {
   
   // Custom transform function to set priorities/changefreq based on path
   transform: async (config, path) => {
-    // Exclude any raw UUID blog URLs from sitemap (only index canonical human-friendly slugs)
+    // Exclude any raw UUID blog URLs or legacy blog paths from sitemap
     const uuidRegex = /^\/blogs\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-    if (uuidRegex.test(path)) {
+    if (uuidRegex.test(path) || path.startsWith('/blogs/blog/')) {
       return null;
     }
 
@@ -32,6 +32,11 @@ module.exports = {
     }
     // Deep service pages
     else if (path.startsWith('/services/')) {
+        priority = 0.8;
+        changefreq = 'monthly';
+    }
+    // Deep case studies
+    else if (path.startsWith('/casestudies/')) {
         priority = 0.8;
         changefreq = 'monthly';
     }
